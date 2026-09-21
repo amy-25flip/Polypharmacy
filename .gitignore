@@ -1,0 +1,18 @@
+# Raw and processed data - large, regenerable from scripts, not meant for git
+Datasets/
+processed/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node / frontend build artifacts
+webapp/frontend/node_modules/
+webapp/frontend/dist/
+webapp/frontend/.vite/
+
+# Editor/OS cruft
+.DS_Store
+Thumbs.db
