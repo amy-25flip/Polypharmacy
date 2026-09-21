@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: polyguard-api
+    runtime: python
+    rootDir: webapp
+    plan: free
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.14.0
+      # Literal URL, matches the frontend service below - update if the
+      # frontend's real onrender.com URL ends up different from the name here.
+      - key: POLYGUARD_ALLOWED_ORIGINS
+        value: https://polyguard-frontend.onrender.com
+
+  - type: web
+    name: polyguard-frontend
+    runtime: static
+    rootDir: webapp/frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    envVars:
+      # Literal URL, not a fromService reference - Render's fromService host/port
+      # is not a browser-usable https URL. Update this once polyguard-api's real
+      # onrender.com URL is known (it follows the service name above).
+      - key: VITE_API_URL
+        value: https://polyguard-api.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

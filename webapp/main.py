@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import itertools
 import json
+import os
 from pathlib import Path
 
 import joblib
@@ -16,15 +17,20 @@ from rapidfuzz import fuzz, process
 from explainability import ExplainabilityEngine
 from hoddi_model import HoddiInferenceModel, build_fingerprint_lookup
 
-PROCESSED_DIR = Path(r"E:\Polypharmacy\processed")
-DATASETS_DIR = Path(r"E:\Polypharmacy\Datasets")
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROCESSED_DIR = Path(os.environ.get("POLYGUARD_PROCESSED_DIR", PROJECT_ROOT / "processed"))
+DATASETS_DIR = Path(os.environ.get("POLYGUARD_DATASETS_DIR", PROJECT_ROOT / "Datasets"))
 
 SEVERITY_RANK = {"Minor": 0, "Moderate": 1, "Major": 2}
 
 app = FastAPI(title="PolyGuard API")
+_allowed_origins = os.environ.get(
+    "POLYGUARD_ALLOWED_ORIGINS",
+    "http://localhost:5173,http://127.0.0.1:5173",
+).split(",")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # dev only - tighten before any real deployment
+    allow_origins=_allowed_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
