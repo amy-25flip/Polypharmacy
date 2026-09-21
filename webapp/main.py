@@ -18,19 +18,40 @@ from explainability import ExplainabilityEngine
 from hoddi_model import HoddiInferenceModel, build_fingerprint_lookup
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-PROCESSED_DIR = Path(os.environ.get("POLYGUARD_PROCESSED_DIR", PROJECT_ROOT / "processed"))
-DATASETS_DIR = Path(os.environ.get("POLYGUARD_DATASETS_DIR", PROJECT_ROOT / "Datasets"))
+
+# Robust search for processed directory across local, Docker, and Render paths
+def resolve_dir(env_var: str, default_name: str) -> Path:
+    if os.environ.get(env_var):
+        return Path(os.environ[env_var])
+    candidates = [
+        PROJECT_ROOT / default_name,
+        Path(__file__).resolve().parent / default_name,
+        Path(default_name),
+        Path("..") / default_name,
+    ]
+    for c in candidates:
+        if c.exists():
+            return c
+    return candidates[0]
+
+PROCESSED_DIR = resolve_dir("POLYGUARD_PROCESSED_DIR", "processed")
+DATASETS_DIR = resolve_dir("POLYGUARD_DATASETS_DIR", "Datasets")
 
 SEVERITY_RANK = {"Minor": 0, "Moderate": 1, "Major": 2}
 
 app = FastAPI(title="PolyGuard API")
-_allowed_origins = os.environ.get(
+
+_allowed_origins_env = os.environ.get(
     "POLYGUARD_ALLOWED_ORIGINS",
-    "http://localhost:5173,http://127.0.0.1:5173",
-).split(",")
+    "http://localhost:5173,http://127.0.0.1:5173,https://polyguard-frontend.onrender.com",
+)
+_allowed_origins = [o.strip() for o in _allowed_origins_env.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_allowed_origins,
+    allow_origin_regex=r"https://.*\.onrender\.com|http://localhost:\d+|http://127\.0\.0\.1:\d+",
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )

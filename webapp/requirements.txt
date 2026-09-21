@@ -1,11 +1,11 @@
 # Torch is installed separately (CPU-only wheel) in the Render build command -
 # do not add it here, the default PyPI index can pull CUDA wheels and bloat/fail the build.
-fastapi==0.141.1
-uvicorn[standard]==0.52.4
-joblib==1.5.3
-numpy==2.3.4
-pandas==2.3.3
-scikit-learn==1.8.0
-rdkit==2026.3.6
-rapidfuzz==3.14.3
-pydantic==2.12.5
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+joblib>=1.3.0
+numpy>=1.26.0,<3.0.0
+pandas>=2.1.0,<3.0.0
+scikit-learn>=1.4.0,<2.0.0
+rdkit>=2023.9.1
+rapidfuzz>=3.6.0
+pydantic>=2.6.0
