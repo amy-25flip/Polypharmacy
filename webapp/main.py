@@ -58,11 +58,17 @@ hoddi_model.eval()
 print("Loading explainability engine (Hetionet knowledge-graph evidence)...")
 explain_engine = ExplainabilityEngine(PROCESSED_DIR / "explainability_data.json")
 
-print(f"Ready. {len(DRUG_VOCAB)} known drugs, {len(NAME_TO_DRUGBANK_ID)} with DrugBankID/HODDI support.")
-
 
 def normalize(value: str) -> str:
     return " ".join(value.strip().lower().split())
+
+
+print("Loading documented-pairs index (which pairs actually have a real DDInter label)...")
+with open(PROCESSED_DIR / "documented_pairs.json", encoding="utf-8") as f:
+    DOCUMENTED_PAIRS: set[str] = set(json.load(f))
+
+print(f"Ready. {len(DRUG_VOCAB)} known drugs, {len(NAME_TO_DRUGBANK_ID)} with DrugBankID/HODDI support, "
+      f"{len(DOCUMENTED_PAIRS)} documented pairs.")
 
 
 def predict_pair(drug_a: str, drug_b: str) -> dict:
@@ -80,17 +86,34 @@ def predict_pair(drug_a: str, drug_b: str) -> dict:
     feature_cols = ["pair_text", "disease_diabetes", "disease_ckd", "disease_heart_failure", "disease_hypertension"]
     severity = model1.predict(row[feature_cols])[0]
     proba = model1.predict_proba(row[feature_cols])[0]
+    is_documented = "|".join(sorted((normalize(drug_a), normalize(drug_b)))) in DOCUMENTED_PAIRS
     result = {
         "drug_a": drug_a,
         "drug_b": drug_b,
         "severity": severity,
         "confidence": round(float(np.max(proba)), 3),
+        "is_documented": is_documented,
     }
 
+    id_a = NAME_TO_DRUGBANK_ID.get(normalize(drug_a))
+    id_b = NAME_TO_DRUGBANK_ID.get(normalize(drug_b))
+
     if severity in ("Moderate", "Major"):
-        id_a = NAME_TO_DRUGBANK_ID.get(normalize(drug_a))
-        id_b = NAME_TO_DRUGBANK_ID.get(normalize(drug_b))
         result["explanation"] = explain_engine.explain_pair(id_a, id_b)
+
+    if not is_documented:
+        # No labeled example for this exact pair exists in the source data (DDInter
+        # either never covers it, or only has it as an "Unknown"-severity row that
+        # was correctly excluded from training). The severity above is the model
+        # generalizing from other drugs' lexical patterns, not a documented fact -
+        # and its confidence score does NOT reliably reflect that, so this has to
+        # be surfaced explicitly rather than left implicit.
+        result["undocumented_pair_notice"] = (
+            "No documented interaction record exists for this exact drug pair in the "
+            "reference database. This result is inferred from patterns in other drugs' "
+            "names, not from a confirmed interaction record - treat it with extra caution "
+            "and verify independently, regardless of the severity shown above."
+        )
 
     return result
 

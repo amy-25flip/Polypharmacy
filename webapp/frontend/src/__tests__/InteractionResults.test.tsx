@@ -36,13 +36,18 @@ describe('InteractionResults Component', () => {
     ).toBeInTheDocument()
 
     // Check highest risk pair callout
-    expect(screen.getByText(/Highest-risk interaction:/i)).toBeInTheDocument()
-    expect(screen.getByText(/Warfarin/i)).toBeInTheDocument()
-    expect(screen.getByText(/Aspirin/i)).toBeInTheDocument()
+    expect(screen.getByText(/Highest-risk pair:/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/Warfarin/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/Aspirin/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getByRole('heading', { name: /Warfarin \+ Aspirin/i })).toBeInTheDocument()
 
     // Check secondary combination signal prompt
+    expect(screen.getByText('Multi-Drug Pattern Review')).toBeInTheDocument()
     expect(
-      screen.getByText(/Combination pattern check: this combination resembles known higher-risk medication patterns\. Use this as a review prompt, not a confirmed interaction\./i)
+      screen.getByText(/The set-level model reviewed 3 of 3 recognized medicines together/i)
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText(/This combination resembles known higher-risk medication patterns/i)
     ).toBeInTheDocument()
 
     // Verify NO internal ML terms appear anywhere in rendered text
@@ -131,7 +136,7 @@ describe('InteractionResults Component', () => {
     expect(screen.getByText('Azithromicin')).toBeInTheDocument()
   })
 
-  it('toggles collapsible pair breakdown list when clicked', () => {
+  it('renders pair-by-pair review immediately for every evaluated pair', () => {
     const mockResult: CheckResponse = {
       entered: ['Metformin', 'Warfarin', 'Aspirin'],
       matched: ['Metformin', 'Warfarin', 'Aspirin'],
@@ -148,24 +153,16 @@ describe('InteractionResults Component', () => {
 
     render(<InteractionResults result={mockResult} />)
 
-    // Collapsed by default
-    expect(screen.queryByRole('table')).not.toBeInTheDocument()
-
-    // Click toggle to show
-    const toggleButton = screen.getByRole('button', { name: /show all interactions/i })
-    fireEvent.click(toggleButton)
-
-    // Table now visible
-    expect(screen.getByRole('table')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Pair-by-Pair Interaction Review/i })).toBeInTheDocument()
     expect(screen.getByText(/2 pairs evaluated/i)).toBeInTheDocument()
-
-    // Click again to hide
-    const hideButton = screen.getByRole('button', { name: /hide all interactions/i })
-    fireEvent.click(hideButton)
-    expect(screen.queryByRole('table')).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Warfarin \+ Aspirin/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Metformin \+ Warfarin/i })).toBeInTheDocument()
+    expect(
+      screen.getAllByText(/No separate knowledge-graph mechanism was found/i).length
+    ).toBeGreaterThanOrEqual(1)
   })
 
-  it('renders explanation for highest-risk pair and in expandable table rows', () => {
+  it('renders explanation inline for each explained pair', () => {
     const mockResultWithExplanation: CheckResponse = {
       entered: ['Metformin', 'Furosemide'],
       matched: ['Metformin', 'Furosemide'],
@@ -199,7 +196,7 @@ describe('InteractionResults Component', () => {
 
     render(<InteractionResults result={mockResultWithExplanation} />)
 
-    // Highest-risk callout explanation is directly visible
+    expect(screen.getByRole('heading', { name: /Pair-by-Pair Interaction Review/i })).toBeInTheDocument()
     expect(screen.getByText('Why this may be risky')).toBeInTheDocument()
     expect(
       screen.getByText(/Both medicines are linked to overlapping effects/i)
@@ -207,17 +204,6 @@ describe('InteractionResults Component', () => {
     expect(
       screen.getAllByText(/Abdominal bloating, Epigastric discomfort, Lightheadedness/i).length
     ).toBeGreaterThanOrEqual(1)
-
-    // Open table
-    fireEvent.click(screen.getByRole('button', { name: /show all interactions/i }))
-
-    // Expand inline mechanism
-    const mechanismToggle = screen.getByRole('button', { name: /why this may be risky/i })
-    expect(mechanismToggle).toBeInTheDocument()
-    fireEvent.click(mechanismToggle)
-
-    // Check inline explanation visible
-    expect(screen.getByRole('button', { name: /hide mechanism/i })).toBeInTheDocument()
   })
 
   it('triggers onReset when button clicked', () => {

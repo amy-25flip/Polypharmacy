@@ -1,12 +1,11 @@
-import { useState } from 'react'
 import {
   AlertTriangle,
   CheckCircle2,
   AlertOctagon,
-  ChevronDown,
-  ChevronUp,
   Info,
   HelpCircle,
+  ShieldCheck,
+  Network,
 } from 'lucide-react'
 import type { CheckResponse, InteractionPair } from '../api/client'
 import { PairExplanationView } from './PairExplanationView'
@@ -16,20 +15,24 @@ interface InteractionResultsProps {
   onReset?: () => void
 }
 
+const severityBadgeClass = (severity: InteractionPair['severity']) =>
+  severity === 'Major'
+    ? 'bg-rose-100 text-rose-800 border-rose-300'
+    : severity === 'Moderate'
+    ? 'bg-amber-100 text-amber-800 border-amber-300'
+    : 'bg-emerald-100 text-emerald-800 border-emerald-300'
+
+const severityPillClass = (severity: InteractionPair['severity']) =>
+  severity === 'Major'
+    ? 'bg-rose-600 text-white'
+    : severity === 'Moderate'
+    ? 'bg-amber-600 text-white'
+    : 'bg-emerald-700 text-white'
+
 export const InteractionResults: React.FC<InteractionResultsProps> = ({
   result,
   onReset,
 }) => {
-  const [showAllPairs, setShowAllPairs] = useState(false)
-  const [expandedPairs, setExpandedPairs] = useState<Record<number, boolean>>({})
-
-  const togglePairExplanation = (index: number) => {
-    setExpandedPairs((prev) => ({
-      ...prev,
-      [index]: !prev[index],
-    }))
-  }
-
   const { matched, unmatched, regimen, combination_signal } = result
   const pairs = regimen.pairs || []
   const overallSeverity = regimen.overall_severity
@@ -42,6 +45,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
 
   // Find highest risk pair (backend already sorts worst-first: pairs[0])
   const highestRiskPair: InteractionPair | undefined = pairs.length > 0 ? pairs[0] : undefined
+  const hasMultiDrugRegimen = matched.length >= 3
 
   return (
     <div className="space-y-6 animate-fadeIn">
@@ -88,6 +92,12 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                 {isModerate && 'Moderate Interaction Risk'}
                 {isMinor && 'Minor Interaction Risk'}
               </h2>
+              {pairs.length > 0 && (
+                <p className="mt-2 text-sm font-semibold opacity-85">
+                  {matched.length} recognized medicine{matched.length === 1 ? '' : 's'} checked across{' '}
+                  {pairs.length} pair{pairs.length === 1 ? '' : 's'}.
+                </p>
+              )}
             </div>
           </div>
 
@@ -107,26 +117,24 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
           {highestRiskPair ? (
             <div>
               <p className="text-base sm:text-lg font-semibold">
-                Highest-risk interaction:{' '}
+                Highest-risk pair:{' '}
                 <span className="underline decoration-2 underline-offset-2">
                   {highestRiskPair.drug_a} + {highestRiskPair.drug_b}
                 </span>
                 <span
-                  className={`ml-2 text-xs font-bold uppercase px-2.5 py-1 rounded-full ${
-                    highestRiskPair.severity === 'Major'
-                      ? 'bg-rose-600 text-white'
-                      : highestRiskPair.severity === 'Moderate'
-                      ? 'bg-amber-600 text-white'
-                      : 'bg-emerald-700 text-white'
-                  }`}
+                  className={`ml-2 text-xs font-bold uppercase px-2.5 py-1 rounded-full ${severityPillClass(
+                    highestRiskPair.severity
+                  )}`}
                 >
                   {highestRiskPair.severity}
                 </span>
               </p>
+              {hasMultiDrugRegimen && (
+                <p className="mt-2 text-sm font-medium opacity-85">
+                  The remaining medicine{matched.length > 3 ? 's are' : ' is'} reviewed in the pair-by-pair section below and, when supported, in the multi-drug pattern review.
+                </p>
+              )}
 
-              {/* Undocumented-pair caution - shown regardless of severity, since a
-                  confident-looking result on an unlabeled pair is the case that
-                  most needs a warning, not silence */}
               {highestRiskPair.is_documented === false && highestRiskPair.undocumented_pair_notice && (
                 <div className="mt-3 p-3 rounded-lg bg-amber-100/80 border border-amber-300 text-amber-950 shadow-2xs">
                   <div className="flex items-start gap-2.5">
@@ -136,11 +144,6 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                     </p>
                   </div>
                 </div>
-              )}
-
-              {/* Explainability Display for Highest-Risk Pair directly under callout */}
-              {highestRiskPair.explanation && (
-                <PairExplanationView explanation={highestRiskPair.explanation} />
               )}
             </div>
           ) : isIncomplete ? (
@@ -183,128 +186,107 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
         </div>
       )}
 
-      {/* 3. Secondary Combination Signal Note (ONLY shown when combination_signal is present AND elevated === true) */}
-      {combination_signal && combination_signal.elevated && (
+      {/* 3. Combination Signal Note */}
+      {combination_signal && (
         <div
           role="note"
-          className="rounded-lg bg-indigo-50/80 border border-indigo-200 p-4 text-indigo-950 shadow-2xs"
+          className={`rounded-lg border p-4 shadow-2xs ${
+            combination_signal.elevated
+              ? 'bg-indigo-50/80 border-indigo-200 text-indigo-950'
+              : 'bg-emerald-50/80 border-emerald-200 text-emerald-950'
+          }`}
         >
           <div className="flex items-start gap-3">
-            <Info className="h-5 w-5 text-indigo-700 shrink-0 mt-0.5" />
+            {combination_signal.elevated ? (
+              <Network className="h-5 w-5 text-indigo-700 shrink-0 mt-0.5" />
+            ) : (
+              <ShieldCheck className="h-5 w-5 text-emerald-700 shrink-0 mt-0.5" />
+            )}
             <div className="text-sm space-y-1">
-              <p className="font-bold text-indigo-900 text-xs uppercase tracking-wider">
+              <p className="font-bold text-xs uppercase tracking-wider">
                 Multi-Drug Pattern Review
               </p>
               <p className="font-medium text-slate-800 text-sm leading-relaxed">
-                Combination pattern check: this combination resembles known higher-risk medication patterns. Use this as a review prompt, not a confirmed interaction.
+                The set-level model reviewed {combination_signal.drugs_used} of {combination_signal.drugs_total} recognized medicines together.
+                {' '}
+                {combination_signal.elevated
+                  ? 'This combination resembles known higher-risk medication patterns; use it as a regimen-level review prompt, not a confirmed interaction.'
+                  : 'No elevated regimen-level pattern was flagged for this medicine set.'}
               </p>
             </div>
           </div>
         </div>
       )}
 
-      {/* 4. Collapsible "Show all interactions" Section */}
+      {/* 4. Always-visible pair-by-pair review */}
       {pairs.length > 0 && (
-        <div className="rounded-xl border border-slate-200 bg-white overflow-hidden shadow-2xs">
-          <button
-            type="button"
-            onClick={() => setShowAllPairs(!showAllPairs)}
-            className="w-full px-5 py-3.5 bg-slate-50/80 hover:bg-slate-100 flex items-center justify-between text-left transition-colors border-b border-slate-200"
-          >
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-bold text-slate-900">
-                {showAllPairs ? 'Hide all interactions' : 'Show all interactions'}
-              </span>
-              <span className="text-xs font-semibold px-2 py-0.5 rounded bg-slate-200 text-slate-700">
+        <section className="rounded-xl border border-slate-200 bg-white shadow-2xs overflow-hidden">
+          <div className="px-5 py-4 bg-slate-50/90 border-b border-slate-200">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+              <div>
+                <h3 className="text-base font-extrabold text-slate-950">
+                  Pair-by-Pair Interaction Review
+                </h3>
+                <p className="text-sm text-slate-600 mt-1">
+                  Every medicine is checked against every other medicine in this regimen.
+                </p>
+              </div>
+              <span className="self-start sm:self-center text-xs font-bold px-2.5 py-1 rounded-full bg-slate-200 text-slate-700">
                 {pairs.length} {pairs.length === 1 ? 'pair' : 'pairs'} evaluated
               </span>
             </div>
-            {showAllPairs ? (
-              <ChevronUp className="h-5 w-5 text-slate-500" />
-            ) : (
-              <ChevronDown className="h-5 w-5 text-slate-500" />
-            )}
-          </button>
+          </div>
 
-          {showAllPairs && (
-            <div className="p-4 sm:p-5">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm border-collapse">
-                  <thead>
-                    <tr className="border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-500">
-                      <th className="py-2.5 px-3">Medicine Pair</th>
-                      <th className="py-2.5 px-3 text-right">Severity Level</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    {pairs.map((pair, index) => {
-                      const pairSeverity = pair.severity
-                      const badgeClass =
-                        pairSeverity === 'Major'
-                          ? 'bg-rose-100 text-rose-800 border-rose-300'
-                          : pairSeverity === 'Moderate'
-                          ? 'bg-amber-100 text-amber-800 border-amber-300'
-                          : 'bg-emerald-100 text-emerald-800 border-emerald-300'
+          <div className="divide-y divide-slate-100">
+            {pairs.map((pair, index) => {
+              const hasExplanation = !!pair.explanation
 
-                      const isExpanded = !!expandedPairs[index]
-                      const hasExplanation = !!pair.explanation
+              return (
+                <article
+                  key={`${pair.drug_a}-${pair.drug_b}-${index}`}
+                  className="p-4 sm:p-5"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                    <div className="min-w-0">
+                      <div className="text-sm font-bold uppercase tracking-wide text-slate-500">
+                        Pair {index + 1}
+                      </div>
+                      <h4 className="mt-1 text-lg font-extrabold text-slate-950 break-words">
+                        {pair.drug_a}{' '}
+                        <span className="text-slate-400 font-semibold">+</span>{' '}
+                        {pair.drug_b}
+                      </h4>
+                    </div>
+                    <span
+                      className={`self-start inline-block text-xs font-bold px-2.5 py-1 rounded-full border ${severityBadgeClass(
+                        pair.severity
+                      )}`}
+                    >
+                      {pair.severity}
+                    </span>
+                  </div>
 
-                      return (
-                        <tr
-                          key={`${pair.drug_a}-${pair.drug_b}-${index}`}
-                          className="hover:bg-slate-50/75 transition-colors group"
-                        >
-                          <td className="py-3 px-3 align-top">
-                            <div className="font-semibold text-slate-900">
-                              {pair.drug_a}{' '}
-                              <span className="text-slate-400 font-normal">+</span>{' '}
-                              {pair.drug_b}
-                            </div>
+                  {pair.is_documented === false && (
+                    <div className="mt-3 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-900">
+                      <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5 text-amber-700" />
+                      <span>
+                        No documented record for this exact pair. Treat this as an inferred screening result and verify independently.
+                      </span>
+                    </div>
+                  )}
 
-                            {pair.is_documented === false && (
-                              <div className="mt-1 flex items-center gap-1 text-[11px] font-semibold text-amber-800">
-                                <AlertTriangle className="h-3 w-3 shrink-0" />
-                                <span>No documented record for this exact pair</span>
-                              </div>
-                            )}
-
-                            {/* Inline reason toggle button if explanation exists */}
-                            {hasExplanation && (
-                              <button
-                                type="button"
-                                onClick={() => togglePairExplanation(index)}
-                                className="mt-1 text-xs text-blue-700 hover:text-blue-900 font-semibold flex items-center gap-1 transition-colors"
-                              >
-                                <span>{isExpanded ? 'Hide mechanism' : 'Why this may be risky'}</span>
-                                {isExpanded ? (
-                                  <ChevronUp className="h-3.5 w-3.5" />
-                                ) : (
-                                  <ChevronDown className="h-3.5 w-3.5" />
-                                )}
-                              </button>
-                            )}
-
-                            {/* Expanded Inline Explanation */}
-                            {hasExplanation && isExpanded && pair.explanation && (
-                              <PairExplanationView explanation={pair.explanation} compact />
-                            )}
-                          </td>
-                          <td className="py-3 px-3 text-right align-top">
-                            <span
-                              className={`inline-block text-xs font-bold px-2.5 py-1 rounded-full border ${badgeClass}`}
-                            >
-                              {pairSeverity}
-                            </span>
-                          </td>
-                        </tr>
-                      )
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
-        </div>
+                  {hasExplanation && pair.explanation ? (
+                    <PairExplanationView explanation={pair.explanation} compact />
+                  ) : (
+                    <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600">
+                      No separate knowledge-graph mechanism was found for this pair in the current reference data.
+                    </div>
+                  )}
+                </article>
+              )
+            })}
+          </div>
+        </section>
       )}
     </div>
   )

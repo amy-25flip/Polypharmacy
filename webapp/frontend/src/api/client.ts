@@ -33,6 +33,8 @@ export interface InteractionPair {
   severity: 'Minor' | 'Moderate' | 'Major'
   confidence?: number // Internal from API, never shown in UI
   explanation?: PairExplanation
+  is_documented?: boolean
+  undocumented_pair_notice?: string
 }
 
 export interface RegimenResult {
