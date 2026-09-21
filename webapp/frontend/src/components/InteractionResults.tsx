@@ -124,6 +124,20 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                 </span>
               </p>
 
+              {/* Undocumented-pair caution - shown regardless of severity, since a
+                  confident-looking result on an unlabeled pair is the case that
+                  most needs a warning, not silence */}
+              {highestRiskPair.is_documented === false && highestRiskPair.undocumented_pair_notice && (
+                <div className="mt-3 p-3 rounded-lg bg-amber-100/80 border border-amber-300 text-amber-950 shadow-2xs">
+                  <div className="flex items-start gap-2.5">
+                    <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5 text-amber-700" />
+                    <p className="text-sm font-medium leading-relaxed">
+                      {highestRiskPair.undocumented_pair_notice}
+                    </p>
+                  </div>
+                </div>
+              )}
+
               {/* Explainability Display for Highest-Risk Pair directly under callout */}
               {highestRiskPair.explanation && (
                 <PairExplanationView explanation={highestRiskPair.explanation} />
@@ -246,6 +260,13 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                               <span className="text-slate-400 font-normal">+</span>{' '}
                               {pair.drug_b}
                             </div>
+
+                            {pair.is_documented === false && (
+                              <div className="mt-1 flex items-center gap-1 text-[11px] font-semibold text-amber-800">
+                                <AlertTriangle className="h-3 w-3 shrink-0" />
+                                <span>No documented record for this exact pair</span>
+                              </div>
+                            )}
 
                             {/* Inline reason toggle button if explanation exists */}
                             {hasExplanation && (
