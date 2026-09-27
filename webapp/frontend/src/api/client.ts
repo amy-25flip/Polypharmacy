@@ -141,6 +141,14 @@ export interface ScannedMedicine {
   frequency_or_timing_guess: string | null
   confidence_notes: string | null
   suggested_vocab_matches: string[]
+  bounding_box: PrescriptionBoundingBox | null
+}
+
+export interface PrescriptionBoundingBox {
+  y_min: number
+  x_min: number
+  y_max: number
+  x_max: number
 }
 
 export interface PrescriptionScanResult {

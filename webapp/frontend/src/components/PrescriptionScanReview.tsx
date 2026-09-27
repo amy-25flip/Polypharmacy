@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AlertTriangle, Check, FileImage, Loader2, ScanLine, X } from 'lucide-react'
 import { scanPrescription } from '../api/client'
 import type { PrescriptionScanResult, ScannedMedicine } from '../api/client'
@@ -21,6 +21,37 @@ interface PrescriptionScanReviewProps {
   onConfirmDrug: (drug: ConfirmedScannedDrug) => void
 }
 
+function PrescriptionCrop({ imageUrl, box, label }: {
+  imageUrl: string
+  box: NonNullable<ScannedMedicine['bounding_box']>
+  label: string
+}) {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const image = new Image()
+    image.onload = () => {
+      const sourceX = image.naturalWidth * box.x_min / 1000
+      const sourceY = image.naturalHeight * box.y_min / 1000
+      const sourceWidth = image.naturalWidth * (box.x_max - box.x_min) / 1000
+      const sourceHeight = image.naturalHeight * (box.y_max - box.y_min) / 1000
+      if (sourceWidth <= 0 || sourceHeight <= 0) return
+      const targetWidth = 240
+      const targetHeight = Math.max(48, Math.min(120, Math.round(targetWidth * sourceHeight / sourceWidth)))
+      canvas.width = targetWidth
+      canvas.height = targetHeight
+      const context = canvas.getContext('2d')
+      context?.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, targetWidth, targetHeight)
+    }
+    image.src = imageUrl
+    return () => { image.onload = null }
+  }, [box, imageUrl])
+
+  return <canvas ref={canvasRef} aria-label={label} className="mt-2 max-w-full rounded-md border border-slate-300 bg-white" />
+}
+
 function timingFromGuess(guess: string | null): MedicationTiming {
   const value = (guess || '').toLowerCase()
   if (/morning|breakfast|\bam\b/.test(value)) return 'Morning'
@@ -36,9 +67,19 @@ export function PrescriptionScanReview({ onConfirmDrug }: PrescriptionScanReview
   const [scan, setScan] = useState<PrescriptionScanResult | null>(null)
   const [rows, setRows] = useState<ReviewRow[]>([])
   const [error, setError] = useState<string | null>(null)
+  const [imageUrl, setImageUrl] = useState<string | null>(null)
+  const imageUrlRef = useRef<string | null>(null)
+
+  useEffect(() => () => {
+    if (imageUrlRef.current) URL.revokeObjectURL(imageUrlRef.current)
+  }, [])
 
   const handleFile = async (file?: File) => {
     if (!file) return
+    if (imageUrlRef.current) URL.revokeObjectURL(imageUrlRef.current)
+    const nextImageUrl = URL.createObjectURL(file)
+    imageUrlRef.current = nextImageUrl
+    setImageUrl(nextImageUrl)
     setIsScanning(true)
     setError(null)
     setScan(null)
@@ -83,6 +124,10 @@ export function PrescriptionScanReview({ onConfirmDrug }: PrescriptionScanReview
         </div>
       </div>
 
+      <p className="rounded-md bg-blue-100/70 px-3 py-2 text-xs text-slate-700">
+        Photograph or crop to only the medicines list—not the whole pad or header. Use a clear, sharp, well-lit image in focus, without blur, glare, shadows, or an extreme angle.
+      </p>
+
       <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border-2 border-dashed border-blue-300 bg-white px-4 py-4 text-sm font-semibold text-blue-800 hover:bg-blue-50">
         {isScanning ? <Loader2 className="h-5 w-5 animate-spin" /> : <FileImage className="h-5 w-5" />}
         {isScanning ? 'Reading prescription…' : 'Choose or photograph prescription'}
@@ -123,6 +168,9 @@ export function PrescriptionScanReview({ onConfirmDrug }: PrescriptionScanReview
                 <span className="text-xs font-semibold capitalize text-slate-500">{row.status}</span>
               </div>
               <p className="mt-1 text-xs text-slate-600">Raw image text: <span className="font-medium">{row.raw_text || 'Not available'}</span></p>
+              {imageUrl && row.bounding_box && (
+                <PrescriptionCrop imageUrl={imageUrl} box={row.bounding_box} label={`Source image crop for extracted medicine ${index + 1}`} />
+              )}
               <div className="mt-3 grid sm:grid-cols-2 gap-3">
                 <label className="text-xs font-semibold text-slate-700">
                   Reviewed medicine name

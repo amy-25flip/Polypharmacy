@@ -32,7 +32,13 @@ markdown fences or commentary, in exactly this shape:
       "generic_name_guess": "best active-ingredient name if the visible name looks like a brand, otherwise null",
       "dosage": "string or null",
       "frequency_or_timing_guess": "string or null",
-      "confidence_notes": "brief uncertainty note or null"
+      "confidence_notes": "brief uncertainty note or null",
+      "bounding_box": {
+        "y_min": "number from 0 to 1000",
+        "x_min": "number from 0 to 1000",
+        "y_max": "number from 0 to 1000",
+        "x_max": "number from 0 to 1000"
+      }
     }
   ],
   "warnings": ["any image-quality, handwriting, ambiguity, or completeness warnings"]
@@ -41,6 +47,12 @@ If no medicine can be read, return an empty medicines list and explain why in wa
 Every field must be present. This output will be reviewed by a doctor and must not
 be described as verified. Set generic_name_guess to null when drug_name_guess
 already appears to be a generic name or when there is no reasonable ingredient guess.
+Never invent or autocomplete an uncertain medicine name merely because it looks
+plausible. If the medicine name is not reasonably legible, set drug_name_guess to
+an empty string or "illegible" and clearly describe the uncertainty in
+confidence_notes and/or warnings. For each medicine, return bounding_box around
+that medicine's visible text using Gemini's normalized 0-1000 coordinates in
+y_min, x_min, y_max, x_max order. Set bounding_box to null if you cannot localize it.
 """.strip()
 
 
@@ -76,6 +88,23 @@ def _vocab_matches(
             if score >= 60 and name not in results:
                 results.append(name)
     return results[:5]
+
+
+def _normalize_bounding_box(value: Any) -> dict[str, float] | None:
+    """Accept a valid normalized box and silently discard malformed model output."""
+    if isinstance(value, dict):
+        coordinates = [value.get(key) for key in ("y_min", "x_min", "y_max", "x_max")]
+    elif isinstance(value, (list, tuple)) and len(value) == 4:
+        coordinates = list(value)
+    else:
+        return None
+
+    if any(isinstance(coordinate, bool) or not isinstance(coordinate, (int, float)) for coordinate in coordinates):
+        return None
+    y_min, x_min, y_max, x_max = (float(coordinate) for coordinate in coordinates)
+    if not (0 <= y_min < y_max <= 1000 and 0 <= x_min < x_max <= 1000):
+        return None
+    return {"y_min": y_min, "x_min": x_min, "y_max": y_max, "x_max": x_max}
 
 
 def scan_prescription(
@@ -156,6 +185,7 @@ def scan_prescription(
                 "frequency_or_timing_guess": item.get("frequency_or_timing_guess"),
                 "confidence_notes": item.get("confidence_notes"),
                 "suggested_vocab_matches": suggestions[:5],
+                "bounding_box": _normalize_bounding_box(item.get("bounding_box")),
             }
         )
 
