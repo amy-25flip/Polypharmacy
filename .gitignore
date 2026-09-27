@@ -13,10 +13,14 @@ webapp/frontend/node_modules/
 webapp/frontend/dist/
 webapp/frontend/.vite/
 
-# Secrets - never commit API keys
+# Secrets - never commit API keys (but keep .env.example templates tracked)
 .env
 *.env
 .env.*
+!.env.example
+
+# Local runtime logs (from self-hosting scripts, manual test runs, etc.)
+*.log
 
 # Editor/OS cruft
 .DS_Store
