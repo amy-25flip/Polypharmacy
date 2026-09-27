@@ -11,7 +11,8 @@ import pandas as pd
 import torch
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from rapidfuzz import fuzz, process
 
@@ -370,3 +371,26 @@ def check(payload: CheckRequest):
         "combination_signal": hoddi_result,
         "subset_certificate": subset_cert,
     }
+
+
+# --- Optional single-origin static frontend serving ---
+# On Render, the frontend is a SEPARATE static-hosting service (see render.yaml)
+# and this directory never exists in the backend's deployment, so this block is
+# a no-op there. It exists for self-hosting the whole app (backend + built
+# frontend) as one process behind one tunnel/port - e.g. running this on your
+# own machine with ngrok, where a single origin avoids CORS entirely. Build the
+# frontend first (cd webapp/frontend && npm run build) for this to activate.
+_FRONTEND_DIST = Path(__file__).resolve().parent / "frontend" / "dist"
+if _FRONTEND_DIST.exists():
+    print(f"Serving built frontend from {_FRONTEND_DIST} (single-origin self-hosting mode).")
+    app.mount("/assets", StaticFiles(directory=_FRONTEND_DIST / "assets"), name="frontend-assets")
+
+    @app.get("/{full_path:path}")
+    async def serve_frontend(full_path: str):
+        # Real static files (favicon, etc.) served directly; everything else
+        # (including client-side routes like /model-card) falls back to
+        # index.html so the SPA's own router can handle it.
+        candidate = _FRONTEND_DIST / full_path
+        if full_path and candidate.is_file():
+            return FileResponse(candidate)
+        return FileResponse(_FRONTEND_DIST / "index.html")

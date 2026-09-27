@@ -150,7 +150,14 @@ export interface PrescriptionScanResult {
 }
 
 // Defaults to http://127.0.0.1:8765 (or proxied /api in vite dev if configured)
-const API_BASE = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8765'
+// Defaults to '' (same-origin relative requests: /api/...), which works both
+// for local dev (Vite's dev-server proxy forwards /api to 127.0.0.1:8765 -
+// see vite.config.ts) and for single-origin self-hosting where this same
+// FastAPI server also serves the built frontend (see main.py). Render's
+// separate-services deployment explicitly overrides this with VITE_API_URL
+// at build time (see render.yaml) since frontend and backend are different
+// origins there.
+const API_BASE = import.meta.env.VITE_API_URL || ''
 
 export async function checkHealth(): Promise<HealthResponse> {
   const res = await fetch(`${API_BASE}/api/health`)
