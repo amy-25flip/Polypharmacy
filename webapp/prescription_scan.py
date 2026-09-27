@@ -112,6 +112,19 @@ def _vocab_matches(
     return results[:5]
 
 
+def _coerce_optional_str(value: Any) -> str | None:
+    """Gemini's JSON is unconstrained model output, not a validated schema - a
+    field documented as a string could still come back as a number, list, or
+    object. The frontend types (and code like .toLowerCase()) assume a real
+    string or null, so coerce anything else defensively rather than let a
+    surprising type crash the review UI."""
+    if value is None:
+        return None
+    if isinstance(value, str):
+        return value
+    return str(value)
+
+
 def _normalize_bounding_box(value: Any) -> dict[str, float] | None:
     """Accept a valid normalized box and silently discard malformed model output."""
     if isinstance(value, dict):
@@ -203,9 +216,9 @@ def scan_prescription(
                 "raw_text": str(item.get("raw_text") or ""),
                 "drug_name_guess": guess,
                 "generic_name_guess": generic_guess,
-                "dosage": item.get("dosage"),
-                "frequency_or_timing_guess": item.get("frequency_or_timing_guess"),
-                "confidence_notes": item.get("confidence_notes"),
+                "dosage": _coerce_optional_str(item.get("dosage")),
+                "frequency_or_timing_guess": _coerce_optional_str(item.get("frequency_or_timing_guess")),
+                "confidence_notes": _coerce_optional_str(item.get("confidence_notes")),
                 "suggested_vocab_matches": suggestions[:5],
                 "bounding_box": _normalize_bounding_box(item.get("bounding_box")),
             }
