@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { ClipboardPlus, Loader2, Plus, RefreshCw, ShieldCheck, Trash2 } from 'lucide-react'
+import { ClipboardPlus, Loader2, Plus, RefreshCw, ShieldCheck, Sparkles, Trash2 } from 'lucide-react'
 import { checkInteractions } from '../api/client'
 import type { CheckResponse } from '../api/client'
 import { DrugSearchInput } from './DrugSearchInput'
@@ -28,6 +28,12 @@ const newPrescription = (number: number): SessionPrescription => ({
   label: `Prescription ${number}`,
   drugs: [],
 })
+
+// A verified real combination (confirmed live against the interaction engine) that
+// exercises documented evidence, model-predicted evidence, low cross-model
+// disagreement, and the Minimal Unsafe Subset Certificate in one click - useful for
+// a fast, reliable walkthrough instead of typing a combination live.
+const EXAMPLE_DRUGS = ['Warfarin', 'Amiodarone', 'Acetylsalicylic acid', 'Digoxin']
 
 export function PatientPrescriptionWorkflow() {
   const [prescriptions, setPrescriptions] = useState<SessionPrescription[]>([newPrescription(1)])
@@ -83,14 +89,32 @@ export function PatientPrescriptionWorkflow() {
     setCheckError(null)
   }
 
+  const loadExample = () => {
+    const example = newPrescription(1)
+    example.label = 'Example: multi-drug regimen'
+    example.drugs = EXAMPLE_DRUGS.map((name) => ({ id: makeId(), name, timing: 'Unspecified' as MedicationTiming }))
+    setPrescriptions([example])
+    setResult(null)
+    setCheckError(null)
+  }
+
   return (
     <div className="space-y-6">
       <main className="print:hidden bg-white rounded-xl border border-slate-200 shadow-sm p-5 sm:p-7 space-y-6">
-        <div className="border-b border-slate-100 pb-3">
-          <h2 className="text-lg font-bold text-slate-900">Patient prescription session</h2>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Add separate prescriptions from each clinician. This visit stays in browser memory only and is not saved.
-          </p>
+        <div className="border-b border-slate-100 pb-3 flex items-start justify-between gap-3">
+          <div>
+            <h2 className="text-lg font-bold text-slate-900">Patient prescription session</h2>
+            <p className="text-xs text-slate-500 mt-0.5">
+              Add separate prescriptions from each clinician. This visit stays in browser memory only and is not saved.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={loadExample}
+            className="shrink-0 inline-flex items-center gap-1.5 rounded-lg border border-purple-200 bg-purple-50 px-3 py-2 text-xs font-bold text-purple-800 hover:bg-purple-100"
+          >
+            <Sparkles className="h-3.5 w-3.5" /> Try an example
+          </button>
         </div>
 
         <div className="space-y-5">
