@@ -15,8 +15,8 @@ describe('App Full Integration Flow', () => {
 
   it('disables check button with fewer than 2 medicines and enables when 2+ are added', async () => {
     vi.spyOn(apiClient, 'searchDrugs').mockImplementation(async (q) => {
-      if (q.toLowerCase().startsWith('met')) return ['Metformin']
-      if (q.toLowerCase().startsWith('war')) return ['Warfarin']
+      if (q.toLowerCase().startsWith('met')) return [{ name: 'Metformin' }]
+      if (q.toLowerCase().startsWith('war')) return [{ name: 'Warfarin' }]
       return []
     })
 
@@ -47,8 +47,8 @@ describe('App Full Integration Flow', () => {
 
   it('executes interaction check and displays results panel', async () => {
     vi.spyOn(apiClient, 'searchDrugs').mockImplementation(async (q) => {
-      if (q.toLowerCase().startsWith('met')) return ['Metformin']
-      if (q.toLowerCase().startsWith('war')) return ['Warfarin']
+      if (q.toLowerCase().startsWith('met')) return [{ name: 'Metformin' }]
+      if (q.toLowerCase().startsWith('war')) return [{ name: 'Warfarin' }]
       return []
     })
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Search, PlusCircle, AlertCircle, Loader2 } from 'lucide-react'
 import { searchDrugs } from '../api/client'
+import type { DrugSearchResult } from '../api/client'
 
 interface DrugSearchInputProps {
   onAddDrug: (drugName: string, isUnmatched?: boolean) => void
@@ -12,7 +13,7 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
   existingDrugs,
 }) => {
   const [query, setQuery] = useState('')
-  const [suggestions, setSuggestions] = useState<string[]>([])
+  const [suggestions, setSuggestions] = useState<DrugSearchResult[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState<number>(-1)
@@ -111,13 +112,13 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
     } else if (e.key === 'Enter') {
       e.preventDefault()
       if (selectedIndex >= 0 && selectedIndex < suggestions.length) {
-        handleSelect(suggestions[selectedIndex])
+        handleSelect(suggestions[selectedIndex].name)
       } else if (suggestions.length === 0 && query.trim().length >= 2) {
         // Pick fallback unmatched option
         handleSelect(query.trim(), true)
       } else if (suggestions.length > 0 && selectedIndex === -1) {
         // Pick top suggestion on enter
-        handleSelect(suggestions[0])
+        handleSelect(suggestions[0].name)
       }
     } else if (e.key === 'Escape') {
       setIsOpen(false)
@@ -185,11 +186,11 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
                 const isSelected = index === selectedIndex
                 return (
                   <button
-                    key={drug}
+                    key={`${drug.name}-${drug.matched_via_brand || 'direct'}`}
                     type="button"
                     role="option"
                     aria-selected={isSelected}
-                    onClick={() => handleSelect(drug)}
+                    onClick={() => handleSelect(drug.name)}
                     onMouseEnter={() => setSelectedIndex(index)}
                     className={`w-full text-left px-3.5 py-2.5 text-sm font-medium flex items-center justify-between transition-colors ${
                       isSelected
@@ -197,7 +198,14 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
                         : 'text-slate-800 hover:bg-slate-100'
                     }`}
                   >
-                    <span>{drug}</span>
+                    <span className="min-w-0">
+                      <span className="block">{drug.name}</span>
+                      {drug.matched_via_brand && (
+                        <span className={`block text-xs font-normal ${isSelected ? 'text-blue-100' : 'text-slate-500'}`}>
+                          brand: {drug.matched_via_brand}
+                        </span>
+                      )}
+                    </span>
                     <PlusCircle
                       className={`h-4 w-4 ${
                         isSelected ? 'text-white' : 'text-slate-400'

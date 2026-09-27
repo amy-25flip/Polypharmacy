@@ -16,6 +16,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from rapidfuzz import fuzz, process
 
+from brand_names import BRAND_NAMES, lookup_brand_matches
 from conformal import ConformalEngine
 from disagreement_sentinel import DisagreementSentinel
 from evidence_passport import EvidencePassportEngine
@@ -105,6 +106,7 @@ print("Loading Conformal Severity Sets engine (calibrated set-valued predictions
 conformal_engine = ConformalEngine(PROCESSED_DIR / "conformal")
 
 print("Loading model-transparency page data...")
+print(f"Loading Indian brand-name index ({len(BRAND_NAMES)} curated names)...")
 print(
     "Prescription scanning available when GEMINI_API_KEY is set "
     f"({'configured' if os.environ.get('GEMINI_API_KEY') else 'currently unconfigured'})."
@@ -324,12 +326,23 @@ def search_drugs(q: str = ""):
         if q_lower in name.lower() and name not in prefix_hits
     ]
 
-    results = sorted(prefix_hits) + sorted(substring_hits)
+    direct_results = sorted(prefix_hits) + sorted(substring_hits)
+    results = [{"name": name, "matched_via_brand": None} for name in direct_results]
+    seen = set(direct_results)
+    # Prefer a curated brand interpretation to coincidental typo matches. Direct
+    # prefix/substring vocabulary hits still keep first place.
+    for brand, generic_names in lookup_brand_matches(q):
+        for name in generic_names:
+            if name not in seen:
+                results.append({"name": name, "matched_via_brand": brand})
+                seen.add(name)
+
     if len(results) < 8:
         fuzzy_matches = process.extract(q, DRUG_VOCAB, scorer=fuzz.WRatio, limit=8)
         for name, score, _ in fuzzy_matches:
-            if score >= 60 and name not in results:
-                results.append(name)
+            if score >= 60 and name not in seen:
+                results.append({"name": name, "matched_via_brand": None})
+                seen.add(name)
 
     return results[:8]
 

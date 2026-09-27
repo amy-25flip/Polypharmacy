@@ -11,6 +11,8 @@ import os
 import re
 from typing import Any
 
+from brand_names import lookup_brand_name
+
 
 NOT_CONFIGURED_ERROR = (
     "Prescription scanning is not configured on this server (GEMINI_API_KEY not set)."
@@ -27,6 +29,7 @@ markdown fences or commentary, in exactly this shape:
     {
       "raw_text": "the exact visible text",
       "drug_name_guess": "best medicine-name reading",
+      "generic_name_guess": "best active-ingredient name if the visible name looks like a brand, otherwise null",
       "dosage": "string or null",
       "frequency_or_timing_guess": "string or null",
       "confidence_notes": "brief uncertainty note or null"
@@ -36,7 +39,8 @@ markdown fences or commentary, in exactly this shape:
 }
 If no medicine can be read, return an empty medicines list and explain why in warnings.
 Every field must be present. This output will be reviewed by a doctor and must not
-be described as verified.
+be described as verified. Set generic_name_guess to null when drug_name_guess
+already appears to be a generic name or when there is no reasonable ingredient guess.
 """.strip()
 
 
@@ -131,16 +135,27 @@ def scan_prescription(
         if not isinstance(item, dict):
             continue
         guess = str(item.get("drug_name_guess") or "").strip()
+        generic_guess_value = item.get("generic_name_guess")
+        generic_guess = (
+            str(generic_guess_value).strip() if generic_guess_value is not None else None
+        )
+        suggestions: list[str] = []
+        for candidate_query in (guess, generic_guess or ""):
+            for candidate in lookup_brand_name(candidate_query):
+                if candidate not in suggestions:
+                    suggestions.append(candidate)
+        for candidate in _vocab_matches(guess, drug_vocab, fuzz_module, process_module):
+            if candidate not in suggestions:
+                suggestions.append(candidate)
         normalized_medicines.append(
             {
                 "raw_text": str(item.get("raw_text") or ""),
                 "drug_name_guess": guess,
+                "generic_name_guess": generic_guess,
                 "dosage": item.get("dosage"),
                 "frequency_or_timing_guess": item.get("frequency_or_timing_guess"),
                 "confidence_notes": item.get("confidence_notes"),
-                "suggested_vocab_matches": _vocab_matches(
-                    guess, drug_vocab, fuzz_module, process_module
-                ),
+                "suggested_vocab_matches": suggestions[:5],
             }
         )
 

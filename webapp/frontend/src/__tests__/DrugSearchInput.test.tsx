@@ -15,7 +15,10 @@ describe('DrugSearchInput Component', () => {
   })
 
   it('debounces search and displays suggestions when query >= 2 chars', async () => {
-    const searchSpy = vi.spyOn(apiClient, 'searchDrugs').mockResolvedValue(['Metformin', 'Metformin hydrochloride'])
+    const searchSpy = vi.spyOn(apiClient, 'searchDrugs').mockResolvedValue([
+      { name: 'Metformin' },
+      { name: 'Metformin hydrochloride' },
+    ])
     const onAddDrug = vi.fn()
 
     render(<DrugSearchInput onAddDrug={onAddDrug} existingDrugs={[]} />)
@@ -64,7 +67,7 @@ describe('DrugSearchInput Component', () => {
   })
 
   it('warns when attempting to add duplicate medicine', async () => {
-    vi.spyOn(apiClient, 'searchDrugs').mockResolvedValue(['Metformin'])
+    vi.spyOn(apiClient, 'searchDrugs').mockResolvedValue([{ name: 'Metformin' }])
     const onAddDrug = vi.fn()
 
     render(<DrugSearchInput onAddDrug={onAddDrug} existingDrugs={['Metformin']} />)
@@ -81,5 +84,20 @@ describe('DrugSearchInput Component', () => {
 
     expect(onAddDrug).not.toHaveBeenCalled()
     expect(screen.getByText(/"Metformin" is already added to the patient's list\./i)).toBeInTheDocument()
+  })
+
+  it('shows the originating brand but adds the generic name', async () => {
+    vi.spyOn(apiClient, 'searchDrugs').mockResolvedValue([
+      { name: 'Acetaminophen', matched_via_brand: 'dolo 650' },
+    ])
+    const onAddDrug = vi.fn()
+    render(<DrugSearchInput onAddDrug={onAddDrug} existingDrugs={[]} />)
+
+    fireEvent.change(screen.getByLabelText(/Add medicine/i), { target: { value: 'Dolo 650' } })
+    vi.advanceTimersByTime(200)
+    await waitFor(() => expect(screen.getByText('brand: dolo 650')).toBeInTheDocument())
+
+    fireEvent.click(screen.getByText('Acetaminophen'))
+    expect(onAddDrug).toHaveBeenCalledWith('Acetaminophen', false)
   })
 })

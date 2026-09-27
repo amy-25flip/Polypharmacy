@@ -1,6 +1,8 @@
 # Raw and processed data - large, regenerable from scripts, not meant for git
 Datasets/
-processed/
+processed/*
+!processed/indian_brand_names.json
+!processed/indian_brand_names_summary.md
 
 # Python
 __pycache__/

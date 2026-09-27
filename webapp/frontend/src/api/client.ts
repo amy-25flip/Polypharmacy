@@ -136,6 +136,7 @@ export interface HealthResponse {
 export interface ScannedMedicine {
   raw_text: string
   drug_name_guess: string
+  generic_name_guess: string | null
   dosage: string | null
   frequency_or_timing_guess: string | null
   confidence_notes: string | null
@@ -167,7 +168,12 @@ export async function checkHealth(): Promise<HealthResponse> {
   return res.json()
 }
 
-export async function searchDrugs(query: string, signal?: AbortSignal): Promise<string[]> {
+export interface DrugSearchResult {
+  name: string
+  matched_via_brand?: string | null
+}
+
+export async function searchDrugs(query: string, signal?: AbortSignal): Promise<DrugSearchResult[]> {
   const trimmed = query.trim()
   if (trimmed.length < 2) {
     return []

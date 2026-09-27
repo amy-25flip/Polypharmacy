@@ -12,6 +12,7 @@ describe('PrescriptionScanReview safety gate', () => {
       medicines: [{
         raw_text: 'Warfarin 5 mg nocte',
         drug_name_guess: 'Warfarn',
+        generic_name_guess: null,
         dosage: '5 mg',
         frequency_or_timing_guess: 'night',
         confidence_notes: 'Handwriting is slightly unclear',
