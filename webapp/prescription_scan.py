@@ -11,12 +11,27 @@ import os
 import re
 from typing import Any
 
-from brand_names import lookup_brand_name
+from brand_names import BRAND_NAMES, lookup_brand_name
 
 
 NOT_CONFIGURED_ERROR = (
     "Prescription scanning is not configured on this server (GEMINI_API_KEY not set)."
 )
+
+
+def _build_brand_reference() -> str:
+    """A compact brand -> generic reference block, built once at import time
+    from the same curated Indian brand-name index used for post-hoc matching
+    (webapp/brand_names.py). Giving Gemini this as context while it reads,
+    not just matching against it afterward, should help it recognize a
+    partially-legible brand name it might otherwise misread - but it must
+    never be used to force a match onto handwriting that does not actually
+    resemble one of these (see the caveat at the end of the prompt)."""
+    lines = [f"{brand} -> {', '.join(generics)}" for brand, generics in sorted(BRAND_NAMES.items())]
+    return "\n".join(lines)
+
+
+_BRAND_REFERENCE = _build_brand_reference()
 
 EXTRACTION_PROMPT = """
 Read this prescription image and extract only medicines that are visibly written.
@@ -53,7 +68,14 @@ an empty string or "illegible" and clearly describe the uncertainty in
 confidence_notes and/or warnings. For each medicine, return bounding_box around
 that medicine's visible text using Gemini's normalized 0-1000 coordinates in
 y_min, x_min, y_max, x_max order. Set bounding_box to null if you cannot localize it.
-""".strip()
+
+Reference only - common Indian brand-name medicines and their generic
+ingredient(s), which may help you recognize a partially-legible brand name:
+{brand_reference}
+This list is not exhaustive and the medicine written may not be on it at all.
+Never force a match to this list - only use it if the handwriting genuinely
+resembles one of these names. It does not override the anti-guessing rule above.
+""".strip().replace("{brand_reference}", _BRAND_REFERENCE)
 
 
 def _strip_code_fences(value: str) -> str:
