@@ -27,6 +27,29 @@ export interface PairExplanation {
   caveat: string
 }
 
+export type EvidenceTier = 'documented' | 'mechanism_evidence' | 'indirect_evidence' | 'no_evidence'
+export type SupportTier = 'sparse' | 'limited' | 'well_represented'
+export type ReliabilityBand = 'High' | 'Moderate' | 'Low'
+
+export interface DrugSupport {
+  documented_pair_count: number
+  tier: SupportTier
+}
+
+export interface Reliability {
+  band: ReliabilityBand
+  empirical_accuracy: number
+}
+
+export interface EvidencePassport {
+  evidence_tier: EvidenceTier
+  drug_a_support: DrugSupport
+  drug_b_support: DrugSupport
+  reliability: Reliability
+  abstain: boolean
+  abstain_reason: string | null
+}
+
 export interface InteractionPair {
   drug_a: string
   drug_b: string
@@ -35,6 +58,7 @@ export interface InteractionPair {
   explanation?: PairExplanation
   is_documented?: boolean
   undocumented_pair_notice?: string
+  evidence_passport?: EvidencePassport
 }
 
 export interface RegimenResult {

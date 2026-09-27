@@ -6,9 +6,11 @@ import {
   HelpCircle,
   ShieldCheck,
   Network,
+  FileWarning,
 } from 'lucide-react'
 import type { CheckResponse, InteractionPair } from '../api/client'
 import { PairExplanationView } from './PairExplanationView'
+import { AbstainCard, EvidencePassportView } from './EvidencePassportView'
 
 interface InteractionResultsProps {
   result: CheckResponse
@@ -37,15 +39,19 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
   const pairs = regimen.pairs || []
   const overallSeverity = regimen.overall_severity
 
-  // Determine Banner Variant: Red, Amber, Green, or Gray
-  const isMajor = overallSeverity === 'Major'
-  const isModerate = overallSeverity === 'Moderate'
-  const isMinor = overallSeverity === 'Minor'
-  const isIncomplete = matched.length < 2 || overallSeverity === null
-
   // Find highest risk pair (backend already sorts worst-first: pairs[0])
   const highestRiskPair: InteractionPair | undefined = pairs.length > 0 ? pairs[0] : undefined
   const hasMultiDrugRegimen = matched.length >= 3
+
+  // Determine Banner Variant: Red, Amber, Green, Gray (incomplete), or Uncertain (abstained).
+  // If the worst-looking pair doesn't clear the reliability bar, the banner must not
+  // proclaim a confident severity headline - that would contradict the pair-by-pair
+  // review directly below it.
+  const isUncertain = !!highestRiskPair?.evidence_passport?.abstain
+  const isMajor = !isUncertain && overallSeverity === 'Major'
+  const isModerate = !isUncertain && overallSeverity === 'Moderate'
+  const isMinor = !isUncertain && overallSeverity === 'Minor'
+  const isIncomplete = matched.length < 2 || overallSeverity === null
 
   return (
     <div className="space-y-6 animate-fadeIn">
@@ -53,7 +59,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
       <div
         role="alert"
         className={`rounded-xl border-2 p-6 sm:p-7 shadow-xs transition-all ${
-          isIncomplete
+          isIncomplete || isUncertain
             ? 'bg-slate-50 border-slate-300 text-slate-900'
             : isMajor
             ? 'bg-rose-50 border-rose-500 text-rose-950'
@@ -67,7 +73,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
             {/* Status Icon */}
             <div
               className={`p-3 rounded-lg shrink-0 ${
-                isIncomplete
+                isIncomplete || isUncertain
                   ? 'bg-slate-200 text-slate-700'
                   : isMajor
                   ? 'bg-rose-600 text-white'
@@ -77,6 +83,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
               }`}
             >
               {isIncomplete && <HelpCircle className="h-7 w-7" />}
+              {isUncertain && <FileWarning className="h-7 w-7" />}
               {isMajor && <AlertOctagon className="h-7 w-7" />}
               {isModerate && <AlertTriangle className="h-7 w-7" />}
               {isMinor && <CheckCircle2 className="h-7 w-7" />}
@@ -88,6 +95,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight mt-0.5">
                 {isIncomplete && 'Incomplete Check'}
+                {isUncertain && 'Uncertain — Review Needed'}
                 {isMajor && 'Major Interaction Risk'}
                 {isModerate && 'Moderate Interaction Risk'}
                 {isMinor && 'Minor Interaction Risk'}
@@ -114,7 +122,22 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
 
         {/* Highest-risk interaction callout */}
         <div className="mt-5 pt-4 border-t border-black/10">
-          {highestRiskPair ? (
+          {highestRiskPair?.evidence_passport?.abstain ? (
+            <div>
+              <p className="text-base sm:text-lg font-semibold">
+                Highest-scoring pair:{' '}
+                <span className="underline decoration-2 underline-offset-2">
+                  {highestRiskPair.drug_a} + {highestRiskPair.drug_b}
+                </span>
+                <span className="ml-2 text-xs font-bold uppercase px-2.5 py-1 rounded-full bg-slate-300 text-slate-800">
+                  Insufficient evidence
+                </span>
+              </p>
+              <p className="mt-2 text-sm font-medium opacity-85">
+                This pair's model output isn't reliable enough to headline as a severity result - see the pair-by-pair review below for why.
+              </p>
+            </div>
+          ) : highestRiskPair ? (
             <div>
               <p className="text-base sm:text-lg font-semibold">
                 Highest-risk pair:{' '}
@@ -240,6 +263,21 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
           <div className="divide-y divide-slate-100">
             {pairs.map((pair, index) => {
               const hasExplanation = !!pair.explanation
+              const passport = pair.evidence_passport
+
+              if (passport?.abstain) {
+                return (
+                  <article
+                    key={`${pair.drug_a}-${pair.drug_b}-${index}`}
+                    className="p-4 sm:p-5"
+                  >
+                    <div className="text-sm font-bold uppercase tracking-wide text-slate-500 mb-2">
+                      Pair {index + 1}
+                    </div>
+                    <AbstainCard drugA={pair.drug_a} drugB={pair.drug_b} reason={passport.abstain_reason} />
+                  </article>
+                )
+              }
 
               return (
                 <article
@@ -281,6 +319,10 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                     <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600">
                       No separate knowledge-graph mechanism was found for this pair in the current reference data.
                     </div>
+                  )}
+
+                  {passport && (
+                    <EvidencePassportView passport={passport} drugA={pair.drug_a} drugB={pair.drug_b} />
                   )}
                 </article>
               )

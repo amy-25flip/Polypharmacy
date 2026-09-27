@@ -1,0 +1,86 @@
+[
+  {
+    "confidence_low": 0.3,
+    "confidence_high": 0.35,
+    "n": 11,
+    "empirical_accuracy": 0.2727
+  },
+  {
+    "confidence_low": 0.35,
+    "confidence_high": 0.4,
+    "n": 166,
+    "empirical_accuracy": 0.3916
+  },
+  {
+    "confidence_low": 0.4,
+    "confidence_high": 0.45,
+    "n": 434,
+    "empirical_accuracy": 0.4055
+  },
+  {
+    "confidence_low": 0.45,
+    "confidence_high": 0.5,
+    "n": 981,
+    "empirical_accuracy": 0.4669
+  },
+  {
+    "confidence_low": 0.5,
+    "confidence_high": 0.55,
+    "n": 2012,
+    "empirical_accuracy": 0.4891
+  },
+  {
+    "confidence_low": 0.55,
+    "confidence_high": 0.6,
+    "n": 1990,
+    "empirical_accuracy": 0.5503
+  },
+  {
+    "confidence_low": 0.6,
+    "confidence_high": 0.65,
+    "n": 2044,
+    "empirical_accuracy": 0.592
+  },
+  {
+    "confidence_low": 0.65,
+    "confidence_high": 0.7,
+    "n": 2131,
+    "empirical_accuracy": 0.6021
+  },
+  {
+    "confidence_low": 0.7,
+    "confidence_high": 0.75,
+    "n": 2208,
+    "empirical_accuracy": 0.6617
+  },
+  {
+    "confidence_low": 0.75,
+    "confidence_high": 0.8,
+    "n": 2495,
+    "empirical_accuracy": 0.6878
+  },
+  {
+    "confidence_low": 0.8,
+    "confidence_high": 0.85,
+    "n": 2922,
+    "empirical_accuracy": 0.7296
+  },
+  {
+    "confidence_low": 0.85,
+    "confidence_high": 0.9,
+    "n": 3649,
+    "empirical_accuracy": 0.761
+  },
+  {
+    "confidence_low": 0.9,
+    "confidence_high": 0.95,
+    "n": 5107,
+    "empirical_accuracy": 0.8034
+  },
+  {
+    "confidence_low": 0.95,
+    "confidence_high": 1.0,
+    "n": 12977,
+    "empirical_accuracy": 0.8258
+  }
+]

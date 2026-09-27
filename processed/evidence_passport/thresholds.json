@@ -1,0 +1,8 @@
+{
+  "majority_class_baseline_accuracy_on_heldout": 0.7413,
+  "target_reliability_floor": 0.7413,
+  "confidence_threshold": 0.5325,
+  "coverage_at_confidence_threshold": 0.9256,
+  "margin_threshold": 0.2708,
+  "note": "abstain (for undocumented pairs only) when confidence < confidence_threshold OR margin < margin_threshold. Documented pairs are never abstained on - they have a real labeled example, not just a model guess."
+}

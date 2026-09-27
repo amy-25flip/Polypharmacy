@@ -1,0 +1,62 @@
+[
+  {
+    "coverage": 1.0,
+    "n": 39127,
+    "accuracy": 0.7202
+  },
+  {
+    "coverage": 0.95,
+    "n": 37170,
+    "accuracy": 0.7348
+  },
+  {
+    "coverage": 0.9,
+    "n": 35214,
+    "accuracy": 0.7475
+  },
+  {
+    "coverage": 0.85,
+    "n": 33257,
+    "accuracy": 0.7583
+  },
+  {
+    "coverage": 0.8,
+    "n": 31301,
+    "accuracy": 0.7694
+  },
+  {
+    "coverage": 0.75,
+    "n": 29345,
+    "accuracy": 0.7802
+  },
+  {
+    "coverage": 0.7,
+    "n": 27388,
+    "accuracy": 0.7891
+  },
+  {
+    "coverage": 0.65,
+    "n": 25432,
+    "accuracy": 0.7971
+  },
+  {
+    "coverage": 0.6,
+    "n": 23476,
+    "accuracy": 0.8032
+  },
+  {
+    "coverage": 0.5,
+    "n": 19563,
+    "accuracy": 0.8164
+  },
+  {
+    "coverage": 0.4,
+    "n": 15650,
+    "accuracy": 0.823
+  },
+  {
+    "coverage": 0.3,
+    "n": 11738,
+    "accuracy": 0.8266
+  }
+]

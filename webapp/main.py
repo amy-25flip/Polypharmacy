@@ -14,6 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from rapidfuzz import fuzz, process
 
+from evidence_passport import EvidencePassportEngine
 from explainability import ExplainabilityEngine
 from hoddi_model import HoddiInferenceModel, build_fingerprint_lookup
 
@@ -88,6 +89,9 @@ print("Loading documented-pairs index (which pairs actually have a real DDInter 
 with open(PROCESSED_DIR / "documented_pairs.json", encoding="utf-8") as f:
     DOCUMENTED_PAIRS: set[str] = set(json.load(f))
 
+print("Loading Evidence Passport engine (calibration + selective prediction)...")
+evidence_passport_engine = EvidencePassportEngine(PROCESSED_DIR / "evidence_passport")
+
 print(f"Ready. {len(DRUG_VOCAB)} known drugs, {len(NAME_TO_DRUGBANK_ID)} with DrugBankID/HODDI support, "
       f"{len(DOCUMENTED_PAIRS)} documented pairs.")
 
@@ -108,19 +112,37 @@ def predict_pair(drug_a: str, drug_b: str) -> dict:
     severity = model1.predict(row[feature_cols])[0]
     proba = model1.predict_proba(row[feature_cols])[0]
     is_documented = "|".join(sorted((normalize(drug_a), normalize(drug_b)))) in DOCUMENTED_PAIRS
+    confidence = float(np.max(proba))
+    top2 = np.sort(proba)[-2:]
+    margin = float(top2[1] - top2[0])
     result = {
         "drug_a": drug_a,
         "drug_b": drug_b,
         "severity": severity,
-        "confidence": round(float(np.max(proba)), 3),
+        "confidence": round(confidence, 3),
         "is_documented": is_documented,
     }
 
     id_a = NAME_TO_DRUGBANK_ID.get(normalize(drug_a))
     id_b = NAME_TO_DRUGBANK_ID.get(normalize(drug_b))
 
+    # Explainability is computed regardless of severity - the Evidence Passport
+    # needs to know whether mechanism evidence exists even for a Minor prediction,
+    # even though the full explanation panel is only shown to the user for
+    # Moderate/Major (a display choice, not a data limitation).
+    explanation = explain_engine.explain_pair(id_a, id_b)
     if severity in ("Moderate", "Major"):
-        result["explanation"] = explain_engine.explain_pair(id_a, id_b)
+        result["explanation"] = explanation
+
+    result["evidence_passport"] = evidence_passport_engine.build(
+        drug_a_norm=normalize(drug_a),
+        drug_b_norm=normalize(drug_b),
+        confidence=confidence,
+        margin=margin,
+        is_documented=is_documented,
+        has_mechanism_evidence=explanation["has_explanation"],
+        has_indirect_evidence=bool(explanation["supporting_evidence"]) and not explanation["has_explanation"],
+    )
 
     if not is_documented:
         # No labeled example for this exact pair exists in the source data (DDInter
