@@ -9,8 +9,9 @@ import joblib
 import numpy as np
 import pandas as pd
 import torch
-from fastapi import FastAPI
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from rapidfuzz import fuzz, process
 
@@ -19,6 +20,7 @@ from disagreement_sentinel import DisagreementSentinel
 from evidence_passport import EvidencePassportEngine
 from explainability import ExplainabilityEngine
 from hoddi_model import HoddiInferenceModel, build_fingerprint_lookup
+from prescription_scan import scan_prescription
 from subset_certificate import build_certificate
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -102,6 +104,10 @@ print("Loading Conformal Severity Sets engine (calibrated set-valued predictions
 conformal_engine = ConformalEngine(PROCESSED_DIR / "conformal")
 
 print("Loading model-transparency page data...")
+print(
+    "Prescription scanning available when GEMINI_API_KEY is set "
+    f"({'configured' if os.environ.get('GEMINI_API_KEY') else 'currently unconfigured'})."
+)
 
 
 def _load_json(path: Path) -> dict | list | None:
@@ -325,6 +331,21 @@ def search_drugs(q: str = ""):
                 results.append(name)
 
     return results[:8]
+
+
+@app.post("/api/prescriptions/scan")
+async def scan_prescription_image(file: UploadFile = File(...)):
+    content_type = file.content_type or "application/octet-stream"
+    if not content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="Please upload a prescription image file.")
+    image_bytes = await file.read()
+    if not image_bytes:
+        raise HTTPException(status_code=400, detail="The uploaded prescription image is empty.")
+
+    result = scan_prescription(image_bytes, content_type, DRUG_VOCAB, fuzz, process)
+    if result.get("error"):
+        return JSONResponse(status_code=503, content={"error": result["error"]})
+    return result
 
 
 @app.post("/api/check")

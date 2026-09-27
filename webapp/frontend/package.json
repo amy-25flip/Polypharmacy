@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "test": "vitest run",
+    "test": "vitest run --configLoader native --pool=vmThreads --maxWorkers=1",
     "preview": "vite preview"
   },
   "dependencies": {

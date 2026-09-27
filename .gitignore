@@ -13,6 +13,11 @@ webapp/frontend/node_modules/
 webapp/frontend/dist/
 webapp/frontend/.vite/
 
+# Secrets - never commit API keys
+.env
+*.env
+.env.*
+
 # Editor/OS cruft
 .DS_Store
 Thumbs.db

@@ -133,6 +133,22 @@ export interface HealthResponse {
   known_drugs: number
 }
 
+export interface ScannedMedicine {
+  raw_text: string
+  drug_name_guess: string
+  dosage: string | null
+  frequency_or_timing_guess: string | null
+  confidence_notes: string | null
+  suggested_vocab_matches: string[]
+}
+
+export interface PrescriptionScanResult {
+  source_guess: string | null
+  date_guess: string | null
+  medicines: ScannedMedicine[]
+  warnings: string[]
+}
+
 // Defaults to http://127.0.0.1:8765 (or proxied /api in vite dev if configured)
 const API_BASE = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8765'
 
@@ -154,6 +170,26 @@ export async function searchDrugs(query: string, signal?: AbortSignal): Promise<
   })
   if (!res.ok) {
     throw new Error(`Drug search failed: ${res.statusText}`)
+  }
+  return res.json()
+}
+
+export async function scanPrescription(file: File): Promise<PrescriptionScanResult> {
+  const formData = new FormData()
+  formData.append('file', file)
+  const res = await fetch(`${API_BASE}/api/prescriptions/scan`, {
+    method: 'POST',
+    body: formData,
+  })
+  if (!res.ok) {
+    let message = `Prescription scan failed: ${res.statusText}`
+    try {
+      const body = (await res.json()) as { detail?: string; error?: string }
+      message = body.detail || body.error || message
+    } catch {
+      // Keep the HTTP fallback when the server did not return JSON.
+    }
+    throw new Error(message)
   }
   return res.json()
 }

@@ -9,3 +9,5 @@ scikit-learn>=1.4.0,<2.0.0
 rdkit>=2023.9.1
 rapidfuzz>=3.6.0
 pydantic>=2.6.0
+python-multipart>=0.0.9
+google-genai>=0.3.0
