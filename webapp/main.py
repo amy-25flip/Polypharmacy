@@ -5,6 +5,28 @@ import json
 import os
 from pathlib import Path
 
+
+def _load_local_env() -> None:
+    """Load webapp/.env into the process environment, without overriding
+    variables already set (e.g. by Render's own env config, which never
+    has this file). Self-host launchers can then start this process
+    without embedding the secret in a command line."""
+    env_path = Path(__file__).resolve().parent / ".env"
+    if not env_path.exists():
+        return
+    for line in env_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        name, value = line.split("=", 1)
+        name = name.strip()
+        value = value.strip().strip('"').strip("'")
+        if name and value and name not in os.environ:
+            os.environ[name] = value
+
+
+_load_local_env()
+
 import joblib
 import numpy as np
 import pandas as pd

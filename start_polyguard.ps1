@@ -67,10 +67,13 @@ if ($Rebuild -or -not (Test-Path (Join-Path $dist "index.html"))) {
 }
 
 # --- Start the backend in its own window (serves the API and the built frontend together). ---
+# main.py loads webapp\.env itself at startup, so the secret never needs to
+# be embedded in this command line (where it would be visible to anything
+# inspecting running process command lines on this machine).
 Write-Host "Starting PolyGuard backend on http://127.0.0.1:8765 ..." -ForegroundColor Cyan
 Start-Process powershell -ArgumentList @(
     "-NoExit", "-Command",
-    "cd '$webapp'; `$env:GEMINI_API_KEY = '$($env:GEMINI_API_KEY)'; python -m uvicorn main:app --host 127.0.0.1 --port 8765"
+    "cd '$webapp'; python -m uvicorn main:app --host 127.0.0.1 --port 8765"
 )
 
 # --- Wait for the backend to come up. ---
