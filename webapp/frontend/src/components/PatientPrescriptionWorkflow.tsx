@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { ClipboardPlus, Loader2, Plus, RefreshCw, ShieldCheck, Sparkles, Trash2 } from 'lucide-react'
 import { checkInteractions } from '../api/client'
 import type { CheckResponse } from '../api/client'
@@ -40,11 +40,16 @@ export function PatientPrescriptionWorkflow() {
   const [isChecking, setIsChecking] = useState(false)
   const [checkError, setCheckError] = useState<string | null>(null)
   const [result, setResult] = useState<CheckResponse | null>(null)
+  // Bumped on every edit/check so a slow, superseded /api/check response can never
+  // overwrite state with results for a medication list the user has since changed.
+  const requestIdRef = useRef(0)
 
   const updatePrescription = (id: string, updater: (prescription: SessionPrescription) => SessionPrescription) => {
+    requestIdRef.current += 1 // any in-flight check is now stale and will discard its response
     setPrescriptions((current) => current.map((prescription) => prescription.id === id ? updater(prescription) : prescription))
     setResult(null)
     setCheckError(null)
+    setIsChecking(false)
   }
 
   const addDrug = (prescriptionId: string, name: string, timing: MedicationTiming = 'Unspecified', isUnmatched = false) => {
@@ -72,30 +77,38 @@ export function PatientPrescriptionWorkflow() {
 
   const handleCheck = async () => {
     if (combinedMedications.length < 2) return
+    const requestId = ++requestIdRef.current
     setIsChecking(true)
     setCheckError(null)
     try {
-      setResult(await checkInteractions(combinedMedications.map((drug) => drug.name)))
+      const response = await checkInteractions(combinedMedications.map((drug) => drug.name))
+      if (requestIdRef.current !== requestId) return // superseded by a later edit/check - discard
+      setResult(response)
     } catch {
+      if (requestIdRef.current !== requestId) return
       setCheckError('Unable to complete interaction screening. Please verify the backend connection and try again.')
     } finally {
-      setIsChecking(false)
+      if (requestIdRef.current === requestId) setIsChecking(false)
     }
   }
 
   const clearSession = () => {
+    requestIdRef.current += 1
     setPrescriptions([newPrescription(1)])
     setResult(null)
     setCheckError(null)
+    setIsChecking(false)
   }
 
   const loadExample = () => {
+    requestIdRef.current += 1
     const example = newPrescription(1)
     example.label = 'Example: multi-drug regimen'
     example.drugs = EXAMPLE_DRUGS.map((name) => ({ id: makeId(), name, timing: 'Unspecified' as MedicationTiming }))
     setPrescriptions([example])
     setResult(null)
     setCheckError(null)
+    setIsChecking(false)
   }
 
   return (

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ShieldAlert, ShieldCheck, ShieldQuestion, FileWarning, Braces } from 'lucide-react'
-import type { ConformalSets, EvidencePassport, EvidenceTier, ReliabilityBand, SupportTier } from '../api/client'
+import type { ConformalSet, ConformalSets, EvidencePassport, EvidenceTier, ReliabilityBand, SupportTier } from '../api/client'
 
 interface EvidencePassportViewProps {
   passport: EvidencePassport
@@ -72,9 +72,13 @@ export const AbstainCard: React.FC<{ drugA: string; drugB: string; reason: strin
   </div>
 )
 
+const CONFORMAL_LEVELS = ['0.8', '0.9', '0.95']
+
 export const EvidencePassportView: React.FC<EvidencePassportViewProps> = ({ passport, conformalSets }) => {
   const { evidence_tier, drug_a_support, drug_b_support, reliability, cross_model_agreement } = passport
-  const set90 = conformalSets?.['0.9']
+  const conformalLevels: { level: string; entry: ConformalSet }[] = CONFORMAL_LEVELS
+    .map((level) => ({ level, entry: conformalSets?.[level] }))
+    .filter((row): row is { level: string; entry: ConformalSet } => !!row.entry)
 
   const Icon =
     evidence_tier === 'documented'
@@ -106,19 +110,35 @@ export const EvidencePassportView: React.FC<EvidencePassportViewProps> = ({ pass
         <span>Drug A data: {supportLabel[drug_a_support.tier]} ({drug_a_support.documented_pair_count} documented pairs)</span>
         <span>Drug B data: {supportLabel[drug_b_support.tier]} ({drug_b_support.documented_pair_count} documented pairs)</span>
       </div>
-      {set90 && (
-        <div className="mt-2 pt-2 border-t border-slate-100 text-xs flex items-center gap-1.5 flex-wrap">
-          <Braces className="h-3.5 w-3.5 text-slate-400 shrink-0" />
-          <span className="font-semibold text-slate-700">Plausible severities at 90% target coverage:</span>
-          {set90.set.map((s) => (
-            <span key={s} className="inline-flex items-center gap-1 font-bold text-slate-800">
-              <span className={`h-1.5 w-1.5 rounded-full ${severityDotClass[s]}`} />
-              {s}
-            </span>
-          ))}
-          {set90.size > 1 && (
-            <span className="text-slate-500 italic">— this pair is genuinely ambiguous between these, not a single confident answer</span>
-          )}
+      {conformalLevels.length > 0 && (
+        <div className="mt-2 pt-2 border-t border-slate-100 text-xs">
+          <div className="flex items-center gap-1.5 font-semibold text-slate-700 mb-1.5">
+            <Braces className="h-3.5 w-3.5 text-slate-400 shrink-0" />
+            <span>Conformal severity set — statistically guaranteed coverage, not a single guess</span>
+          </div>
+          <div className="space-y-1">
+            {conformalLevels.map(({ level, entry }) => (
+              <div key={level} className="flex items-center gap-2">
+                <span className="w-16 shrink-0 font-mono font-bold text-slate-500">
+                  {Math.round(Number(level) * 100)}%
+                </span>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  {entry.set.map((s) => (
+                    <span
+                      key={s}
+                      className="inline-flex items-center gap-1 font-bold text-slate-800 bg-slate-100 border border-slate-200 rounded-full px-2 py-0.5"
+                    >
+                      <span className={`h-1.5 w-1.5 rounded-full ${severityDotClass[s]}`} />
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="mt-1.5 text-[11px] text-slate-500 italic">
+            As target coverage rises, the guaranteed set widens — a mathematically calibrated way of saying how sure PolyGuard really is, not just a confidence number.
+          </p>
         </div>
       )}
 
