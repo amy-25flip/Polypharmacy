@@ -85,7 +85,7 @@ export function PatientPrescriptionWorkflow() {
 
   return (
     <div className="space-y-6">
-      <main className="bg-white rounded-xl border border-slate-200 shadow-sm p-5 sm:p-7 space-y-6">
+      <main className="print:hidden bg-white rounded-xl border border-slate-200 shadow-sm p-5 sm:p-7 space-y-6">
         <div className="border-b border-slate-100 pb-3">
           <h2 className="text-lg font-bold text-slate-900">Patient prescription session</h2>
           <p className="text-xs text-slate-500 mt-0.5">
@@ -197,14 +197,14 @@ export function PatientPrescriptionWorkflow() {
           type="button"
           disabled={combinedMedications.length < 2 || isChecking}
           onClick={() => void handleCheck()}
-          className="w-full py-3.5 px-6 rounded-lg font-bold text-base flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 text-white disabled:bg-slate-200 disabled:text-slate-400 disabled:border disabled:border-slate-300"
+          className="print:hidden w-full py-3.5 px-6 rounded-lg font-bold text-base flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 text-white disabled:bg-slate-200 disabled:text-slate-400 disabled:border disabled:border-slate-300"
         >
           {isChecking ? <Loader2 className="h-5 w-5 animate-spin" /> : <ShieldCheck className="h-5 w-5" />}
           {isChecking ? 'Screening regimen interactions…' : `Check interactions ${combinedMedications.length >= 2 ? `(${combinedMedications.length} medicines)` : '(Add at least 2)'}`}
         </button>
-        {combinedMedications.length === 1 && <p className="text-xs text-center text-slate-500 font-medium">Add at least 1 more medicine to evaluate pairwise interactions</p>}
+        {combinedMedications.length === 1 && <p className="print:hidden text-xs text-center text-slate-500 font-medium">Add at least 1 more medicine to evaluate pairwise interactions</p>}
         {checkError && (
-          <div className="rounded-lg bg-rose-50 border border-rose-200 p-4 text-rose-900 text-sm flex items-start gap-2.5">
+          <div className="print:hidden rounded-lg bg-rose-50 border border-rose-200 p-4 text-rose-900 text-sm flex items-start gap-2.5">
             <RefreshCw className="h-4 w-4 shrink-0 mt-0.5 text-rose-600" />
             <div><p className="font-semibold">Screening error</p><p className="text-xs mt-0.5">{checkError}</p></div>
           </div>

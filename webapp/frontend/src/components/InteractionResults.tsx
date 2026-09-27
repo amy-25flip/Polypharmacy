@@ -7,6 +7,7 @@ import {
   ShieldCheck,
   Network,
   FileWarning,
+  Printer,
 } from 'lucide-react'
 import type { CheckResponse, InteractionPair } from '../api/client'
 import { PairExplanationView } from './PairExplanationView'
@@ -56,6 +57,28 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
 
   return (
     <div className="space-y-6 animate-fadeIn">
+      {/* Print-only report header - hidden on screen, shown only in the printed/exported report */}
+      <div className="hidden print:block mb-4 pb-4 border-b-2 border-slate-900">
+        <h1 className="text-2xl font-extrabold text-slate-950">PolyGuard — Medication Interaction Screening Report</h1>
+        <p className="text-sm text-slate-600 mt-1">Generated {new Date().toLocaleString()}</p>
+        <p className="text-xs text-slate-600 mt-2 leading-relaxed">
+          This is an AI-based clinical decision-support output, not a substitute for clinical judgment,
+          prescribing guidelines, or pharmacist review. Verify all findings independently before acting on them.
+        </p>
+      </div>
+
+      {/* Print/export control - screen only */}
+      <div className="print:hidden flex justify-end">
+        <button
+          type="button"
+          onClick={() => window.print()}
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 text-sm font-semibold rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 shadow-2xs transition-colors"
+        >
+          <Printer className="h-4 w-4" />
+          Print / Export Report
+        </button>
+      </div>
+
       {/* 1. Primary Dominant Severity Banner */}
       <div
         role="alert"
@@ -114,7 +137,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
             <button
               type="button"
               onClick={onReset}
-              className="self-start sm:self-center px-4 py-2 text-sm font-semibold rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 shadow-2xs transition-colors"
+              className="print:hidden self-start sm:self-center px-4 py-2 text-sm font-semibold rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 shadow-2xs transition-colors"
             >
               Check another regimen
             </button>

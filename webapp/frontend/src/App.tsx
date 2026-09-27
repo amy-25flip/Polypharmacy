@@ -51,12 +51,14 @@ export function App() {
     <div className="min-h-screen bg-slate-100/70 text-slate-900 py-6 sm:py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto space-y-6">
         {/* Header with safety line & system status */}
-        <Header knownDrugsCount={knownDrugsCount} />
+        <div className="print:hidden">
+          <Header knownDrugsCount={knownDrugsCount} />
+        </div>
 
         <PatientPrescriptionWorkflow />
 
         {/* Quiet Footer */}
-        <footer className="text-center text-xs text-slate-400 pt-4 space-y-2">
+        <footer className="print:hidden text-center text-xs text-slate-400 pt-4 space-y-2">
           <button
             type="button"
             onClick={openTransparency}

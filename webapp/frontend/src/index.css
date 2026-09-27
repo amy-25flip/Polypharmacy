@@ -19,3 +19,24 @@
   outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
+
+/* Print / exported-report styling. Individual elements are hidden via
+   Tailwind's print:hidden utility; this covers page-level concerns
+   Tailwind doesn't: browsers strip background colors by default when
+   printing, which would silently drop the severity color-coding that
+   carries real meaning in this report. */
+@media print {
+  * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  body {
+    background: white;
+  }
+  @page {
+    margin: 1.5cm;
+  }
+  article, section {
+    break-inside: avoid;
+  }
+}
