@@ -11,6 +11,7 @@ import {
 import type { CheckResponse, InteractionPair } from '../api/client'
 import { PairExplanationView } from './PairExplanationView'
 import { AbstainCard, EvidencePassportView } from './EvidencePassportView'
+import { SubsetCertificateView } from './SubsetCertificateView'
 
 interface InteractionResultsProps {
   result: CheckResponse
@@ -35,7 +36,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
   result,
   onReset,
 }) => {
-  const { matched, unmatched, regimen, combination_signal } = result
+  const { matched, unmatched, regimen, combination_signal, subset_certificate } = result
   const pairs = regimen.pairs || []
   const overallSeverity = regimen.overall_severity
 
@@ -241,6 +242,9 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
         </div>
       )}
 
+      {/* 3b. Minimal Unsafe Subset Certificate - only meaningful when the combination signal above is elevated */}
+      {subset_certificate && <SubsetCertificateView certificate={subset_certificate} />}
+
       {/* 4. Always-visible pair-by-pair review */}
       {pairs.length > 0 && (
         <section className="rounded-xl border border-slate-200 bg-white shadow-2xs overflow-hidden">
@@ -322,7 +326,12 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                   )}
 
                   {passport && (
-                    <EvidencePassportView passport={passport} drugA={pair.drug_a} drugB={pair.drug_b} />
+                    <EvidencePassportView
+                      passport={passport}
+                      drugA={pair.drug_a}
+                      drugB={pair.drug_b}
+                      conformalSets={pair.conformal_sets}
+                    />
                   )}
                 </article>
               )

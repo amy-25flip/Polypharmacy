@@ -17,6 +17,7 @@ describe('InteractionResults Component', () => {
           { drug_a: 'Metformin', drug_b: 'Aspirin', severity: 'Minor', confidence: 0.65 },
         ],
       },
+      subset_certificate: null,
       combination_signal: {
         drugs_used: 3,
         drugs_total: 3,
@@ -72,6 +73,7 @@ describe('InteractionResults Component', () => {
           { drug_a: 'Metformin', drug_b: 'Warfarin', severity: 'Moderate', confidence: 0.75 },
         ],
       },
+      subset_certificate: null,
       combination_signal: null,
     }
 
@@ -97,6 +99,7 @@ describe('InteractionResults Component', () => {
           { drug_a: 'Metformin', drug_b: 'Aspirin', severity: 'Minor', confidence: 0.6 },
         ],
       },
+      subset_certificate: null,
       combination_signal: {
         drugs_used: 2,
         drugs_total: 2,
@@ -124,6 +127,7 @@ describe('InteractionResults Component', () => {
         overall_severity: null,
         pairs: [],
       },
+      subset_certificate: null,
       combination_signal: null,
     }
 
@@ -148,6 +152,7 @@ describe('InteractionResults Component', () => {
           { drug_a: 'Metformin', drug_b: 'Warfarin', severity: 'Moderate', confidence: 0.77 },
         ],
       },
+      subset_certificate: null,
       combination_signal: null,
     }
 
@@ -191,6 +196,7 @@ describe('InteractionResults Component', () => {
           },
         ],
       },
+      subset_certificate: null,
       combination_signal: null,
     }
 
@@ -218,6 +224,7 @@ describe('InteractionResults Component', () => {
           { drug_a: 'Metformin', drug_b: 'Warfarin', severity: 'Moderate', confidence: 0.75 },
         ],
       },
+      subset_certificate: null,
       combination_signal: null,
     }
 

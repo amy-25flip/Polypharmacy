@@ -1,0 +1,138 @@
+{
+  "standard_split": {
+    "0.8": {
+      "overall_coverage": 0.8142,
+      "overall_avg_set_size": 1.095,
+      "singleton_rate": 0.9054,
+      "per_class": {
+        "Minor": {
+          "n": 1025,
+          "coverage": 0.8127,
+          "avg_set_size": 1.015
+        },
+        "Moderate": {
+          "n": 14502,
+          "coverage": 0.8169,
+          "avg_set_size": 1.082
+        },
+        "Major": {
+          "n": 4037,
+          "coverage": 0.8051,
+          "avg_set_size": 1.16
+        }
+      }
+    },
+    "0.9": {
+      "overall_coverage": 0.8994,
+      "overall_avg_set_size": 1.431,
+      "singleton_rate": 0.5898,
+      "per_class": {
+        "Minor": {
+          "n": 1025,
+          "coverage": 0.9054,
+          "avg_set_size": 1.271
+        },
+        "Moderate": {
+          "n": 14502,
+          "coverage": 0.8985,
+          "avg_set_size": 1.398
+        },
+        "Major": {
+          "n": 4037,
+          "coverage": 0.9012,
+          "avg_set_size": 1.59
+        }
+      }
+    },
+    "0.95": {
+      "overall_coverage": 0.9504,
+      "overall_avg_set_size": 1.784,
+      "singleton_rate": 0.3423,
+      "per_class": {
+        "Minor": {
+          "n": 1025,
+          "coverage": 0.9522,
+          "avg_set_size": 1.558
+        },
+        "Moderate": {
+          "n": 14502,
+          "coverage": 0.949,
+          "avg_set_size": 1.755
+        },
+        "Major": {
+          "n": 4037,
+          "coverage": 0.9549,
+          "avg_set_size": 1.945
+        }
+      }
+    }
+  },
+  "cold_start_split": {
+    "0.8": {
+      "overall_coverage": 0.8012,
+      "overall_avg_set_size": 1.529,
+      "singleton_rate": 0.5118,
+      "per_class": {
+        "Minor": {
+          "n": 1306,
+          "coverage": 0.807,
+          "avg_set_size": 1.344
+        },
+        "Moderate": {
+          "n": 16625,
+          "coverage": 0.7973,
+          "avg_set_size": 1.534
+        },
+        "Major": {
+          "n": 5148,
+          "coverage": 0.8125,
+          "avg_set_size": 1.561
+        }
+      }
+    },
+    "0.9": {
+      "overall_coverage": 0.9003,
+      "overall_avg_set_size": 2.01,
+      "singleton_rate": 0.2482,
+      "per_class": {
+        "Minor": {
+          "n": 1306,
+          "coverage": 0.8913,
+          "avg_set_size": 1.733
+        },
+        "Moderate": {
+          "n": 16625,
+          "coverage": 0.8987,
+          "avg_set_size": 2.01
+        },
+        "Major": {
+          "n": 5148,
+          "coverage": 0.9079,
+          "avg_set_size": 2.08
+        }
+      }
+    },
+    "0.95": {
+      "overall_coverage": 0.9513,
+      "overall_avg_set_size": 2.459,
+      "singleton_rate": 0.0927,
+      "per_class": {
+        "Minor": {
+          "n": 1306,
+          "coverage": 0.9426,
+          "avg_set_size": 2.155
+        },
+        "Moderate": {
+          "n": 16625,
+          "coverage": 0.95,
+          "avg_set_size": 2.474
+        },
+        "Major": {
+          "n": 5148,
+          "coverage": 0.958,
+          "avg_set_size": 2.487
+        }
+      }
+    }
+  }
+}

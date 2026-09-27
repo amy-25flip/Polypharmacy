@@ -4,9 +4,12 @@ import { DrugSearchInput } from './components/DrugSearchInput'
 import { DrugChipList } from './components/DrugChipList'
 import type { DrugItem } from './components/DrugChipList'
 import { InteractionResults } from './components/InteractionResults'
+import { TransparencyPage } from './components/TransparencyPage'
 import { checkHealth, checkInteractions } from './api/client'
 import type { CheckResponse } from './api/client'
-import { ShieldCheck, Loader2, RefreshCw } from 'lucide-react'
+import { ShieldCheck, Loader2, RefreshCw, BarChart3 } from 'lucide-react'
+
+const TRANSPARENCY_PATH = '/model-card'
 
 export function App() {
   const [drugs, setDrugs] = useState<DrugItem[]>([])
@@ -14,6 +17,27 @@ export function App() {
   const [isChecking, setIsChecking] = useState(false)
   const [checkError, setCheckError] = useState<string | null>(null)
   const [result, setResult] = useState<CheckResponse | null>(null)
+  const [page, setPage] = useState<'checker' | 'transparency'>(
+    window.location.pathname === TRANSPARENCY_PATH ? 'transparency' : 'checker'
+  )
+
+  useEffect(() => {
+    const onPopState = () => {
+      setPage(window.location.pathname === TRANSPARENCY_PATH ? 'transparency' : 'checker')
+    }
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
+
+  const openTransparency = () => {
+    window.history.pushState({}, '', TRANSPARENCY_PATH)
+    setPage('transparency')
+  }
+
+  const closeTransparency = () => {
+    window.history.pushState({}, '', '/')
+    setPage('checker')
+  }
 
   // Fetch initial health status
   useEffect(() => {
@@ -69,6 +93,10 @@ export function App() {
   }
 
   const canCheck = drugs.length >= 2
+
+  if (page === 'transparency') {
+    return <TransparencyPage onBack={closeTransparency} />
+  }
 
   return (
     <div className="min-h-screen bg-slate-100/70 text-slate-900 py-6 sm:py-10 px-4 sm:px-6 lg:px-8">
@@ -158,8 +186,16 @@ export function App() {
         )}
 
         {/* Quiet Footer */}
-        <footer className="text-center text-xs text-slate-400 pt-4">
-          PolyGuard v1.0 • Clinical Drug Interaction Screening System
+        <footer className="text-center text-xs text-slate-400 pt-4 space-y-2">
+          <button
+            type="button"
+            onClick={openTransparency}
+            className="inline-flex items-center gap-1.5 text-slate-500 hover:text-slate-700 font-medium transition-colors"
+          >
+            <BarChart3 className="h-3.5 w-3.5" />
+            Model transparency &amp; real evaluation numbers
+          </button>
+          <p>PolyGuard v1.0 • Clinical Drug Interaction Screening System</p>
         </footer>
       </div>
     </div>

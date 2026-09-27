@@ -1,11 +1,18 @@
 import React from 'react'
-import { ShieldAlert, ShieldCheck, ShieldQuestion, FileWarning } from 'lucide-react'
-import type { EvidencePassport, EvidenceTier, ReliabilityBand, SupportTier } from '../api/client'
+import { ShieldAlert, ShieldCheck, ShieldQuestion, FileWarning, Braces } from 'lucide-react'
+import type { ConformalSets, EvidencePassport, EvidenceTier, ReliabilityBand, SupportTier } from '../api/client'
 
 interface EvidencePassportViewProps {
   passport: EvidencePassport
   drugA: string
   drugB: string
+  conformalSets?: ConformalSets
+}
+
+const severityDotClass: Record<string, string> = {
+  Minor: 'bg-emerald-500',
+  Moderate: 'bg-amber-500',
+  Major: 'bg-rose-500',
 }
 
 const evidenceTierLabel: Record<EvidenceTier, string> = {
@@ -34,6 +41,12 @@ const supportLabel: Record<SupportTier, string> = {
   well_represented: 'Well represented',
 }
 
+const disagreementClass: Record<'Low' | 'Moderate' | 'High', string> = {
+  Low: 'text-emerald-700',
+  Moderate: 'text-amber-700',
+  High: 'text-rose-700',
+}
+
 /** Abstain state: shown instead of a severity badge when the model's evidence
  * doesn't clear the empirically-measured reliability bar for this pair. */
 export const AbstainCard: React.FC<{ drugA: string; drugB: string; reason: string | null }> = ({
@@ -59,8 +72,9 @@ export const AbstainCard: React.FC<{ drugA: string; drugB: string; reason: strin
   </div>
 )
 
-export const EvidencePassportView: React.FC<EvidencePassportViewProps> = ({ passport }) => {
-  const { evidence_tier, drug_a_support, drug_b_support, reliability } = passport
+export const EvidencePassportView: React.FC<EvidencePassportViewProps> = ({ passport, conformalSets }) => {
+  const { evidence_tier, drug_a_support, drug_b_support, reliability, cross_model_agreement } = passport
+  const set90 = conformalSets?.['0.9']
 
   const Icon =
     evidence_tier === 'documented'
@@ -92,6 +106,37 @@ export const EvidencePassportView: React.FC<EvidencePassportViewProps> = ({ pass
         <span>Drug A data: {supportLabel[drug_a_support.tier]} ({drug_a_support.documented_pair_count} documented pairs)</span>
         <span>Drug B data: {supportLabel[drug_b_support.tier]} ({drug_b_support.documented_pair_count} documented pairs)</span>
       </div>
+      {set90 && (
+        <div className="mt-2 pt-2 border-t border-slate-100 text-xs flex items-center gap-1.5 flex-wrap">
+          <Braces className="h-3.5 w-3.5 text-slate-400 shrink-0" />
+          <span className="font-semibold text-slate-700">Plausible severities at 90% target coverage:</span>
+          {set90.set.map((s) => (
+            <span key={s} className="inline-flex items-center gap-1 font-bold text-slate-800">
+              <span className={`h-1.5 w-1.5 rounded-full ${severityDotClass[s]}`} />
+              {s}
+            </span>
+          ))}
+          {set90.size > 1 && (
+            <span className="text-slate-500 italic">— this pair is genuinely ambiguous between these, not a single confident answer</span>
+          )}
+        </div>
+      )}
+
+      {cross_model_agreement && (
+        <div className="mt-2 pt-2 border-t border-slate-100 text-xs">
+          <span className="font-semibold text-slate-700">Independent second opinion (chemistry model): </span>
+          <span className={`font-bold ${disagreementClass[cross_model_agreement.disagreement_level]}`}>
+            {cross_model_agreement.disagreement_level} disagreement
+          </span>
+          <span className="text-slate-500">
+            {' '}(chemistry model says {cross_model_agreement.chemistry_model_severity}
+            {cross_model_agreement.disagreement_level !== 'Low' && (
+              <> — historically {Math.round(cross_model_agreement.model1_empirical_accuracy_at_this_disagreement * 100)}% accurate at this disagreement level</>
+            )}
+            )
+          </span>
+        </div>
+      )}
     </div>
   )
 }

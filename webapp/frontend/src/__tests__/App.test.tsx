@@ -62,6 +62,7 @@ describe('App Full Integration Flow', () => {
           { drug_a: 'Metformin', drug_b: 'Warfarin', severity: 'Moderate', confidence: 0.77 },
         ],
       },
+      subset_certificate: null,
       combination_signal: null,
     }
 

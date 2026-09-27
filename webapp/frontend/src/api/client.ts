@@ -41,6 +41,16 @@ export interface Reliability {
   empirical_accuracy: number
 }
 
+export type DisagreementLevel = 'Low' | 'Moderate' | 'High'
+
+export interface CrossModelAgreement {
+  available: boolean
+  chemistry_model_severity: 'Minor' | 'Moderate' | 'Major'
+  js_divergence: number
+  disagreement_level: DisagreementLevel
+  model1_empirical_accuracy_at_this_disagreement: number
+}
+
 export interface EvidencePassport {
   evidence_tier: EvidenceTier
   drug_a_support: DrugSupport
@@ -48,7 +58,15 @@ export interface EvidencePassport {
   reliability: Reliability
   abstain: boolean
   abstain_reason: string | null
+  cross_model_agreement: CrossModelAgreement | null
 }
+
+export interface ConformalSet {
+  set: ('Minor' | 'Moderate' | 'Major')[]
+  size: number
+}
+
+export type ConformalSets = Record<string, ConformalSet> // key = target coverage, e.g. "0.9"
 
 export interface InteractionPair {
   drug_a: string
@@ -59,6 +77,7 @@ export interface InteractionPair {
   is_documented?: boolean
   undocumented_pair_notice?: string
   evidence_passport?: EvidencePassport
+  conformal_sets?: ConformalSets
 }
 
 export interface RegimenResult {
@@ -73,12 +92,40 @@ export interface CombinationSignal {
   elevated: boolean
 }
 
+export type CertificateType = 'reducible' | 'entangled' | 'higher_order'
+
+export interface MinimalElevatedSubset {
+  drugs: string[]
+  probability: number
+  size: number
+}
+
+export interface RemovalImpact {
+  drug: string
+  probability_without_this_drug: number
+  still_elevated_without_it: boolean
+  change: number
+}
+
+export interface SubsetCertificate {
+  applicable: boolean
+  reason?: string
+  certificate_type?: CertificateType
+  full_regimen_probability?: number
+  summary?: string
+  minimal_elevated_subsets?: MinimalElevatedSubset[]
+  total_minimal_subsets_found?: number
+  removal_impact?: RemovalImpact[]
+  caveat?: string
+}
+
 export interface CheckResponse {
   entered: string[]
   matched: string[]
   unmatched: string[]
   regimen: RegimenResult
   combination_signal: CombinationSignal | null
+  subset_certificate: SubsetCertificate | null
 }
 
 export interface HealthResponse {
@@ -107,6 +154,88 @@ export async function searchDrugs(query: string, signal?: AbortSignal): Promise<
   })
   if (!res.ok) {
     throw new Error(`Drug search failed: ${res.statusText}`)
+  }
+  return res.json()
+}
+
+// --- Transparency page ---
+
+export interface CalibrationBin {
+  confidence_low: number
+  confidence_high: number
+  n: number
+  empirical_accuracy: number
+}
+
+export interface RiskCoveragePoint {
+  coverage: number
+  n: number
+  accuracy: number
+}
+
+export interface DisagreementBin {
+  js_divergence_low: number
+  js_divergence_high: number
+  n: number
+  model1_empirical_accuracy: number
+  top_class_mismatch_rate: number
+}
+
+export interface ModelComparisonRow {
+  model: string
+  standard_accuracy: number
+  standard_macro_f1: number
+  cold_start_accuracy: number
+  cold_start_macro_f1: number
+  status: 'baseline' | 'shipped' | 'negative_result'
+}
+
+export interface ConformalCoverageResult {
+  overall_coverage: number
+  overall_avg_set_size: number
+  singleton_rate: number
+  per_class: Record<string, { n: number; coverage: number; avg_set_size: number }>
+}
+
+export interface TransparencyData {
+  model1_calibration: {
+    bins: CalibrationBin[]
+    risk_coverage: RiskCoveragePoint[]
+    thresholds: Record<string, number | string>
+    method: string
+  }
+  conformal_sets: {
+    eval: {
+      standard_split: Record<string, ConformalCoverageResult>
+      cold_start_split: Record<string, ConformalCoverageResult>
+    }
+    method: string
+  }
+  disagreement_sentinel: {
+    calibration: {
+      overall_model1_accuracy_on_this_heldout: number
+      correlation_disagreement_vs_error: number
+      bins: DisagreementBin[]
+    }
+    method: string
+  }
+  model_comparison: {
+    note: string
+    rows: ModelComparisonRow[]
+    finding: string
+  }
+  dataset: {
+    total_documented_pairs: number
+    total_drugs: number
+    drugs_with_drugbank_id: number
+    support_tiers: { sparse_max: number; limited_max: number }
+  }
+}
+
+export async function fetchTransparency(): Promise<TransparencyData> {
+  const res = await fetch(`${API_BASE}/api/transparency`)
+  if (!res.ok) {
+    throw new Error(`Transparency data fetch failed: ${res.statusText}`)
   }
   return res.json()
 }

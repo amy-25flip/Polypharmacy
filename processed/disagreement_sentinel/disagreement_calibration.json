@@ -1,0 +1,48 @@
+{
+  "overall_model1_accuracy_on_this_heldout": 0.6795,
+  "correlation_disagreement_vs_error": 0.4535,
+  "bins": [
+    {
+      "js_divergence_low": 0.0,
+      "js_divergence_high": 0.02,
+      "n": 5009,
+      "model1_empirical_accuracy": 0.8449,
+      "top_class_mismatch_rate": 0.02
+    },
+    {
+      "js_divergence_low": 0.02,
+      "js_divergence_high": 0.05,
+      "n": 2684,
+      "model1_empirical_accuracy": 0.7798,
+      "top_class_mismatch_rate": 0.0805
+    },
+    {
+      "js_divergence_low": 0.05,
+      "js_divergence_high": 0.1,
+      "n": 2136,
+      "model1_empirical_accuracy": 0.7364,
+      "top_class_mismatch_rate": 0.1376
+    },
+    {
+      "js_divergence_low": 0.1,
+      "js_divergence_high": 0.2,
+      "n": 1935,
+      "model1_empirical_accuracy": 0.661,
+      "top_class_mismatch_rate": 0.262
+    },
+    {
+      "js_divergence_low": 0.2,
+      "js_divergence_high": 0.35,
+      "n": 1304,
+      "model1_empirical_accuracy": 0.4555,
+      "top_class_mismatch_rate": 0.6066
+    },
+    {
+      "js_divergence_low": 0.35,
+      "js_divergence_high": 1.01,
+      "n": 1630,
+      "model1_empirical_accuracy": 0.1325,
+      "top_class_mismatch_rate": 0.9896
+    }
+  ]
+}
