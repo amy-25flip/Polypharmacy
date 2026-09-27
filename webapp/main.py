@@ -403,7 +403,8 @@ if _FRONTEND_DIST.exists():
         # Real static files (favicon, etc.) served directly; everything else
         # (including client-side routes like /model-card) falls back to
         # index.html so the SPA's own router can handle it.
-        candidate = _FRONTEND_DIST / full_path
-        if full_path and candidate.is_file():
+        candidate = (_FRONTEND_DIST / full_path).resolve()
+        dist_root = _FRONTEND_DIST.resolve()
+        if full_path and candidate.is_relative_to(dist_root) and candidate.is_file():
             return FileResponse(candidate)
         return FileResponse(_FRONTEND_DIST / "index.html")
