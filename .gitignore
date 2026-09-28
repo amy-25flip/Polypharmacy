@@ -27,3 +27,7 @@ webapp/frontend/.vite/
 # Editor/OS cruft
 .DS_Store
 Thumbs.db
+
+# Scratch working directory for PPT editing (copies of source files, extracted
+# media, LibreOffice profiles) - not project deliverables, not meant for git
+.pptx_work/
