@@ -111,6 +111,14 @@ export function PatientPrescriptionWorkflow() {
     setIsChecking(false)
   }
 
+  const removePrescription = (id: string) => {
+    requestIdRef.current += 1 // any in-flight check covered the now-removed prescription's drugs - discard it
+    setPrescriptions((current) => current.filter((item) => item.id !== id))
+    setResult(null)
+    setCheckError(null)
+    setIsChecking(false)
+  }
+
   return (
     <div className="space-y-6">
       <main className="print:hidden bg-white rounded-xl border border-slate-200 shadow-sm p-5 sm:p-7 space-y-6">
@@ -149,7 +157,7 @@ export function PatientPrescriptionWorkflow() {
                   <button
                     type="button"
                     aria-label={`Remove prescription ${prescriptionIndex + 1}`}
-                    onClick={() => setPrescriptions((current) => current.filter((item) => item.id !== prescription.id))}
+                    onClick={() => removePrescription(prescription.id)}
                     className="mt-5 rounded-md p-2 text-slate-500 hover:bg-rose-50 hover:text-rose-700"
                   >
                     <Trash2 className="h-4 w-4" />

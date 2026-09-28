@@ -4,7 +4,7 @@ import { Header } from '../components/Header'
 
 describe('Header Component', () => {
   it('renders title and permanent clinical safety notice', () => {
-    render(<Header knownDrugsCount={1902} />)
+    render(<Header knownDrugsCount={1902} healthStatus="ready" />)
 
     expect(screen.getByText('PolyGuard')).toBeInTheDocument()
     expect(
@@ -15,8 +15,14 @@ describe('Header Component', () => {
     expect(screen.getByText(/1,902 indexed medicines/i)).toBeInTheDocument()
   })
 
-  it('renders connecting state when knownDrugsCount is null', () => {
-    render(<Header knownDrugsCount={null} />)
+  it('renders connecting state while health check is loading', () => {
+    render(<Header knownDrugsCount={null} healthStatus="loading" />)
     expect(screen.getByText(/Connecting to database\.\.\./i)).toBeInTheDocument()
+  })
+
+  it('renders a distinct error state when the health check fails', () => {
+    render(<Header knownDrugsCount={null} healthStatus="error" />)
+    expect(screen.getByText(/Backend unavailable/i)).toBeInTheDocument()
+    expect(screen.queryByText(/Connecting to database\.\.\./i)).not.toBeInTheDocument()
   })
 })

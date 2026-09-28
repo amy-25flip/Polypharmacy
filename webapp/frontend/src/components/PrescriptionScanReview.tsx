@@ -138,7 +138,11 @@ export function PrescriptionScanReview({ onConfirmDrug }: PrescriptionScanReview
           capture="environment"
           className="sr-only"
           disabled={isScanning}
-          onChange={(event) => void handleFile(event.target.files?.[0])}
+          onChange={(event) => {
+            const file = event.target.files?.[0]
+            event.target.value = '' // allow re-selecting the identical file after a failed/empty scan
+            void handleFile(file)
+          }}
         />
       </label>
 
@@ -158,6 +162,15 @@ export function PrescriptionScanReview({ onConfirmDrug }: PrescriptionScanReview
           <AlertTriangle className="h-4 w-4 shrink-0" /> {warning}
         </p>
       ))}
+
+      {scan && rows.length === 0 && (
+        <div role="status" className="rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
+          <p className="font-semibold">No medicines could be read from this image.</p>
+          <p className="text-xs mt-1">
+            Try a clearer, closer, better-lit photo of just the medicines list, or add medicines manually below.
+          </p>
+        </div>
+      )}
 
       {rows.length > 0 && (
         <div className="space-y-3" aria-label="Extracted medicines awaiting review">

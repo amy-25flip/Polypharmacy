@@ -1,11 +1,12 @@
 import React from 'react'
-import { ShieldAlert, Activity } from 'lucide-react'
+import { ShieldAlert, Activity, WifiOff } from 'lucide-react'
 
 interface HeaderProps {
   knownDrugsCount?: number | null
+  healthStatus?: 'loading' | 'ready' | 'error'
 }
 
-export const Header: React.FC<HeaderProps> = ({ knownDrugsCount }) => {
+export const Header: React.FC<HeaderProps> = ({ knownDrugsCount, healthStatus = 'loading' }) => {
   return (
     <header className="space-y-4">
       {/* Top Brand Bar */}
@@ -27,11 +28,16 @@ export const Header: React.FC<HeaderProps> = ({ knownDrugsCount }) => {
           </div>
         </div>
 
-        {knownDrugsCount !== undefined && (
+        {healthStatus === 'error' ? (
+          <div className="flex items-center gap-2 text-xs text-rose-800 bg-rose-50 border border-rose-200 rounded-md px-2.5 py-1.5 self-start sm:self-auto">
+            <WifiOff className="h-3.5 w-3.5 text-rose-600" />
+            <span>Backend unavailable - check the server connection</span>
+          </div>
+        ) : (
           <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded-md px-2.5 py-1.5 self-start sm:self-auto">
-            <Activity className="h-3.5 w-3.5 text-emerald-600" />
+            <Activity className={`h-3.5 w-3.5 ${healthStatus === 'ready' ? 'text-emerald-600' : 'text-slate-400'}`} />
             <span>
-              {knownDrugsCount !== null
+              {healthStatus === 'ready' && knownDrugsCount != null
                 ? `${knownDrugsCount.toLocaleString()} indexed medicines`
                 : 'Connecting to database...'}
             </span>
