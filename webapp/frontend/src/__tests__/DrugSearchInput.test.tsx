@@ -66,6 +66,21 @@ describe('DrugSearchInput Component', () => {
     expect(onAddDrug).toHaveBeenCalledWith('Metformin', 'Morning', false)
   })
 
+  it('shows a distinct search-failure message instead of "no match found" when the request errors', async () => {
+    vi.spyOn(apiClient, 'searchDrugs').mockRejectedValue(new Error('Network error'))
+    const onAddDrug = vi.fn()
+
+    render(<DrugSearchInput onAddDrug={onAddDrug} existingDrugs={[]} />)
+
+    fireEvent.change(screen.getByLabelText(/Add medicine/i), { target: { value: 'warf' } })
+    vi.advanceTimersByTime(200)
+
+    await waitFor(() => {
+      expect(screen.getByText(/Search failed/i)).toBeInTheDocument()
+    })
+    expect(screen.queryByText(/No match found in database/i)).not.toBeInTheDocument()
+  })
+
   it('displays non-blocking unmatched option when no matches are found', async () => {
     vi.spyOn(apiClient, 'searchDrugs').mockResolvedValue([])
     const onAddDrug = vi.fn()

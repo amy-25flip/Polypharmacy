@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { AlertTriangle, Check, FileImage, Loader2, ScanLine, X } from 'lucide-react'
+import { AlertTriangle, Check, FileImage, Loader2, RotateCcw, ScanLine, X } from 'lucide-react'
 import { scanPrescription } from '../api/client'
 import type { PrescriptionScanResult, ScannedMedicine } from '../api/client'
 import { TIMING_OPTIONS } from './MedicationTimingTable'
@@ -15,10 +15,18 @@ interface ReviewRow extends ScannedMedicine {
   editedName: string
   timing: MedicationTiming
   status: 'pending' | 'confirmed' | 'rejected'
+  confirmedName?: string
+  duplicateWarning?: string
 }
 
 interface PrescriptionScanReviewProps {
   onConfirmDrug: (drug: ConfirmedScannedDrug) => void
+  /** Names already in this prescription (manually added or previously confirmed from
+   * this same scan) - used to catch duplicates the way manual entry already does. */
+  existingDrugs: string[]
+  /** Called when a doctor undoes a confirmed row, so the caller can remove the
+   * matching entry it already added via onConfirmDrug. */
+  onUndoConfirm: (name: string) => void
 }
 
 function PrescriptionCrop({ imageUrl, box, label }: {
@@ -62,7 +70,7 @@ function timingFromGuess(guess: string | null): MedicationTiming {
   return 'Unspecified'
 }
 
-export function PrescriptionScanReview({ onConfirmDrug }: PrescriptionScanReviewProps) {
+export function PrescriptionScanReview({ onConfirmDrug, existingDrugs, onUndoConfirm }: PrescriptionScanReviewProps) {
   const [isScanning, setIsScanning] = useState(false)
   const [scan, setScan] = useState<PrescriptionScanResult | null>(null)
   const [rows, setRows] = useState<ReviewRow[]>([])
@@ -108,8 +116,25 @@ export function PrescriptionScanReview({ onConfirmDrug }: PrescriptionScanReview
   const confirmRow = (row: ReviewRow) => {
     const name = row.editedName.trim()
     if (!name || row.status !== 'pending') return
+
+    const isDuplicate = existingDrugs.some((d) => d.toLowerCase() === name.toLowerCase())
+    if (isDuplicate) {
+      updateRow(row.id, { duplicateWarning: `"${name}" is already in this prescription - not added again.` })
+      return
+    }
+
     onConfirmDrug({ name, timing: row.timing })
-    updateRow(row.id, { status: 'confirmed' })
+    updateRow(row.id, { status: 'confirmed', confirmedName: name, duplicateWarning: undefined })
+  }
+
+  // Reopens a confirmed/rejected row for correction. For a confirmed row this must
+  // also remove the drug it already added, or the reopened row could be re-confirmed
+  // into a real duplicate once the doctor fixes the name.
+  const undoRow = (row: ReviewRow) => {
+    if (row.status === 'confirmed' && row.confirmedName) {
+      onUndoConfirm(row.confirmedName)
+    }
+    updateRow(row.id, { status: 'pending', confirmedName: undefined, duplicateWarning: undefined })
   }
 
   return (
@@ -192,7 +217,7 @@ export function PrescriptionScanReview({ onConfirmDrug }: PrescriptionScanReview
                     list={`scan-suggestions-${index}`}
                     value={row.editedName}
                     disabled={row.status !== 'pending'}
-                    onChange={(event) => updateRow(row.id, { editedName: event.target.value })}
+                    onChange={(event) => updateRow(row.id, { editedName: event.target.value, duplicateWarning: undefined })}
                     className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm font-normal text-slate-900"
                   />
                   <datalist id={`scan-suggestions-${index}`}>
@@ -217,13 +242,25 @@ export function PrescriptionScanReview({ onConfirmDrug }: PrescriptionScanReview
                   {[row.dosage && `Dosage: ${row.dosage}`, row.frequency_or_timing_guess && `Timing read: ${row.frequency_or_timing_guess}`, row.confidence_notes].filter(Boolean).join(' · ')}
                 </p>
               )}
+              {row.duplicateWarning && (
+                <p className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-amber-800">
+                  <AlertTriangle className="h-3.5 w-3.5 shrink-0" /> {row.duplicateWarning}
+                </p>
+              )}
               {row.status === 'pending' && (
-                <div className="mt-3 flex gap-2">
+                <div className="mt-3 flex flex-wrap gap-2">
                   <button type="button" disabled={!row.editedName.trim()} onClick={() => confirmRow(row)} className="inline-flex items-center gap-1.5 rounded-md bg-emerald-700 px-3 py-2 text-xs font-bold text-white disabled:opacity-40">
                     <Check className="h-4 w-4" /> Confirm this medicine
                   </button>
                   <button type="button" onClick={() => updateRow(row.id, { status: 'rejected' })} className="inline-flex items-center gap-1.5 rounded-md border border-slate-300 px-3 py-2 text-xs font-bold text-slate-700">
                     <X className="h-4 w-4" /> Reject
+                  </button>
+                </div>
+              )}
+              {row.status !== 'pending' && (
+                <div className="mt-3">
+                  <button type="button" onClick={() => undoRow(row)} className="inline-flex items-center gap-1.5 rounded-md border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50">
+                    <RotateCcw className="h-3.5 w-3.5" /> {row.status === 'confirmed' ? 'Undo - remove and re-edit' : 'Undo rejection'}
                   </button>
                 </div>
               )}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Search, PlusCircle, AlertCircle, Loader2 } from 'lucide-react'
+import { Search, PlusCircle, AlertCircle, Loader2, RefreshCw } from 'lucide-react'
 import { searchDrugs } from '../api/client'
 import type { DrugSearchResult } from '../api/client'
 import { TIMING_OPTIONS } from './MedicationTimingTable'
@@ -20,40 +20,55 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
   const [isOpen, setIsOpen] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState<number>(-1)
   const [feedback, setFeedback] = useState<string | null>(null)
+  const [searchError, setSearchError] = useState<string | null>(null)
+  const [retryTick, setRetryTick] = useState(0)
   // Persists across adds so entering several same-schedule medicines in a row
   // (a common real prescription pattern) doesn't require resetting it each time.
   const [timing, setTiming] = useState<MedicationTiming>('Unspecified')
 
   const inputRef = useRef<HTMLInputElement>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  // Guards against a slower, superseded search response landing after a newer one -
+  // e.g. typing quickly could otherwise briefly show suggestions or an error for a
+  // query the user has already changed.
+  const searchRequestIdRef = useRef(0)
 
   // Debounced search logic (200ms)
   useEffect(() => {
     const trimmed = query.trim()
     if (trimmed.length < 2) {
+      searchRequestIdRef.current += 1
       setSuggestions([])
       setIsLoading(false)
       setIsOpen(false)
       setSelectedIndex(-1)
+      setSearchError(null)
       return
     }
 
     setIsLoading(true)
+    setSearchError(null)
+    const requestId = ++searchRequestIdRef.current
     const controller = new AbortController()
 
     const timer = setTimeout(async () => {
       try {
         const results = await searchDrugs(trimmed, controller.signal)
+        if (searchRequestIdRef.current !== requestId) return
         setSuggestions(results)
+        setSearchError(null)
         setIsOpen(true)
         setSelectedIndex(-1)
       } catch (err: unknown) {
+        if (searchRequestIdRef.current !== requestId) return
         if (err instanceof Error && err.name !== 'AbortError') {
           console.error('Error fetching drug suggestions:', err)
           setSuggestions([])
+          setSearchError('Search failed - check your connection.')
+          setIsOpen(true)
         }
       } finally {
-        setIsLoading(false)
+        if (searchRequestIdRef.current === requestId) setIsLoading(false)
       }
     }, 200)
 
@@ -61,7 +76,7 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
       clearTimeout(timer)
       controller.abort()
     }
-  }, [query])
+  }, [query, retryTick])
 
   // Handle outside click to close dropdown
   useEffect(() => {
@@ -132,7 +147,7 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
   }
 
   const trimmedQuery = query.trim()
-  const showUnmatchedOption = isOpen && !isLoading && trimmedQuery.length >= 2 && suggestions.length === 0
+  const showUnmatchedOption = isOpen && !isLoading && !searchError && trimmedQuery.length >= 2 && suggestions.length === 0
 
   return (
     <div className="relative w-full">
@@ -195,12 +210,29 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
       )}
 
       {/* Autocomplete Dropdown */}
-      {isOpen && (suggestions.length > 0 || showUnmatchedOption) && (
+      {isOpen && (suggestions.length > 0 || showUnmatchedOption || searchError) && (
         <div
           ref={dropdownRef}
           role="listbox"
           className="absolute z-30 mt-1.5 w-full bg-white border border-slate-200 rounded-lg shadow-lg overflow-hidden max-h-72 overflow-y-auto"
         >
+          {searchError && (
+            <div className="p-3 flex items-start gap-2.5 bg-rose-50">
+              <AlertCircle className="h-4 w-4 text-rose-600 shrink-0 mt-0.5" />
+              <div className="text-sm flex-1">
+                <p className="font-semibold text-rose-900">{searchError}</p>
+                <p className="text-xs mt-0.5 text-rose-700">This is a connection problem, not a database result - it does not mean the medicine is unknown.</p>
+                <button
+                  type="button"
+                  onClick={() => setRetryTick((t) => t + 1)}
+                  className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-rose-800 hover:text-rose-950"
+                >
+                  <RefreshCw className="h-3.5 w-3.5" /> Retry search
+                </button>
+              </div>
+            </div>
+          )}
+
           {suggestions.length > 0 && (
             <div className="py-1">
               <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400 bg-slate-50 border-b border-slate-100">

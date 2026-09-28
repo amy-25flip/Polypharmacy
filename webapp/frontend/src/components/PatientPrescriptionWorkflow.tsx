@@ -59,6 +59,15 @@ export function PatientPrescriptionWorkflow() {
     }))
   }
 
+  // Used to undo a scan confirmation - safe to match by name since the scan review's
+  // own duplicate check prevents two drugs in the same prescription sharing a name.
+  const removeDrugByName = (prescriptionId: string, name: string) => {
+    updatePrescription(prescriptionId, (prescription) => ({
+      ...prescription,
+      drugs: prescription.drugs.filter((drug) => drug.name.toLowerCase() !== name.toLowerCase()),
+    }))
+  }
+
   const combinedMedications = useMemo<CombinedMedication[]>(() => {
     const merged = new Map<string, CombinedMedication>()
     prescriptions.forEach((prescription) => prescription.drugs.forEach((drug) => {
@@ -165,7 +174,11 @@ export function PatientPrescriptionWorkflow() {
                 )}
               </div>
 
-              <PrescriptionScanReview onConfirmDrug={({ name, timing }) => addDrug(prescription.id, name, timing)} />
+              <PrescriptionScanReview
+                onConfirmDrug={({ name, timing }) => addDrug(prescription.id, name, timing)}
+                existingDrugs={prescription.drugs.map((drug) => drug.name)}
+                onUndoConfirm={(name) => removeDrugByName(prescription.id, name)}
+              />
 
               <div className="rounded-lg border border-slate-200 bg-white p-4">
                 <DrugSearchInput
