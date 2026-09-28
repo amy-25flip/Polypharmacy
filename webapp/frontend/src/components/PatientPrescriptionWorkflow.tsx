@@ -161,7 +161,7 @@ export function PatientPrescriptionWorkflow() {
 
               <div className="rounded-lg border border-slate-200 bg-white p-4">
                 <DrugSearchInput
-                  onAddDrug={(name, isUnmatched) => addDrug(prescription.id, name, 'Unspecified', isUnmatched)}
+                  onAddDrug={(name, timing, isUnmatched) => addDrug(prescription.id, name, timing, isUnmatched)}
                   existingDrugs={prescription.drugs.map((drug) => drug.name)}
                 />
               </div>

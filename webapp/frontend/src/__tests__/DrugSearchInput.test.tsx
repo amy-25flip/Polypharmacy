@@ -43,7 +43,27 @@ describe('DrugSearchInput Component', () => {
 
     // Click on suggestion
     fireEvent.click(screen.getByText('Metformin'))
-    expect(onAddDrug).toHaveBeenCalledWith('Metformin', false)
+    expect(onAddDrug).toHaveBeenCalledWith('Metformin', 'Unspecified', false)
+  })
+
+  it('applies the selected timing to the next medicine added', async () => {
+    vi.spyOn(apiClient, 'searchDrugs').mockResolvedValue([{ name: 'Metformin' }])
+    const onAddDrug = vi.fn()
+
+    render(<DrugSearchInput onAddDrug={onAddDrug} existingDrugs={[]} />)
+
+    fireEvent.change(screen.getByLabelText('Timing for the next medicine you add'), { target: { value: 'Morning' } })
+
+    const input = screen.getByLabelText(/Add medicine/i)
+    fireEvent.change(input, { target: { value: 'metf' } })
+    vi.advanceTimersByTime(200)
+
+    await waitFor(() => {
+      expect(screen.getByText('Metformin')).toBeInTheDocument()
+    })
+
+    fireEvent.click(screen.getByText('Metformin'))
+    expect(onAddDrug).toHaveBeenCalledWith('Metformin', 'Morning', false)
   })
 
   it('displays non-blocking unmatched option when no matches are found', async () => {
@@ -63,7 +83,7 @@ describe('DrugSearchInput Component', () => {
 
     // Click the fallback unmatched option
     fireEvent.click(screen.getByText(/No match found in database/i))
-    expect(onAddDrug).toHaveBeenCalledWith('UnknownMed123', true)
+    expect(onAddDrug).toHaveBeenCalledWith('UnknownMed123', 'Unspecified', true)
   })
 
   it('warns when attempting to add duplicate medicine', async () => {
@@ -98,6 +118,6 @@ describe('DrugSearchInput Component', () => {
     await waitFor(() => expect(screen.getByText('brand: dolo 650')).toBeInTheDocument())
 
     fireEvent.click(screen.getByText('Acetaminophen'))
-    expect(onAddDrug).toHaveBeenCalledWith('Acetaminophen', false)
+    expect(onAddDrug).toHaveBeenCalledWith('Acetaminophen', 'Unspecified', false)
   })
 })

@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Search, PlusCircle, AlertCircle, Loader2 } from 'lucide-react'
 import { searchDrugs } from '../api/client'
 import type { DrugSearchResult } from '../api/client'
+import { TIMING_OPTIONS } from './MedicationTimingTable'
+import type { MedicationTiming } from './MedicationTimingTable'
 
 interface DrugSearchInputProps {
-  onAddDrug: (drugName: string, isUnmatched?: boolean) => void
+  onAddDrug: (drugName: string, timing: MedicationTiming, isUnmatched?: boolean) => void
   existingDrugs: string[]
 }
 
@@ -18,6 +20,9 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
   const [isOpen, setIsOpen] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState<number>(-1)
   const [feedback, setFeedback] = useState<string | null>(null)
+  // Persists across adds so entering several same-schedule medicines in a row
+  // (a common real prescription pattern) doesn't require resetting it each time.
+  const [timing, setTiming] = useState<MedicationTiming>('Unspecified')
 
   const inputRef = useRef<HTMLInputElement>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -87,7 +92,7 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
       setFeedback(`"${trimmed}" is already added to the patient's list.`)
       setTimeout(() => setFeedback(null), 3000)
     } else {
-      onAddDrug(trimmed, isUnmatched)
+      onAddDrug(trimmed, timing, isUnmatched)
       setFeedback(null)
     }
 
@@ -131,37 +136,56 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
 
   return (
     <div className="relative w-full">
-      <label
-        htmlFor="drug-search-input"
-        className="block text-sm font-semibold text-slate-800 mb-1.5"
-      >
-        Add medicine
-      </label>
+      <div className="flex items-end gap-3 mb-1.5">
+        <label
+          htmlFor="drug-search-input"
+          className="block text-sm font-semibold text-slate-800"
+        >
+          Add medicine
+        </label>
+      </div>
 
-      <div className="relative">
-        <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-          {isLoading ? (
-            <Loader2 className="h-5 w-5 animate-spin text-blue-600" />
-          ) : (
-            <Search className="h-5 w-5" />
-          )}
+      <div className="flex flex-col sm:flex-row gap-2">
+        <div className="relative flex-1">
+          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+            {isLoading ? (
+              <Loader2 className="h-5 w-5 animate-spin text-blue-600" />
+            ) : (
+              <Search className="h-5 w-5" />
+            )}
+          </div>
+
+          <input
+            id="drug-search-input"
+            ref={inputRef}
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onFocus={() => {
+              if (trimmedQuery.length >= 2) setIsOpen(true)
+            }}
+            onKeyDown={handleKeyDown}
+            placeholder="Type medicine name (e.g. Metformin, Warfarin, Lisinopril)..."
+            autoComplete="off"
+            className="w-full pl-11 pr-4 py-3 bg-white border-2 border-slate-300 rounded-lg text-slate-900 text-base placeholder-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-colors shadow-xs"
+          />
         </div>
 
-        <input
-          id="drug-search-input"
-          ref={inputRef}
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onFocus={() => {
-            if (trimmedQuery.length >= 2) setIsOpen(true)
-          }}
-          onKeyDown={handleKeyDown}
-          placeholder="Type medicine name (e.g. Metformin, Warfarin, Lisinopril)..."
-          autoComplete="off"
-          className="w-full pl-11 pr-4 py-3 bg-white border-2 border-slate-300 rounded-lg text-slate-900 text-base placeholder-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-colors shadow-xs"
-        />
+        <label className="sm:w-40 shrink-0 text-xs font-semibold text-slate-600">
+          <span className="sm:hidden">Timing for next medicine</span>
+          <select
+            aria-label="Timing for the next medicine you add"
+            value={timing}
+            onChange={(e) => setTiming(e.target.value as MedicationTiming)}
+            className="mt-1 sm:mt-0 w-full h-full rounded-lg border-2 border-slate-300 px-2.5 py-3 text-sm font-medium text-slate-800 focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+          >
+            {TIMING_OPTIONS.map((option) => <option key={option}>{option}</option>)}
+          </select>
+        </label>
       </div>
+      <p className="mt-1 text-[11px] text-slate-500">
+        Sets the timing applied to the next medicine you add - change per-medicine anytime below.
+      </p>
 
       {feedback && (
         <p className="mt-1.5 text-xs font-medium text-amber-700 flex items-center gap-1.5">
