@@ -8,6 +8,7 @@ import type { MedicationTiming } from './MedicationTimingTable'
 export interface ConfirmedScannedDrug {
   name: string
   timing: MedicationTiming
+  isUnmatched: boolean
 }
 
 interface ReviewRow extends ScannedMedicine {
@@ -27,6 +28,10 @@ interface PrescriptionScanReviewProps {
   /** Called when a doctor undoes a confirmed row, so the caller can remove the
    * matching entry it already added via onConfirmDrug. */
   onUndoConfirm: (name: string) => void
+  /** Called when a doctor accepts Gemini's guessed source/date as this prescription's
+   * label - never applied automatically, since it could silently overwrite a label
+   * the doctor already typed. */
+  onUseSuggestedSource: (label: string) => void
 }
 
 function PrescriptionCrop({ imageUrl, box, label }: {
@@ -70,13 +75,17 @@ function timingFromGuess(guess: string | null): MedicationTiming {
   return 'Unspecified'
 }
 
-export function PrescriptionScanReview({ onConfirmDrug, existingDrugs, onUndoConfirm }: PrescriptionScanReviewProps) {
+export function PrescriptionScanReview({ onConfirmDrug, existingDrugs, onUndoConfirm, onUseSuggestedSource }: PrescriptionScanReviewProps) {
   const [isScanning, setIsScanning] = useState(false)
   const [scan, setScan] = useState<PrescriptionScanResult | null>(null)
   const [rows, setRows] = useState<ReviewRow[]>([])
   const [error, setError] = useState<string | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
   const imageUrlRef = useRef<string | null>(null)
+  // Visible status text already changes (button label, row badges), but that alone
+  // isn't announced to screen-reader users - this drives a matching live region.
+  const [announcement, setAnnouncement] = useState('')
+  const [sourceSuggestionDismissed, setSourceSuggestionDismissed] = useState(false)
 
   useEffect(() => () => {
     if (imageUrlRef.current) URL.revokeObjectURL(imageUrlRef.current)
@@ -92,6 +101,8 @@ export function PrescriptionScanReview({ onConfirmDrug, existingDrugs, onUndoCon
     setError(null)
     setScan(null)
     setRows([])
+    setSourceSuggestionDismissed(false)
+    setAnnouncement('Reading prescription image…')
     try {
       const result = await scanPrescription(file)
       setScan(result)
@@ -102,8 +113,15 @@ export function PrescriptionScanReview({ onConfirmDrug, existingDrugs, onUndoCon
         timing: timingFromGuess(medicine.frequency_or_timing_guess),
         status: 'pending',
       })))
+      setAnnouncement(
+        result.medicines.length > 0
+          ? `${result.medicines.length} medicine${result.medicines.length === 1 ? '' : 's'} found - review each before adding.`
+          : 'No medicines could be read from this image.'
+      )
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : 'Prescription scanning failed.')
+      const message = caught instanceof Error ? caught.message : 'Prescription scanning failed.'
+      setError(message)
+      setAnnouncement(message)
     } finally {
       setIsScanning(false)
     }
@@ -119,12 +137,19 @@ export function PrescriptionScanReview({ onConfirmDrug, existingDrugs, onUndoCon
 
     const isDuplicate = existingDrugs.some((d) => d.toLowerCase() === name.toLowerCase())
     if (isDuplicate) {
-      updateRow(row.id, { duplicateWarning: `"${name}" is already in this prescription - not added again.` })
+      const warning = `"${name}" is already in this prescription - not added again.`
+      updateRow(row.id, { duplicateWarning: warning })
+      setAnnouncement(warning)
       return
     }
 
-    onConfirmDrug({ name, timing: row.timing })
+    // The doctor may have edited the OCR suggestion into free text - only trust it as
+    // "matched" if it's actually one of the vocabulary matches offered for this row,
+    // the same standard manual entry uses.
+    const isUnmatched = !row.suggested_vocab_matches.some((match) => match.toLowerCase() === name.toLowerCase())
+    onConfirmDrug({ name, timing: row.timing, isUnmatched })
     updateRow(row.id, { status: 'confirmed', confirmedName: name, duplicateWarning: undefined })
+    setAnnouncement(`"${name}" confirmed and added.`)
   }
 
   // Reopens a confirmed/rejected row for correction. For a confirmed row this must
@@ -135,10 +160,12 @@ export function PrescriptionScanReview({ onConfirmDrug, existingDrugs, onUndoCon
       onUndoConfirm(row.confirmedName)
     }
     updateRow(row.id, { status: 'pending', confirmedName: undefined, duplicateWarning: undefined })
+    setAnnouncement('Row reopened for correction.')
   }
 
   return (
     <div className="rounded-lg border border-blue-200 bg-blue-50/40 p-4 space-y-4">
+      <div aria-live="polite" className="sr-only">{announcement}</div>
       <div className="flex items-start gap-3">
         <ScanLine className="h-5 w-5 text-blue-700 shrink-0 mt-0.5" />
         <div>
@@ -187,6 +214,29 @@ export function PrescriptionScanReview({ onConfirmDrug, existingDrugs, onUndoCon
           <AlertTriangle className="h-4 w-4 shrink-0" /> {warning}
         </p>
       ))}
+
+      {scan && !sourceSuggestionDismissed && (scan.source_guess || scan.date_guess) && (
+        <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-blue-200 bg-white px-3 py-2 text-xs">
+          <span className="text-slate-700">
+            Detected on this image: <span className="font-semibold text-slate-900">{[scan.source_guess, scan.date_guess].filter(Boolean).join(' · ')}</span>
+          </span>
+          <span className="flex gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={() => {
+                onUseSuggestedSource([scan.source_guess, scan.date_guess].filter(Boolean).join(' · '))
+                setSourceSuggestionDismissed(true)
+              }}
+              className="font-bold text-blue-700 hover:text-blue-900"
+            >
+              Use as prescription label
+            </button>
+            <button type="button" onClick={() => setSourceSuggestionDismissed(true)} className="font-semibold text-slate-500 hover:text-slate-700">
+              Dismiss
+            </button>
+          </span>
+        </div>
+      )}
 
       {scan && rows.length === 0 && (
         <div role="status" className="rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
@@ -252,7 +302,7 @@ export function PrescriptionScanReview({ onConfirmDrug, existingDrugs, onUndoCon
                   <button type="button" disabled={!row.editedName.trim()} onClick={() => confirmRow(row)} className="inline-flex items-center gap-1.5 rounded-md bg-emerald-700 px-3 py-2 text-xs font-bold text-white disabled:opacity-40">
                     <Check className="h-4 w-4" /> Confirm this medicine
                   </button>
-                  <button type="button" onClick={() => updateRow(row.id, { status: 'rejected' })} className="inline-flex items-center gap-1.5 rounded-md border border-slate-300 px-3 py-2 text-xs font-bold text-slate-700">
+                  <button type="button" onClick={() => { updateRow(row.id, { status: 'rejected' }); setAnnouncement('Extracted medicine rejected.') }} className="inline-flex items-center gap-1.5 rounded-md border border-slate-300 px-3 py-2 text-xs font-bold text-slate-700">
                     <X className="h-4 w-4" /> Reject
                   </button>
                 </div>

@@ -148,6 +148,17 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
 
   const trimmedQuery = query.trim()
   const showUnmatchedOption = isOpen && !isLoading && !searchError && trimmedQuery.length >= 2 && suggestions.length === 0
+  const activeOptionId =
+    selectedIndex < 0 ? undefined : selectedIndex < suggestions.length ? `drug-option-${selectedIndex}` : 'drug-option-unmatched'
+  const statusMessage = isLoading
+    ? 'Searching…'
+    : searchError
+    ? searchError
+    : isOpen && suggestions.length > 0
+    ? `${suggestions.length} matching medicine${suggestions.length === 1 ? '' : 's'} found`
+    : isOpen && showUnmatchedOption
+    ? 'No database match found for this medicine'
+    : ''
 
   return (
     <div className="relative w-full">
@@ -174,6 +185,11 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
             id="drug-search-input"
             ref={inputRef}
             type="text"
+            role="combobox"
+            aria-expanded={isOpen && (suggestions.length > 0 || showUnmatchedOption || !!searchError)}
+            aria-controls="drug-search-listbox"
+            aria-autocomplete="list"
+            aria-activedescendant={activeOptionId}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onFocus={() => {
@@ -209,10 +225,18 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
         </p>
       )}
 
+      {/* Visually-hidden status announcements for screen-reader users - the visual
+          dropdown alone doesn't announce result counts, errors, or duplicate feedback. */}
+      <div aria-live="polite" className="sr-only">
+        {statusMessage}
+        {feedback}
+      </div>
+
       {/* Autocomplete Dropdown */}
       {isOpen && (suggestions.length > 0 || showUnmatchedOption || searchError) && (
         <div
           ref={dropdownRef}
+          id="drug-search-listbox"
           role="listbox"
           className="absolute z-30 mt-1.5 w-full bg-white border border-slate-200 rounded-lg shadow-lg overflow-hidden max-h-72 overflow-y-auto"
         >
@@ -243,6 +267,7 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
                 return (
                   <button
                     key={`${drug.name}-${drug.matched_via_brand || 'direct'}`}
+                    id={`drug-option-${index}`}
                     type="button"
                     role="option"
                     aria-selected={isSelected}
@@ -277,6 +302,7 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
           {showUnmatchedOption && (
             <div className="p-2">
               <button
+                id="drug-option-unmatched"
                 type="button"
                 role="option"
                 aria-selected={selectedIndex === 0}

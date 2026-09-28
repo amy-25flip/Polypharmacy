@@ -23,7 +23,7 @@ describe('PrescriptionScanReview safety gate', () => {
       }],
     })
     const onConfirmDrug = vi.fn()
-    render(<PrescriptionScanReview onConfirmDrug={onConfirmDrug} existingDrugs={[]} onUndoConfirm={vi.fn()} />)
+    render(<PrescriptionScanReview onConfirmDrug={onConfirmDrug} existingDrugs={[]} onUndoConfirm={vi.fn()} onUseSuggestedSource={vi.fn()} />)
 
     const file = new File(['image'], 'prescription.jpg', { type: 'image/jpeg' })
     fireEvent.change(screen.getByLabelText('Upload prescription image'), { target: { files: [file] } })
@@ -33,7 +33,7 @@ describe('PrescriptionScanReview safety gate', () => {
     expect(onConfirmDrug).not.toHaveBeenCalled()
 
     fireEvent.click(screen.getByRole('button', { name: 'Confirm this medicine' }))
-    expect(onConfirmDrug).toHaveBeenCalledWith({ name: 'Warfarin', timing: 'Bedtime' })
+    expect(onConfirmDrug).toHaveBeenCalledWith({ name: 'Warfarin', timing: 'Bedtime', isUnmatched: false })
   })
 
   it('warns instead of confirming when the extracted medicine is already in the prescription', async () => {
@@ -55,7 +55,7 @@ describe('PrescriptionScanReview safety gate', () => {
       }],
     })
     const onConfirmDrug = vi.fn()
-    render(<PrescriptionScanReview onConfirmDrug={onConfirmDrug} existingDrugs={['Metformin']} onUndoConfirm={vi.fn()} />)
+    render(<PrescriptionScanReview onConfirmDrug={onConfirmDrug} existingDrugs={['Metformin']} onUndoConfirm={vi.fn()} onUseSuggestedSource={vi.fn()} />)
 
     fireEvent.change(screen.getByLabelText('Upload prescription image'), {
       target: { files: [new File(['image'], 'rx.jpg', { type: 'image/jpeg' })] },
@@ -64,7 +64,38 @@ describe('PrescriptionScanReview safety gate', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Confirm this medicine' }))
     expect(onConfirmDrug).not.toHaveBeenCalled()
-    expect(screen.getByText(/already in this prescription/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/already in this prescription/i).length).toBeGreaterThan(0)
+  })
+
+  it('marks a confirmed row as unmatched when the edited name is not one of the suggested vocabulary matches', async () => {
+    vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:test-unmatched')
+    vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => undefined)
+    vi.spyOn(apiClient, 'scanPrescription').mockResolvedValue({
+      source_guess: null,
+      date_guess: null,
+      warnings: [],
+      medicines: [{
+        raw_text: 'Illegible 5mg',
+        drug_name_guess: 'Illegible',
+        generic_name_guess: null,
+        dosage: '5mg',
+        frequency_or_timing_guess: null,
+        confidence_notes: null,
+        suggested_vocab_matches: ['Warfarin'],
+        bounding_box: null,
+      }],
+    })
+    const onConfirmDrug = vi.fn()
+    render(<PrescriptionScanReview onConfirmDrug={onConfirmDrug} existingDrugs={[]} onUndoConfirm={vi.fn()} onUseSuggestedSource={vi.fn()} />)
+
+    fireEvent.change(screen.getByLabelText('Upload prescription image'), {
+      target: { files: [new File(['image'], 'rx.jpg', { type: 'image/jpeg' })] },
+    })
+    await waitFor(() => expect(screen.getByLabelText('Reviewed medicine name 1')).toBeInTheDocument())
+
+    fireEvent.change(screen.getByLabelText('Reviewed medicine name 1'), { target: { value: 'Some Made Up Drug' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Confirm this medicine' }))
+    expect(onConfirmDrug).toHaveBeenCalledWith({ name: 'Some Made Up Drug', timing: 'Unspecified', isUnmatched: true })
   })
 
   it('lets a confirmed row be undone, removing the drug it added', async () => {
@@ -87,7 +118,7 @@ describe('PrescriptionScanReview safety gate', () => {
     })
     const onConfirmDrug = vi.fn()
     const onUndoConfirm = vi.fn()
-    render(<PrescriptionScanReview onConfirmDrug={onConfirmDrug} existingDrugs={[]} onUndoConfirm={onUndoConfirm} />)
+    render(<PrescriptionScanReview onConfirmDrug={onConfirmDrug} existingDrugs={[]} onUndoConfirm={onUndoConfirm} onUseSuggestedSource={vi.fn()} />)
 
     fireEvent.change(screen.getByLabelText('Upload prescription image'), {
       target: { files: [new File(['image'], 'rx.jpg', { type: 'image/jpeg' })] },
@@ -95,7 +126,7 @@ describe('PrescriptionScanReview safety gate', () => {
     await waitFor(() => expect(screen.getByDisplayValue('Aspirin')).toBeInTheDocument())
 
     fireEvent.click(screen.getByRole('button', { name: 'Confirm this medicine' }))
-    expect(onConfirmDrug).toHaveBeenCalledWith({ name: 'Aspirin', timing: 'Unspecified' })
+    expect(onConfirmDrug).toHaveBeenCalledWith({ name: 'Aspirin', timing: 'Unspecified', isUnmatched: false })
 
     fireEvent.click(screen.getByRole('button', { name: /Undo/i }))
     expect(onUndoConfirm).toHaveBeenCalledWith('Aspirin')
@@ -112,12 +143,12 @@ describe('PrescriptionScanReview safety gate', () => {
       warnings: [],
       medicines: [],
     })
-    render(<PrescriptionScanReview onConfirmDrug={vi.fn()} existingDrugs={[]} onUndoConfirm={vi.fn()} />)
+    render(<PrescriptionScanReview onConfirmDrug={vi.fn()} existingDrugs={[]} onUndoConfirm={vi.fn()} onUseSuggestedSource={vi.fn()} />)
 
     fireEvent.change(screen.getByLabelText('Upload prescription image'), {
       target: { files: [new File(['image'], 'blank.jpg', { type: 'image/jpeg' })] },
     })
-    await waitFor(() => expect(screen.getByText(/No medicines could be read/i)).toBeInTheDocument())
+    await waitFor(() => expect(screen.getAllByText(/No medicines could be read/i).length).toBeGreaterThan(0))
   })
 
   it('renders a medicine safely when no source bounding box is available', async () => {
@@ -139,7 +170,7 @@ describe('PrescriptionScanReview safety gate', () => {
       }],
     })
 
-    render(<PrescriptionScanReview onConfirmDrug={vi.fn()} existingDrugs={[]} onUndoConfirm={vi.fn()} />)
+    render(<PrescriptionScanReview onConfirmDrug={vi.fn()} existingDrugs={[]} onUndoConfirm={vi.fn()} onUseSuggestedSource={vi.fn()} />)
     fireEvent.change(screen.getByLabelText('Upload prescription image'), {
       target: { files: [new File(['image'], 'unclear.jpg', { type: 'image/jpeg' })] },
     })

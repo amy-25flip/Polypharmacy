@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { ClipboardPlus, Loader2, Plus, RefreshCw, ShieldCheck, Sparkles, Trash2 } from 'lucide-react'
 import { checkInteractions } from '../api/client'
 import type { CheckResponse } from '../api/client'
@@ -43,6 +43,21 @@ export function PatientPrescriptionWorkflow() {
   // Bumped on every edit/check so a slow, superseded /api/check response can never
   // overwrite state with results for a medication list the user has since changed.
   const requestIdRef = useRef(0)
+  // The report renders well below the "Check interactions" button - without this, a
+  // sighted user could miss that it appeared at all, and a keyboard/screen-reader
+  // user would be stuck at the button with no indication anything happened.
+  const resultsRef = useRef<HTMLElement>(null)
+  const errorRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (result) resultsRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'start' })
+    resultsRef.current?.focus()
+  }, [result])
+
+  useEffect(() => {
+    if (checkError) errorRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'nearest' })
+    errorRef.current?.focus()
+  }, [checkError])
 
   const updatePrescription = (id: string, updater: (prescription: SessionPrescription) => SessionPrescription) => {
     requestIdRef.current += 1 // any in-flight check is now stale and will discard its response
@@ -175,9 +190,10 @@ export function PatientPrescriptionWorkflow() {
               </div>
 
               <PrescriptionScanReview
-                onConfirmDrug={({ name, timing }) => addDrug(prescription.id, name, timing)}
+                onConfirmDrug={({ name, timing, isUnmatched }) => addDrug(prescription.id, name, timing, isUnmatched)}
                 existingDrugs={prescription.drugs.map((drug) => drug.name)}
                 onUndoConfirm={(name) => removeDrugByName(prescription.id, name)}
+                onUseSuggestedSource={(label) => updatePrescription(prescription.id, (current) => ({ ...current, label }))}
               />
 
               <div className="rounded-lg border border-slate-200 bg-white p-4">
@@ -192,11 +208,12 @@ export function PatientPrescriptionWorkflow() {
               ) : (
                 <div className="space-y-2">
                   {prescription.drugs.map((drug) => (
-                    <div key={drug.id} className="grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2">
-                      <div className="min-w-0">
-                        <p className="truncate text-sm font-semibold text-slate-900">{drug.name}</p>
+                    <div key={drug.id} className="flex flex-col sm:flex-row sm:items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2">
+                      <div className="min-w-0 flex-1">
+                        <p className="break-words text-sm font-semibold text-slate-900" title={drug.name}>{drug.name}</p>
                         {drug.isUnmatched && <p className="text-[11px] text-amber-700">Not matched to the reference vocabulary</p>}
                       </div>
+                      <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
                       <select
                         aria-label={`Timing for ${drug.name}`}
                         value={drug.timing}
@@ -216,6 +233,7 @@ export function PatientPrescriptionWorkflow() {
                       >
                         <Trash2 className="h-4 w-4" />
                       </button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -262,17 +280,17 @@ export function PatientPrescriptionWorkflow() {
         </button>
         {combinedMedications.length === 1 && <p className="print:hidden text-xs text-center text-slate-500 font-medium">Add at least 1 more medicine to evaluate pairwise interactions</p>}
         {checkError && (
-          <div className="print:hidden rounded-lg bg-rose-50 border border-rose-200 p-4 text-rose-900 text-sm flex items-start gap-2.5">
+          <div ref={errorRef} role="alert" tabIndex={-1} className="print:hidden rounded-lg bg-rose-50 border border-rose-200 p-4 text-rose-900 text-sm flex items-start gap-2.5 focus:outline-none">
             <RefreshCw className="h-4 w-4 shrink-0 mt-0.5 text-rose-600" />
             <div><p className="font-semibold">Screening error</p><p className="text-xs mt-0.5">{checkError}</p></div>
           </div>
         )}
       </section>
 
-      <MedicationTimingTable medications={combinedMedications} />
+      {combinedMedications.length > 0 && <MedicationTimingTable medications={combinedMedications} />}
 
       {result && (
-        <section aria-label="Interaction Screening Results">
+        <section ref={resultsRef} tabIndex={-1} aria-label="Interaction Screening Results" className="focus:outline-none">
           <InteractionResults result={result} onReset={clearSession} />
         </section>
       )}

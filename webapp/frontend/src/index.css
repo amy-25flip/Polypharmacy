@@ -36,7 +36,12 @@
   @page {
     margin: 1.5cm;
   }
-  article, section {
+  /* Only individual report cards (e.g. one pair's review) should refuse to split -
+     they're small and a mid-card page break looks broken. The large wrapper
+     <section> around ALL pair cards must NOT get this: for a 10-drug regimen
+     (up to 45 pairs) it can't fit on one page, and forcing it not to split
+     produces large blank areas or clipped content instead of normal pagination. */
+  article {
     break-inside: avoid;
   }
 }

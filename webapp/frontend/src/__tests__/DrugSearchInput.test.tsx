@@ -76,7 +76,7 @@ describe('DrugSearchInput Component', () => {
     vi.advanceTimersByTime(200)
 
     await waitFor(() => {
-      expect(screen.getByText(/Search failed/i)).toBeInTheDocument()
+      expect(screen.getAllByText(/Search failed/i).length).toBeGreaterThan(0)
     })
     expect(screen.queryByText(/No match found in database/i)).not.toBeInTheDocument()
   })
@@ -118,7 +118,7 @@ describe('DrugSearchInput Component', () => {
     fireEvent.click(screen.getByText('Metformin'))
 
     expect(onAddDrug).not.toHaveBeenCalled()
-    expect(screen.getByText(/"Metformin" is already added to the patient's list\./i)).toBeInTheDocument()
+    expect(screen.getAllByText(/"Metformin" is already added to the patient's list\./i).length).toBeGreaterThan(0)
   })
 
   it('shows the originating brand but adds the generic name', async () => {

@@ -45,9 +45,9 @@ export const SubsetCertificateView: React.FC<SubsetCertificateViewProps> = ({ ce
             {certificate_type === 'entangled' ? 'Strongest combinations' : 'Responsible combination'}
           </div>
           {minimal_elevated_subsets.map((s, i) => (
-            <div key={i} className="flex items-center justify-between text-xs bg-white/70 rounded-md px-2.5 py-1.5 border border-indigo-100">
-              <span className="font-medium text-slate-800">{s.drugs.join(' + ')}</span>
-              <span className="font-bold text-indigo-700">{Math.round(s.probability * 100)}%</span>
+            <div key={i} className="flex flex-wrap items-center justify-between gap-x-2 gap-y-0.5 text-xs bg-white/70 rounded-md px-2.5 py-1.5 border border-indigo-100">
+              <span className="font-medium text-slate-800 break-words min-w-0">{s.drugs.join(' + ')}</span>
+              <span className="font-bold text-indigo-700 shrink-0">{Math.round(s.probability * 100)}%</span>
             </div>
           ))}
           {total_minimal_subsets_found !== undefined && total_minimal_subsets_found > minimal_elevated_subsets.length && (
@@ -66,9 +66,9 @@ export const SubsetCertificateView: React.FC<SubsetCertificateViewProps> = ({ ce
             <span>If one drug were removed</span>
           </div>
           {removal_impact.map((r, i) => (
-            <div key={i} className="flex items-center justify-between text-xs text-slate-700">
-              <span>Without <span className="font-medium">{r.drug}</span>:</span>
-              <span className={r.still_elevated_without_it ? 'text-slate-600' : 'text-emerald-700 font-semibold'}>
+            <div key={i} className="flex flex-wrap items-center justify-between gap-x-2 gap-y-0.5 text-xs text-slate-700">
+              <span className="break-words min-w-0">Without <span className="font-medium">{r.drug}</span>:</span>
+              <span className={`shrink-0 ${r.still_elevated_without_it ? 'text-slate-600' : 'text-emerald-700 font-semibold'}`}>
                 {Math.round(r.probability_without_this_drug * 100)}%
                 {!r.still_elevated_without_it && ' — no longer elevated'}
               </span>

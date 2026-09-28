@@ -15,10 +15,10 @@ export const Header: React.FC<HeaderProps> = ({ knownDrugsCount, healthStatus = 
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-700 text-white font-bold text-xl shadow-xs">
             PG
           </div>
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
+          <div className="min-w-0">
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900 flex flex-wrap items-center gap-2">
               PolyGuard
-              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-blue-800 border border-blue-200">
+              <span className="whitespace-nowrap text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-blue-800 border border-blue-200">
                 Clinical Decision Support
               </span>
             </h1>
