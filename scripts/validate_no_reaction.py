@@ -60,7 +60,7 @@ def main() -> None:
         uncertain = card["abstain"] or card["reliability"]["band"] == "Low"
         shown, _ = resolve_severity(documented=None, model_severity=label, uncertain=uncertain,
                                     has_mechanism=strong_mechanism(explanation), estimated=False,
-                                    has_label=bool(labels_index.get(a, b)))
+                                    has_label=labels_index.has_mention(a, b))
         outcomes[row.severity][shown] += 1
         both_covered = (card["drug_a_support"]["tier"] == "well_represented"
                         and card["drug_b_support"]["tier"] == "well_represented")

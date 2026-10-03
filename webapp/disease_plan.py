@@ -150,7 +150,7 @@ class DiseasePlanEngine:
         severity, basis = resolve_severity(
             documented=documented_label, model_severity=model_severity, uncertain=bool(uncertain),
             has_mechanism=strong_mechanism(explanation), estimated=estimated,
-            has_label=bool(label_entries),
+            has_label=self.labels.has_mention(a, b),
         )
         # Effects named in an FDA label for this exact pair beat the overlap of each drug's own
         # side effects, which says nothing about the combination.

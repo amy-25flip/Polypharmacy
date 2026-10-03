@@ -322,7 +322,7 @@ def predict_pair(drug_a: str, drug_b: str) -> dict:
     severity, basis = resolve_severity(
         documented=documented_label, model_severity=model_severity, uncertain=uncertain,
         has_mechanism=strong_mechanism(explanation), estimated=estimated,
-        has_label=bool(label_entries),
+        has_label=LABEL_EVIDENCE.has_mention(normalize(model_a), normalize(model_b)),
     )
     if label_entries:
         result["label_evidence"] = label_entries

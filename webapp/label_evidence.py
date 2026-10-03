@@ -26,13 +26,14 @@ class LabelEvidence:
 
     def get(self, a_norm: str, b_norm: str) -> list[dict]:
         entries = self.pairs.get("|".join(sorted((a_norm, b_norm))), [])
-        # Real sentences first. A table row or a long list of drug names is shown only when nothing
-        # better exists, and then only once.
+        # Only real sentences are shown. A table row or a long list of drug names says nothing
+        # readable about the pair, but it still counts as a mention (see has_mention).
         sentences = sorted((e for e in entries if not e.get("list")), key=lambda e: (not e["effects"], e["from"]))
-        chosen = sentences[:MAX_ENTRIES]
-        if not chosen:
-            chosen = [e for e in entries if e.get("list")][:1]
-        return chosen
+        return sentences[:MAX_ENTRIES]
+
+    def has_mention(self, a_norm: str, b_norm: str) -> bool:
+        """True if either drug's label names the other, even only in a table or list."""
+        return bool(self.pairs.get("|".join(sorted((a_norm, b_norm)))))
 
     @staticmethod
     def effects(entries: list[dict]) -> list[str]:
