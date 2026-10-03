@@ -379,6 +379,22 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                     </div>
                   )}
 
+                  {pair.label_evidence && pair.label_evidence.length > 0 && (
+                    <div className="mt-3 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800">
+                      <div className="font-bold uppercase tracking-wide text-[11px] text-slate-600">What the FDA label says about this combination</div>
+                      {pair.label_effects && pair.label_effects.length > 0 && (
+                        <div className="mt-1 flex flex-wrap gap-1">
+                          {pair.label_effects.map((effect) => <span key={effect} className="rounded-full border border-slate-300 bg-slate-50 px-2 py-0.5 font-semibold">{effect}</span>)}
+                        </div>
+                      )}
+                      <ul className="mt-1.5 space-y-1">
+                        {pair.label_evidence.map((entry, entryIndex) => (
+                          <li key={entryIndex} className="italic text-slate-700">From the label for {entry.from}: “{entry.text}”</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
                   {pair.severity === 'None' || pair.severity_basis === 'duplicate_class' ? null : hasExplanation && pair.explanation ? (
                     <PairExplanationView explanation={pair.explanation} compact />
                   ) : (

@@ -5,6 +5,13 @@ export type Severity = 'None' | 'Minor' | 'Moderate' | 'Major' | null
 // own ('estimated'), the model's guess ('inferred'), no record at all, or a same-class duplicate.
 export type SeverityBasis = 'documented' | 'estimated' | 'inferred' | 'no_record' | 'duplicate_class'
 
+// A sentence from an FDA drug label that names the other drug of a pair.
+export interface LabelEvidenceEntry {
+  from: string
+  text: string
+  effects: string[]
+}
+
 export interface EstimateNote {
   drug: string
   proxy: string
@@ -86,6 +93,8 @@ export interface InteractionPair {
   severity_basis?: SeverityBasis
   severity_notice?: string
   estimated_from?: EstimateNote[]
+  label_evidence?: LabelEvidenceEntry[]
+  label_effects?: string[]
   confidence?: number // Internal from API, never shown in UI
   explanation?: PairExplanation
   is_documented?: boolean
@@ -213,6 +222,8 @@ export interface CandidateFlag {
   severity: string
   severity_basis?: SeverityBasis
   estimated_from?: EstimateNote[]
+  label_evidence?: LabelEvidenceEntry[]
+  adverse_effect_source?: 'label' | 'overlap' | 'none'
   is_documented: boolean
   uncertain: boolean
   adverse_effects: string[]
@@ -232,6 +243,8 @@ export interface ScreenedPair {
   severity_basis?: SeverityBasis
   severity_notice?: string
   estimated_from?: EstimateNote[]
+  label_evidence?: LabelEvidenceEntry[]
+  adverse_effect_source?: 'label' | 'overlap' | 'none'
   is_documented: boolean
   uncertain: boolean
   adverse_effects: string[]
@@ -246,6 +259,30 @@ export interface CandidateScreenResponse {
   }
   unmatched: string[]
   adverse_effect_basis: string
+}
+
+export interface PatientCaution {
+  drug: string
+  level: string
+  factor: 'age' | 'egfr'
+  trigger: string
+  text: string
+  source: string
+  url: string
+}
+
+export async function fetchPatientCautions(
+  drugs: string[], age: number | null, egfr: number | null, signal?: AbortSignal,
+): Promise<PatientCaution[]> {
+  const res = await fetch(`${API_BASE}/api/patient-cautions`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ drugs, age, egfr }),
+    signal,
+  })
+  if (!res.ok) throw new Error(`Patient cautions failed: ${res.statusText}`)
+  const body: { cautions: PatientCaution[] } = await res.json()
+  return body.cautions
 }
 
 export async function searchDiseases(query: string, signal?: AbortSignal): Promise<Disease[]> {
@@ -346,7 +383,20 @@ export interface ConformalCoverageResult {
   per_class: Record<string, { n: number; coverage: number; avg_set_size: number }>
 }
 
+export interface NoReactionValidation {
+  model_alone_on_documented_pairs: {
+    documented_pairs: number
+    model_wrong_pct: number
+    documented_major_pairs: number
+    major_shown_as_minor_pct: number
+  }
+  method: string
+  held_out_pairs: number
+  by_true_severity: Record<string, { pairs: number; shown_no_reaction_pct: number; shown_correctly_pct: number }>
+}
+
 export interface TransparencyData {
+  no_reaction_validation?: NoReactionValidation | null
   model1_calibration: {
     bins: CalibrationBin[]
     risk_coverage: RiskCoveragePoint[]

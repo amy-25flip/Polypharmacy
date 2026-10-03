@@ -31,11 +31,14 @@ export function ScreeningFlag({ flags, severity, basis }: { flags: CandidateFlag
           <span className="font-semibold">With {flag.with}: </span><SeverityLabel severity={flag.severity} uncertain={flag.uncertain} />
           <span className="ml-1">{basisLabel(flag.severity_basis, flag.is_documented)}</span>
           {flag.adverse_effects.length > 0 && <div className="mt-1 flex flex-wrap gap-1">{flag.adverse_effects.map((effect) => <span key={effect} className="rounded bg-white px-1.5 py-0.5 text-slate-700">{effect}</span>)}</div>}
+          {flag.adverse_effect_source === 'label' && <p className="mt-1 text-[11px] text-slate-600">Effects named in the FDA label for this combination.</p>}
+          {flag.adverse_effect_source === 'overlap' && flag.adverse_effects.length > 0 && <p className="mt-1 text-[11px] text-slate-600">Side effects both medicines are reported to cause on their own; not specific to this combination.</p>}
+          {(flag.label_evidence ?? []).map((entry, entryIndex) => <p key={entryIndex} className="mt-1 text-[11px] italic text-slate-700">FDA label for {entry.from}: “{entry.text}”</p>)}
         </li>)}
       </ul>
       {severity === 'None' && <p className="mt-2 text-[11px] text-slate-600">No interaction is recorded for this combination in the reference database. This is not proof that it is safe.</p>}
       {estimateNotes.map((note) => <p key={`${note.drug}-${note.proxy}`} className="mt-2 text-[11px] text-amber-900">{note.drug} has no interaction records of its own, so it is checked as {note.proxy} (estimate). {note.reason}</p>)}
-      <p className="mt-2 text-[11px] text-slate-600">{basis}</p>
+      {flags.some((flag) => flag.adverse_effect_source !== 'label' && flag.adverse_effects.length > 0) && <p className="mt-2 text-[11px] text-slate-600">{basis}</p>}
     </details>}
   </div>
 }
@@ -46,6 +49,8 @@ export function pairAsFlag(pair: ScreenedPair, medicine: string): CandidateFlag 
     severity: pair.severity,
     severity_basis: pair.severity_basis,
     estimated_from: pair.estimated_from,
+    label_evidence: pair.label_evidence,
+    adverse_effect_source: pair.adverse_effect_source,
     is_documented: pair.is_documented,
     uncertain: pair.uncertain,
     adverse_effects: pair.adverse_effects,

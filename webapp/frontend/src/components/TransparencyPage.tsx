@@ -182,6 +182,46 @@ export const TransparencyPage: React.FC<TransparencyPageProps> = ({ onBack }) =>
               </div>
             </section>
 
+            {/* How the shown severity is chosen, and what "No reaction" can miss */}
+            {data.no_reaction_validation && (
+              <section className="bg-white rounded-xl border border-slate-200 shadow-sm p-5 sm:p-7">
+                <h2 className="text-lg font-bold text-slate-950 mb-1">Where each severity comes from, and how "No reaction" can be wrong</h2>
+                <p className="text-xs text-slate-500 mb-3">
+                  A documented pair always shows its documented severity. The model only speaks for pairs with no record, and it
+                  can say "No reaction" only when it reliably judges the pair Minor and nothing else (shared class or target
+                  gene, FDA label) points to a risk.
+                </p>
+                <p className="text-sm text-slate-800 mb-3">
+                  Why documented pairs are not left to the model: on the {data.no_reaction_validation.model_alone_on_documented_pairs.documented_pairs.toLocaleString()} documented
+                  pairs, the model alone gets <span className="font-bold">{data.no_reaction_validation.model_alone_on_documented_pairs.model_wrong_pct}%</span> wrong,
+                  and shows <span className="font-bold">{data.no_reaction_validation.model_alone_on_documented_pairs.major_shown_as_minor_pct}%</span> of
+                  documented Major pairs as Minor.
+                </p>
+                <p className="text-sm text-slate-800 mb-2">
+                  Test: hide {data.no_reaction_validation.held_out_pairs.toLocaleString()} documented pairs from the model and the database, then see what
+                  would be shown. Every one of them is a real interaction, so each "No reaction" is a miss.
+                </p>
+                <div className="grid grid-cols-3 gap-2">
+                  {(['Major', 'Moderate', 'Minor'] as const).map((severity) => {
+                    const row = data.no_reaction_validation?.by_true_severity[severity]
+                    if (!row) return null
+                    return (
+                      <div key={severity} className="bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-center">
+                        <div className="text-[11px] text-slate-500 font-medium">Real {severity} pairs</div>
+                        <div className="text-lg font-extrabold text-slate-900">{row.shown_no_reaction_pct}%</div>
+                        <div className="text-[10px] text-slate-400">shown as "No reaction", n={row.pairs.toLocaleString()}</div>
+                      </div>
+                    )
+                  })}
+                </div>
+                <p className="text-xs text-slate-500 mt-3">
+                  Reading this: if a real interaction were missing from the database, these are the shares the model would wave
+                  through. A "No reaction" result is therefore an absence of a record, not a safety guarantee. Minor pairs are
+                  expected to read "No reaction" often because the difference is small.
+                </p>
+              </section>
+            )}
+
             {/* Dataset stats */}
             <section className="bg-white rounded-xl border border-slate-200 shadow-sm p-5 sm:p-7">
               <h2 className="text-lg font-bold text-slate-950 mb-1">Dataset coverage</h2>

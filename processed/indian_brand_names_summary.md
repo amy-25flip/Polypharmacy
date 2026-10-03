@@ -2,7 +2,7 @@
 
 ## Scope
 
-This file accompanies `indian_brand_names.json`, a curated index of **225** normalized Indian trade-name entries. Strength-qualified variants (for example, `dolo 650` and `augmentin 625`) are retained because that is often what is written on a prescription; they count as separate lookup keys. Every mapped value was mechanically checked against the 1,902 exact strings in `drug_vocabulary.json`.
+This file accompanies `indian_brand_names.json`, a curated index of **248** normalized Indian trade-name entries. Strength-qualified variants (for example, `dolo 650` and `augmentin 625`) are retained because that is often what is written on a prescription; they count as separate lookup keys. Every mapped value was mechanically checked against the 1,902 exact strings in `drug_vocabulary.json`.
 
 Coverage includes analgesics and antipyretics; antibiotics and other anti-infectives; antidiabetics and insulins; antihypertensive, cardiac, antiplatelet and anticoagulant drugs; antacids, H2 blockers and proton-pump inhibitors; statins and other lipid drugs; antihistamines and respiratory drugs; systemic and inhaled corticosteroids; psychiatric, neurologic and CNS drugs; and common thyroid, vitamin/mineral, gastrointestinal, rheumatology, urology and erectile-dysfunction products.
 

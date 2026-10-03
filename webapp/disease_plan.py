@@ -25,7 +25,7 @@ FEATURE_COLS = ["pair_text", "disease_diabetes", "disease_ckd", "disease_heart_f
 class DiseasePlanEngine:
     def __init__(self, data_path: Path, vocabulary: list[str], name_to_id: dict[str, str],
                  documented_pairs: set[str], model, explain_engine, passport_engine,
-                 disagreement_sentinel, aliases, documented_severity: dict[str, str]):
+                 disagreement_sentinel, aliases, documented_severity: dict[str, str], label_evidence):
         self.unavailable_reason: str | None = None
         self.vocab_by_norm = {self.normalize(name): name for name in vocabulary}
         self.name_to_id = name_to_id
@@ -36,6 +36,7 @@ class DiseasePlanEngine:
         self.sentinel = disagreement_sentinel
         self.aliases = aliases
         self.documented_severity = documented_severity
+        self.labels = label_evidence
         self._prediction_cache: dict[tuple[str, str], tuple[str, tuple[float, ...]]] = {}
         self.diseases: dict[str, dict] = {}
         try:
@@ -145,14 +146,26 @@ class DiseasePlanEngine:
         if not documented and not uncertain and self.sentinel.has_coverage(a, b):
             agreement = self.sentinel.score(a, b, proba, list(self.model.classes_))
             uncertain = bool(agreement and agreement["disagreement_level"] == "High")
+        label_entries = self.labels.get(a, b)
         severity, basis = resolve_severity(
             documented=documented_label, model_severity=model_severity, uncertain=bool(uncertain),
             has_mechanism=strong_mechanism(explanation), estimated=estimated,
+            has_label=bool(label_entries),
         )
+        # Effects named in an FDA label for this exact pair beat the overlap of each drug's own
+        # side effects, which says nothing about the combination.
+        label_effects = self.labels.effects(label_entries)
+        if severity == "None":
+            effects, source = (), "none"
+        elif label_effects:
+            effects, source = tuple(label_effects), "label"
+        else:
+            effects, source = self._adverse_effects(a, b), "overlap"
         return {"severity": severity, "severity_basis": basis, "is_documented": documented,
                 # "Low confidence" only describes the model's own estimate.
                 "uncertain": basis == BASIS_INFERRED and bool(uncertain),
-                "adverse_effects": () if severity == "None" else self._adverse_effects(a, b)}
+                "adverse_effects": effects, "adverse_effect_source": source,
+                "label_evidence": tuple(label_entries)}
 
     def screen(self, selected_raw: list[str], candidates_raw: list[str]) -> dict:
         selected, unmatched_a = self._resolve(selected_raw)
@@ -194,6 +207,7 @@ class DiseasePlanEngine:
             if same_drug(a, b):
                 return {"severity": "Moderate", "severity_basis": BASIS_DUPLICATE, "is_documented": False,
                         "uncertain": False, "adverse_effects": (), "estimated_from": notes,
+                        "adverse_effect_source": "none", "label_evidence": (),
                         "severity_notice": DUPLICATE_NOTICE}
             key = self.pair_key(effective[a], effective[b])
             label, proba = self._prediction_cache[key]
@@ -208,7 +222,8 @@ class DiseasePlanEngine:
         for a, b in combinations(selected, 2):
             p = pair(a, b)
             counts[p["severity"]] += 1
-            selected_pairs.append({"drug_a": a, "drug_b": b, **{k: (list(v[:5]) if k == "adverse_effects" else v)
+            selected_pairs.append({"drug_a": a, "drug_b": b, **{k: (list(v[:5]) if k == "adverse_effects"
+                                                                      else list(v) if k == "label_evidence" else v)
                                                               for k, v in p.items()}})
         selected_pairs.sort(key=lambda p: (-RANK[p["severity"]], p["drug_a"], p["drug_b"]))
 
@@ -221,6 +236,8 @@ class DiseasePlanEngine:
                     flags.append({"with": s, "severity": p["severity"], "severity_basis": p["severity_basis"],
                                   "is_documented": p["is_documented"], "uncertain": p["uncertain"],
                                   "estimated_from": p["estimated_from"],
+                                  "adverse_effect_source": p["adverse_effect_source"],
+                                  "label_evidence": list(p["label_evidence"]),
                                   "adverse_effects": list(p["adverse_effects"][:5])})
             flags.sort(key=lambda p: (-RANK[p["severity"]], p["with"]))
             adverse = list(dict.fromkeys(effect for flag in flags for effect in flag["adverse_effects"]))[:6]

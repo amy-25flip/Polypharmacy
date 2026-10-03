@@ -25,6 +25,7 @@ function sourceLabels(sources: string[]): string {
   const labels = sources.map((source) => {
     if (source === 'hetionet:CtD') return 'Hetionet (treats)'
     if (source === 'hetionet:CpD') return 'Hetionet (symptom relief)'
+    if (source === 'fda-label:indicated') return 'FDA label (approved use)'
     return source.split(':')[0].trim()
   })
   return [...new Set(labels)].join(' · ')

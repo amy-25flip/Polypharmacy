@@ -8,9 +8,12 @@ documented Major pairs shown as Minor). The reference database is therefore cons
 2. undocumented pair, model has a confident Moderate/Major, or the knowledge graph shows a
    shared class or target gene
                               -> the model's estimate, labelled "inferred"
-3. undocumented, no mechanism, and the model says Minor or is not reliable
+3. undocumented, no mechanism, no FDA-label mention, and the model reliably says Minor
                               -> "None": no reaction on record (absence of a record, not
-                                 proof of safety)
+                                 proof of safety). An unreliable estimate is never turned
+                                 into "None"; it stays "insufficient evidence".
+
+scripts/validate_no_reaction.py measures how often rule 3 would hide a real interaction.
 """
 from __future__ import annotations
 
@@ -50,10 +53,10 @@ def strong_mechanism(explanation: dict) -> bool:
 
 
 def resolve_severity(*, documented: str | None, model_severity: str, uncertain: bool,
-                     has_mechanism: bool, estimated: bool) -> tuple[str, str]:
+                     has_mechanism: bool, estimated: bool, has_label: bool = False) -> tuple[str, str]:
     """Return ``(severity, basis)``; ``uncertain`` means the model abstained or is Low-reliability."""
     if documented:
         return documented, BASIS_ESTIMATED if estimated else BASIS_DOCUMENTED
-    if not has_mechanism and (model_severity == "Minor" or uncertain):
+    if not has_mechanism and not has_label and model_severity == "Minor" and not uncertain:
         return "None", BASIS_NO_RECORD
     return model_severity, BASIS_INFERRED

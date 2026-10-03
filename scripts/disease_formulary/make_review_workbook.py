@@ -61,15 +61,20 @@ def build() -> None:
     rows = []
     for disease in formulary:
         for med in disease["medicines"]:
-            guideline = [s for s in med["sources"] if not s.startswith("hetionet:")]
+            guideline = [s for s in med["sources"] if not s.startswith(("hetionet:", "fda-label:"))]
             database = [HETIONET_LABELS.get(s, s) for s in med["sources"] if s.startswith("hetionet:")]
+            label_supported = any(s.startswith("fda-label:") for s in med["sources"])
             if guideline:
-                level = "Guideline-cited" + (" + database" if database else "")
+                level = "Guideline-cited" + (" + database" if database else "") + (" + FDA label" if label_supported else "")
+            elif label_supported:
+                level = "FDA label lists this use"
             else:
                 level = "Database only"
             flags = []
-            if not guideline:
-                flags.append("No guideline citation: please confirm")
+            if not guideline and label_supported:
+                flags.append("FDA label lists this use; no guideline citation")
+            elif not guideline:
+                flags.append("No guideline or label support: please confirm")
             if spread[med["name"]] >= 10:
                 flags.append(f"Listed under {spread[med['name']]} diseases: may be a general-purpose drug")
             rows.append([disease["name"], med["name"], level,
@@ -115,6 +120,8 @@ def build() -> None:
         ("Evidence level", ""),
         ("Guideline-cited", "Listed in a named guideline or essential-medicines list (NLEM 2022, WHO EML, NICE, ESC, KDIGO, "
                             "GINA, GOLD, India MoHFW). The citation and link are on the row."),
+        ("FDA label lists this use", "No guideline is cited, but the medicine's FDA label names this condition among its approved uses "
+                                     "(openFDA). A good sign, though US labels may differ from Indian practice."),
         ("Database only", "Appears only in the public Hetionet knowledge graph (\"Treats\" or \"Symptom relief\" links). There is no "
                           "guideline behind it, so it needs the closest look. Some of these are not first-line or are off-label."),
         ("Broad drug flag", "A medicine listed under 10 or more diseases is often a general-purpose drug "
@@ -136,8 +143,9 @@ def build() -> None:
 
     # ---------------- Diseases ----------------
     ds = wb.create_sheet("Diseases")
-    set_widths(ds, [44, 12, 16, 16, 16, 16, 14, 50])
-    heads = ["Disease", "Medicines", "Guideline-cited", "Database only", "Reviewed", "Marked Remove", "Status", "Reviewer notes"]
+    set_widths(ds, [44, 12, 16, 16, 16, 16, 16, 14, 50])
+    heads = ["Disease", "Medicines", "Guideline-cited", "FDA label lists use", "Database only", "Reviewed",
+             "Marked Remove", "Status", "Reviewer notes"]
     for col, head in enumerate(heads, start=1):
         ds.cell(row=1, column=col, value=head)
     style_header(ds, 1, len(heads))
@@ -147,24 +155,25 @@ def build() -> None:
         ds.cell(row=index, column=1, value=name)
         ds.cell(row=index, column=2, value=f"=COUNTIF(Review!$A$2:$A${last},A{index})")
         ds.cell(row=index, column=3, value=f'=COUNTIFS(Review!$A$2:$A${last},A{index},Review!$C$2:$C${last},"Guideline-cited*")')
-        ds.cell(row=index, column=4, value=f'=COUNTIFS(Review!$A$2:$A${last},A{index},Review!$C$2:$C${last},"Database only")')
-        ds.cell(row=index, column=5, value=f'=COUNTIFS(Review!$A$2:$A${last},A{index},Review!$H$2:$H${last},"?*")')
-        ds.cell(row=index, column=6, value=f'=COUNTIFS(Review!$A$2:$A${last},A{index},Review!$H$2:$H${last},"Remove")')
-        for col in range(1, 9):
+        ds.cell(row=index, column=4, value=f'=COUNTIFS(Review!$A$2:$A${last},A{index},Review!$C$2:$C${last},"FDA label lists this use")')
+        ds.cell(row=index, column=5, value=f'=COUNTIFS(Review!$A$2:$A${last},A{index},Review!$C$2:$C${last},"Database only")')
+        ds.cell(row=index, column=6, value=f'=COUNTIFS(Review!$A$2:$A${last},A{index},Review!$H$2:$H${last},"?*")')
+        ds.cell(row=index, column=7, value=f'=COUNTIFS(Review!$A$2:$A${last},A{index},Review!$H$2:$H${last},"Remove")')
+        for col in range(1, 10):
             cell = ds.cell(row=index, column=col)
             cell.border, cell.font = BORDER, BODY_FONT
-        for col in (7, 8):
+        for col in (8, 9):
             ds.cell(row=index, column=col).fill = INPUT_FILL
     disease_last = len(formulary) + 1
     status_dv = DataValidation(type="list", formula1='"Not started,In progress,Reviewed"', allow_blank=True)
     ds.add_data_validation(status_dv)
-    status_dv.add(f"G2:G{disease_last}")
-    ds.conditional_formatting.add(f"G2:G{disease_last}", CellIsRule(operator="equal", formula=['"Reviewed"'],
+    status_dv.add(f"H2:H{disease_last}")
+    ds.conditional_formatting.add(f"H2:H{disease_last}", CellIsRule(operator="equal", formula=['"Reviewed"'],
                                                                      fill=PatternFill("solid", bgColor="C6EFCE")))
-    ds.conditional_formatting.add(f"G2:G{disease_last}", CellIsRule(operator="equal", formula=['"In progress"'],
+    ds.conditional_formatting.add(f"H2:H{disease_last}", CellIsRule(operator="equal", formula=['"In progress"'],
                                                                      fill=PatternFill("solid", bgColor="FFEB9C")))
     ds.freeze_panes = "B2"
-    ds.auto_filter.ref = f"A1:H{disease_last}"
+    ds.auto_filter.ref = f"A1:I{disease_last}"
 
     # ---------------- Review ----------------
     rv = wb.create_sheet("Review")
@@ -192,6 +201,8 @@ def build() -> None:
     for value, colour in (("Keep", "C6EFCE"), ("Remove", "FFC7CE"), ("Unsure", "FFEB9C")):
         rv.conditional_formatting.add(f"H2:H{last}", CellIsRule(operator="equal", formula=[f'"{value}"'],
                                                                 fill=PatternFill("solid", bgColor=colour)))
+    rv.conditional_formatting.add(f"C2:C{last}", CellIsRule(operator="equal", formula=['"FDA label lists this use"'],
+                                                            fill=PatternFill("solid", bgColor="FFF2CC")))
     rv.conditional_formatting.add(f"C2:C{last}", CellIsRule(operator="equal", formula=['"Database only"'],
                                                             fill=PatternFill("solid", bgColor="FDE9D9")))
 

@@ -46,6 +46,8 @@ from drug_aliases import DrugAliases
 from evidence_passport import EvidencePassportEngine
 from explainability import ExplainabilityEngine
 from hoddi_model import HoddiInferenceModel, build_fingerprint_lookup
+from label_evidence import LabelEvidence
+from patient_factors import PatientFactorEngine
 from prescription_scan import scan_prescription
 from severity_policy import (
     BASIS_DUPLICATE, BASIS_INFERRED, BASIS_NO_RECORD, DUPLICATE_NOTICE, NO_RECORD_NOTICE,
@@ -124,6 +126,9 @@ with open(PROCESSED_DIR / "documented_pairs.json", encoding="utf-8") as f:
     DOCUMENTED_PAIRS: set[str] = set(json.load(f))
 # The documented severity of every known pair, so a known pair is never shown as the model's guess.
 DOCUMENTED_SEVERITY = load_documented_severity(PROCESSED_DIR / "documented_severity.json")
+# Sentences from FDA drug labels that name the other drug of a pair (optional data).
+LABEL_EVIDENCE = LabelEvidence(PROCESSED_DIR / "label_interactions.json")
+PATIENT_FACTORS = PatientFactorEngine(PROCESSED_DIR / "patient_factor_rules.json")
 
 print("Loading Evidence Passport engine (calibration + selective prediction)...")
 evidence_passport_engine = EvidencePassportEngine(PROCESSED_DIR / "evidence_passport")
@@ -202,6 +207,7 @@ TRANSPARENCY_DATA = {
             "relationships, at this data scale. Model 1 (the simplest model) is what's deployed."
         ),
     },
+    "no_reaction_validation": _load_json(PROCESSED_DIR / "no_reaction_validation.json"),
     "dataset": {
         "total_documented_pairs": len(DOCUMENTED_PAIRS),
         "total_drugs": len(DRUG_VOCAB),
@@ -217,7 +223,7 @@ print("Loading disease-plan reference...")
 disease_plan_engine = DiseasePlanEngine(
     PROCESSED_DIR / "disease_formulary.json", DRUG_VOCAB, NAME_TO_DRUGBANK_ID,
     DOCUMENTED_PAIRS, model1, explain_engine, evidence_passport_engine,
-    disagreement_sentinel, DRUG_ALIASES, DOCUMENTED_SEVERITY,
+    disagreement_sentinel, DRUG_ALIASES, DOCUMENTED_SEVERITY, LABEL_EVIDENCE,
 )
 if disease_plan_engine.unavailable_reason:
     print(disease_plan_engine.unavailable_reason)
@@ -312,10 +318,15 @@ def predict_pair(drug_a: str, drug_b: str) -> dict:
         )
 
     uncertain = passport["abstain"] or passport["reliability"]["band"] == "Low"
+    label_entries = LABEL_EVIDENCE.get(normalize(model_a), normalize(model_b))
     severity, basis = resolve_severity(
         documented=documented_label, model_severity=model_severity, uncertain=uncertain,
         has_mechanism=strong_mechanism(explanation), estimated=estimated,
+        has_label=bool(label_entries),
     )
+    if label_entries:
+        result["label_evidence"] = label_entries
+        result["label_effects"] = LABEL_EVIDENCE.effects(label_entries)
     result["severity"] = severity
     result["severity_basis"] = basis
     result["evidence_passport"] = passport
@@ -375,6 +386,12 @@ class ScreenCandidatesRequest(BaseModel):
     candidates: list[str] = Field(max_length=100)
 
 
+class PatientCautionsRequest(BaseModel):
+    drugs: list[str] = Field(max_length=100)
+    age: int | None = Field(default=None, ge=0, le=120)
+    egfr: int | None = Field(default=None, ge=0, le=200)
+
+
 def require_disease_plan() -> DiseasePlanEngine:
     if disease_plan_engine.unavailable_reason:
         raise HTTPException(status_code=503, detail=disease_plan_engine.unavailable_reason)
@@ -397,6 +414,12 @@ def disease_medicines(disease_id: str):
 @app.post("/api/screen-candidates")
 def screen_candidates(payload: ScreenCandidatesRequest):
     return require_disease_plan().screen(payload.selected, payload.candidates)
+
+
+@app.post("/api/patient-cautions")
+def patient_cautions(payload: PatientCautionsRequest):
+    drugs = [d for d in dict.fromkeys(name.strip() for name in payload.drugs) if d in DRUG_VOCAB_SET]
+    return {"cautions": PATIENT_FACTORS.cautions(drugs, payload.age, payload.egfr)}
 
 
 @app.get("/api/health")

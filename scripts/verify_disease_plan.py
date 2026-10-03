@@ -130,6 +130,32 @@ def main() -> None:
     assert hits[0]["name"] == "Acetaminophen"
     print("PASS aliases: gliclazide/carbimazole checked as estimates; duplicate class flagged; aspirin and paracetamol are found")
 
+    # Patient factors: cautions depend on age and kidney function, and only on what was entered.
+    status, none = request(base, "/api/patient-cautions", {"drugs": ["Metformin", "Diazepam"]})
+    assert status == 200 and none["cautions"] == []
+    status, renal = request(base, "/api/patient-cautions", {"drugs": ["Metformin", "Ibuprofen"], "egfr": 15})
+    levels = {c["drug"]: c["level"] for c in renal["cautions"]}
+    assert levels == {"Metformin": "Avoid", "Ibuprofen": "Avoid"}, renal
+    status, mild = request(base, "/api/patient-cautions", {"drugs": ["Metformin"], "egfr": 30})
+    assert [c["level"] for c in mild["cautions"]] == ["Use with caution"], mild
+    status, aged = request(base, "/api/patient-cautions", {"drugs": ["Diazepam", "Warfarin"], "age": 72})
+    assert [(c["drug"], c["level"]) for c in aged["cautions"]] == [("Diazepam", "Avoid")], aged
+    assert all(c["source"] and c["url"].startswith("http") for c in renal["cautions"] + aged["cautions"])
+    status, _ = request(base, "/api/patient-cautions", {"drugs": ["Metformin"], "age": 500})
+    assert status == 422
+    print("PASS patient factors: renal and age cautions trigger only when entered, carry a source, and bad input is 422")
+
+    # Pair-specific evidence from FDA label text, when the label index has been built.
+    if (ROOT / "processed" / "label_interactions.json").exists():
+        status, check = request(base, "/api/check", {"drugs": ["Amiodarone", "Warfarin"]})
+        pair = check["regimen"]["pairs"][0]
+        assert pair["label_evidence"] and "Bleeding" in pair["label_effects"], pair
+        status, screen = request(base, "/api/screen-candidates", {"selected": ["Warfarin"], "candidates": ["Amiodarone"]})
+        flag = screen["results"][0]["flags"][0]
+        assert flag["adverse_effect_source"] == "label" and "Bleeding" in flag["adverse_effects"], flag
+        assert flag["label_evidence"]
+        print("PASS label evidence: amiodarone + warfarin carries the FDA label sentence and its named effect in both endpoints")
+
     status, result = request(base, "/api/screen-candidates",
                              {"selected": ["Warfarin", "warfarin"],
                               "candidates": ["Warfarin", "NOT_A_DRUG", "Amiodarone"]})

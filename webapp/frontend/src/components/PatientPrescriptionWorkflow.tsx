@@ -7,6 +7,7 @@ import { DiseaseCombobox } from './DiseaseCombobox'
 import { DiagnosisMedicinePicker } from './DiagnosisMedicinePicker'
 import { pairAsFlag, ScreeningFlag, SeverityLabel } from './ScreeningFlag'
 import { basisLabel } from '../severity'
+import { PatientFactors } from './PatientFactors'
 import { InteractionResults } from './InteractionResults'
 import { MedicationTimingTable, TIMING_OPTIONS } from './MedicationTimingTable'
 import type { CombinedMedication, MedicationTiming } from './MedicationTimingTable'
@@ -442,6 +443,8 @@ export function PatientPrescriptionWorkflow({ mode = 'prescription' }: { mode?: 
           </div>
         )}
       </section>
+
+      <PatientFactors medicines={selectedNames} />
 
       {combinedMedications.length > 0 && <MedicationTimingTable medications={combinedMedications} />}
 

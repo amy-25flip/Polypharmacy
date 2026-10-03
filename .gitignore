@@ -7,6 +7,10 @@ processed/*
 !processed/disease_formulary_summary.md
 !processed/documented_severity.json
 !processed/drug_aliases.json
+!processed/label_interactions.json
+!processed/label_indications.json
+!processed/patient_factor_rules.json
+!processed/no_reaction_validation.json
 
 # Python
 __pycache__/

@@ -119,6 +119,7 @@
         {
           "name": "Naltrexone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -138,30 +139,35 @@
         {
           "name": "Betamethasone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Cetirizine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Cyproheptadine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Desloratadine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Dexamethasone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -216,12 +222,14 @@
         {
           "name": "Montelukast",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Prednisolone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -240,6 +248,7 @@
         {
           "name": "Triamcinolone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         }
@@ -259,12 +268,14 @@
         {
           "name": "Donepezil",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Galantamine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -277,6 +288,7 @@
         {
           "name": "Memantine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -289,6 +301,7 @@
         {
           "name": "Rivastigmine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -317,7 +330,8 @@
         {
           "name": "Darbepoetin alfa",
           "sources": [
-            "KDIGO 2026: anemia in CKD"
+            "KDIGO 2026: anemia in CKD",
+            "fda-label:indicated"
           ]
         },
         {
@@ -342,6 +356,7 @@
         {
           "name": "Celecoxib",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -360,6 +375,7 @@
         {
           "name": "Indomethacin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -378,12 +394,14 @@
         {
           "name": "Methylprednisolone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Naproxen",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -402,6 +420,7 @@
         {
           "name": "Prednisone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -435,24 +454,28 @@
         {
           "name": "Aminophylline",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Arformoterol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Beclomethasone dipropionate",
           "sources": [
-            "GINA 2025: asthma summary guide"
+            "GINA 2025: asthma summary guide",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Betamethasone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -478,6 +501,7 @@
         {
           "name": "Dexamethasone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -508,6 +532,7 @@
         {
           "name": "Formoterol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -552,6 +577,7 @@
           "sources": [
             "GINA 2025: asthma summary guide",
             "NLEM 2022: section 24.1, antiasthmatic medicines",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -576,6 +602,7 @@
         {
           "name": "Prednisolone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -602,42 +629,49 @@
         {
           "name": "Salmeterol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Terbutaline",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Theophylline",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Tiotropium",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Triamcinolone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Zafirlukast",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Zileuton",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         }
@@ -657,18 +691,21 @@
         {
           "name": "Lovastatin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Niacin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Pravastatin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -694,12 +731,14 @@
         {
           "name": "Betamethasone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Dexamethasone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -742,6 +781,7 @@
         {
           "name": "Prednisolone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -760,6 +800,7 @@
         {
           "name": "Triamcinolone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -782,7 +823,8 @@
         {
           "name": "Apixaban",
           "sources": [
-            "NICE NG196: atrial fibrillation"
+            "NICE NG196: atrial fibrillation",
+            "fda-label:indicated"
           ]
         },
         {
@@ -794,19 +836,22 @@
         {
           "name": "Digoxin",
           "sources": [
-            "NICE NG196: atrial fibrillation"
+            "NICE NG196: atrial fibrillation",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Rivaroxaban",
           "sources": [
-            "NICE NG196: atrial fibrillation"
+            "NICE NG196: atrial fibrillation",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Warfarin",
           "sources": [
-            "NICE NG196: atrial fibrillation"
+            "NICE NG196: atrial fibrillation",
+            "fda-label:indicated"
           ]
         }
       ]
@@ -819,12 +864,14 @@
         {
           "name": "Amphetamine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Atomoxetine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -849,12 +896,14 @@
         {
           "name": "Dextroamphetamine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Guanfacine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -867,12 +916,14 @@
         {
           "name": "Lisdexamfetamine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Methylphenidate",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -904,6 +955,7 @@
         {
           "name": "Aripiprazole",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -940,6 +992,7 @@
         {
           "name": "Risperidone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -962,7 +1015,8 @@
         {
           "name": "Dutasteride",
           "sources": [
-            "NICE CG97: lower urinary tract symptoms and prostate enlargement"
+            "NICE CG97: lower urinary tract symptoms and prostate enlargement",
+            "fda-label:indicated"
           ]
         },
         {
@@ -974,7 +1028,8 @@
         {
           "name": "Tamsulosin",
           "sources": [
-            "NICE CG97: lower urinary tract symptoms and prostate enlargement"
+            "NICE CG97: lower urinary tract symptoms and prostate enlargement",
+            "fda-label:indicated"
           ]
         }
       ]
@@ -1041,12 +1096,14 @@
         {
           "name": "Lamotrigine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Olanzapine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -1065,12 +1122,14 @@
         {
           "name": "Quetiapine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Risperidone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -1101,6 +1160,7 @@
         {
           "name": "Ziprasidone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         }
@@ -1126,6 +1186,7 @@
         {
           "name": "Doxorubicin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1224,6 +1285,7 @@
         {
           "name": "Anastrozole",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1242,6 +1304,7 @@
         {
           "name": "Capecitabine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1266,24 +1329,28 @@
         {
           "name": "Docetaxel",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Doxorubicin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Epirubicin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Eribulin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1302,6 +1369,7 @@
         {
           "name": "Exemestane",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1320,18 +1388,21 @@
         {
           "name": "Fulvestrant",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Gemcitabine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Goserelin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1350,18 +1421,21 @@
         {
           "name": "Ixabepilone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Lapatinib",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Letrozole",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1404,6 +1478,7 @@
         {
           "name": "Paclitaxel",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1416,12 +1491,14 @@
         {
           "name": "Raloxifene",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Tamoxifen",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1440,12 +1517,14 @@
         {
           "name": "Toremifene",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Vinblastine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1493,13 +1572,15 @@
         {
           "name": "Cinacalcet",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Dapagliflozin",
           "sources": [
-            "KDIGO 2024: CKD management, chapter 3"
+            "KDIGO 2024: CKD management, chapter 3",
+            "fda-label:indicated"
           ]
         },
         {
@@ -1535,6 +1616,7 @@
         {
           "name": "Paricalcitol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -1558,18 +1640,21 @@
         {
           "name": "Acetylcysteine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Aminophylline",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Arformoterol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1589,6 +1674,7 @@
           "name": "Formoterol",
           "sources": [
             "GOLD 2026: stable COPD bronchodilators",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1601,6 +1687,7 @@
         {
           "name": "Levofloxacin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -1637,6 +1724,7 @@
         {
           "name": "Roflumilast",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1657,6 +1745,7 @@
           "name": "Tiotropium",
           "sources": [
             "GOLD 2026: stable COPD bronchodilators",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         }
@@ -1682,6 +1771,7 @@
         {
           "name": "Capecitabine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1731,6 +1821,7 @@
         {
           "name": "Chlorpromazine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -1767,6 +1858,7 @@
         {
           "name": "Amlodipine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -1774,6 +1866,7 @@
           "name": "Atorvastatin",
           "sources": [
             "ESC 2024: chronic coronary syndromes",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1793,6 +1886,7 @@
           "name": "Clopidogrel",
           "sources": [
             "ESC 2024: chronic coronary syndromes",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1805,6 +1899,7 @@
         {
           "name": "Diltiazem",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -1853,12 +1948,14 @@
         {
           "name": "Isosorbide dinitrate",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Isosorbide mononitrate",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -1883,6 +1980,7 @@
         {
           "name": "Lovastatin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1895,6 +1993,7 @@
         {
           "name": "Niacin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1908,6 +2007,7 @@
           "name": "Nitroglycerin",
           "sources": [
             "ESC 2024: chronic coronary syndromes",
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -1926,6 +2026,7 @@
         {
           "name": "Perindopril",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1968,6 +2069,7 @@
         {
           "name": "Ticagrelor",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2063,6 +2165,7 @@
         {
           "name": "Amitriptyline",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -2076,25 +2179,29 @@
           "name": "Citalopram",
           "sources": [
             "NICE CG91: depression with chronic physical illness",
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Duloxetine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Escitalopram",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Fluoxetine",
           "sources": [
-            "NICE NG222: depression"
+            "NICE NG222: depression",
+            "fda-label:indicated"
           ]
         },
         {
@@ -2106,24 +2213,28 @@
         {
           "name": "Imipramine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Nefazodone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Nortriptyline",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Paroxetine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -2137,12 +2248,14 @@
           "name": "Sertraline",
           "sources": [
             "NICE CG91: depression with chronic physical illness",
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Trazodone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -2155,6 +2268,7 @@
         {
           "name": "Vilazodone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         }
@@ -2209,13 +2323,15 @@
         {
           "name": "Atorvastatin",
           "sources": [
-            "NICE NG238: lipid modification"
+            "NICE NG238: lipid modification",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Rosuvastatin",
           "sources": [
-            "NICE NG238: lipid modification"
+            "NICE NG238: lipid modification",
+            "fda-label:indicated"
           ]
         }
       ]
@@ -2244,18 +2360,21 @@
           "name": "Carbamazepine",
           "sources": [
             "NICE NG217: epilepsy",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Clobazam",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Clonazepam",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2268,24 +2387,28 @@
         {
           "name": "Felbamate",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Fosphenytoin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Gabapentin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Lacosamide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2293,6 +2416,7 @@
           "name": "Lamotrigine",
           "sources": [
             "NICE NG217: epilepsy",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2300,6 +2424,7 @@
           "name": "Levetiracetam",
           "sources": [
             "NICE NG217: epilepsy",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2312,30 +2437,35 @@
         {
           "name": "Oxcarbazepine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Phenobarbital",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Phenytoin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Pregabalin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Primidone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2348,12 +2478,14 @@
         {
           "name": "Rufinamide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Topiramate",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2367,18 +2499,21 @@
           "name": "Valproic acid",
           "sources": [
             "NICE NG217: epilepsy",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Vigabatrin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Zonisamide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         }
@@ -2446,7 +2581,8 @@
         {
           "name": "Omeprazole",
           "sources": [
-            "NICE CG184: reflux and peptic ulcer"
+            "NICE CG184: reflux and peptic ulcer",
+            "fda-label:indicated"
           ]
         },
         {
@@ -2489,6 +2625,7 @@
         {
           "name": "Ifosfamide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2575,6 +2712,7 @@
         {
           "name": "Acetazolamide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2593,6 +2731,7 @@
         {
           "name": "Carteolol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2623,6 +2762,7 @@
         {
           "name": "Methazolamide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2641,6 +2781,7 @@
         {
           "name": "Timolol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         }
@@ -2682,12 +2823,14 @@
         {
           "name": "Hydrocortisone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Indomethacin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2713,12 +2856,14 @@
         {
           "name": "Prednisone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Probenecid",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         }
@@ -2732,6 +2877,7 @@
         {
           "name": "Docetaxel",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2750,6 +2896,7 @@
         {
           "name": "Pilocarpine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -2778,37 +2925,43 @@
         {
           "name": "Carvedilol",
           "sources": [
-            "ESC 2023: heart failure medicines"
+            "ESC 2023: heart failure medicines",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Dapagliflozin",
           "sources": [
-            "ESC 2023: heart failure medicines"
+            "ESC 2023: heart failure medicines",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Empagliflozin",
           "sources": [
-            "ESC 2023: heart failure medicines"
+            "ESC 2023: heart failure medicines",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Enalapril",
           "sources": [
-            "ESC 2023: heart failure medicines"
+            "ESC 2023: heart failure medicines",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Furosemide",
           "sources": [
-            "ESC 2023: heart failure medicines"
+            "ESC 2023: heart failure medicines",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Spironolactone",
           "sources": [
-            "ESC 2023: heart failure medicines"
+            "ESC 2023: heart failure medicines",
+            "fda-label:indicated"
           ]
         }
       ]
@@ -3140,6 +3293,7 @@
         {
           "name": "Entecavir",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3168,7 +3322,8 @@
         {
           "name": "Patiromer",
           "sources": [
-            "NICE NG203: CKD and hyperkalaemia"
+            "NICE NG203: CKD and hyperkalaemia",
+            "fda-label:indicated"
           ]
         }
       ]
@@ -3184,12 +3339,14 @@
         {
           "name": "Acebutolol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Amiloride",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3197,13 +3354,15 @@
           "name": "Amlodipine",
           "sources": [
             "India MoHFW: standard treatment guideline for hypertension",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Atenolol",
           "sources": [
-            "India MoHFW: standard treatment guideline for hypertension"
+            "India MoHFW: standard treatment guideline for hypertension",
+            "fda-label:indicated"
           ]
         },
         {
@@ -3215,6 +3374,7 @@
         {
           "name": "Benazepril",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3233,6 +3393,7 @@
         {
           "name": "Betaxolol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3245,36 +3406,42 @@
         {
           "name": "Candesartan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Captopril",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Carvedilol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Chlorothiazide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Chlorthalidone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Clonidine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3287,12 +3454,14 @@
         {
           "name": "Diltiazem",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Doxazosin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3300,12 +3469,14 @@
           "name": "Enalapril",
           "sources": [
             "India MoHFW: standard treatment guideline for hypertension",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Eplerenone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3318,12 +3489,14 @@
         {
           "name": "Esmolol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Felodipine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3336,12 +3509,14 @@
         {
           "name": "Fosinopril",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Furosemide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3372,6 +3547,7 @@
         {
           "name": "Hydralazine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3379,6 +3555,7 @@
           "name": "Hydrochlorothiazide",
           "sources": [
             "India MoHFW: standard treatment guideline for hypertension",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3391,24 +3568,28 @@
         {
           "name": "Indapamide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Irbesartan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Isradipine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Labetalol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3416,6 +3597,7 @@
           "name": "Lisinopril",
           "sources": [
             "India MoHFW: standard treatment guideline for hypertension",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3423,78 +3605,91 @@
           "name": "Losartan",
           "sources": [
             "India MoHFW: standard treatment guideline for hypertension",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Mecamylamine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Methyldopa",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Metolazone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Metoprolol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Minoxidil",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Moexipril",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Nadolol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Nebivolol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Nicardipine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Nifedipine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Nisoldipine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Olmesartan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3507,6 +3702,7 @@
         {
           "name": "Perindopril",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3519,30 +3715,35 @@
         {
           "name": "Pindolol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Prazosin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Propranolol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Quinapril",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Ramipril",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3555,24 +3756,28 @@
         {
           "name": "Spironolactone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Telmisartan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Terazosin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Timolol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3585,24 +3790,28 @@
         {
           "name": "Trandolapril",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Triamterene",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Valsartan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Verapamil",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         }
@@ -3631,7 +3840,8 @@
         {
           "name": "Propylthiouracil",
           "sources": [
-            "NICE NG145: thyroid disease"
+            "NICE NG145: thyroid disease",
+            "fda-label:indicated"
           ]
         }
       ]
@@ -3653,12 +3863,14 @@
           "name": "Levothyroxine",
           "sources": [
             "NICE NG145: thyroid disease",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Liothyronine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3805,6 +4017,7 @@
         {
           "name": "Rifampicin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3855,12 +4068,14 @@
         {
           "name": "Crizotinib",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Docetaxel",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3873,12 +4088,14 @@
         {
           "name": "Erlotinib",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Etoposide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3891,12 +4108,14 @@
         {
           "name": "Gefitinib",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Gemcitabine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3921,6 +4140,7 @@
         {
           "name": "Pemetrexed",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3933,6 +4153,7 @@
         {
           "name": "Topotecan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -3945,6 +4166,7 @@
         {
           "name": "Vinorelbine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         }
@@ -4022,6 +4244,7 @@
           "name": "Artemether",
           "sources": [
             "WHO 2026: malaria guidelines",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -4034,7 +4257,8 @@
         {
           "name": "Chloroquine",
           "sources": [
-            "WHO 2026: malaria guidelines"
+            "WHO 2026: malaria guidelines",
+            "fda-label:indicated"
           ]
         },
         {
@@ -4058,7 +4282,8 @@
         {
           "name": "Lumefantrine",
           "sources": [
-            "WHO 2026: malaria guidelines"
+            "WHO 2026: malaria guidelines",
+            "fda-label:indicated"
           ]
         },
         {
@@ -4070,12 +4295,14 @@
         {
           "name": "Primaquine",
           "sources": [
-            "WHO 2026: malaria guidelines"
+            "WHO 2026: malaria guidelines",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Proguanil",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -4094,12 +4321,14 @@
         {
           "name": "Quinine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Sulfadiazine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         }
@@ -4125,6 +4354,7 @@
         {
           "name": "Dacarbazine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -4149,6 +4379,7 @@
         {
           "name": "Vemurafenib",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         }
@@ -4174,6 +4405,7 @@
         {
           "name": "Almotriptan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -4216,24 +4448,28 @@
         {
           "name": "Dihydroergotamine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Eletriptan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Ergotamine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Frovatriptan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -4270,6 +4506,7 @@
         {
           "name": "Naratriptan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -4288,18 +4525,21 @@
         {
           "name": "Propranolol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Rizatriptan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Sumatriptan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -4318,6 +4558,7 @@
         {
           "name": "Topiramate",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -4336,6 +4577,7 @@
         {
           "name": "Zolmitriptan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         }
@@ -4385,6 +4627,7 @@
         {
           "name": "Cladribine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -4397,12 +4640,14 @@
         {
           "name": "Dalfampridine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Dantrolene",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -4433,6 +4678,7 @@
         {
           "name": "Fingolimod",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -4457,6 +4703,7 @@
         {
           "name": "Mitoxantrone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -4591,6 +4838,7 @@
         {
           "name": "Amphetamine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -4603,6 +4851,7 @@
         {
           "name": "Modafinil",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         }
@@ -4616,6 +4865,7 @@
         {
           "name": "Benzphetamine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -4634,24 +4884,28 @@
         {
           "name": "Diethylpropion",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Orlistat",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Phendimetrazine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Phentermine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -4698,6 +4952,7 @@
         {
           "name": "Celecoxib",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -4716,6 +4971,7 @@
         {
           "name": "Diclofenac",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -4728,24 +4984,28 @@
         {
           "name": "Diflunisal",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Etodolac",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Fenoprofen",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Flurbiprofen",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -4759,18 +5019,21 @@
           "name": "Ibuprofen",
           "sources": [
             "NICE NG226: osteoarthritis",
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Indomethacin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Ketoprofen",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -4783,18 +5046,21 @@
         {
           "name": "Meloxicam",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Methylprednisolone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Nabumetone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -4802,36 +5068,42 @@
           "name": "Naproxen",
           "sources": [
             "NICE NG226: osteoarthritis",
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Oxaprozin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Piroxicam",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Prednisone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Sulindac",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Tolmetin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         }
@@ -4865,13 +5137,15 @@
         {
           "name": "Cholecalciferol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Denosumab",
           "sources": [
-            "NICE QS149: osteoporosis medicines"
+            "NICE QS149: osteoporosis medicines",
+            "fda-label:indicated"
           ]
         },
         {
@@ -4896,6 +5170,7 @@
           "name": "Ibandronate",
           "sources": [
             "NICE QS149: osteoporosis medicines",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -4908,6 +5183,7 @@
         {
           "name": "Raloxifene",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -4920,7 +5196,8 @@
         {
           "name": "Teriparatide",
           "sources": [
-            "NICE QS149: osteoporosis medicines"
+            "NICE QS149: osteoporosis medicines",
+            "fda-label:indicated"
           ]
         },
         {
@@ -4963,6 +5240,7 @@
         {
           "name": "Doxorubicin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5030,6 +5308,7 @@
         {
           "name": "Erlotinib",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5042,6 +5321,7 @@
         {
           "name": "Gemcitabine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5073,6 +5353,7 @@
         {
           "name": "Alprazolam",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -5103,6 +5384,7 @@
         {
           "name": "Clonazepam",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -5115,6 +5397,7 @@
         {
           "name": "Fluoxetine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -5133,6 +5416,7 @@
         {
           "name": "Isocarboxazid",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -5163,12 +5447,14 @@
         {
           "name": "Paroxetine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Sertraline",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -5188,12 +5474,14 @@
         {
           "name": "Amantadine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Apomorphine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -5236,12 +5524,14 @@
         {
           "name": "Diphenhydramine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Entacapone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -5284,6 +5574,7 @@
         {
           "name": "Pramipexole",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -5302,18 +5593,21 @@
         {
           "name": "Rasagiline",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Rivastigmine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Ropinirole",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -5326,18 +5620,21 @@
         {
           "name": "Selegiline",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Tolcapone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Trihexyphenidyl",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         }
@@ -5480,6 +5777,7 @@
         {
           "name": "Abiraterone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5498,6 +5796,7 @@
         {
           "name": "Cabazitaxel",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5516,6 +5815,7 @@
         {
           "name": "Degarelix",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5528,6 +5828,7 @@
         {
           "name": "Docetaxel",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5588,6 +5889,7 @@
         {
           "name": "Goserelin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5612,6 +5914,7 @@
         {
           "name": "Nilutamide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5643,6 +5946,7 @@
         {
           "name": "Acitretin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5667,6 +5971,7 @@
         {
           "name": "Cyclosporine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5691,12 +5996,14 @@
         {
           "name": "Methotrexate",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Methoxsalen",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5764,6 +6071,7 @@
         {
           "name": "Methylprednisolone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5776,6 +6084,7 @@
         {
           "name": "Prednisone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5831,6 +6140,7 @@
         {
           "name": "Ropinirole",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -5864,12 +6174,14 @@
         {
           "name": "Auranofin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Azathioprine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5882,12 +6194,14 @@
         {
           "name": "Celecoxib",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Cyclosporine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5906,6 +6220,7 @@
         {
           "name": "Diflunisal",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -5924,18 +6239,21 @@
         {
           "name": "Hydrocortisone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Hydroxychloroquine",
           "sources": [
-            "NICE NG100: rheumatoid arthritis"
+            "NICE NG100: rheumatoid arthritis",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Indomethacin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -5943,6 +6261,7 @@
           "name": "Leflunomide",
           "sources": [
             "NICE NG100: rheumatoid arthritis",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -5955,6 +6274,7 @@
         {
           "name": "Meloxicam",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -5962,42 +6282,49 @@
           "name": "Methotrexate",
           "sources": [
             "NICE NG100: rheumatoid arthritis",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Methylprednisolone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Nabumetone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Naproxen",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Oxaprozin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Penicillamine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Piroxicam",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -6010,12 +6337,14 @@
         {
           "name": "Prednisone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Salsalate",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -6023,12 +6352,14 @@
           "name": "Sulfasalazine",
           "sources": [
             "NICE NG100: rheumatoid arthritis",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Tolmetin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -6054,12 +6385,14 @@
         {
           "name": "Dactinomycin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Doxorubicin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -6084,12 +6417,14 @@
         {
           "name": "Thiotepa",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Vincristine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         }
@@ -6103,6 +6438,7 @@
         {
           "name": "Aripiprazole",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -6121,6 +6457,7 @@
         {
           "name": "Chlorpromazine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -6133,6 +6470,7 @@
         {
           "name": "Clozapine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -6175,6 +6513,7 @@
         {
           "name": "Haloperidol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -6187,6 +6526,7 @@
         {
           "name": "Loxapine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -6199,24 +6539,28 @@
         {
           "name": "Olanzapine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Paliperidone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Quetiapine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Risperidone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -6229,12 +6573,14 @@
         {
           "name": "Thioridazine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Thiothixene",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -6247,6 +6593,7 @@
         {
           "name": "Trifluoperazine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -6259,6 +6606,7 @@
         {
           "name": "Ziprasidone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         }
@@ -6275,13 +6623,15 @@
         {
           "name": "Calcitriol",
           "sources": [
-            "KDIGO 2017: CKD mineral and bone disorder"
+            "KDIGO 2017: CKD mineral and bone disorder",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Cinacalcet",
           "sources": [
-            "KDIGO 2017: CKD mineral and bone disorder"
+            "KDIGO 2017: CKD mineral and bone disorder",
+            "fda-label:indicated"
           ]
         },
         {
@@ -6300,6 +6650,7 @@
         {
           "name": "Bleomycin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -6694,6 +7045,7 @@
         {
           "name": "Bleomycin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -6712,12 +7064,14 @@
         {
           "name": "Cisplatin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Dactinomycin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -6736,12 +7090,14 @@
         {
           "name": "Etoposide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Ifosfamide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -6767,6 +7123,7 @@
         {
           "name": "Doxorubicin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -6785,6 +7142,7 @@
         {
           "name": "Vandetanib",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         }
@@ -6801,25 +7159,29 @@
         {
           "name": "Ethambutol",
           "sources": [
-            "WHO 2022: drug-susceptible tuberculosis"
+            "WHO 2022: drug-susceptible tuberculosis",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Isoniazid",
           "sources": [
-            "WHO 2022: drug-susceptible tuberculosis"
+            "WHO 2022: drug-susceptible tuberculosis",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Pyrazinamide",
           "sources": [
-            "WHO 2022: drug-susceptible tuberculosis"
+            "WHO 2022: drug-susceptible tuberculosis",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Rifampicin",
           "sources": [
-            "WHO 2022: drug-susceptible tuberculosis"
+            "WHO 2022: drug-susceptible tuberculosis",
+            "fda-label:indicated"
           ]
         }
       ]
@@ -6836,6 +7198,7 @@
         {
           "name": "Acarbose",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -6854,13 +7217,15 @@
         {
           "name": "Dapagliflozin",
           "sources": [
-            "WHO EML 2025: section 18.5, medicines for diabetes"
+            "WHO EML 2025: section 18.5, medicines for diabetes",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Empagliflozin",
           "sources": [
-            "WHO EML 2025: section 18.5, medicines for diabetes"
+            "WHO EML 2025: section 18.5, medicines for diabetes",
+            "fda-label:indicated"
           ]
         },
         {
@@ -6874,42 +7239,49 @@
           "name": "Glimepiride",
           "sources": [
             "NLEM 2022: section 18.3, medicines used in diabetes mellitus",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Glipizide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Glyburide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Insulin human",
           "sources": [
-            "WHO PEN 2020: type 2 diabetes management"
+            "WHO PEN 2020: type 2 diabetes management",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Irbesartan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Linagliptin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Losartan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -6918,30 +7290,35 @@
           "sources": [
             "NLEM 2022: section 18.3, medicines used in diabetes mellitus",
             "WHO PEN 2020: type 2 diabetes management",
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Miglitol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Nateglinide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Orlistat",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Pioglitazone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -6954,6 +7331,7 @@
         {
           "name": "Repaglinide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -6966,6 +7344,7 @@
         {
           "name": "Sitagliptin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -7003,6 +7382,7 @@
         {
           "name": "Balsalazide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -7063,6 +7443,7 @@
         {
           "name": "Olsalazine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -7081,6 +7462,7 @@
         {
           "name": "Sulfasalazine",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -7177,13 +7559,15 @@
         {
           "name": "Nitrofurantoin",
           "sources": [
-            "NICE NG109: lower urinary tract infection"
+            "NICE NG109: lower urinary tract infection",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Trimethoprim",
           "sources": [
-            "NICE NG109: lower urinary tract infection"
+            "NICE NG109: lower urinary tract infection",
+            "fda-label:indicated"
           ]
         }
       ]
