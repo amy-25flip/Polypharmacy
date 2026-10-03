@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useId, useRef } from 'react'
 import { Search, PlusCircle, AlertCircle, Loader2, RefreshCw } from 'lucide-react'
 import { searchDrugs } from '../api/client'
 import type { DrugSearchResult } from '../api/client'
@@ -27,6 +27,7 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
   const [timing, setTiming] = useState<MedicationTiming>('Unspecified')
 
   const inputRef = useRef<HTMLInputElement>(null)
+  const instanceId = useId()
   const dropdownRef = useRef<HTMLDivElement>(null)
   // Guards against a slower, superseded search response landing after a newer one -
   // e.g. typing quickly could otherwise briefly show suggestions or an error for a
@@ -149,7 +150,7 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
   const trimmedQuery = query.trim()
   const showUnmatchedOption = isOpen && !isLoading && !searchError && trimmedQuery.length >= 2 && suggestions.length === 0
   const activeOptionId =
-    selectedIndex < 0 ? undefined : selectedIndex < suggestions.length ? `drug-option-${selectedIndex}` : 'drug-option-unmatched'
+    selectedIndex < 0 ? undefined : selectedIndex < suggestions.length ? `${instanceId}-drug-option-${selectedIndex}` : `${instanceId}-drug-option-unmatched`
   const statusMessage = isLoading
     ? 'Searching…'
     : searchError
@@ -164,7 +165,7 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
     <div className="relative w-full">
       <div className="flex items-end gap-3 mb-1.5">
         <label
-          htmlFor="drug-search-input"
+          htmlFor={`${instanceId}-drug-search-input`}
           className="block text-sm font-semibold text-slate-800"
         >
           Add medicine
@@ -182,12 +183,12 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
           </div>
 
           <input
-            id="drug-search-input"
+            id={`${instanceId}-drug-search-input`}
             ref={inputRef}
             type="text"
             role="combobox"
             aria-expanded={isOpen && (suggestions.length > 0 || showUnmatchedOption || !!searchError)}
-            aria-controls="drug-search-listbox"
+            aria-controls={`${instanceId}-drug-search-listbox`}
             aria-autocomplete="list"
             aria-activedescendant={activeOptionId}
             value={query}
@@ -236,7 +237,7 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
       {isOpen && (suggestions.length > 0 || showUnmatchedOption || searchError) && (
         <div
           ref={dropdownRef}
-          id="drug-search-listbox"
+          id={`${instanceId}-drug-search-listbox`}
           role="listbox"
           className="absolute z-30 mt-1.5 w-full bg-white border border-slate-200 rounded-lg shadow-lg overflow-hidden max-h-72 overflow-y-auto"
         >
@@ -267,7 +268,7 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
                 return (
                   <button
                     key={`${drug.name}-${drug.matched_via_brand || 'direct'}`}
-                    id={`drug-option-${index}`}
+                    id={`${instanceId}-drug-option-${index}`}
                     type="button"
                     role="option"
                     aria-selected={isSelected}
@@ -302,7 +303,7 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
           {showUnmatchedOption && (
             <div className="p-2">
               <button
-                id="drug-option-unmatched"
+                id={`${instanceId}-drug-option-unmatched`}
                 type="button"
                 role="option"
                 aria-selected={selectedIndex === 0}

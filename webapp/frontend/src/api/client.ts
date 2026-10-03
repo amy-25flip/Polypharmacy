@@ -181,6 +181,78 @@ export interface DrugSearchResult {
   matched_via_brand?: string | null
 }
 
+export interface Disease {
+  id: string
+  name: string
+  aliases: string[]
+  medicine_count: number
+}
+
+export interface DiseaseMedicine {
+  name: string
+  sources: string[]
+}
+
+export interface CandidateFlag {
+  with: string
+  severity: string
+  is_documented: boolean
+  uncertain: boolean
+  adverse_effects: string[]
+}
+
+export interface CandidateResult {
+  candidate: string
+  worst_severity: Severity
+  flags: CandidateFlag[]
+  adverse_effects: string[]
+}
+
+export interface ScreenedPair {
+  drug_a: string
+  drug_b: string
+  severity: string
+  is_documented: boolean
+  uncertain: boolean
+  adverse_effects: string[]
+}
+
+export interface CandidateScreenResponse {
+  results: CandidateResult[]
+  selected_summary: {
+    overall_severity: string | null
+    pairs: ScreenedPair[]
+    counts: { Major: number; Moderate: number; Minor: number }
+  }
+  unmatched: string[]
+  adverse_effect_basis: string
+}
+
+export async function searchDiseases(query: string, signal?: AbortSignal): Promise<Disease[]> {
+  const res = await fetch(`${API_BASE}/api/diseases?q=${encodeURIComponent(query.trim())}`, { signal })
+  if (!res.ok) throw new Error(`Disease search failed: ${res.statusText}`)
+  const body: { diseases: Disease[] } = await res.json()
+  return body.diseases
+}
+
+export async function fetchDiseaseMedicines(id: string, signal?: AbortSignal): Promise<DiseaseMedicine[]> {
+  const res = await fetch(`${API_BASE}/api/diseases/${encodeURIComponent(id)}/medicines`, { signal })
+  if (!res.ok) throw new Error(`Disease medicines failed: ${res.statusText}`)
+  const body: { disease: Pick<Disease, 'id' | 'name'>; medicines: DiseaseMedicine[] } = await res.json()
+  return body.medicines
+}
+
+export async function screenCandidates(selected: string[], candidates: string[], signal?: AbortSignal): Promise<CandidateScreenResponse> {
+  const res = await fetch(`${API_BASE}/api/screen-candidates`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ selected, candidates }),
+    signal,
+  })
+  if (!res.ok) throw new Error(`Candidate screening failed: ${res.statusText}`)
+  return res.json()
+}
+
 export async function searchDrugs(query: string, signal?: AbortSignal): Promise<DrugSearchResult[]> {
   const trimmed = query.trim()
   if (trimmed.length < 2) {

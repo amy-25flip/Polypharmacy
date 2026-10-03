@@ -17,6 +17,7 @@ import { SubsetCertificateView } from './SubsetCertificateView'
 interface InteractionResultsProps {
   result: CheckResponse
   onReset?: () => void
+  diagnoses?: { name: string; medicines: string[] }[]
 }
 
 const severityBadgeClass = (severity: InteractionPair['severity']) =>
@@ -36,6 +37,7 @@ const severityPillClass = (severity: InteractionPair['severity']) =>
 export const InteractionResults: React.FC<InteractionResultsProps> = ({
   result,
   onReset,
+  diagnoses = [],
 }) => {
   const { matched, unmatched, regimen, combination_signal, subset_certificate } = result
   const pairs = regimen.pairs || []
@@ -65,6 +67,10 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
           This is an AI-based clinical decision-support output, not a substitute for clinical judgment,
           prescribing guidelines, or pharmacist review. Verify all findings independently before acting on them.
         </p>
+        {diagnoses.length > 0 && <div className="mt-3 border-t border-slate-300 pt-2">
+          <h2 className="text-sm font-bold">Medication plan by diagnosis</h2>
+          <ul className="mt-1 space-y-1 text-xs">{diagnoses.map((diagnosis) => <li key={diagnosis.name} className="break-words"><strong>{diagnosis.name}:</strong> {diagnosis.medicines.join(', ') || 'No medicines selected'}</li>)}</ul>
+        </div>}
       </div>
 
       {/* Print/export control - screen only */}

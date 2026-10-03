@@ -35,12 +35,13 @@ from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from rapidfuzz import fuzz, process
 
 from brand_names import BRAND_NAMES, lookup_brand_matches
 from conformal import ConformalEngine
 from disagreement_sentinel import DisagreementSentinel
+from disease_plan import DiseasePlanEngine
 from evidence_passport import EvidencePassportEngine
 from explainability import ExplainabilityEngine
 from hoddi_model import HoddiInferenceModel, build_fingerprint_lookup
@@ -206,6 +207,15 @@ TRANSPARENCY_DATA = {
 print(f"Ready. {len(DRUG_VOCAB)} known drugs, {len(NAME_TO_DRUGBANK_ID)} with DrugBankID/HODDI support, "
       f"{len(DOCUMENTED_PAIRS)} documented pairs.")
 
+print("Loading disease-plan reference...")
+disease_plan_engine = DiseasePlanEngine(
+    PROCESSED_DIR / "disease_formulary.json", DRUG_VOCAB, NAME_TO_DRUGBANK_ID,
+    DOCUMENTED_PAIRS, model1, explain_engine, evidence_passport_engine,
+    disagreement_sentinel,
+)
+if disease_plan_engine.unavailable_reason:
+    print(disease_plan_engine.unavailable_reason)
+
 
 def predict_pair(drug_a: str, drug_b: str) -> dict:
     row = pd.DataFrame(
@@ -321,6 +331,35 @@ def predict_hoddi_signal(drug_names: list[str]) -> dict | None:
 
 class CheckRequest(BaseModel):
     drugs: list[str]
+
+
+class ScreenCandidatesRequest(BaseModel):
+    selected: list[str] = Field(max_length=100)
+    candidates: list[str] = Field(max_length=100)
+
+
+def require_disease_plan() -> DiseasePlanEngine:
+    if disease_plan_engine.unavailable_reason:
+        raise HTTPException(status_code=503, detail=disease_plan_engine.unavailable_reason)
+    return disease_plan_engine
+
+
+@app.get("/api/diseases")
+def search_diseases(q: str = ""):
+    return {"diseases": require_disease_plan().search(q)}
+
+
+@app.get("/api/diseases/{disease_id}/medicines")
+def disease_medicines(disease_id: str):
+    result = require_disease_plan().medicines(disease_id)
+    if result is None:
+        raise HTTPException(status_code=404, detail="Unknown disease")
+    return result
+
+
+@app.post("/api/screen-candidates")
+def screen_candidates(payload: ScreenCandidatesRequest):
+    return require_disease_plan().screen(payload.selected, payload.candidates)
 
 
 @app.get("/api/health")

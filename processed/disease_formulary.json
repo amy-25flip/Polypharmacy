@@ -1,0 +1,7222 @@
+{
+  "version": 1,
+  "generated_by": "scripts/disease_formulary/build_disease_formulary.py",
+  "diseases": [
+    {
+      "id": "acquired-immunodeficiency-syndrome",
+      "name": "Acquired immunodeficiency syndrome",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Abacavir",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Amprenavir",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Delavirdine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Didanosine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Efavirenz",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Indinavir",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Lamivudine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Lopinavir",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Nelfinavir",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Nevirapine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ritonavir",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Saquinavir",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Stavudine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Zidovudine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alcohol-dependence",
+      "name": "Alcohol dependence",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Chlordiazepoxide",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Citalopram",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Disulfiram",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Naltrexone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ondansetron",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "allergic-rhinitis",
+      "name": "Allergic rhinitis",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Betamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cetirizine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cyproheptadine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Desloratadine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dexamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dimenhydrinate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Diphenhydramine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ephedrine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Epinephrine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Flunisolide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Hydrocortisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Loratadine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methylprednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Montelukast",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pseudoephedrine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Salbutamol",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Triamcinolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alzheimer-s-disease",
+      "name": "Alzheimer's disease",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Benzatropine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Donepezil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Galantamine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Haloperidol",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Memantine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Quetiapine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Rivastigmine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ropinirole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Selegiline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "anaemia-of-chronic-kidney-disease",
+      "name": "Anaemia of chronic kidney disease",
+      "aliases": [
+        "anemia of CKD",
+        "renal anaemia"
+      ],
+      "medicines": [
+        {
+          "name": "Darbepoetin alfa",
+          "sources": [
+            "KDIGO 2026: anemia in CKD"
+          ]
+        },
+        {
+          "name": "Ferrous sulfate anhydrous",
+          "sources": [
+            "KDIGO 2026: anemia in CKD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ankylosing-spondylitis",
+      "name": "Ankylosing spondylitis",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Betamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Celecoxib",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Dexamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Diclofenac",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Indomethacin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Meloxicam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methylprednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Naproxen",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Piroxicam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Sulfasalazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Tolmetin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Triamcinolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "asthma",
+      "name": "Asthma",
+      "aliases": [
+        "bronchial asthma"
+      ],
+      "medicines": [
+        {
+          "name": "Aminophylline",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Arformoterol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Beclomethasone dipropionate",
+          "sources": [
+            "GINA 2025: asthma summary guide"
+          ]
+        },
+        {
+          "name": "Betamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Budesonide",
+          "sources": [
+            "GINA 2025: asthma summary guide",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ciclesonide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cromoglicic acid",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dexamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dyphylline",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ephedrine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Epinephrine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Flunisolide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Formoterol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Hydrocortisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Indacaterol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ipratropium",
+          "sources": [
+            "NLEM 2022: section 24.1, antiasthmatic medicines"
+          ]
+        },
+        {
+          "name": "Isoprenaline",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Loratadine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methylprednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Montelukast",
+          "sources": [
+            "GINA 2025: asthma summary guide",
+            "NLEM 2022: section 24.1, antiasthmatic medicines",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Nedocromil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Orciprenaline",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pirbuterol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pseudoephedrine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Salbutamol",
+          "sources": [
+            "GINA 2025: asthma summary guide",
+            "NLEM 2022: section 24.1, antiasthmatic medicines",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Salmeterol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Terbutaline",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Theophylline",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Tiotropium",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Triamcinolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Zafirlukast",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Zileuton",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atherosclerosis",
+      "name": "Atherosclerosis",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Ezetimibe",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Lovastatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Niacin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pravastatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Rosuvastatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Simvastatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atopic-dermatitis",
+      "name": "Atopic dermatitis",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Betamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dexamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dimenhydrinate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Diphenhydramine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxepin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Hydrocortisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Loratadine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methylprednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Tacrolimus",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Triamcinolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Triprolidine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-fibrillation",
+      "name": "Atrial fibrillation",
+      "aliases": [
+        "AF",
+        "AFib"
+      ],
+      "medicines": [
+        {
+          "name": "Apixaban",
+          "sources": [
+            "NICE NG196: atrial fibrillation"
+          ]
+        },
+        {
+          "name": "Bisoprolol",
+          "sources": [
+            "NICE NG196: atrial fibrillation"
+          ]
+        },
+        {
+          "name": "Digoxin",
+          "sources": [
+            "NICE NG196: atrial fibrillation"
+          ]
+        },
+        {
+          "name": "Rivaroxaban",
+          "sources": [
+            "NICE NG196: atrial fibrillation"
+          ]
+        },
+        {
+          "name": "Warfarin",
+          "sources": [
+            "NICE NG196: atrial fibrillation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "attention-deficit-hyperactivity-disorder",
+      "name": "Attention deficit hyperactivity disorder",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Amphetamine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Atomoxetine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Bupropion",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Clonidine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Desipramine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Dextroamphetamine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Guanfacine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Imipramine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Lisdexamfetamine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Methylphenidate",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Modafinil",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Nortriptyline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Venlafaxine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "autistic-disorder",
+      "name": "Autistic disorder",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Aripiprazole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Atomoxetine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Benzatropine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Clonazepam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Clonidine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Quetiapine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Risperidone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Sertraline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "benign-prostatic-hyperplasia",
+      "name": "Benign prostatic hyperplasia",
+      "aliases": [
+        "benign prostate enlargement",
+        "BPH"
+      ],
+      "medicines": [
+        {
+          "name": "Dutasteride",
+          "sources": [
+            "NICE CG97: lower urinary tract symptoms and prostate enlargement"
+          ]
+        },
+        {
+          "name": "Finasteride",
+          "sources": [
+            "NICE CG97: lower urinary tract symptoms and prostate enlargement"
+          ]
+        },
+        {
+          "name": "Tamsulosin",
+          "sources": [
+            "NICE CG97: lower urinary tract symptoms and prostate enlargement"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bipolar-disorder",
+      "name": "Bipolar disorder",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Aripiprazole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Carbamazepine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Chlorpromazine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Citalopram",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Clonazepam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Clozapine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Duloxetine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Escitalopram",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Gabapentin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Lamotrigine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Olanzapine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Oxcarbazepine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Paroxetine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Quetiapine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Risperidone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Tiagabine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Topiramate",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Trazodone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Valproic acid",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Ziprasidone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bone-cancer",
+      "name": "Bone cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Carboplatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cisplatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Epirubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "brain-cancer",
+      "name": "Brain cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Betamethasone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Carboplatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Carmustine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dexamethasone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Etoposide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Hydroxyurea",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Lomustine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methylprednisolone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Procarbazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Temozolomide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Triamcinolone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "breast-cancer",
+      "name": "Breast cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Anastrozole",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Aprepitant",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Betamethasone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Capecitabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Carboplatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Chlorambucil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dexamethasone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Docetaxel",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Epirubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Eribulin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Estradiol",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Estrone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Exemestane",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Fluorouracil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Fluoxymesterone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Fulvestrant",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Gemcitabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Goserelin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Idarubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Irinotecan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ixabepilone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Lapatinib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Letrozole",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Medroxyprogesterone acetate",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Megestrol acetate",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Melphalan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methyltestosterone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Mitoxantrone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Paclitaxel",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prochlorperazine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Raloxifene",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Tamoxifen",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Testosterone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Thiotepa",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Toremifene",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vinblastine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vinorelbine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chronic-kidney-disease",
+      "name": "Chronic kidney disease",
+      "aliases": [
+        "chronic kidney failure",
+        "CKD",
+        "kidney disease"
+      ],
+      "medicines": [
+        {
+          "name": "Bumetanide",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Calcitriol",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Calcium acetate",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Cholecalciferol",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Cinacalcet",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Dapagliflozin",
+          "sources": [
+            "KDIGO 2024: CKD management, chapter 3"
+          ]
+        },
+        {
+          "name": "Deferoxamine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Empagliflozin",
+          "sources": [
+            "KDIGO 2024: CKD management, chapter 3"
+          ]
+        },
+        {
+          "name": "Enalapril",
+          "sources": [
+            "KDIGO 2024: CKD management, chapter 3"
+          ]
+        },
+        {
+          "name": "Furosemide",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Losartan",
+          "sources": [
+            "KDIGO 2024: CKD management, chapter 3"
+          ]
+        },
+        {
+          "name": "Paricalcitol",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Torasemide",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chronic-obstructive-pulmonary-disease",
+      "name": "Chronic obstructive pulmonary disease",
+      "aliases": [
+        "chronic bronchitis",
+        "COPD",
+        "emphysema"
+      ],
+      "medicines": [
+        {
+          "name": "Acetylcysteine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Aminophylline",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Arformoterol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ciprofloxacin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Doxycycline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Formoterol",
+          "sources": [
+            "GOLD 2026: stable COPD bronchodilators",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ipratropium",
+          "sources": [
+            "GOLD 2026: stable COPD bronchodilators"
+          ]
+        },
+        {
+          "name": "Levofloxacin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Montelukast",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Moxifloxacin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Ofloxacin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Roflumilast",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Salbutamol",
+          "sources": [
+            "GOLD 2026: stable COPD bronchodilators",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Salmeterol",
+          "sources": [
+            "GOLD 2026: stable COPD bronchodilators"
+          ]
+        },
+        {
+          "name": "Tiotropium",
+          "sources": [
+            "GOLD 2026: stable COPD bronchodilators",
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "colon-cancer",
+      "name": "Colon cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Aprepitant",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Betamethasone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Capecitabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Celecoxib",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Dexamethasone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Fluorouracil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Irinotecan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vincristine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conduct-disorder",
+      "name": "Conduct disorder",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Chlorpromazine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Haloperidol",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Risperidone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "coronary-artery-disease",
+      "name": "Coronary artery disease",
+      "aliases": [
+        "angina",
+        "CAD",
+        "ischemic heart disease"
+      ],
+      "medicines": [
+        {
+          "name": "Acetylsalicylic acid",
+          "sources": [
+            "ESC 2024: chronic coronary syndromes",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Amlodipine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Atorvastatin",
+          "sources": [
+            "ESC 2024: chronic coronary syndromes",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Bisoprolol",
+          "sources": [
+            "ESC 2024: chronic coronary syndromes"
+          ]
+        },
+        {
+          "name": "Captopril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Clopidogrel",
+          "sources": [
+            "ESC 2024: chronic coronary syndromes",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Digoxin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Diltiazem",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Dipyridamole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Enalapril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Eplerenone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ezetimibe",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Fenofibrate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Furosemide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Gemfibrozil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Isosorbide dinitrate",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Isosorbide mononitrate",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Lidocaine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Lisinopril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Losartan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Lovastatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Morphine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Niacin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Nifedipine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Nitroglycerin",
+          "sources": [
+            "ESC 2024: chronic coronary syndromes",
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Olmesartan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Penbutolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Perindopril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pitavastatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pravastatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ramipril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Rosuvastatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Simvastatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Telmisartan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ticagrelor",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Timolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Tirofiban",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Trandolapril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Valsartan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "crohn-s-disease",
+      "name": "Crohn's disease",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Atropine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Azathioprine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Balsalazide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Hyoscyamine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Mercaptopurine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mesalazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Sulfasalazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "depression",
+      "name": "Depression",
+      "aliases": [
+        "depressive disorder",
+        "Endogenous depression"
+      ],
+      "medicines": [
+        {
+          "name": "Amitriptyline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Aripiprazole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Citalopram",
+          "sources": [
+            "NICE CG91: depression with chronic physical illness",
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Duloxetine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Escitalopram",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Fluoxetine",
+          "sources": [
+            "NICE NG222: depression"
+          ]
+        },
+        {
+          "name": "Fluvoxamine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Imipramine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Nefazodone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Nortriptyline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Paroxetine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Selegiline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Sertraline",
+          "sources": [
+            "NICE CG91: depression with chronic physical illness",
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Trazodone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Valproic acid",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Vilazodone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dilated-cardiomyopathy",
+      "name": "Dilated cardiomyopathy",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Amrinone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Digoxin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Furosemide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Lisinopril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Spironolactone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dyslipidaemia",
+      "name": "Dyslipidaemia",
+      "aliases": [
+        "dyslipidemia",
+        "high cholesterol",
+        "hyperlipidemia"
+      ],
+      "medicines": [
+        {
+          "name": "Atorvastatin",
+          "sources": [
+            "NICE NG238: lipid modification"
+          ]
+        },
+        {
+          "name": "Rosuvastatin",
+          "sources": [
+            "NICE NG238: lipid modification"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "epilepsy",
+      "name": "Epilepsy",
+      "aliases": [
+        "epilepsy syndrome",
+        "seizure disorder"
+      ],
+      "medicines": [
+        {
+          "name": "Acetazolamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Amobarbital",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Carbamazepine",
+          "sources": [
+            "NICE NG217: epilepsy",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Clobazam",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Clonazepam",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Diazepam",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Felbamate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Fosphenytoin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Gabapentin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Lacosamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Lamotrigine",
+          "sources": [
+            "NICE NG217: epilepsy",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Levetiracetam",
+          "sources": [
+            "NICE NG217: epilepsy",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Midazolam",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Oxcarbazepine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Phenobarbital",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Phenytoin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pregabalin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Primidone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Propofol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Rufinamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Topiramate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Trimethadione",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Valproic acid",
+          "sources": [
+            "NICE NG217: epilepsy",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vigabatrin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Zonisamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "esophageal-cancer",
+      "name": "Esophageal cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Capecitabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Carboplatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cisplatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Esomeprazole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Omeprazole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gastro-oesophageal-reflux-disease-and-peptic-ulcer",
+      "name": "Gastro-oesophageal reflux disease and peptic ulcer",
+      "aliases": [
+        "acid reflux",
+        "GERD",
+        "GORD",
+        "peptic ulcer"
+      ],
+      "medicines": [
+        {
+          "name": "Famotidine",
+          "sources": [
+            "NICE CG184: reflux and peptic ulcer"
+          ]
+        },
+        {
+          "name": "Omeprazole",
+          "sources": [
+            "NICE CG184: reflux and peptic ulcer"
+          ]
+        },
+        {
+          "name": "Pantoprazole",
+          "sources": [
+            "NICE CG184: reflux and peptic ulcer"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "germ-cell-cancer",
+      "name": "Germ cell cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Bleomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cisplatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dactinomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Etoposide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ifosfamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vinblastine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gilles-de-la-tourette-syndrome",
+      "name": "Gilles de la Tourette syndrome",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Clonidine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Haloperidol",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Mecamylamine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Olanzapine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Pergolide",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Perphenazine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Pimozide",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Risperidone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Ziprasidone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "glaucoma",
+      "name": "Glaucoma",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Acetazolamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Apraclonidine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Betaxolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Carteolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Clonidine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Diclofenamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Epinephrine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Mannitol",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Methazolamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Physostigmine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pilocarpine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Timolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gout",
+      "name": "Gout",
+      "aliases": [
+        "gouty arthritis"
+      ],
+      "medicines": [
+        {
+          "name": "Acetylsalicylic acid",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Allopurinol",
+          "sources": [
+            "NICE NG219: gout",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Colchicine",
+          "sources": [
+            "NICE NG219: gout",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Febuxostat",
+          "sources": [
+            "NICE NG219: gout"
+          ]
+        },
+        {
+          "name": "Hydrocortisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Indomethacin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methylprednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Naproxen",
+          "sources": [
+            "NICE NG219: gout",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Probenecid",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "head-and-neck-cancer",
+      "name": "Head and neck cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Docetaxel",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Fluorouracil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Hydroxyurea",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pilocarpine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Vinblastine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heart-failure",
+      "name": "Heart failure",
+      "aliases": [
+        "congestive heart failure",
+        "HF"
+      ],
+      "medicines": [
+        {
+          "name": "Bisoprolol",
+          "sources": [
+            "ESC 2023: heart failure medicines"
+          ]
+        },
+        {
+          "name": "Carvedilol",
+          "sources": [
+            "ESC 2023: heart failure medicines"
+          ]
+        },
+        {
+          "name": "Dapagliflozin",
+          "sources": [
+            "ESC 2023: heart failure medicines"
+          ]
+        },
+        {
+          "name": "Empagliflozin",
+          "sources": [
+            "ESC 2023: heart failure medicines"
+          ]
+        },
+        {
+          "name": "Enalapril",
+          "sources": [
+            "ESC 2023: heart failure medicines"
+          ]
+        },
+        {
+          "name": "Furosemide",
+          "sources": [
+            "ESC 2023: heart failure medicines"
+          ]
+        },
+        {
+          "name": "Spironolactone",
+          "sources": [
+            "ESC 2023: heart failure medicines"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hematologic-cancer",
+      "name": "Hematologic cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Anagrelide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Betamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Bexarotene",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Bleomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Bortezomib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Busulfan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Carmustine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Celecoxib",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Chlorambucil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cisplatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cladribine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Clofarabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cytarabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dacarbazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dasatinib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Daunorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dexamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Epirubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Etoposide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Fludarabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Gemcitabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Hydroxyurea",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Idarubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ifosfamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Imatinib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Irinotecan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Lenalidomide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Lomustine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mechlorethamine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Melphalan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mercaptopurine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methoxsalen",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methylprednisolone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Mitoxantrone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Nelarabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Nilotinib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pentostatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Procarbazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ruxolitinib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Teniposide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Thalidomide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Thiotepa",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Tioguanine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Triamcinolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vinblastine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vincristine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vinorelbine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vorinostat",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hepatitis-b",
+      "name": "Hepatitis B",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Entecavir",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Lamivudine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Telbivudine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperkalaemia-in-chronic-kidney-disease",
+      "name": "Hyperkalaemia in chronic kidney disease",
+      "aliases": [
+        "high potassium in CKD",
+        "hyperkalemia"
+      ],
+      "medicines": [
+        {
+          "name": "Patiromer",
+          "sources": [
+            "NICE NG203: CKD and hyperkalaemia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertension",
+      "name": "Hypertension",
+      "aliases": [
+        "high blood pressure",
+        "HTN"
+      ],
+      "medicines": [
+        {
+          "name": "Acebutolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Amiloride",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Amlodipine",
+          "sources": [
+            "India MoHFW: standard treatment guideline for hypertension",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Atenolol",
+          "sources": [
+            "India MoHFW: standard treatment guideline for hypertension"
+          ]
+        },
+        {
+          "name": "Atorvastatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Benazepril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Bendroflumethiazide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Bepridil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Betaxolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Bumetanide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Captopril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Carvedilol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Chlorothiazide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Chlorthalidone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Clonidine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Diazoxide",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Diltiazem",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxazosin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Enalapril",
+          "sources": [
+            "India MoHFW: standard treatment guideline for hypertension",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Eplerenone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Eprosartan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Esmolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Felodipine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Fenoldopam",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Fosinopril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Furosemide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Guanabenz",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Guanadrel",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Guanethidine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Guanfacine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Hydralazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Hydrochlorothiazide",
+          "sources": [
+            "India MoHFW: standard treatment guideline for hypertension",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Hydroflumethiazide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Indapamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Irbesartan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Isradipine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Labetalol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Lisinopril",
+          "sources": [
+            "India MoHFW: standard treatment guideline for hypertension",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Losartan",
+          "sources": [
+            "India MoHFW: standard treatment guideline for hypertension",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mecamylamine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methyldopa",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Metolazone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Metoprolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Minoxidil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Moexipril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Nadolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Nebivolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Nicardipine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Nifedipine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Nisoldipine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Olmesartan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Penbutolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Perindopril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Phentolamine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Pindolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prazosin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Propranolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Quinapril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ramipril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Reserpine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Spironolactone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Telmisartan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Terazosin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Timolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Torasemide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Trandolapril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Triamterene",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Valsartan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Verapamil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperthyroidism",
+      "name": "Hyperthyroidism",
+      "aliases": [
+        "Graves disease",
+        "overactive thyroid"
+      ],
+      "medicines": [
+        {
+          "name": "Methimazole",
+          "sources": [
+            "NICE NG145 evidence review J: methimazole and propylthiouracil"
+          ]
+        },
+        {
+          "name": "Propylthiouracil",
+          "sources": [
+            "NICE NG145: thyroid disease"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypothyroidism",
+      "name": "Hypothyroidism",
+      "aliases": [
+        "underactive thyroid"
+      ],
+      "medicines": [
+        {
+          "name": "Dextrothyroxine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Levothyroxine",
+          "sources": [
+            "NICE NG145: thyroid disease",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Liothyronine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Liotrix",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kidney-cancer",
+      "name": "Kidney cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Betamethasone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Capecitabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Celecoxib",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Dactinomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dexamethasone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Erlotinib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Esomeprazole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Everolimus",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Gemcitabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Hydrocortisone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Omeprazole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Paclitaxel",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pazopanib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Sorafenib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Sunitinib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Temsirolimus",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vinblastine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vincristine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "leprosy",
+      "name": "Leprosy",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Dapsone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Rifampicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Thalidomide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "liver-cancer",
+      "name": "Liver cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Epirubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Sorafenib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lung-cancer",
+      "name": "Lung cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Cisplatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Crizotinib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Docetaxel",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Erlotinib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Etoposide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Fentanyl",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Gefitinib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Gemcitabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Irinotecan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Paclitaxel",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pemetrexed",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Teniposide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Topotecan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vinblastine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vinorelbine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lymphatic-system-cancer",
+      "name": "Lymphatic system cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Bleomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Carmustine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cytarabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Fludarabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mechlorethamine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mitoxantrone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Teniposide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vincristine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "malaria",
+      "name": "Malaria",
+      "aliases": [
+        "plasmodium infection"
+      ],
+      "medicines": [
+        {
+          "name": "Artemether",
+          "sources": [
+            "WHO 2026: malaria guidelines",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Artesunate",
+          "sources": [
+            "WHO 2026: malaria guidelines"
+          ]
+        },
+        {
+          "name": "Chloroquine",
+          "sources": [
+            "WHO 2026: malaria guidelines"
+          ]
+        },
+        {
+          "name": "Clindamycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dapsone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxycycline",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Lumefantrine",
+          "sources": [
+            "WHO 2026: malaria guidelines"
+          ]
+        },
+        {
+          "name": "Pentoxifylline",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Primaquine",
+          "sources": [
+            "WHO 2026: malaria guidelines"
+          ]
+        },
+        {
+          "name": "Proguanil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pyrimethamine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Quinidine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Quinine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Sulfadiazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "melanoma",
+      "name": "Melanoma",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Bleomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Carmustine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dacarbazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dactinomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Docetaxel",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Temozolomide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vemurafenib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "migraine",
+      "name": "Migraine",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Acetaminophen",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Acetylsalicylic acid",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Almotriptan",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Amitriptyline",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Butalbital",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Caffeine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Cyclobenzaprine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Cyproheptadine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Diclofenac",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Dihydroergotamine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Eletriptan",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Ergotamine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Frovatriptan",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Gabapentin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Indomethacin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Methylergometrine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Metoclopramide",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Naproxen",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Naratriptan",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Orphenadrine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Propranolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Rizatriptan",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Sumatriptan",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Timolol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Tizanidine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Topiramate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Valproic acid",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Verapamil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Zolmitriptan",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "multiple-sclerosis",
+      "name": "Multiple sclerosis",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Amantadine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Amitriptyline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Azathioprine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Baclofen",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Betamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Carbamazepine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Cladribine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Clonazepam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Dalfampridine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Dantrolene",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Dexamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dextromethorphan",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Diazepam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Eszopiclone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Fingolimod",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Gabapentin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methylprednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mitoxantrone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Modafinil",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Nortriptyline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Oxcarbazepine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pregabalin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Quazepam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Sildenafil",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Solifenacin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Tizanidine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Tolterodine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Triamcinolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Zolpidem",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muscle-cancer",
+      "name": "Muscle cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Dacarbazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dactinomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Etoposide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vincristine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "narcolepsy",
+      "name": "Narcolepsy",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Amphetamine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Dextroamphetamine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Modafinil",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "obesity",
+      "name": "Obesity",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Benzphetamine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Bupropion",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cimetidine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Diethylpropion",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Orlistat",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Phendimetrazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Phentermine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Phenylpropanolamine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Sibutramine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Topiramate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "osteoarthritis",
+      "name": "Osteoarthritis",
+      "aliases": [
+        "degenerative joint disease",
+        "OA"
+      ],
+      "medicines": [
+        {
+          "name": "Acetaminophen",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Acetylsalicylic acid",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Celecoxib",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Codeine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Cyclobenzaprine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Diclofenac",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Diclofenac (topical)",
+          "sources": [
+            "NICE NG226: osteoarthritis"
+          ]
+        },
+        {
+          "name": "Diflunisal",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Etodolac",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Fenoprofen",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Flurbiprofen",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Glucosamine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Ibuprofen",
+          "sources": [
+            "NICE NG226: osteoarthritis",
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Indomethacin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Ketoprofen",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Lidocaine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Meloxicam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Methylprednisolone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Nabumetone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Naproxen",
+          "sources": [
+            "NICE NG226: osteoarthritis",
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Oxaprozin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Piroxicam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Sulindac",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Tolmetin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "osteoporosis",
+      "name": "Osteoporosis",
+      "aliases": [
+        "low bone density"
+      ],
+      "medicines": [
+        {
+          "name": "Alendronic acid",
+          "sources": [
+            "NICE QS149: osteoporosis medicines"
+          ]
+        },
+        {
+          "name": "Calcitriol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Calcium acetate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cholecalciferol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Denosumab",
+          "sources": [
+            "NICE QS149: osteoporosis medicines"
+          ]
+        },
+        {
+          "name": "Ergocalciferol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Estradiol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Etidronic acid",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ibandronate",
+          "sources": [
+            "NICE QS149: osteoporosis medicines",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Oxandrolone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Raloxifene",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Risedronic acid",
+          "sources": [
+            "NICE QS149: osteoporosis medicines"
+          ]
+        },
+        {
+          "name": "Teriparatide",
+          "sources": [
+            "NICE QS149: osteoporosis medicines"
+          ]
+        },
+        {
+          "name": "Zoledronic acid",
+          "sources": [
+            "NICE QS149: osteoporosis medicines"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ovarian-cancer",
+      "name": "Ovarian cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Altretamine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Carboplatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Chlorambucil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Docetaxel",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Epirubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Melphalan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Paclitaxel",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Topotecan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vinorelbine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pancreatic-cancer",
+      "name": "Pancreatic cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Dacarbazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Docetaxel",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Epirubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Erlotinib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Fluorouracil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Gemcitabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Irinotecan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Sunitinib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Tamoxifen",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "panic-disorder",
+      "name": "Panic disorder",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Alprazolam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Bupropion",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Buspirone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Citalopram",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Clomipramine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Clonazepam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Diazepam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Fluoxetine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Fluvoxamine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Imipramine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Isocarboxazid",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Lorazepam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Maprotiline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Nortriptyline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Olanzapine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Paroxetine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Sertraline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Venlafaxine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "parkinson-s-disease",
+      "name": "Parkinson's disease",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Amantadine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Apomorphine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Atropine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Benzatropine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Biperiden",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Bromocriptine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Cabergoline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Clonazepam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Diphenhydramine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Entacapone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Fludrocortisone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Gabapentin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Hyoscyamine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Memantine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Modafinil",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Pergolide",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Pramipexole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Procyclidine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Ramelteon",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Rasagiline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Rivastigmine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Ropinirole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Rotigotine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Selegiline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Tolcapone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Trihexyphenidyl",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peripheral-nervous-system-neoplasm",
+      "name": "Peripheral nervous system neoplasm",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Cisplatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dacarbazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dactinomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Epirubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Etoposide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Isotretinoin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Melphalan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Topotecan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Tretinoin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vincristine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polycystic-ovary-syndrome",
+      "name": "Polycystic ovary syndrome",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Desogestrel",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Drospirenone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Levonorgestrel",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Metformin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "primary-biliary-cirrhosis",
+      "name": "Primary biliary cirrhosis",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Chenodeoxycholic acid",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Colchicine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ursodeoxycholic acid",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prostate-cancer",
+      "name": "Prostate cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Abiraterone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Betamethasone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Bicalutamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cabazitaxel",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Capecitabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Celecoxib",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Degarelix",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dexamethasone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Docetaxel",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Epirubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Esomeprazole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Estradiol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Estramustine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Estrone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Etoposide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Fentanyl",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Flutamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Goserelin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Hydrocortisone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Metoclopramide",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Mitoxantrone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Nilutamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Omeprazole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Tamsulosin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "psoriasis",
+      "name": "Psoriasis",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Acitretin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Betamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Calcitriol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cholecalciferol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cyclosporine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dexamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Hydrocortisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Hydroxyurea",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methoxsalen",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mycophenolate mofetil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mycophenolic acid",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Triamcinolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "psoriatic-arthritis",
+      "name": "Psoriatic arthritis",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Auranofin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Betamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dexamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methylprednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Triamcinolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "restless-legs-syndrome",
+      "name": "Restless legs syndrome",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Carbamazepine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Clonazepam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Clonidine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Gabapentin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Pramipexole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Pregabalin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Ropinirole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Tramadol",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rheumatoid-arthritis",
+      "name": "Rheumatoid arthritis",
+      "aliases": [
+        "RA"
+      ],
+      "medicines": [
+        {
+          "name": "Acetylsalicylic acid",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Amitriptyline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Auranofin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Azathioprine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Betamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Celecoxib",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Cyclosporine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dexamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Diclofenac",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Diflunisal",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Ergocalciferol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Gabapentin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Hydrocortisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Hydroxychloroquine",
+          "sources": [
+            "NICE NG100: rheumatoid arthritis"
+          ]
+        },
+        {
+          "name": "Indomethacin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Leflunomide",
+          "sources": [
+            "NICE NG100: rheumatoid arthritis",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Lidocaine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Meloxicam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "NICE NG100: rheumatoid arthritis",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methylprednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Nabumetone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Naproxen",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Oxaprozin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Penicillamine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Piroxicam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Salsalate",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Sulfasalazine",
+          "sources": [
+            "NICE NG100: rheumatoid arthritis",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Tolmetin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Triamcinolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sarcoma",
+      "name": "Sarcoma",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Dacarbazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dactinomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Epirubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Etoposide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mitoxantrone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Thiotepa",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vincristine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "schizophrenia",
+      "name": "Schizophrenia",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Aripiprazole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Benzatropine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Carbamazepine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Chlorpromazine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Clonazepam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Clozapine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Cyproheptadine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Dimenhydrinate",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Diphenhydramine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Eszopiclone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Fluoxetine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Fluphenazine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Haloperidol",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Lamotrigine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Loxapine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Mesoridazine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Olanzapine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Paliperidone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Quetiapine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Risperidone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Sertraline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Thioridazine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Thiothixene",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Trazodone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Trifluoperazine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Valproic acid",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Ziprasidone",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "secondary-hyperparathyroidism-in-chronic-kidney-disease",
+      "name": "Secondary hyperparathyroidism in chronic kidney disease",
+      "aliases": [
+        "CKD-MBD",
+        "renal hyperparathyroidism"
+      ],
+      "medicines": [
+        {
+          "name": "Calcitriol",
+          "sources": [
+            "KDIGO 2017: CKD mineral and bone disorder"
+          ]
+        },
+        {
+          "name": "Cinacalcet",
+          "sources": [
+            "KDIGO 2017: CKD mineral and bone disorder"
+          ]
+        },
+        {
+          "name": "Sevelamer",
+          "sources": [
+            "KDIGO 2017: CKD mineral and bone disorder"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "skin-cancer",
+      "name": "Skin cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Bleomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dacarbazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dactinomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Docetaxel",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Fluorouracil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Temozolomide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vemurafenib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vismodegib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stomach-cancer",
+      "name": "Stomach cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Capecitabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Docetaxel",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Epirubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Floxuridine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Fluorouracil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Irinotecan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mitomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "systemic-lupus-erythematosus",
+      "name": "Systemic lupus erythematosus",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Acetylsalicylic acid",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Amitriptyline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Azathioprine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Betamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Celecoxib",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Cyclosporine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dapsone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dexamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Gabapentin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Hydrocortisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Leflunomide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Meloxicam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methylprednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mycophenolate mofetil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Naproxen",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pregabalin",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Triamcinolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "systemic-scleroderma",
+      "name": "Systemic scleroderma",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Alprazolam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Azathioprine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Captopril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Celecoxib",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Cilostazol",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Colchicine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Diclofenac",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Epoprostenol",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Esomeprazole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Leflunomide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Lidocaine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Lisinopril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Meloxicam",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Metoclopramide",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Mycophenolate mofetil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mycophenolic acid",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Nifedipine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Omeprazole",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Pentoxifylline",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Sildenafil",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Tadalafil",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Tolazoline",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "testicular-cancer",
+      "name": "Testicular cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Bleomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Carboplatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Chlorambucil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cisplatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dactinomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Epirubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Etoposide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ifosfamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vinblastine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thyroid-cancer",
+      "name": "Thyroid cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Epirubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Sorafenib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Vandetanib",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tuberculosis",
+      "name": "Tuberculosis",
+      "aliases": [
+        "pulmonary tuberculosis",
+        "TB"
+      ],
+      "medicines": [
+        {
+          "name": "Ethambutol",
+          "sources": [
+            "WHO 2022: drug-susceptible tuberculosis"
+          ]
+        },
+        {
+          "name": "Isoniazid",
+          "sources": [
+            "WHO 2022: drug-susceptible tuberculosis"
+          ]
+        },
+        {
+          "name": "Pyrazinamide",
+          "sources": [
+            "WHO 2022: drug-susceptible tuberculosis"
+          ]
+        },
+        {
+          "name": "Rifampicin",
+          "sources": [
+            "WHO 2022: drug-susceptible tuberculosis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "type-2-diabetes-mellitus",
+      "name": "Type 2 diabetes mellitus",
+      "aliases": [
+        "diabetes",
+        "T2DM",
+        "type 2 diabetes"
+      ],
+      "medicines": [
+        {
+          "name": "Acarbose",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Bromocriptine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Chlorpropamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dapagliflozin",
+          "sources": [
+            "WHO EML 2025: section 18.5, medicines for diabetes"
+          ]
+        },
+        {
+          "name": "Empagliflozin",
+          "sources": [
+            "WHO EML 2025: section 18.5, medicines for diabetes"
+          ]
+        },
+        {
+          "name": "Glimepiride",
+          "sources": [
+            "NLEM 2022: section 18.3, medicines used in diabetes mellitus",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Glipizide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Glyburide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Insulin human",
+          "sources": [
+            "WHO PEN 2020: type 2 diabetes management"
+          ]
+        },
+        {
+          "name": "Irbesartan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Linagliptin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Losartan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Metformin",
+          "sources": [
+            "NLEM 2022: section 18.3, medicines used in diabetes mellitus",
+            "WHO PEN 2020: type 2 diabetes management",
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Miglitol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Nateglinide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Orlistat",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pioglitazone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ramipril",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Repaglinide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Rosiglitazone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Sitagliptin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Tolazamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Tolbutamide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Valsartan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ulcerative-colitis",
+      "name": "Ulcerative colitis",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Azathioprine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Balsalazide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Betamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Budesonide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cholecalciferol",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dexamethasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Hydrocortisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mercaptopurine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mesalazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methylprednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Nicotine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Olsalazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Sulfasalazine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Triamcinolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "urinary-bladder-cancer",
+      "name": "Urinary bladder cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Carboplatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Cisplatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Epirubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Etoposide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Fluorouracil",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Gemcitabine",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mitomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Thiotepa",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Valrubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "urinary-tract-infection",
+      "name": "Urinary tract infection",
+      "aliases": [
+        "cystitis",
+        "lower urinary tract infection",
+        "UTI"
+      ],
+      "medicines": [
+        {
+          "name": "Nitrofurantoin",
+          "sources": [
+            "NICE NG109: lower urinary tract infection"
+          ]
+        },
+        {
+          "name": "Trimethoprim",
+          "sources": [
+            "NICE NG109: lower urinary tract infection"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "uterine-cancer",
+      "name": "Uterine cancer",
+      "aliases": [],
+      "medicines": [
+        {
+          "name": "Carboplatin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Dactinomycin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Doxorubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Epirubicin",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Etoposide",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Medroxyprogesterone acetate",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Progesterone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        }
+      ]
+    }
+  ]
+}
