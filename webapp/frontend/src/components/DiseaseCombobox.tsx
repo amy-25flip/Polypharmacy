@@ -7,9 +7,13 @@ import type { Disease } from '../api/client'
 interface Props {
   existingIds: string[]
   onSelect: (disease: Disease) => void
+  // Only move focus into the box when the user just asked for it (clicking "Add a diagnosis").
+  // Stealing focus on mount broke keyboard tab navigation: arrowing to the diagnosis tab
+  // would jump into the search field instead of staying on the tab.
+  autoFocus?: boolean
 }
 
-export function DiseaseCombobox({ existingIds, onSelect }: Props) {
+export function DiseaseCombobox({ existingIds, onSelect, autoFocus = false }: Props) {
   const id = useId()
   const inputRef = useRef<HTMLInputElement>(null)
   const rootRef = useRef<HTMLDivElement>(null)
@@ -27,7 +31,7 @@ export function DiseaseCombobox({ existingIds, onSelect }: Props) {
   const [retry, setRetry] = useState(0)
   const [message, setMessage] = useState('')
 
-  useEffect(() => { inputRef.current?.focus() }, [])
+  useEffect(() => { if (autoFocus) inputRef.current?.focus() }, [autoFocus])
 
   useEffect(() => {
     if (!focused) return

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor, within } from '@testing-library/react'
 import { App } from '../App'
 import * as apiClient from '../api/client'
 import type { CheckResponse } from '../api/client'
@@ -85,6 +85,59 @@ describe('App Full Integration Flow', () => {
     await waitFor(() => {
       expect(screen.getByText('Moderate Interaction Risk')).toBeInTheDocument()
       expect(screen.getByText(/Metformin \+ Warfarin/i)).toBeInTheDocument()
+    })
+  })
+  describe('workflow tabs', () => {
+    beforeEach(() => {
+      vi.spyOn(apiClient, 'searchDrugs').mockImplementation(async (q) => (q.toLowerCase().startsWith('met') ? [{ name: 'Metformin' }] : []))
+      vi.spyOn(apiClient, 'searchDiseases').mockResolvedValue([])
+    })
+
+    it('opens on the original prescription workflow, with no diagnosis controls', () => {
+      render(<App />)
+      expect(screen.getByRole('tab', { name: /Prescriptions & scan/ })).toHaveAttribute('aria-selected', 'true')
+      expect(screen.getByRole('tab', { name: /Plan by diagnosis/ })).toHaveAttribute('aria-selected', 'false')
+      expect(screen.getByRole('heading', { name: 'Patient prescription session' })).toBeInTheDocument()
+      expect(screen.getByText('Scan a prescription image')).toBeInTheDocument()
+      expect(screen.queryByRole('button', { name: 'Add a diagnosis' })).not.toBeInTheDocument()
+      expect(screen.queryByRole('heading', { name: 'Plan by diagnosis' })).not.toBeInTheDocument()
+    })
+
+    it('switches to the diagnosis workflow, which has its own controls and none of the prescription ones', () => {
+      render(<App />)
+      fireEvent.click(screen.getByRole('tab', { name: /Plan by diagnosis/ }))
+      expect(screen.getByRole('tab', { name: /Plan by diagnosis/ })).toHaveAttribute('aria-selected', 'true')
+      expect(screen.getByRole('heading', { name: 'Plan by diagnosis' })).toBeInTheDocument()
+      expect(screen.getByRole('combobox', { name: 'Search diagnoses' })).toBeInTheDocument()
+      // The prescription panel is hidden, so its controls are not available here.
+      expect(screen.queryByRole('heading', { name: 'Scan a prescription image' })).not.toBeInTheDocument()
+      expect(screen.queryByRole('button', { name: 'Try an example' })).not.toBeInTheDocument()
+      expect(screen.queryByRole('button', { name: 'Add another prescription' })).not.toBeInTheDocument()
+    })
+
+    it('keeps each tab session when switching back and forth', async () => {
+      render(<App />)
+      fireEvent.change(screen.getByLabelText(/Add medicine/i), { target: { value: 'metf' } })
+      await waitFor(() => expect(screen.getByText('Metformin')).toBeInTheDocument())
+      fireEvent.click(screen.getByText('Metformin'))
+      expect(screen.getByText(/From: Prescription 1/)).toBeInTheDocument()
+
+      fireEvent.click(screen.getByRole('tab', { name: /Plan by diagnosis/ }))
+      // Only the visible panel is exposed; the diagnosis session is separate and empty.
+      expect(within(screen.getByRole('tabpanel')).queryByText(/From: Prescription 1/)).not.toBeInTheDocument()
+      expect(within(screen.getByRole('tabpanel')).getByText(/No diagnoses added yet/)).toBeInTheDocument()
+      fireEvent.click(screen.getByRole('tab', { name: /Prescriptions & scan/ }))
+      expect(within(screen.getByRole('tabpanel')).getByText(/From: Prescription 1/)).toBeInTheDocument()
+    })
+
+    it('supports arrow-key navigation between tabs', () => {
+      render(<App />)
+      const first = screen.getByRole('tab', { name: /Prescriptions & scan/ })
+      first.focus()
+      fireEvent.keyDown(first, { key: 'ArrowRight' })
+      const second = screen.getByRole('tab', { name: /Plan by diagnosis/ })
+      expect(second).toHaveAttribute('aria-selected', 'true')
+      expect(second).toHaveFocus()
     })
   })
 })

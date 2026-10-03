@@ -41,12 +41,20 @@ const newPrescription = (number: number): SessionPrescription => ({
 // a fast, reliable walkthrough instead of typing a combination live.
 const EXAMPLE_DRUGS = ['Warfarin', 'Amiodarone', 'Acetylsalicylic acid', 'Digoxin']
 
-export function PatientPrescriptionWorkflow() {
-  const [prescriptions, setPrescriptions] = useState<SessionPrescription[]>([newPrescription(1)])
+export type WorkflowMode = 'prescription' | 'diagnosis'
+
+// 'prescription' is the original workflow (prescriptions, image scan, text search).
+// 'diagnosis' is the plan-by-diagnosis workflow. Both share this component's logic
+// for the combined list, check and report, but are mounted as separate tabs with
+// separate sessions, so a doctor can use whichever fits the visit.
+export function PatientPrescriptionWorkflow({ mode = 'prescription' }: { mode?: WorkflowMode }) {
+  const isDiagnosisMode = mode === 'diagnosis'
+  const [prescriptions, setPrescriptions] = useState<SessionPrescription[]>(isDiagnosisMode ? [] : [newPrescription(1)])
   const [isChecking, setIsChecking] = useState(false)
   const [checkError, setCheckError] = useState<string | null>(null)
   const [result, setResult] = useState<CheckResponse | null>(null)
-  const [showDiagnosisSearch, setShowDiagnosisSearch] = useState(false)
+  const [showDiagnosisSearch, setShowDiagnosisSearch] = useState(isDiagnosisMode)
+  const [focusDiagnosisSearch, setFocusDiagnosisSearch] = useState(false)
   const diagnosisButtonRef = useRef<HTMLButtonElement>(null)
   const [visibleCandidates, setVisibleCandidates] = useState<Record<string, string[]>>({})
   const [screening, setScreening] = useState<CandidateScreenResponse | null>(null)
@@ -181,10 +189,11 @@ export function PatientPrescriptionWorkflow() {
     requestIdRef.current += 1
     screenRequestIdRef.current += 1
     screenControllerRef.current?.abort()
-    setPrescriptions([newPrescription(1)])
+    setPrescriptions(isDiagnosisMode ? [] : [newPrescription(1)])
     setVisibleCandidates({})
     setScreening(null)
-    setShowDiagnosisSearch(false)
+    setShowDiagnosisSearch(isDiagnosisMode)
+    setFocusDiagnosisSearch(false)
     setResult(null)
     setCheckError(null)
     setIsChecking(false)
@@ -237,18 +246,20 @@ export function PatientPrescriptionWorkflow() {
       <main className="print:hidden bg-white rounded-xl border border-slate-200 shadow-sm p-5 sm:p-7 space-y-6">
         <div className="border-b border-slate-100 pb-3 flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h2 className="text-lg font-bold text-slate-900">Patient prescription session</h2>
+            <h2 className="text-lg font-bold text-slate-900">{isDiagnosisMode ? 'Plan by diagnosis' : 'Patient prescription session'}</h2>
             <p className="text-xs text-slate-500 mt-0.5">
-              Build one patient's plan from prescriptions and diagnoses. This visit stays in browser memory only and is not saved.
+              {isDiagnosisMode
+                ? "Add each of the patient's diagnoses and choose its medicines; every medicine is screened against the rest of the plan. This visit stays in browser memory only and is not saved."
+                : 'Add separate prescriptions from each clinician. This visit stays in browser memory only and is not saved.'}
             </p>
           </div>
-          <button
+          {!isDiagnosisMode && <button
             type="button"
             onClick={loadExample}
             className="shrink-0 inline-flex items-center gap-1.5 rounded-lg border border-purple-200 bg-purple-50 px-3 py-2 text-xs font-bold text-purple-800 hover:bg-purple-100"
           >
             <Sparkles className="h-3.5 w-3.5" /> Try an example
-          </button>
+          </button>}
         </div>
 
         <div className="space-y-5">
@@ -348,19 +359,20 @@ export function PatientPrescriptionWorkflow() {
           ))}
         </div>
 
+        {isDiagnosisMode && diagnosisGroups.length === 0 && <p className="rounded-lg border-2 border-dashed border-slate-200 p-4 text-center text-sm text-slate-500">No diagnoses added yet. Search for a diagnosis below to start building the plan.</p>}
         <div className="flex flex-wrap gap-2">
-        <button
+        {!isDiagnosisMode && <button
           type="button"
           onClick={() => setPrescriptions((current) => [...current, newPrescription(current.filter((item) => item.kind === 'prescription').length + 1)])}
           className="inline-flex items-center gap-2 rounded-lg border border-blue-300 bg-blue-50 px-4 py-2.5 text-sm font-bold text-blue-800 hover:bg-blue-100"
         >
           <Plus className="h-4 w-4" /> Add another prescription
-        </button>
-        <button ref={diagnosisButtonRef} type="button" onClick={() => setShowDiagnosisSearch((value) => !value)} className="inline-flex items-center gap-2 rounded-lg border border-blue-300 bg-white px-4 py-2.5 text-sm font-bold text-blue-800 hover:bg-blue-50">
+        </button>}
+        {isDiagnosisMode && <button ref={diagnosisButtonRef} type="button" onClick={() => { setShowDiagnosisSearch((value) => !value); setFocusDiagnosisSearch(true) }} className="inline-flex items-center gap-2 rounded-lg border border-blue-300 bg-white px-4 py-2.5 text-sm font-bold text-blue-800 hover:bg-blue-50">
           <Plus className="h-4 w-4" /> Add a diagnosis
-        </button>
+        </button>}
         </div>
-        {showDiagnosisSearch && <DiseaseCombobox existingIds={diagnosisGroups.map((item) => item.diseaseId || '')} onSelect={addDiagnosis} />}
+        {isDiagnosisMode && showDiagnosisSearch && <DiseaseCombobox existingIds={diagnosisGroups.map((item) => item.diseaseId || '')} onSelect={addDiagnosis} autoFocus={focusDiagnosisSearch} />}
         {diagnosisGroups.length > 0 && combinedMedications.length >= 2 && <section aria-label="Whole plan screening" className="rounded-xl border border-blue-200 bg-blue-50/50 p-4 space-y-3">
           <h3 className="text-base font-bold text-slate-900">Whole plan screening</h3>
           {screeningLoading ? <p className="flex items-center gap-2 text-xs text-slate-600"><Loader2 className="h-4 w-4 animate-spin" /> Screening the current plan…</p> : screening && <>

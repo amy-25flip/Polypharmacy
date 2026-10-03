@@ -42,8 +42,9 @@ describe('diagnosis medication plan', () => {
   it('searches and selects a diagnosis, blocks duplicate selection, and retries a failed search', async () => {
     const search = vi.mocked(api.searchDiseases)
     search.mockRejectedValueOnce(new Error('503'))
-    render(<PatientPrescriptionWorkflow />)
-    fireEvent.click(screen.getByRole('button', { name: 'Add a diagnosis' }))
+    render(<PatientPrescriptionWorkflow mode="diagnosis" />)
+    // The diagnosis tab opens with the search box ready - no extra click needed to start.
+    expect(screen.getByText(/No diagnoses added yet/)).toBeInTheDocument()
     const input = screen.getByRole('combobox', { name: 'Search diagnoses' })
     fireEvent.focus(input)
     await waitFor(() => expect(screen.getByText(/Diagnosis search unavailable/)).toBeInTheDocument())
@@ -59,7 +60,7 @@ describe('diagnosis medication plan', () => {
   })
 
   it('multi-selects medicines per diagnosis, merges duplicates, and removes only the selected source', async () => {
-    render(<PatientPrescriptionWorkflow />)
+    render(<PatientPrescriptionWorkflow mode="diagnosis" />)
     await addDiagnosis('diabetes')
     const diabetes = await screen.findByLabelText('Reference medicines for Diabetes')
     fireEvent.click(within(diabetes).getByRole('checkbox', { name: 'Metformin' }))
@@ -89,7 +90,7 @@ describe('diagnosis medication plan', () => {
       unmatched: [], adverse_effect_basis: basis,
     }))
     vi.spyOn(api, 'checkInteractions').mockResolvedValue(report)
-    render(<PatientPrescriptionWorkflow />)
+    render(<PatientPrescriptionWorkflow mode="diagnosis" />)
     await addDiagnosis('diabetes')
     const list = await screen.findByLabelText('Reference medicines for Diabetes')
     fireEvent.click(within(list).getByRole('checkbox', { name: 'Metformin' }))
@@ -112,7 +113,7 @@ describe('diagnosis medication plan', () => {
     const old = new Promise<CandidateScreenResponse>((resolve) => { resolveOld = resolve })
     const spy = vi.mocked(api.screenCandidates)
     spy.mockResolvedValueOnce(emptyScreen).mockImplementationOnce(() => old).mockResolvedValue(emptyScreen)
-    render(<PatientPrescriptionWorkflow />)
+    render(<PatientPrescriptionWorkflow mode="diagnosis" />)
     await addDiagnosis('diabetes')
     const list = await screen.findByLabelText('Reference medicines for Diabetes')
     await waitFor(() => expect(spy).toHaveBeenCalled())
@@ -134,7 +135,7 @@ describe('diagnosis medication plan', () => {
       ...emptyScreen,
       results: candidates.map((candidate) => ({ candidate, worst_severity: null, flags: [], adverse_effects: [] })),
     }))
-    render(<PatientPrescriptionWorkflow />)
+    render(<PatientPrescriptionWorkflow mode="diagnosis" />)
     await addDiagnosis('diabetes')
     expect(await screen.findByText(/Medicine reference list unavailable/)).toBeInTheDocument()
     expect(screen.queryByText(/No interaction found with current plan/i)).not.toBeInTheDocument()
@@ -152,7 +153,7 @@ describe('diagnosis medication plan', () => {
       { name: 'Metformin', sources: ['hetionet:CtD', 'NLEM 2022: section 18.3, medicines used in diabetes mellitus'] },
       { name: 'Bromocriptine', sources: ['hetionet:CpD'] },
     ])
-    render(<PatientPrescriptionWorkflow />)
+    render(<PatientPrescriptionWorkflow mode="diagnosis" />)
     await addDiagnosis('diabetes')
     const list = await screen.findByLabelText('Reference medicines for Diabetes')
     expect(await within(list).findByText('Listed by: Hetionet (treats) · NLEM 2022')).toBeInTheDocument()
@@ -163,7 +164,7 @@ describe('diagnosis medication plan', () => {
   it('shows a distinct screening failure with Retry, and the printed diagnosis plan', async () => {
     vi.mocked(api.screenCandidates).mockRejectedValue(new Error('network'))
     vi.spyOn(api, 'checkInteractions').mockResolvedValue(report)
-    render(<PatientPrescriptionWorkflow />)
+    render(<PatientPrescriptionWorkflow mode="diagnosis" />)
     await addDiagnosis('diabetes')
     const list = await screen.findByLabelText('Reference medicines for Diabetes')
     fireEvent.click(within(list).getByRole('checkbox', { name: 'Metformin' }))
