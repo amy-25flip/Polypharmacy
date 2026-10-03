@@ -8,8 +8,7 @@ Separates four things that a raw severity label collapses into one number:
 All thresholds/curves here are loaded from files produced by
 scripts/evidence_passport/build_calibration.py and build_support_index.py -
 real empirical numbers from a held-out 30% split of the production dataset,
-not guessed constants. See MODEL4_GNN_FINDINGS.md / CODEX_NOVELTY_RESEARCH.md
-for the reasoning behind this design.
+not guessed constants. See MODEL4_GNN_FINDINGS.md for the reasoning behind this design.
 """
 from __future__ import annotations
 

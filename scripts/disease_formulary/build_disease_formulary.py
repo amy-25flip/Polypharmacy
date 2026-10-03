@@ -16,6 +16,8 @@ OUTPUT = ROOT / "processed" / "disease_formulary.json"
 SUMMARY = ROOT / "processed" / "disease_formulary_summary.md"
 # source key (casefolded name before merging) -> target key
 MERGE_DISEASES = {"endogenous depression": "depression"}
+# Written by apply_doctor_review.py from the returned clinician review workbook (optional).
+DOCTOR_REVIEW = Path(__file__).with_name("doctor_review.json")
 
 
 def slug(value: str) -> str:
@@ -98,6 +100,30 @@ def main() -> None:
         for medicine, citations in source["medicines"].items():
             target["medicines"][medicine] = set(target["medicines"].get(medicine, set())) | set(citations)
 
+    # Clinician review: explicit removals and additions override both sources.
+    review = json.loads(DOCTOR_REVIEW.read_text(encoding="utf-8")) if DOCTOR_REVIEW.exists() else None
+    review_removed = review_added = 0
+    if review:
+        by_name = {d["name"].casefold(): d for d in diseases.values()}
+        credit = f"Clinician review ({review.get('reviewer') or 'unnamed'})"
+        for item in review["removed"]:
+            disease = by_name.get(item["disease"].casefold())
+            medicine = vocab_by_norm.get(item["medicine"].casefold())
+            if disease and medicine in disease["medicines"]:
+                del disease["medicines"][medicine]
+                review_removed += 1
+            else:
+                skipped.append(f"Review removal not applied (not on the list): {item['disease']}: {item['medicine']}")
+        for item in review["added"]:
+            disease = by_name.get(item["disease"].casefold())
+            medicine = vocab_by_norm.get(item["medicine"].casefold())
+            if disease and medicine:
+                disease["medicines"][medicine].add(credit)
+                review_added += 1
+            else:
+                skipped.append(f"Review addition not applied: {item['disease']}: {item['medicine']}")
+        skipped.extend(review.get("requests_not_applied", []))
+
     result = []
     ids_seen = set()
     for disease in diseases.values():
@@ -130,7 +156,9 @@ def main() -> None:
              f"- Hetionet disease nodes with CtD/CpD edges: {len(seen_diseases)}.",
              f"- Hetionet diseases with at least three checkable medicines: {len(seen_diseases) - len(dropped)}.",
              f"- Final diseases: {len(result)}; with Hetionet provenance: {hetionet_count}; with curated provenance: {curated_count}.",
-             f"- Curated source-to-medicine additions processed: {curated_added} (before deduplication).", "",
+             f"- Curated source-to-medicine additions processed: {curated_added} (before deduplication).",
+             f"- Clinician review applied: {review_removed} removals, {review_added} additions." if review
+             else "- Clinician review: none applied yet.", "",
              "## Diseases and medicine counts", "",
              "| Disease | Medicines |", "|---|---:|",]
     lines += [f"| {d['name']} | {len(d['medicines'])} |" for d in result]
@@ -145,7 +173,7 @@ def main() -> None:
               "medicines section; inclusion is a browsing aid, never prescribing advice.", ""]
     used_sources = {source for disease in result for med in disease["medicines"]
                     for source in med["sources"] if not source.startswith("hetionet:")}
-    lines += [f"- {citation}: {references[citation]}" for citation in sorted(used_sources)]
+    lines += [f"- {citation}: {references.get(citation, 'reviewer-added entry')}" for citation in sorted(used_sources)]
     SUMMARY.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"PASS: {len(result)} diseases, {hetionet_count} with Hetionet edges, "
           f"{curated_count} with curated entries; {len(skipped)} skipped-for-review notes")
