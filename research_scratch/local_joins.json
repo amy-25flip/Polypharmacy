@@ -1,0 +1,16 @@
+{
+  "dd_pairs_both_vocab": 157544,
+  "dd_pairs_known_severity": 130422,
+  "hoddi_projected_pairs_mapped": 35857,
+  "hoddi_dd_overlap": 11813,
+  "twosides_cids": 645,
+  "cids_unique_smiles_join": 513,
+  "twosides_cid_pairs": 63473,
+  "twosides_pairs_resolved": 40654,
+  "twosides_dd_overlap": 21342,
+  "twosides_dd_known_overlap": 5172,
+  "strict_cids_unique_join": 288,
+  "strict_twosides_pairs_resolved": 14448,
+  "strict_twosides_dd_overlap": 7210,
+  "strict_twosides_dd_known_overlap": 1910
+}

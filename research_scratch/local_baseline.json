@@ -1,0 +1,39 @@
+{
+  "vocab": 1902,
+  "drugbank_mapped": 1531,
+  "ddinter_all_combined.csv": {
+    "unique_pairs": 160235,
+    "drugs": 1939,
+    "drugs_in_vocab": 1902,
+    "pairs_both_in_vocab": 157544,
+    "severity_rows": {
+      "Moderate": 130367,
+      "Major": 33896,
+      "Minor": 10938,
+      "Unknown": 47182
+    }
+  },
+  "ddinter2_all_combined.csv": {
+    "unique_pairs": 160235,
+    "drugs": 1939,
+    "drugs_in_vocab": 1902,
+    "pairs_both_in_vocab": 157544,
+    "severity_rows": {
+      "Moderate": 96675,
+      "Major": 26914,
+      "Minor": 6833,
+      "Unknown": 29813
+    }
+  },
+  "local_TWOSIDES": {
+    "unique_cid_pairs": 63473,
+    "unique_y": 1317,
+    "y_min": 0,
+    "y_max": 1316
+  },
+  "HODDI": {
+    "positive_rows": 165479,
+    "pair_projection_unique": 72266,
+    "pairs_both_ids_mapped": 35857
+  }
+}
