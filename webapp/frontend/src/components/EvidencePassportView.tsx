@@ -7,6 +7,8 @@ interface EvidencePassportViewProps {
   drugA: string
   drugB: string
   conformalSets?: ConformalSets
+  /** False when the severity comes from a database record, so the model's reliability does not apply. */
+  modelBased?: boolean
 }
 
 const severityDotClass: Record<string, string> = {
@@ -74,7 +76,7 @@ export const AbstainCard: React.FC<{ drugA: string; drugB: string; reason: strin
 
 const CONFORMAL_LEVELS = ['0.8', '0.9', '0.95']
 
-export const EvidencePassportView: React.FC<EvidencePassportViewProps> = ({ passport, conformalSets }) => {
+export const EvidencePassportView: React.FC<EvidencePassportViewProps> = ({ passport, conformalSets, modelBased = true }) => {
   const { evidence_tier, drug_a_support, drug_b_support, reliability, cross_model_agreement } = passport
   const conformalLevels: { level: string; entry: ConformalSet }[] = CONFORMAL_LEVELS
     .map((level) => ({ level, entry: conformalSets?.[level] }))
@@ -99,12 +101,16 @@ export const EvidencePassportView: React.FC<EvidencePassportViewProps> = ({ pass
         >
           {evidenceTierLabel[evidence_tier]}
         </span>
-        <span className="text-slate-600">
-          Model reliability at this confidence:{' '}
-          <span className={`font-bold ${reliabilityClass[reliability.band]}`}>
-            {reliability.band} ({Math.round(reliability.empirical_accuracy * 100)}% historically, held-out test)
+        {modelBased ? (
+          <span className="text-slate-600">
+            Model reliability at this confidence:{' '}
+            <span className={`font-bold ${reliabilityClass[reliability.band]}`}>
+              {reliability.band} ({Math.round(reliability.empirical_accuracy * 100)}% historically, held-out test)
+            </span>
           </span>
-        </span>
+        ) : (
+          <span className="text-slate-600">Severity is taken from the reference database record, not predicted.</span>
+        )}
       </div>
       <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-slate-500">
         <span>Drug A data: {supportLabel[drug_a_support.tier]} ({drug_a_support.documented_pair_count} documented pairs)</span>
@@ -142,7 +148,7 @@ export const EvidencePassportView: React.FC<EvidencePassportViewProps> = ({ pass
         </div>
       )}
 
-      {cross_model_agreement && (
+      {modelBased && cross_model_agreement && (
         <div className="mt-2 pt-2 border-t border-slate-100 text-xs">
           <span className="font-semibold text-slate-700">Independent second opinion (chemistry model): </span>
           <span className={`font-bold ${disagreementClass[cross_model_agreement.disagreement_level]}`}>

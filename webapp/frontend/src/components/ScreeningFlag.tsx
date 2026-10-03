@@ -1,22 +1,26 @@
-import { AlertTriangle, CheckCircle2, Info } from 'lucide-react'
+import { AlertTriangle, CheckCircle2, Info, ShieldCheck } from 'lucide-react'
 import type { CandidateFlag, ScreenedPair, Severity } from '../api/client'
+import { basisLabel, severityName } from '../severity'
 
 const classes: Record<string, string> = {
   Major: 'border-rose-300 bg-rose-50 text-rose-900',
   Moderate: 'border-amber-300 bg-amber-50 text-amber-900',
   Minor: 'border-emerald-300 bg-emerald-50 text-emerald-900',
+  None: 'border-sky-300 bg-sky-50 text-sky-900',
 }
 
 export function SeverityLabel({ severity, uncertain }: { severity: Severity | string; uncertain?: boolean }) {
   if (!severity) return <span className="inline-flex items-center gap-1 text-xs text-slate-500"><CheckCircle2 className="h-3.5 w-3.5" /> No interaction found with current plan</span>
   return <span className={`inline-flex flex-wrap items-center gap-1 rounded-full border px-2 py-0.5 text-xs font-semibold ${uncertain ? 'border-slate-300 bg-slate-100 text-slate-800' : classes[severity] || classes.Minor}`}>
-    {uncertain ? <Info className="h-3.5 w-3.5" /> : <AlertTriangle className="h-3.5 w-3.5" />}
-    {severity}{uncertain && ' · low-confidence estimate'}
+    {uncertain ? <Info className="h-3.5 w-3.5" /> : severity === 'None' ? <ShieldCheck className="h-3.5 w-3.5" /> : <AlertTriangle className="h-3.5 w-3.5" />}
+    {severityName(severity)}{uncertain && ' · low-confidence estimate'}
   </span>
 }
 
 export function ScreeningFlag({ flags, severity, basis }: { flags: CandidateFlag[]; severity: Severity; basis: string }) {
   const worst = flags.find((flag) => flag.severity === severity) || flags[0]
+  const estimates = flags.flatMap((flag) => flag.estimated_from ?? [])
+  const estimateNotes = [...new Map(estimates.map((note) => [`${note.drug}|${note.proxy}`, note])).values()]
   return <div className="min-w-0 text-xs">
     <SeverityLabel severity={severity} uncertain={worst?.uncertain} />
     {worst && <span className="ml-1 text-slate-600">with {worst.with}</span>}
@@ -25,10 +29,12 @@ export function ScreeningFlag({ flags, severity, basis }: { flags: CandidateFlag
       <ul className="mt-2 space-y-2">
         {flags.map((flag, index) => <li key={`${flag.with}-${index}`} className="break-words rounded-md bg-slate-50 p-2">
           <span className="font-semibold">With {flag.with}: </span><SeverityLabel severity={flag.severity} uncertain={flag.uncertain} />
-          <span className="ml-1">{flag.is_documented ? 'Documented' : 'Inferred'}</span>
+          <span className="ml-1">{basisLabel(flag.severity_basis, flag.is_documented)}</span>
           {flag.adverse_effects.length > 0 && <div className="mt-1 flex flex-wrap gap-1">{flag.adverse_effects.map((effect) => <span key={effect} className="rounded bg-white px-1.5 py-0.5 text-slate-700">{effect}</span>)}</div>}
         </li>)}
       </ul>
+      {severity === 'None' && <p className="mt-2 text-[11px] text-slate-600">No interaction is recorded for this combination in the reference database. This is not proof that it is safe.</p>}
+      {estimateNotes.map((note) => <p key={`${note.drug}-${note.proxy}`} className="mt-2 text-[11px] text-amber-900">{note.drug} has no interaction records of its own, so it is checked as {note.proxy} (estimate). {note.reason}</p>)}
       <p className="mt-2 text-[11px] text-slate-600">{basis}</p>
     </details>}
   </div>
@@ -38,6 +44,8 @@ export function pairAsFlag(pair: ScreenedPair, medicine: string): CandidateFlag 
   return {
     with: pair.drug_a.toLowerCase() === medicine.toLowerCase() ? pair.drug_b : pair.drug_a,
     severity: pair.severity,
+    severity_basis: pair.severity_basis,
+    estimated_from: pair.estimated_from,
     is_documented: pair.is_documented,
     uncertain: pair.uncertain,
     adverse_effects: pair.adverse_effects,

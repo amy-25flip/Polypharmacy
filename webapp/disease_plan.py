@@ -10,8 +10,11 @@ import numpy as np
 import pandas as pd
 from rapidfuzz import fuzz
 
+from severity_policy import (
+    BASIS_DUPLICATE, BASIS_INFERRED, BASIS_NO_RECORD, DUPLICATE_NOTICE, NO_RECORD_NOTICE, RANK,
+    resolve_severity, strong_mechanism,
+)
 
-RANK = {"Minor": 0, "Moderate": 1, "Major": 2}
 ADVERSE_EFFECT_BASIS = (
     "Side effects both medicines are individually reported to cause (overlap of known "
     "side-effect profiles) - not an observed outcome of this specific combination."
@@ -22,7 +25,7 @@ FEATURE_COLS = ["pair_text", "disease_diabetes", "disease_ckd", "disease_heart_f
 class DiseasePlanEngine:
     def __init__(self, data_path: Path, vocabulary: list[str], name_to_id: dict[str, str],
                  documented_pairs: set[str], model, explain_engine, passport_engine,
-                 disagreement_sentinel):
+                 disagreement_sentinel, aliases, documented_severity: dict[str, str]):
         self.unavailable_reason: str | None = None
         self.vocab_by_norm = {self.normalize(name): name for name in vocabulary}
         self.name_to_id = name_to_id
@@ -31,6 +34,8 @@ class DiseasePlanEngine:
         self.explain = explain_engine
         self.passport = passport_engine
         self.sentinel = disagreement_sentinel
+        self.aliases = aliases
+        self.documented_severity = documented_severity
         self._prediction_cache: dict[tuple[str, str], tuple[str, tuple[float, ...]]] = {}
         self.diseases: dict[str, dict] = {}
         try:
@@ -119,9 +124,11 @@ class DiseasePlanEngine:
         return tuple(dict.fromkeys(self.explain.item_names.get(item, item) for item in ranked))
 
     @lru_cache(maxsize=100_000)
-    def _pair_result(self, a: str, b: str, severity: str, probabilities: tuple[float, ...]) -> dict:
+    def _pair_result(self, a: str, b: str, model_severity: str, probabilities: tuple[float, ...],
+                     estimated: bool) -> dict:
         key = "|".join((a, b))
-        documented = key in self.documented_pairs
+        documented_label = self.documented_severity.get(key)
+        documented = documented_label is not None and not estimated
         proba = np.asarray(probabilities)
         confidence = float(np.max(proba))
         top2 = np.sort(proba)[-2:]
@@ -138,23 +145,37 @@ class DiseasePlanEngine:
         if not documented and not uncertain and self.sentinel.has_coverage(a, b):
             agreement = self.sentinel.score(a, b, proba, list(self.model.classes_))
             uncertain = bool(agreement and agreement["disagreement_level"] == "High")
-        return {"severity": severity, "is_documented": documented, "uncertain": bool(uncertain),
-                "adverse_effects": self._adverse_effects(a, b)}
+        severity, basis = resolve_severity(
+            documented=documented_label, model_severity=model_severity, uncertain=bool(uncertain),
+            has_mechanism=strong_mechanism(explanation), estimated=estimated,
+        )
+        return {"severity": severity, "severity_basis": basis, "is_documented": documented,
+                # "Low confidence" only describes the model's own estimate.
+                "uncertain": basis == BASIS_INFERRED and bool(uncertain),
+                "adverse_effects": () if severity == "None" else self._adverse_effects(a, b)}
 
     def screen(self, selected_raw: list[str], candidates_raw: list[str]) -> dict:
         selected, unmatched_a = self._resolve(selected_raw)
         candidates, unmatched_b = self._resolve(candidates_raw)
         selected_norm = {self.normalize(n) for n in selected}
+        # Drugs with no records of their own are checked through a close relative.
+        effective = {name: self.normalize(self.aliases.effective(name)) for name in (*selected, *candidates)}
+
+        def same_drug(a: str, b: str) -> bool:
+            return effective[a] == effective[b]
+
         needed = set()
         for a, b in combinations(selected, 2):
-            needed.add(self.pair_key(self.normalize(a), self.normalize(b)))
+            if not same_drug(a, b):
+                needed.add(self.pair_key(effective[a], effective[b]))
         for c in candidates:
             if self.normalize(c) not in selected_norm:
                 for s in selected:
-                    needed.add(self.pair_key(self.normalize(c), self.normalize(s)))
+                    if not same_drug(c, s):
+                        needed.add(self.pair_key(effective[c], effective[s]))
 
-        # One vectorized Model 1 pass for all uncached pairs. Documented status is
-        # resolved from the exact index, while labels retain /api/check's model rule.
+        # One vectorized Model 1 pass for all uncached pairs. Documented pairs take their
+        # documented severity (see severity_policy); the model covers the rest.
         ordered = sorted(needed)
         missing = [key for key in ordered if key not in self._prediction_cache]
         if missing:
@@ -169,12 +190,21 @@ class DiseasePlanEngine:
                 self._prediction_cache[key] = (str(label), tuple(float(x) for x in proba))
 
         def pair(a: str, b: str) -> dict:
-            key = self.pair_key(self.normalize(a), self.normalize(b))
+            notes = self.aliases.notes(a, b)
+            if same_drug(a, b):
+                return {"severity": "Moderate", "severity_basis": BASIS_DUPLICATE, "is_documented": False,
+                        "uncertain": False, "adverse_effects": (), "estimated_from": notes,
+                        "severity_notice": DUPLICATE_NOTICE}
+            key = self.pair_key(effective[a], effective[b])
             label, proba = self._prediction_cache[key]
-            return self._pair_result(*key, label, proba)
+            result = dict(self._pair_result(*key, label, proba, bool(notes)))
+            result["estimated_from"] = notes
+            if result["severity_basis"] == BASIS_NO_RECORD:
+                result["severity_notice"] = NO_RECORD_NOTICE
+            return result
 
         selected_pairs = []
-        counts = {"Major": 0, "Moderate": 0, "Minor": 0}
+        counts = {"Major": 0, "Moderate": 0, "Minor": 0, "None": 0}
         for a, b in combinations(selected, 2):
             p = pair(a, b)
             counts[p["severity"]] += 1
@@ -188,8 +218,9 @@ class DiseasePlanEngine:
             if self.normalize(c) not in selected_norm:
                 for s in selected:
                     p = pair(c, s)
-                    flags.append({"with": s, "severity": p["severity"],
+                    flags.append({"with": s, "severity": p["severity"], "severity_basis": p["severity_basis"],
                                   "is_documented": p["is_documented"], "uncertain": p["uncertain"],
+                                  "estimated_from": p["estimated_from"],
                                   "adverse_effects": list(p["adverse_effects"][:5])})
             flags.sort(key=lambda p: (-RANK[p["severity"]], p["with"]))
             adverse = list(dict.fromkeys(effect for flag in flags for effect in flag["adverse_effects"]))[:6]

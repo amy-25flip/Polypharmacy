@@ -6,6 +6,7 @@ import { DrugSearchInput } from './DrugSearchInput'
 import { DiseaseCombobox } from './DiseaseCombobox'
 import { DiagnosisMedicinePicker } from './DiagnosisMedicinePicker'
 import { pairAsFlag, ScreeningFlag, SeverityLabel } from './ScreeningFlag'
+import { basisLabel } from '../severity'
 import { InteractionResults } from './InteractionResults'
 import { MedicationTimingTable, TIMING_OPTIONS } from './MedicationTimingTable'
 import type { CombinedMedication, MedicationTiming } from './MedicationTimingTable'
@@ -377,9 +378,9 @@ export function PatientPrescriptionWorkflow({ mode = 'prescription' }: { mode?: 
           <h3 className="text-base font-bold text-slate-900">Whole plan screening</h3>
           {screeningLoading ? <p className="flex items-center gap-2 text-xs text-slate-600"><Loader2 className="h-4 w-4 animate-spin" /> Screening the current plan…</p> : screening && <>
             <div className="flex flex-wrap items-center gap-2 text-sm font-semibold text-slate-800"><span>Overall:</span><SeverityLabel severity={screening.selected_summary.overall_severity} uncertain={screening.selected_summary.pairs.some((pair) => pair.uncertain && pair.severity === screening.selected_summary.overall_severity)} /></div>
-            <p className="text-xs text-slate-700">{screening.selected_summary.counts.Major} Major · {screening.selected_summary.counts.Moderate} Moderate · {screening.selected_summary.counts.Minor} Minor pairs</p>
+            <p className="text-xs text-slate-700">{screening.selected_summary.counts.Major} Major · {screening.selected_summary.counts.Moderate} Moderate · {screening.selected_summary.counts.Minor} Minor · {screening.selected_summary.counts.None ?? 0} No reaction pairs</p>
             {screening.selected_summary.pairs.filter((pair) => pair.severity === 'Major' || pair.severity === 'Moderate').map((pair, index) => <div key={`${pair.drug_a}-${pair.drug_b}-${index}`} className="break-words rounded-lg bg-white p-2 text-xs">
-              <span className="font-semibold">{pair.drug_a} + {pair.drug_b}: </span><SeverityLabel severity={pair.severity} uncertain={pair.uncertain} /> <span>{pair.is_documented ? 'Documented' : 'Inferred'}</span>
+              <span className="font-semibold">{pair.drug_a} + {pair.drug_b}: </span><SeverityLabel severity={pair.severity} uncertain={pair.uncertain} /> <span>{basisLabel(pair.severity_basis, pair.is_documented)}</span>
               {pair.adverse_effects.length > 0 && <div className="mt-1 flex flex-wrap gap-1">{pair.adverse_effects.map((effect) => <span key={effect} className="rounded bg-slate-100 px-1.5 py-0.5">{effect}</span>)}</div>}
             </div>)}
             {screening.selected_summary.pairs.some((pair) => pair.adverse_effects.length > 0) && <p className="text-[11px] text-slate-600">{screening.adverse_effect_basis}</p>}
@@ -412,7 +413,7 @@ export function PatientPrescriptionWorkflow({ mode = 'prescription' }: { mode?: 
                     if (screening.unmatched.some((name) => name.toLowerCase() === drug.name.toLowerCase())) return <p className="text-xs text-amber-800">Not matched to screening reference data; interaction status unknown</p>
                     const pairs = screening.selected_summary.pairs.filter((pair) => pair.drug_a.toLowerCase() === drug.name.toLowerCase() || pair.drug_b.toLowerCase() === drug.name.toLowerCase())
                     const flags = pairs.map((pair) => pairAsFlag(pair, drug.name))
-                    const severity = flags.some((flag) => flag.severity === 'Major') ? 'Major' : flags.some((flag) => flag.severity === 'Moderate') ? 'Moderate' : flags.some((flag) => flag.severity === 'Minor') ? 'Minor' : null
+                    const severity = flags.some((flag) => flag.severity === 'Major') ? 'Major' : flags.some((flag) => flag.severity === 'Moderate') ? 'Moderate' : flags.some((flag) => flag.severity === 'Minor') ? 'Minor' : flags.some((flag) => flag.severity === 'None') ? 'None' : null
                     return <ScreeningFlag flags={flags} severity={severity} basis={screening.adverse_effect_basis} />
                   })())}
                 </div>

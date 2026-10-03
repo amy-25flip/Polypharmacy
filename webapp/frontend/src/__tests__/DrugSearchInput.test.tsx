@@ -135,4 +135,18 @@ describe('DrugSearchInput Component', () => {
     fireEvent.click(screen.getByText('Acetaminophen'))
     expect(onAddDrug).toHaveBeenCalledWith('Acetaminophen', 'Unspecified', false)
   })
+  it('shows the other name a medicine was found by, but adds the vocabulary name', async () => {
+    vi.spyOn(apiClient, 'searchDrugs').mockResolvedValue([
+      { name: 'Acetylsalicylic acid', matched_via_synonym: 'aspirin' },
+    ])
+    const onAddDrug = vi.fn()
+    render(<DrugSearchInput onAddDrug={onAddDrug} existingDrugs={[]} />)
+
+    fireEvent.change(screen.getByLabelText(/Add medicine/i), { target: { value: 'aspirin' } })
+    vi.advanceTimersByTime(200)
+    await waitFor(() => expect(screen.getByText('also known as: aspirin')).toBeInTheDocument())
+
+    fireEvent.click(screen.getByText('Acetylsalicylic acid'))
+    expect(onAddDrug).toHaveBeenCalledWith('Acetylsalicylic acid', 'Unspecified', false)
+  })
 })

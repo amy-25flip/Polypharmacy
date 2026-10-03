@@ -234,4 +234,60 @@ describe('InteractionResults Component', () => {
     fireEvent.click(resetBtn)
     expect(onReset).toHaveBeenCalledTimes(1)
   })
+  describe('four-state severity', () => {
+    const passport = {
+      evidence_tier: 'no_evidence' as const,
+      drug_a_support: { documented_pair_count: 10, tier: 'limited' as const },
+      drug_b_support: { documented_pair_count: 10, tier: 'limited' as const },
+      reliability: { band: 'Low' as const, empirical_accuracy: 0.4 },
+      abstain: true,
+      abstain_reason: 'Not enough evidence',
+      cross_model_agreement: null,
+    }
+    const resultWith = (pairs: CheckResponse['regimen']['pairs'], overall: CheckResponse['regimen']['overall_severity']): CheckResponse => ({
+      entered: ['Metformin', 'Amoxicillin'], matched: ['Metformin', 'Amoxicillin'], unmatched: [],
+      regimen: { overall_severity: overall, pairs }, subset_certificate: null, combination_signal: null,
+    })
+
+    it('shows "No reaction" as its own result, even when the model had abstained', () => {
+      render(<InteractionResults result={resultWith([{
+        drug_a: 'Metformin', drug_b: 'Amoxicillin', severity: 'None', severity_basis: 'no_record',
+        severity_notice: 'No interaction is recorded for this pair in the reference database. This means no recorded reaction, not proof that the combination is safe.',
+        is_documented: false, evidence_passport: passport,
+      }], 'None')} />)
+
+      expect(screen.getByText('No Reaction on Record')).toBeInTheDocument()
+      expect(screen.getAllByText('No reaction').length).toBeGreaterThanOrEqual(1)
+      expect(screen.getAllByText(/not proof that the combination is safe/i).length).toBeGreaterThanOrEqual(1)
+      expect(screen.queryByText(/Uncertain — Review Needed/i)).not.toBeInTheDocument()
+      expect(screen.queryByText(/insufficient evidence/i)).not.toBeInTheDocument()
+      expect(screen.queryByText(/Major Interaction Risk/i)).not.toBeInTheDocument()
+    })
+
+    it('headlines the worst real interaction over a no-reaction pair', () => {
+      render(<InteractionResults result={resultWith([
+        { drug_a: 'Warfarin', drug_b: 'Acetylsalicylic acid', severity: 'Major', severity_basis: 'documented', is_documented: true,
+          evidence_passport: { ...passport, evidence_tier: 'documented', abstain: false, abstain_reason: null,
+            cross_model_agreement: { available: true, chemistry_model_severity: 'Minor', js_divergence: 0.6, disagreement_level: 'High', model1_empirical_accuracy_at_this_disagreement: 0.13 } } },
+        { drug_a: 'Metformin', drug_b: 'Amoxicillin', severity: 'None', severity_basis: 'no_record', is_documented: false },
+      ], 'Major')} />)
+
+      expect(screen.getByText('Major Interaction Risk')).toBeInTheDocument()
+      expect(screen.queryByText('No Reaction on Record')).not.toBeInTheDocument()
+      // A documented severity is a database record, so the model's reliability does not apply.
+      expect(screen.queryByText(/Model reliability at this confidence/i)).not.toBeInTheDocument()
+      expect(screen.queryByText(/Independent second opinion/i)).not.toBeInTheDocument()
+    })
+
+    it('explains when a medicine is checked through a close relative', () => {
+      render(<InteractionResults result={resultWith([{
+        drug_a: 'Gliclazide', drug_b: 'Fluconazole', severity: 'Major', severity_basis: 'estimated', is_documented: false,
+        severity_notice: 'Gliclazide has no interaction records of its own, so this result uses Glimepiride. Treat it as an estimate.',
+        estimated_from: [{ drug: 'Gliclazide', proxy: 'Glimepiride', reason: 'Both are sulfonylureas.' }],
+      }], 'Major')} />)
+
+      expect(screen.getAllByText(/Gliclazide has no interaction records of its own/i).length).toBeGreaterThanOrEqual(1)
+      expect(screen.queryByText(/No documented record for this exact pair/i)).not.toBeInTheDocument()
+    })
+  })
 })

@@ -267,7 +267,7 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
                 const isSelected = index === selectedIndex
                 return (
                   <button
-                    key={`${drug.name}-${drug.matched_via_brand || 'direct'}`}
+                    key={`${drug.name}-${drug.matched_via_brand || drug.matched_via_synonym || 'direct'}`}
                     id={`${instanceId}-drug-option-${index}`}
                     type="button"
                     role="option"
@@ -282,6 +282,11 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
                   >
                     <span className="min-w-0">
                       <span className="block">{drug.name}</span>
+                      {drug.matched_via_synonym && (
+                        <span className={`block text-xs font-normal ${isSelected ? 'text-blue-100' : 'text-slate-500'}`}>
+                          also known as: {drug.matched_via_synonym}
+                        </span>
+                      )}
                       {drug.matched_via_brand && (
                         <span className={`block text-xs font-normal ${isSelected ? 'text-blue-100' : 'text-slate-500'}`}>
                           brand: {drug.matched_via_brand}

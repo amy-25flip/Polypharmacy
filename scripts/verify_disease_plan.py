@@ -29,6 +29,7 @@ def main() -> None:
     base = parser.parse_args().base_url.rstrip("/")
     vocab = json.loads((ROOT / "processed" / "drug_vocabulary.json").read_text(encoding="utf-8"))
     vocab_set = set(vocab)
+    lowered = {name.lower(): name for name in vocab}
     documented = set(json.loads((ROOT / "processed" / "documented_pairs.json").read_text(encoding="utf-8")))
 
     status, data = request(base, "/api/diseases")
@@ -75,7 +76,59 @@ def main() -> None:
         reference = check["regimen"]["pairs"][0]
         assert flag["severity"] == reference["severity"], (a, b, flag, reference)
         assert flag["is_documented"] == reference["is_documented"]
+        assert flag["severity_basis"] == reference["severity_basis"], (a, b, flag, reference)
     print("PASS parity: 20/20 pairs (10 documented, 10 undocumented) match /api/check severity and provenance")
+
+    # A documented pair must show its documented severity, never the model's guess. The model alone
+    # shows documented Major pairs as Minor, so check the pairs where it is most wrong.
+    severity_by_pair = json.loads((ROOT / "processed" / "documented_severity.json").read_text(encoding="utf-8"))
+    majors = [key.split("|") for key in severity_by_pair["Major"]
+              if all(name in lowered for name in key.split("|"))][:60]
+    assert len(majors) >= 40
+    for a, b in majors:
+        status, check = request(base, "/api/check", {"drugs": [lowered[a], lowered[b]]})
+        pair = check["regimen"]["pairs"][0]
+        assert status == 200 and pair["severity"] == "Major" and pair["severity_basis"] == "documented", (a, b, pair)
+        status, screen = request(base, "/api/screen-candidates",
+                                 {"selected": [lowered[a]], "candidates": [lowered[b]]})
+        assert screen["results"][0]["flags"][0]["severity"] == "Major", (a, b)
+    status, check = request(base, "/api/check", {"drugs": ["Warfarin", "Acetylsalicylic acid"]})
+    assert check["regimen"]["pairs"][0]["severity"] == "Major"
+    print(f"PASS documented severity: {len(majors)} documented Major pairs are Major in both endpoints; warfarin + aspirin is Major")
+
+    # Fourth state: an undocumented pair with no signal is "None" (no reaction on record).
+    none_pairs = []
+    for a, b in itertools.combinations(common, 2):
+        status, check = request(base, "/api/check", {"drugs": [a, b]})
+        pair = check["regimen"]["pairs"][0]
+        if pair["severity"] == "None":
+            assert pair["severity_basis"] == "no_record" and not pair["is_documented"]
+            assert "not proof" in pair["severity_notice"]
+            none_pairs.append((a, b))
+    assert none_pairs, "expected at least one no-reaction pair among common drugs"
+    a, b = none_pairs[0]
+    status, screen = request(base, "/api/screen-candidates", {"selected": [a], "candidates": [b]})
+    assert screen["results"][0]["worst_severity"] == "None" and screen["selected_summary"]["counts"]["None"] == 0
+    status, plan = request(base, "/api/screen-candidates", {"selected": [a, b], "candidates": []})
+    assert plan["selected_summary"]["overall_severity"] == "None" and plan["selected_summary"]["counts"]["None"] == 1
+    print(f"PASS no-reaction state: {len(none_pairs)} common pairs, e.g. {a} + {b}, consistent in both endpoints")
+
+    # Drugs with no records of their own are checked through a relative, and say so.
+    for name, proxy in [("Gliclazide", "Glimepiride"), ("Carbimazole", "Methimazole")]:
+        assert name in vocab_set
+        status, check = request(base, "/api/check", {"drugs": [name, "Warfarin"]})
+        pair = check["regimen"]["pairs"][0]
+        assert pair["estimated_from"][0]["proxy"] == proxy and pair["is_documented"] is False
+        assert pair["severity_basis"] in ("estimated", "no_record", "inferred")
+        status, ref = request(base, "/api/check", {"drugs": [proxy, "Warfarin"]})
+        assert pair["severity"] == ref["regimen"]["pairs"][0]["severity"], (name, pair, ref)
+    status, dup = request(base, "/api/check", {"drugs": ["Gliclazide", "Glimepiride"]})
+    assert dup["regimen"]["pairs"][0]["severity_basis"] == "duplicate_class"
+    status, hits = request(base, "/api/drugs/search?q=aspirin")
+    assert hits[0]["name"] == "Acetylsalicylic acid" and hits[0]["matched_via_synonym"] == "aspirin"
+    status, hits = request(base, "/api/drugs/search?q=paracetamol")
+    assert hits[0]["name"] == "Acetaminophen"
+    print("PASS aliases: gliclazide/carbimazole checked as estimates; duplicate class flagged; aspirin and paracetamol are found")
 
     status, result = request(base, "/api/screen-candidates",
                              {"selected": ["Warfarin", "warfarin"],
@@ -94,7 +147,7 @@ def main() -> None:
     print("PASS >100-name validation: selected and candidates both return 422")
 
     status, health = request(base, "/api/health")
-    assert status == 200 and health == {"status": "ok", "known_drugs": 1902}
+    assert status == 200 and health == {"status": "ok", "known_drugs": len(vocab)}
     status, old = request(base, "/api/check", {"drugs": ["Warfarin", "Amiodarone"]})
     assert status == 200 and old["regimen"]["overall_severity"] == "Major"
     print("PASS old endpoints: health unchanged; Warfarin + Amiodarone is Major")

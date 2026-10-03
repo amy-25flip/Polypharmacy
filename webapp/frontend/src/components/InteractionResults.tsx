@@ -9,6 +9,7 @@ import {
   FileWarning,
   Printer,
 } from 'lucide-react'
+import { severityName } from '../severity'
 import type { CheckResponse, InteractionPair } from '../api/client'
 import { PairExplanationView } from './PairExplanationView'
 import { AbstainCard, EvidencePassportView } from './EvidencePassportView'
@@ -25,6 +26,8 @@ const severityBadgeClass = (severity: InteractionPair['severity']) =>
     ? 'bg-rose-100 text-rose-800 border-rose-300'
     : severity === 'Moderate'
     ? 'bg-amber-100 text-amber-800 border-amber-300'
+    : severity === 'None'
+    ? 'bg-sky-100 text-sky-800 border-sky-300'
     : 'bg-emerald-100 text-emerald-800 border-emerald-300'
 
 const severityPillClass = (severity: InteractionPair['severity']) =>
@@ -32,6 +35,8 @@ const severityPillClass = (severity: InteractionPair['severity']) =>
     ? 'bg-rose-600 text-white'
     : severity === 'Moderate'
     ? 'bg-amber-600 text-white'
+    : severity === 'None'
+    ? 'bg-sky-700 text-white'
     : 'bg-emerald-700 text-white'
 
 export const InteractionResults: React.FC<InteractionResultsProps> = ({
@@ -51,7 +56,9 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
   // If the worst-looking pair doesn't clear the reliability bar, the banner must not
   // proclaim a confident severity headline - that would contradict the pair-by-pair
   // review directly below it.
-  const isUncertain = !!highestRiskPair?.evidence_passport?.abstain
+  // A "no reaction on record" pair is a result in its own right, whatever the model's own confidence.
+  const isUncertain = highestRiskPair?.severity !== 'None' && !!highestRiskPair?.evidence_passport?.abstain
+  const isNone = !isUncertain && overallSeverity === 'None'
   const isMajor = !isUncertain && overallSeverity === 'Major'
   const isModerate = !isUncertain && overallSeverity === 'Moderate'
   const isMinor = !isUncertain && overallSeverity === 'Minor'
@@ -95,6 +102,8 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
             ? 'bg-rose-50 border-rose-500 text-rose-950'
             : isModerate
             ? 'bg-amber-50 border-amber-500 text-amber-950'
+            : isNone
+            ? 'bg-sky-50 border-sky-500 text-sky-950'
             : 'bg-emerald-50 border-emerald-500 text-emerald-950'
         }`}
       >
@@ -109,6 +118,8 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                   ? 'bg-rose-600 text-white'
                   : isModerate
                   ? 'bg-amber-600 text-white'
+                  : isNone
+                  ? 'bg-sky-700 text-white'
                   : 'bg-emerald-600 text-white'
               }`}
             >
@@ -117,6 +128,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
               {isMajor && <AlertOctagon className="h-7 w-7" />}
               {isModerate && <AlertTriangle className="h-7 w-7" />}
               {isMinor && <CheckCircle2 className="h-7 w-7" />}
+              {isNone && <ShieldCheck className="h-7 w-7" />}
             </div>
 
             <div>
@@ -129,6 +141,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                 {isMajor && 'Major Interaction Risk'}
                 {isModerate && 'Moderate Interaction Risk'}
                 {isMinor && 'Minor Interaction Risk'}
+                {isNone && 'No Reaction on Record'}
               </h2>
               {pairs.length > 0 && (
                 <p className="mt-2 text-sm font-semibold opacity-85">
@@ -152,7 +165,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
 
         {/* Highest-risk interaction callout */}
         <div className="mt-5 pt-4 border-t border-black/10">
-          {highestRiskPair?.evidence_passport?.abstain ? (
+          {isUncertain ? (
             <div>
               <p className="text-base sm:text-lg font-semibold">
                 Highest-scoring pair:{' '}
@@ -167,6 +180,10 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                 This pair's model output isn't reliable enough to headline as a severity result - see the pair-by-pair review below for why.
               </p>
             </div>
+          ) : isNone ? (
+            <p className="text-base font-semibold">
+              No interaction is recorded for any pair in this regimen. This means no recorded reaction, not proof that the combination is safe.
+            </p>
           ) : highestRiskPair ? (
             <div>
               <p className="text-base sm:text-lg font-semibold">
@@ -179,13 +196,22 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                     highestRiskPair.severity
                   )}`}
                 >
-                  {highestRiskPair.severity}
+                  {severityName(highestRiskPair.severity)}
                 </span>
               </p>
               {hasMultiDrugRegimen && (
                 <p className="mt-2 text-sm font-medium opacity-85">
                   The remaining medicine{matched.length > 3 ? 's are' : ' is'} reviewed in the pair-by-pair section below and, when supported, in the multi-drug pattern review.
                 </p>
+              )}
+
+              {highestRiskPair.severity_notice && highestRiskPair.severity_basis !== 'no_record' && (
+                <div className="mt-3 p-3 rounded-lg bg-sky-50 border border-sky-300 text-sky-950 shadow-2xs">
+                  <div className="flex items-start gap-2.5">
+                    <Info className="h-4 w-4 shrink-0 mt-0.5 text-sky-700" />
+                    <p className="text-sm font-medium leading-relaxed">{highestRiskPair.severity_notice}</p>
+                  </div>
+                </div>
               )}
 
               {highestRiskPair.is_documented === false && highestRiskPair.undocumented_pair_notice && (
@@ -298,7 +324,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
               const hasExplanation = !!pair.explanation
               const passport = pair.evidence_passport
 
-              if (passport?.abstain) {
+              if (passport?.abstain && pair.severity !== 'None') {
                 return (
                   <article
                     key={`${pair.drug_a}-${pair.drug_b}-${index}`}
@@ -333,11 +359,18 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                         pair.severity
                       )}`}
                     >
-                      {pair.severity}
+                      {severityName(pair.severity)}
                     </span>
                   </div>
 
-                  {pair.is_documented === false && (
+                  {pair.severity_notice && (
+                    <div className="mt-3 flex items-start gap-2 rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 text-xs font-semibold text-sky-900">
+                      <Info className="h-4 w-4 shrink-0 mt-0.5 text-sky-700" />
+                      <span>{pair.severity_notice}</span>
+                    </div>
+                  )}
+
+                  {pair.is_documented === false && (!pair.severity_basis || pair.severity_basis === 'inferred') && (
                     <div className="mt-3 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-900">
                       <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5 text-amber-700" />
                       <span>
@@ -346,7 +379,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                     </div>
                   )}
 
-                  {hasExplanation && pair.explanation ? (
+                  {pair.severity === 'None' || pair.severity_basis === 'duplicate_class' ? null : hasExplanation && pair.explanation ? (
                     <PairExplanationView explanation={pair.explanation} compact />
                   ) : (
                     <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600">
@@ -354,12 +387,13 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                     </div>
                   )}
 
-                  {passport && (
+                  {passport && pair.severity !== 'None' && pair.severity_basis !== 'duplicate_class' && (
                     <EvidencePassportView
                       passport={passport}
                       drugA={pair.drug_a}
                       drugB={pair.drug_b}
                       conformalSets={pair.conformal_sets}
+                      modelBased={!pair.severity_basis || pair.severity_basis === 'inferred'}
                     />
                   )}
                 </article>

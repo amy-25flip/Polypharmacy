@@ -46,7 +46,8 @@
         ],
         "NLEM 2022: section 18.3, medicines used in diabetes mellitus": [
           "Metformin",
-          "Glimepiride"
+          "Glimepiride",
+          "Gliclazide"
         ],
         "WHO EML 2025: section 18.5, medicines for diabetes": [
           "Empagliflozin",
@@ -211,7 +212,8 @@
       ],
       "medicines": {
         "NICE NG145: thyroid disease": [
-          "Propylthiouracil"
+          "Propylthiouracil",
+          "Carbimazole"
         ],
         "NICE NG145 evidence review J: methimazole and propylthiouracil": [
           "Methimazole"
@@ -418,8 +420,6 @@
     }
   ],
   "skipped_for_review": [
-    "Gliclazide: not present in the 1,902-name application vocabulary.",
-    "Carbimazole: not present in the vocabulary; methimazole is retained only with its own evidence.",
     "Rifampin: US name absent from vocabulary; exact vocabulary name Rifampicin is used.",
     "Budesonide/formoterol fixed combination: no exact combination entry in vocabulary; the fixed combination is not represented as equivalent to either component.",
     "Sacubitril/valsartan fixed combination: no exact combination entry in vocabulary; not split into components for the heart failure formulary.",

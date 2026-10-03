@@ -5,6 +5,8 @@ processed/*
 !processed/indian_brand_names_summary.md
 !processed/disease_formulary.json
 !processed/disease_formulary_summary.md
+!processed/documented_severity.json
+!processed/drug_aliases.json
 
 # Python
 __pycache__/

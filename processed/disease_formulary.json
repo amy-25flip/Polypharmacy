@@ -3243,6 +3243,12 @@
           ]
         },
         {
+          "name": "Candesartan",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
           "name": "Captopril",
           "sources": [
             "hetionet:CtD"
@@ -3610,6 +3616,12 @@
         "overactive thyroid"
       ],
       "medicines": [
+        {
+          "name": "Carbimazole",
+          "sources": [
+            "NICE NG145: thyroid disease"
+          ]
+        },
         {
           "name": "Methimazole",
           "sources": [
@@ -6849,6 +6861,13 @@
           "name": "Empagliflozin",
           "sources": [
             "WHO EML 2025: section 18.5, medicines for diabetes"
+          ]
+        },
+        {
+          "name": "Gliclazide",
+          "sources": [
+            "NLEM 2022: section 18.3, medicines used in diabetes mellitus",
+            "hetionet:CtD"
           ]
         },
         {

@@ -1,4 +1,15 @@
-export type Severity = 'Minor' | 'Moderate' | 'Major' | null
+// 'None' means no reaction is on record for the pair (not proof that it is safe).
+export type Severity = 'None' | 'Minor' | 'Moderate' | 'Major' | null
+
+// How a severity was reached: a documented record, a borrowed record for a drug with none of its
+// own ('estimated'), the model's guess ('inferred'), no record at all, or a same-class duplicate.
+export type SeverityBasis = 'documented' | 'estimated' | 'inferred' | 'no_record' | 'duplicate_class'
+
+export interface EstimateNote {
+  drug: string
+  proxy: string
+  reason: string
+}
 
 export type PrimaryReasonType = 'class' | 'side_effect' | 'gene' | 'structural_resemblance' | string
 
@@ -71,7 +82,10 @@ export type ConformalSets = Record<string, ConformalSet> // key = target coverag
 export interface InteractionPair {
   drug_a: string
   drug_b: string
-  severity: 'Minor' | 'Moderate' | 'Major'
+  severity: 'None' | 'Minor' | 'Moderate' | 'Major'
+  severity_basis?: SeverityBasis
+  severity_notice?: string
+  estimated_from?: EstimateNote[]
   confidence?: number // Internal from API, never shown in UI
   explanation?: PairExplanation
   is_documented?: boolean
@@ -179,6 +193,7 @@ export async function checkHealth(): Promise<HealthResponse> {
 export interface DrugSearchResult {
   name: string
   matched_via_brand?: string | null
+  matched_via_synonym?: string | null
 }
 
 export interface Disease {
@@ -196,6 +211,8 @@ export interface DiseaseMedicine {
 export interface CandidateFlag {
   with: string
   severity: string
+  severity_basis?: SeverityBasis
+  estimated_from?: EstimateNote[]
   is_documented: boolean
   uncertain: boolean
   adverse_effects: string[]
@@ -212,6 +229,9 @@ export interface ScreenedPair {
   drug_a: string
   drug_b: string
   severity: string
+  severity_basis?: SeverityBasis
+  severity_notice?: string
+  estimated_from?: EstimateNote[]
   is_documented: boolean
   uncertain: boolean
   adverse_effects: string[]
@@ -222,7 +242,7 @@ export interface CandidateScreenResponse {
   selected_summary: {
     overall_severity: string | null
     pairs: ScreenedPair[]
-    counts: { Major: number; Moderate: number; Minor: number }
+    counts: { Major: number; Moderate: number; Minor: number; None?: number }
   }
   unmatched: string[]
   adverse_effect_basis: string

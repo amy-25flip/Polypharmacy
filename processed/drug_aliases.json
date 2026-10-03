@@ -1,0 +1,123 @@
+{
+  "_note": "synonyms: another name for a drug already in the vocabulary. estimated: drugs with no interaction records of their own; checks borrow the records of a close relative and are always labelled as estimates. Curated, clinician review recommended.",
+  "synonyms": {
+    "aspirin": [
+      "Acetylsalicylic acid"
+    ],
+    "paracetamol": [
+      "Acetaminophen"
+    ],
+    "frusemide": [
+      "Furosemide"
+    ],
+    "adrenaline": [
+      "Epinephrine"
+    ],
+    "noradrenaline": [
+      "Norepinephrine"
+    ],
+    "lignocaine": [
+      "Lidocaine"
+    ],
+    "glibenclamide": [
+      "Glyburide"
+    ],
+    "valproate": [
+      "Valproic acid"
+    ],
+    "sodium valproate": [
+      "Valproic acid"
+    ],
+    "alendronate": [
+      "Alendronic acid"
+    ],
+    "mesalamine": [
+      "Mesalazine"
+    ],
+    "rifampin": [
+      "Rifampicin"
+    ],
+    "thiamazole": [
+      "Methimazole"
+    ],
+    "torsemide": [
+      "Torasemide"
+    ],
+    "vitamin k": [
+      "Phylloquinone"
+    ],
+    "phytonadione": [
+      "Phylloquinone"
+    ],
+    "valacyclovir": [
+      "Valaciclovir"
+    ],
+    "clomiphene": [
+      "Clomifene"
+    ],
+    "methylcobalamin": [
+      "Mecobalamin"
+    ],
+    "glycopyrrolate": [
+      "Glycopyrronium"
+    ],
+    "cotrimoxazole": [
+      "Sulfamethoxazole",
+      "Trimethoprim"
+    ],
+    "co-trimoxazole": [
+      "Sulfamethoxazole",
+      "Trimethoprim"
+    ]
+  },
+  "estimated": {
+    "Gliclazide": {
+      "proxy": "Glimepiride",
+      "reason": "Both are sulfonylureas; their interaction profile is largely shared across the class."
+    },
+    "Carbimazole": {
+      "proxy": "Methimazole",
+      "reason": "Carbimazole is converted to methimazole in the body, which is the active drug."
+    },
+    "Vildagliptin": {
+      "proxy": "Sitagliptin",
+      "reason": "Both are DPP-4 inhibitors with a largely shared interaction profile."
+    },
+    "Teneligliptin": {
+      "proxy": "Sitagliptin",
+      "reason": "Both are DPP-4 inhibitors with a largely shared interaction profile."
+    },
+    "Voglibose": {
+      "proxy": "Acarbose",
+      "reason": "Both are alpha-glucosidase inhibitors with a largely shared interaction profile."
+    },
+    "Candesartan": {
+      "proxy": "Valsartan",
+      "reason": "Both are angiotensin receptor blockers; class interactions (potassium, lithium, kidney function) are shared."
+    },
+    "Cilnidipine": {
+      "proxy": "Amlodipine",
+      "reason": "Both are dihydropyridine calcium-channel blockers with a largely shared interaction profile."
+    },
+    "Acenocoumarol": {
+      "proxy": "Warfarin",
+      "reason": "Both are coumarin anticoagulants; bleeding and INR interactions are largely shared."
+    },
+    "Etoricoxib": {
+      "proxy": "Celecoxib",
+      "reason": "Both are COX-2 selective NSAIDs with a largely shared interaction profile."
+    },
+    "Aceclofenac": {
+      "proxy": "Diclofenac",
+      "reason": "Aceclofenac is partly converted to diclofenac in the body; NSAID interactions are shared."
+    },
+    "Ornidazole": {
+      "proxy": "Tinidazole",
+      "reason": "Both are nitroimidazoles; alcohol and warfarin interactions are largely shared."
+    },
+    "Teicoplanin": {
+      "proxy": "Vancomycin",
+      "reason": "Both are glycopeptide antibiotics; kidney and hearing toxicity interactions are largely shared."
+    }
+  }
+}

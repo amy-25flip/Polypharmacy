@@ -42,10 +42,15 @@ from brand_names import BRAND_NAMES, lookup_brand_matches
 from conformal import ConformalEngine
 from disagreement_sentinel import DisagreementSentinel
 from disease_plan import DiseasePlanEngine
+from drug_aliases import DrugAliases
 from evidence_passport import EvidencePassportEngine
 from explainability import ExplainabilityEngine
 from hoddi_model import HoddiInferenceModel, build_fingerprint_lookup
 from prescription_scan import scan_prescription
+from severity_policy import (
+    BASIS_DUPLICATE, BASIS_INFERRED, BASIS_NO_RECORD, DUPLICATE_NOTICE, NO_RECORD_NOTICE,
+    RANK as SEVERITY_RANK, load_documented_severity, resolve_severity, strong_mechanism,
+)
 from subset_certificate import build_certificate
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -67,8 +72,6 @@ def resolve_dir(env_var: str, default_name: str) -> Path:
 
 PROCESSED_DIR = resolve_dir("POLYGUARD_PROCESSED_DIR", "processed")
 DATASETS_DIR = resolve_dir("POLYGUARD_DATASETS_DIR", "Datasets")
-
-SEVERITY_RANK = {"Minor": 0, "Moderate": 1, "Major": 2}
 
 app = FastAPI(title="PolyGuard API")
 
@@ -95,6 +98,7 @@ model1 = joblib.load(PROCESSED_DIR / "model1_severity_pipeline.joblib")
 with open(PROCESSED_DIR / "drug_vocabulary.json", encoding="utf-8") as f:
     DRUG_VOCAB: list[str] = json.load(f)
 DRUG_VOCAB_SET = set(DRUG_VOCAB)
+DRUG_ALIASES = DrugAliases(PROCESSED_DIR / "drug_aliases.json", DRUG_VOCAB)
 
 with open(PROCESSED_DIR / "drug_name_to_drugbank_id.json", encoding="utf-8") as f:
     NAME_TO_DRUGBANK_ID: dict[str, str] = json.load(f)
@@ -118,6 +122,8 @@ def normalize(value: str) -> str:
 print("Loading documented-pairs index (which pairs actually have a real DDInter label)...")
 with open(PROCESSED_DIR / "documented_pairs.json", encoding="utf-8") as f:
     DOCUMENTED_PAIRS: set[str] = set(json.load(f))
+# The documented severity of every known pair, so a known pair is never shown as the model's guess.
+DOCUMENTED_SEVERITY = load_documented_severity(PROCESSED_DIR / "documented_severity.json")
 
 print("Loading Evidence Passport engine (calibration + selective prediction)...")
 evidence_passport_engine = EvidencePassportEngine(PROCESSED_DIR / "evidence_passport")
@@ -211,17 +217,36 @@ print("Loading disease-plan reference...")
 disease_plan_engine = DiseasePlanEngine(
     PROCESSED_DIR / "disease_formulary.json", DRUG_VOCAB, NAME_TO_DRUGBANK_ID,
     DOCUMENTED_PAIRS, model1, explain_engine, evidence_passport_engine,
-    disagreement_sentinel,
+    disagreement_sentinel, DRUG_ALIASES, DOCUMENTED_SEVERITY,
 )
 if disease_plan_engine.unavailable_reason:
     print(disease_plan_engine.unavailable_reason)
 
 
+def estimate_notice(notes: list[dict]) -> str:
+    return " ".join(
+        f"{n['drug']} has no interaction records of its own, so this result uses {n['proxy']}, "
+        f"a close relative ({n['reason']}) Treat it as an estimate."
+        for n in notes
+    )
+
+
 def predict_pair(drug_a: str, drug_b: str) -> dict:
+    # A drug with no records of its own is checked through a close relative, and says so.
+    notes = DRUG_ALIASES.notes(drug_a, drug_b)
+    estimated = bool(notes)
+    model_a, model_b = DRUG_ALIASES.effective(drug_a), DRUG_ALIASES.effective(drug_b)
+    if normalize(model_a) == normalize(model_b):
+        return {
+            "drug_a": drug_a, "drug_b": drug_b, "severity": "Moderate",
+            "severity_basis": BASIS_DUPLICATE, "is_documented": False, "estimated_from": notes,
+            "severity_notice": DUPLICATE_NOTICE, "confidence": 1.0,
+        }
+
     row = pd.DataFrame(
         [
             {
-                "pair_text": " [DRUG_PAIR] ".join(sorted([drug_a, drug_b])) + " [DISEASE_SCOPE] ",
+                "pair_text": " [DRUG_PAIR] ".join(sorted([model_a, model_b])) + " [DISEASE_SCOPE] ",
                 "disease_diabetes": 0,
                 "disease_ckd": 0,
                 "disease_heart_failure": 0,
@@ -230,36 +255,36 @@ def predict_pair(drug_a: str, drug_b: str) -> dict:
         ]
     )
     feature_cols = ["pair_text", "disease_diabetes", "disease_ckd", "disease_heart_failure", "disease_hypertension"]
-    severity = model1.predict(row[feature_cols])[0]
+    model_severity = model1.predict(row[feature_cols])[0]
     proba = model1.predict_proba(row[feature_cols])[0]
     model1_classes = list(model1.classes_)
-    is_documented = "|".join(sorted((normalize(drug_a), normalize(drug_b)))) in DOCUMENTED_PAIRS
+    pair_key = "|".join(sorted((normalize(model_a), normalize(model_b))))
+    documented_label = DOCUMENTED_SEVERITY.get(pair_key)
+    is_documented = documented_label is not None and not estimated
     confidence = float(np.max(proba))
     top2 = np.sort(proba)[-2:]
     margin = float(top2[1] - top2[0])
     result = {
         "drug_a": drug_a,
         "drug_b": drug_b,
-        "severity": severity,
+        "model_severity": model_severity,
         "confidence": round(confidence, 3),
         "is_documented": is_documented,
-        "conformal_sets": conformal_engine.severity_sets(list(proba), model1_classes),
+        "estimated_from": notes,
     }
 
-    id_a = NAME_TO_DRUGBANK_ID.get(normalize(drug_a))
-    id_b = NAME_TO_DRUGBANK_ID.get(normalize(drug_b))
+    id_a = NAME_TO_DRUGBANK_ID.get(normalize(model_a))
+    id_b = NAME_TO_DRUGBANK_ID.get(normalize(model_b))
 
     # Explainability is computed regardless of severity - the Evidence Passport
     # needs to know whether mechanism evidence exists even for a Minor prediction,
     # even though the full explanation panel is only shown to the user for
     # Moderate/Major (a display choice, not a data limitation).
     explanation = explain_engine.explain_pair(id_a, id_b)
-    if severity in ("Moderate", "Major"):
-        result["explanation"] = explanation
 
     passport = evidence_passport_engine.build(
-        drug_a_norm=normalize(drug_a),
-        drug_b_norm=normalize(drug_b),
+        drug_a_norm=normalize(model_a),
+        drug_b_norm=normalize(model_b),
         confidence=confidence,
         margin=margin,
         is_documented=is_documented,
@@ -275,7 +300,7 @@ def predict_pair(drug_a: str, drug_b: str) -> dict:
     # high-disagreement, undocumented pair is forced to abstain even if Model 1's
     # own confidence looked fine - the confidence-only view was already shown to
     # be misleading in exactly this situation.
-    agreement = disagreement_sentinel.score(normalize(drug_a), normalize(drug_b), proba, model1_classes)
+    agreement = disagreement_sentinel.score(normalize(model_a), normalize(model_b), proba, model1_classes)
     passport["cross_model_agreement"] = agreement
     if agreement and not is_documented and not passport["abstain"] and agreement["disagreement_level"] == "High":
         passport["abstain"] = True
@@ -286,21 +311,33 @@ def predict_pair(drug_a: str, drug_b: str) -> dict:
             f"{agreement['model1_empirical_accuracy_at_this_disagreement']:.0%} of the time."
         )
 
+    uncertain = passport["abstain"] or passport["reliability"]["band"] == "Low"
+    severity, basis = resolve_severity(
+        documented=documented_label, model_severity=model_severity, uncertain=uncertain,
+        has_mechanism=strong_mechanism(explanation), estimated=estimated,
+    )
+    result["severity"] = severity
+    result["severity_basis"] = basis
     result["evidence_passport"] = passport
-
-    if not is_documented:
-        # No labeled example for this exact pair exists in the source data (DDInter
-        # either never covers it, or only has it as an "Unknown"-severity row that
-        # was correctly excluded from training). The severity above is the model
-        # generalizing from other drugs' lexical patterns, not a documented fact -
-        # and its confidence score does NOT reliably reflect that, so this has to
-        # be surfaced explicitly rather than left implicit.
+    if severity in ("Moderate", "Major"):
+        result["explanation"] = explanation
+    if basis == BASIS_INFERRED:
+        # Only the model's own estimate has calibrated uncertainty. A documented severity
+        # or a "no reaction on record" result is not a model output, so no sets are given.
+        result["conformal_sets"] = conformal_engine.severity_sets(list(proba), model1_classes)
+        # No labeled example for this exact pair exists in the source data, so the severity
+        # is the model generalizing from other drugs' lexical patterns, not a documented
+        # fact - and its confidence score does NOT reliably reflect that.
         result["undocumented_pair_notice"] = (
             "No documented interaction record exists for this exact drug pair in the "
             "reference database. This result is inferred from patterns in other drugs' "
             "names, not from a confirmed interaction record - treat it with extra caution "
             "and verify independently, regardless of the severity shown above."
         )
+    elif basis == BASIS_NO_RECORD:
+        result["severity_notice"] = NO_RECORD_NOTICE
+    if notes:
+        result["severity_notice"] = (result.get("severity_notice", "") + " " + estimate_notice(notes)).strip()
 
     return result
 
@@ -388,21 +425,27 @@ def search_drugs(q: str = ""):
     ]
 
     direct_results = sorted(prefix_hits) + sorted(substring_hits)
-    results = [{"name": name, "matched_via_brand": None} for name in direct_results]
+    results = [{"name": name, "matched_via_brand": None, "matched_via_synonym": None} for name in direct_results]
     seen = set(direct_results)
+    # Another name for a drug already in the vocabulary (aspirin -> Acetylsalicylic acid).
+    for synonym, targets in DRUG_ALIASES.lookup_synonyms(q):
+        for name in targets:
+            if name not in seen:
+                results.append({"name": name, "matched_via_brand": None, "matched_via_synonym": synonym})
+                seen.add(name)
     # Prefer a curated brand interpretation to coincidental typo matches. Direct
     # prefix/substring vocabulary hits still keep first place.
     for brand, generic_names in lookup_brand_matches(q):
         for name in generic_names:
             if name not in seen:
-                results.append({"name": name, "matched_via_brand": brand})
+                results.append({"name": name, "matched_via_brand": brand, "matched_via_synonym": None})
                 seen.add(name)
 
     if len(results) < 8:
         fuzzy_matches = process.extract(q, DRUG_VOCAB, scorer=fuzz.WRatio, limit=8)
         for name, score, _ in fuzzy_matches:
             if score >= 60 and name not in seen:
-                results.append({"name": name, "matched_via_brand": None})
+                results.append({"name": name, "matched_via_brand": None, "matched_via_synonym": None})
                 seen.add(name)
 
     return results[:8]

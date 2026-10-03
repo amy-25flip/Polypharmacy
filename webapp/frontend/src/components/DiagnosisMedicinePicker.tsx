@@ -94,7 +94,7 @@ export function DiagnosisMedicinePicker({ id, diseaseId, diseaseName, selected, 
           const flag = screening?.results.find((entry) => entry.candidate.toLowerCase() === item.name.toLowerCase())
           const selectedPairs = screening?.selected_summary.pairs.filter((pair) => pair.drug_a.toLowerCase() === item.name.toLowerCase() || pair.drug_b.toLowerCase() === item.name.toLowerCase()) || []
           const selectedFlags = selectedPairs.map((pair) => pairAsFlag(pair, item.name))
-          const selectedSeverity = selectedFlags.some((entry) => entry.severity === 'Major') ? 'Major' : selectedFlags.some((entry) => entry.severity === 'Moderate') ? 'Moderate' : selectedFlags.some((entry) => entry.severity === 'Minor') ? 'Minor' : null
+          const selectedSeverity = selectedFlags.some((entry) => entry.severity === 'Major') ? 'Major' : selectedFlags.some((entry) => entry.severity === 'Moderate') ? 'Moderate' : selectedFlags.some((entry) => entry.severity === 'Minor') ? 'Minor' : selectedFlags.some((entry) => entry.severity === 'None') ? 'None' : null
           const inPlan = combined.some((med) => med.name.toLowerCase() === item.name.toLowerCase())
           const unmatched = screening?.unmatched.some((name) => name.toLowerCase() === item.name.toLowerCase())
           return <div key={item.name.toLowerCase()} className="min-w-0 px-3 py-2">
