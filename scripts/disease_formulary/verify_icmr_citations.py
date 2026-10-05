@@ -24,7 +24,7 @@ SYNONYMS = {
     "fusidic acid": ["fusidic"], "cephalexin": ["cephalexin", "cefalexin"], "azelaic acid": ["azelaic"],
     "acetylsalicylic acid": ["aspirin", "acetylsalicylic"], "sulfamethoxazole": ["sulfamethoxazole", "co-trimoxazole", "cotrimoxazole"],
     "polyethylene glycol": ["polyethylene glycol", "peg"], "calcipotriol": ["calcipotriol", "calcipotriene"],
-    "insulin human": ["insulin", "nph", "regular"], "insulin glargine": ["glargine"], "insulin detemir": ["detemir"], "zinc sulfate": ["zinc"], "selenium sulfide": ["selenium sulphide", "selenium sulfide"],
+    "insulin human": ["insulin", "nph", "regular"], "insulin glargine": ["glargine"], "insulin detemir": ["detemir"], "zinc sulfate": ["zinc"], "oral rehydration salts": ["rehydration"], "selenium sulfide": ["selenium sulphide", "selenium sulfide"],
 }
 
 

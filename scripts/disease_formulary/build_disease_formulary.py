@@ -19,6 +19,8 @@ INPUT = Path(__file__).with_name("curated_formulary.json")
 # Conditions added for wider specialty coverage (dermatology and everyday primary-care conditions).
 NEW_CONDITIONS = Path(__file__).with_name("new_conditions.json")
 SPECIALTIES = Path(__file__).with_name("specialties.json")
+# Clinical grouping, display labels and notes applied on top of the evidence lists.
+CURATION = Path(__file__).with_name("clinical_curation.json")
 OUTPUT = ROOT / "processed" / "disease_formulary.json"
 SUMMARY = ROOT / "processed" / "disease_formulary_summary.md"
 # source key (casefolded name before merging) -> target key
@@ -183,6 +185,8 @@ def main() -> None:
                     label_marked += 1
 
     specialty_map = json.loads(SPECIALTIES.read_text(encoding="utf-8")) if SPECIALTIES.exists() else {}
+    curation = json.loads(CURATION.read_text(encoding="utf-8")) if CURATION.exists() else {"diseases": {}, "rest_label": ""}
+    curated_lists = 0
     result = []
     ids_seen = set()
     for disease in diseases.values():
@@ -197,6 +201,23 @@ def main() -> None:
             {"name": name, "sources": sorted(sources)}
             for name, sources in sorted(disease["medicines"].items(), key=lambda item: item[0].casefold())
         ]
+        plan = curation["diseases"].get(disease["name"])
+        if plan:
+            curated_lists += 1
+            placed = {}
+            for order, group in enumerate(plan.get("groups", [])):
+                for medicine in group["medicines"]:
+                    placed.setdefault(medicine, (order, group["label"], bool(group.get("collapsed"))))
+            for item in medicines:
+                order, label, collapsed = placed.get(item["name"], (99, curation["rest_label"], True))
+                item.update({"group": label, "group_order": order, "group_collapsed": collapsed})
+                if plan.get("labels", {}).get(item["name"]):
+                    item["label"] = plan["labels"][item["name"]]
+            for name in placed:
+                if name not in disease["medicines"]:
+                    skipped.append(f"Curation for {disease['name']} names {name}, which is not on the list")
+            if plan.get("note"):
+                disease["note"] = plan["note"]
         entry = {"id": did, "name": disease["name"],
                  "aliases": sorted(disease["aliases"], key=str.casefold),
                  "specialties": sorted(disease.get("specialties", set()) | set(specialty_map.get(disease["name"], [])),
@@ -225,7 +246,8 @@ def main() -> None:
              f"- Clinician review applied: {review_removed} removals, {review_added} additions." if review
              else "- Clinician review: none applied yet.",
              f"- Listings whose FDA label names the condition among its approved uses: {label_marked}.",
-             f"- Medicines suggested directly from FDA label indications for the added conditions: {fda_added}.", "",
+             f"- Medicines suggested directly from FDA label indications for the added conditions: {fda_added}.",
+             f"- Lists with clinical grouping and display labels: {curated_lists}.", "",
              "## Diseases and medicine counts", "",
              "| Disease | Medicines |", "|---|---:|",]
     lines += [f"| {d['name']} | {len(d['medicines'])} |" for d in result]

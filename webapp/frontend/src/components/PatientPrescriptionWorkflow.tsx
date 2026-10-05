@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
 import { ClipboardPlus, Loader2, Plus, RefreshCw, ShieldCheck, Sparkles, Trash2 } from 'lucide-react'
 import { checkInteractions, fetchSpecialties, screenCandidates } from '../api/client'
-import type { CandidateScreenResponse, CheckResponse, Disease, Specialty } from '../api/client'
+import type { CandidateScreenResponse, CheckResponse, Disease, PatientCaution, Specialty } from '../api/client'
 import { DrugSearchInput } from './DrugSearchInput'
 import { DiseaseCombobox } from './DiseaseCombobox'
 import { DiagnosisMedicinePicker } from './DiagnosisMedicinePicker'
 import { pairAsFlag, ScreeningFlag, SeverityLabel } from './ScreeningFlag'
 import { basisLabel } from '../severity'
-import { PatientFactors } from './PatientFactors'
+import { EGFR_BANDS, EMPTY_PATIENT, PatientFactors, pregnancyLabel } from './PatientFactors'
+import type { PatientFactorValue } from './PatientFactors'
 import { InteractionResults } from './InteractionResults'
 import { MedicationTimingTable, TIMING_OPTIONS } from './MedicationTimingTable'
 import type { CombinedMedication, MedicationTiming } from './MedicationTimingTable'
@@ -62,6 +63,10 @@ export function PatientPrescriptionWorkflow({ mode = 'prescription' }: { mode?: 
   const specialtyId = useId()
   const [specialty, setSpecialty] = useState('')
   const [specialties, setSpecialties] = useState<Specialty[]>([])
+  // Age, kidney function and pregnancy live here so they can reach every medicine list and the printed report,
+  // and so they are cleared with the rest of the session when a new patient starts.
+  const [patient, setPatient] = useState<PatientFactorValue>(EMPTY_PATIENT)
+  const [cautions, setCautions] = useState<PatientCaution[]>([])
   // The specialty list only narrows the diagnosis search, so a failure just hides the filter.
   useEffect(() => {
     if (!isDiagnosisMode) return
@@ -217,6 +222,8 @@ export function PatientPrescriptionWorkflow({ mode = 'prescription' }: { mode?: 
     setResult(null)
     setCheckError(null)
     setIsChecking(false)
+    setPatient(EMPTY_PATIENT)
+    setCautions([])
   }
 
   const loadExample = () => {
@@ -264,6 +271,13 @@ export function PatientPrescriptionWorkflow({ mode = 'prescription' }: { mode?: 
 
   return (
     <div className="space-y-6">
+      <PatientFactors
+        medicines={[...new Set([...selectedNames, ...candidates])].slice(0, 100)}
+        selected={selectedNames}
+        value={patient}
+        onChange={setPatient}
+        onCautions={setCautions}
+      />
       <main className="print:hidden bg-white rounded-xl border border-slate-200 shadow-sm p-5 sm:p-7 space-y-6">
         <div className="border-b border-slate-100 pb-3 flex flex-wrap items-start justify-between gap-3">
           <div>
@@ -320,6 +334,7 @@ export function PatientPrescriptionWorkflow({ mode = 'prescription' }: { mode?: 
                 diseaseName={prescription.label}
                 note={prescription.note}
                 routeNote={prescription.routeNote}
+                cautions={cautions}
                 selected={prescription.drugs.map((drug) => drug.name)}
                 combined={combinedMedications}
                 screening={screening}
@@ -474,13 +489,18 @@ export function PatientPrescriptionWorkflow({ mode = 'prescription' }: { mode?: 
         )}
       </section>
 
-      <PatientFactors medicines={selectedNames} />
-
       {combinedMedications.length > 0 && <MedicationTimingTable medications={combinedMedications} />}
 
       {result && (
         <section ref={resultsRef} tabIndex={-1} aria-label="Interaction Screening Results" className="focus:outline-none">
-          <InteractionResults result={result} onReset={clearSession} diagnoses={diagnosisGroups.map((group) => ({ name: group.label, medicines: group.drugs.map((drug) => drug.name) }))} />
+          <InteractionResults result={result} onReset={clearSession}
+            patient={{
+              age: patient.age ? `${patient.age} years` : undefined,
+              egfr: patient.egfr !== '' ? (EGFR_BANDS.find((band) => band.value === patient.egfr)?.label ?? patient.egfr) : undefined,
+              pregnancy: pregnancyLabel(patient.pregnancy),
+            }}
+            cautions={cautions.filter((caution) => selectedNames.some((name) => name.toLowerCase() === caution.drug.toLowerCase()))}
+            diagnoses={diagnosisGroups.map((group) => ({ name: group.label, medicines: group.drugs.map((drug) => drug.name) }))} />
         </section>
       )}
     </div>

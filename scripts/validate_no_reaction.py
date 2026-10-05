@@ -26,8 +26,9 @@ sys.path.insert(0, str(ROOT / "webapp"))
 from train_eval_severity_model import FEATURE_COLS, load_dataset, make_model  # noqa: E402
 from evidence_passport import EvidencePassportEngine  # noqa: E402
 from explainability import ExplainabilityEngine  # noqa: E402
+from class_rules import ClassRules  # noqa: E402
 from label_evidence import LabelEvidence  # noqa: E402
-from severity_policy import resolve_severity, strong_mechanism  # noqa: E402
+from severity_policy import apply_class_rule, resolve_severity, strong_mechanism  # noqa: E402
 
 PROCESSED = ROOT / "processed"
 OUTPUT = PROCESSED / "no_reaction_validation.json"
@@ -46,6 +47,7 @@ def main() -> None:
     explain = ExplainabilityEngine(PROCESSED / "explainability_data.json")
     ids = json.loads((PROCESSED / "drug_name_to_drugbank_id.json").read_text(encoding="utf-8"))
     labels_index = LabelEvidence(PROCESSED / "label_interactions.json")
+    class_rules = ClassRules(PROCESSED / "class_interaction_rules.json")
 
     outcomes = defaultdict(Counter)  # true severity -> shown severity
     tiers = defaultdict(Counter)
@@ -61,6 +63,7 @@ def main() -> None:
         shown, _ = resolve_severity(documented=None, model_severity=label, uncertain=uncertain,
                                     has_mechanism=strong_mechanism(explanation), estimated=False,
                                     has_label=labels_index.has_mention(a, b))
+        shown, _, _ = apply_class_rule(shown, _, class_rules.match(a, b))
         outcomes[row.severity][shown] += 1
         both_covered = (card["drug_a_support"]["tier"] == "well_represented"
                         and card["drug_b_support"]["tier"] == "well_represented")

@@ -10,13 +10,13 @@
   "by_true_severity": {
     "Major": {
       "pairs": 8074,
-      "shown_no_reaction_pct": 7.3,
-      "shown_correctly_pct": 76.6,
+      "shown_no_reaction_pct": 7.2,
+      "shown_correctly_pct": 76.7,
       "shown_as": {
-        "Major": 76.6,
+        "Major": 76.7,
         "Moderate": 12.2,
         "Minor": 3.9,
-        "None": 7.3
+        "None": 7.2
       }
     },
     "Moderate": {
@@ -46,7 +46,7 @@
     "at least one sparse or limited": {
       "Major": {
         "pairs": 2430,
-        "shown_no_reaction_pct": 8.5
+        "shown_no_reaction_pct": 8.4
       },
       "Minor": {
         "pairs": 1207,

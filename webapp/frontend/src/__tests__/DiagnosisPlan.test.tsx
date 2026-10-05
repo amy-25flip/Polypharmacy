@@ -156,8 +156,8 @@ describe('diagnosis medication plan', () => {
     render(<PatientPrescriptionWorkflow mode="diagnosis" />)
     await addDiagnosis('diabetes')
     const list = await screen.findByLabelText('Reference medicines for Diabetes')
-    expect(await within(list).findByText('Listed by: Hetionet (treats) · NLEM 2022')).toBeInTheDocument()
-    expect(within(list).getByText('Listed by: Hetionet (symptom relief)')).toBeInTheDocument()
+    expect(await within(list).findByText('Listed by: Research link, role in care not reviewed · NLEM 2022')).toBeInTheDocument()
+    expect(within(list).getByText('Listed by: Research link (symptom relief), role not reviewed')).toBeInTheDocument()
     await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument())
   })
 

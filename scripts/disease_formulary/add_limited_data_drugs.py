@@ -24,7 +24,8 @@ NOTES = {
 
 
 def main() -> None:
-    wanted = json.loads(SOURCE.read_text(encoding="utf-8"))["limited_data"]
+    source = json.loads(SOURCE.read_text(encoding="utf-8"))
+    wanted, custom_notes = source["limited_data"], source.get("limited_notes", {})
     vocabulary = json.loads(VOCABULARY.read_text(encoding="utf-8"))
     known = set(vocabulary)
     aliases = json.loads(ALIASES.read_text(encoding="utf-8"))
@@ -35,7 +36,7 @@ def main() -> None:
             if name not in known:
                 known.add(name)
                 added.append(name)
-            limited[name] = {"kind": kind, "note": NOTES[kind]}
+            limited[name] = {"kind": kind, "note": custom_notes.get(name, NOTES[kind])}
     # The vocabulary file is a sorted JSON list with CRLF line endings and a two-space indent.
     VOCABULARY.write_text(json.dumps(sorted(known), indent=2, ensure_ascii=False).replace("\n", "\r\n"),
                           encoding="utf-8", newline="")

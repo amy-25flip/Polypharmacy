@@ -268,31 +268,57 @@
           "name": "Doxycycline",
           "sources": [
             "ICMR STW paediatrics: diarrhoea"
-          ]
+          ],
+          "group": "Only when an antibiotic is indicated (blood in stool, cholera, or a severe case)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Erythromycin",
           "sources": [
             "ICMR STW paediatrics: diarrhoea"
-          ]
+          ],
+          "group": "Only when an antibiotic is indicated (blood in stool, cholera, or a severe case)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Loperamide",
           "sources": [
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Adults only, for no-blood diarrhoea",
+          "group_order": 2,
+          "group_collapsed": false
         },
         {
           "name": "Metronidazole",
           "sources": [
             "ICMR STW paediatrics: diarrhoea"
-          ]
+          ],
+          "group": "Only when an antibiotic is indicated (blood in stool, cholera, or a severe case)",
+          "group_order": 1,
+          "group_collapsed": false
+        },
+        {
+          "name": "Oral rehydration salts",
+          "sources": [
+            "ICMR STW paediatrics: diarrhoea"
+          ],
+          "group": "First treatment",
+          "group_order": 0,
+          "group_collapsed": false,
+          "label": "Not screened for interactions. Always give first"
         },
         {
           "name": "Zinc sulfate",
           "sources": [
             "ICMR STW paediatrics: diarrhoea"
-          ]
+          ],
+          "group": "First treatment",
+          "group_order": 0,
+          "group_collapsed": false,
+          "label": "Especially for children"
         }
       ],
       "note": "Oral rehydration solution comes first (it is not in the checker). Antibiotics are for selected cases only."
@@ -1023,133 +1049,202 @@
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Arformoterol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Beclomethasone dipropionate",
           "sources": [
             "GINA 2025: asthma summary guide",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Controller, taken every day (inhaled steroids)",
+          "group_order": 0,
+          "group_collapsed": false,
+          "label": "Inhaled"
         },
         {
           "name": "Betamethasone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Short oral steroid course for a flare-up",
+          "group_order": 3,
+          "group_collapsed": true
         },
         {
           "name": "Budesonide",
           "sources": [
             "GINA 2025: asthma summary guide",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Controller, taken every day (inhaled steroids)",
+          "group_order": 0,
+          "group_collapsed": false,
+          "label": "Inhaled"
         },
         {
           "name": "Ciclesonide",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Controller, taken every day (inhaled steroids)",
+          "group_order": 0,
+          "group_collapsed": false,
+          "label": "Inhaled"
         },
         {
           "name": "Cromoglicic acid",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Dexamethasone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Short oral steroid course for a flare-up",
+          "group_order": 3,
+          "group_collapsed": true
         },
         {
           "name": "Dyphylline",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Ephedrine",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Epinephrine",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Flunisolide",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Controller, taken every day (inhaled steroids)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Formoterol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on to an inhaled steroid (a long-acting inhaler is never used alone in asthma)",
+          "group_order": 2,
+          "group_collapsed": false,
+          "label": "Inhaled. Use only together with an inhaled steroid"
         },
         {
           "name": "Hydrocortisone",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Short oral steroid course for a flare-up",
+          "group_order": 3,
+          "group_collapsed": true
         },
         {
           "name": "Indacaterol",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on to an inhaled steroid (a long-acting inhaler is never used alone in asthma)",
+          "group_order": 2,
+          "group_collapsed": false,
+          "label": "Inhaled. Use only together with an inhaled steroid"
         },
         {
           "name": "Ipratropium",
           "sources": [
             "NLEM 2022: section 24.1, antiasthmatic medicines"
-          ]
+          ],
+          "group": "Reliever, taken when needed",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Isoprenaline",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Ketotifen",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Loratadine",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Methylprednisolone",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Short oral steroid course for a flare-up",
+          "group_order": 3,
+          "group_collapsed": true
         },
         {
           "name": "Mometasone",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Controller, taken every day (inhaled steroids)",
+          "group_order": 0,
+          "group_collapsed": false,
+          "label": "Inhaled"
         },
         {
           "name": "Montelukast",
@@ -1158,44 +1253,65 @@
             "NLEM 2022: section 24.1, antiasthmatic medicines",
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on to an inhaled steroid (a long-acting inhaler is never used alone in asthma)",
+          "group_order": 2,
+          "group_collapsed": false
         },
         {
           "name": "Nedocromil",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Orciprenaline",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Pirbuterol",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Prednisolone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Short oral steroid course for a flare-up",
+          "group_order": 3,
+          "group_collapsed": true
         },
         {
           "name": "Prednisone",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Short oral steroid course for a flare-up",
+          "group_order": 3,
+          "group_collapsed": true
         },
         {
           "name": "Pseudoephedrine",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Salbutamol",
@@ -1203,56 +1319,83 @@
             "GINA 2025: asthma summary guide",
             "NLEM 2022: section 24.1, antiasthmatic medicines",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Reliever, taken when needed",
+          "group_order": 1,
+          "group_collapsed": false,
+          "label": "Inhaled (or tablet/syrup)"
         },
         {
           "name": "Salmeterol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on to an inhaled steroid (a long-acting inhaler is never used alone in asthma)",
+          "group_order": 2,
+          "group_collapsed": false,
+          "label": "Inhaled. Use only together with an inhaled steroid"
         },
         {
           "name": "Terbutaline",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Reliever, taken when needed",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Theophylline",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on to an inhaled steroid (a long-acting inhaler is never used alone in asthma)",
+          "group_order": 2,
+          "group_collapsed": false
         },
         {
           "name": "Tiotropium",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on to an inhaled steroid (a long-acting inhaler is never used alone in asthma)",
+          "group_order": 2,
+          "group_collapsed": false,
+          "label": "Inhaled"
         },
         {
           "name": "Triamcinolone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Zafirlukast",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on to an inhaled steroid (a long-acting inhaler is never used alone in asthma)",
+          "group_order": 2,
+          "group_collapsed": false
         },
         {
           "name": "Zileuton",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on to an inhaled steroid (a long-acting inhaler is never used alone in asthma)",
+          "group_order": 2,
+          "group_collapsed": false
         }
       ]
     },
@@ -2380,84 +2523,124 @@
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Swelling and fluid",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Calcitriol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Bone and mineral problems",
+          "group_order": 2,
+          "group_collapsed": false
         },
         {
           "name": "Calcium acetate",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Bone and mineral problems",
+          "group_order": 2,
+          "group_collapsed": false
         },
         {
           "name": "Cholecalciferol",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Bone and mineral problems",
+          "group_order": 2,
+          "group_collapsed": false
         },
         {
           "name": "Cinacalcet",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Bone and mineral problems",
+          "group_order": 2,
+          "group_collapsed": false
         },
         {
           "name": "Dapagliflozin",
           "sources": [
             "KDIGO 2024: CKD management, chapter 3",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Protect the kidneys and heart",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Deferoxamine",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true,
+          "label": "Iron or aluminium overload: specialist only"
         },
         {
           "name": "Empagliflozin",
           "sources": [
             "KDIGO 2024: CKD management, chapter 3"
-          ]
+          ],
+          "group": "Protect the kidneys and heart",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Enalapril",
           "sources": [
             "KDIGO 2024: CKD management, chapter 3"
-          ]
+          ],
+          "group": "Protect the kidneys and heart",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Furosemide",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Swelling and fluid",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Losartan",
           "sources": [
             "KDIGO 2024: CKD management, chapter 3"
-          ]
+          ],
+          "group": "Protect the kidneys and heart",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Paricalcitol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Bone and mineral problems",
+          "group_order": 2,
+          "group_collapsed": false
         },
         {
           "name": "Torasemide",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Swelling and fluid",
+          "group_order": 1,
+          "group_collapsed": false
         }
       ]
     },
@@ -2478,33 +2661,50 @@
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Specialist add-on",
+          "group_order": 3,
+          "group_collapsed": true
         },
         {
           "name": "Aminophylline",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Specialist add-on",
+          "group_order": 3,
+          "group_collapsed": true
         },
         {
           "name": "Arformoterol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Stable COPD: daily inhalers",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Ciprofloxacin",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Flare-ups only (short courses)",
+          "group_order": 2,
+          "group_collapsed": true,
+          "label": "Antibiotic for a flare-up only when infection is likely"
         },
         {
           "name": "Doxycycline",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Flare-ups only (short courses)",
+          "group_order": 2,
+          "group_collapsed": true,
+          "label": "Antibiotic for a flare-up only when infection is likely"
         },
         {
           "name": "Formoterol",
@@ -2512,70 +2712,106 @@
             "GOLD 2026: stable COPD bronchodilators",
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Stable COPD: daily inhalers",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Ipratropium",
           "sources": [
             "GOLD 2026: stable COPD bronchodilators"
-          ]
+          ],
+          "group": "Stable COPD: daily inhalers",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Levofloxacin",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Flare-ups only (short courses)",
+          "group_order": 2,
+          "group_collapsed": true,
+          "label": "Antibiotic for a flare-up only when infection is likely"
         },
         {
           "name": "Montelukast",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Specialist add-on",
+          "group_order": 3,
+          "group_collapsed": true
         },
         {
           "name": "Moxifloxacin",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Flare-ups only (short courses)",
+          "group_order": 2,
+          "group_collapsed": true,
+          "label": "Antibiotic for a flare-up only when infection is likely"
         },
         {
           "name": "Ofloxacin",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Flare-ups only (short courses)",
+          "group_order": 2,
+          "group_collapsed": true,
+          "label": "Antibiotic for a flare-up only when infection is likely"
         },
         {
           "name": "Prednisolone",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Flare-ups only (short courses)",
+          "group_order": 2,
+          "group_collapsed": true
         },
         {
           "name": "Prednisone",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Flare-ups only (short courses)",
+          "group_order": 2,
+          "group_collapsed": true
         },
         {
           "name": "Roflumilast",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Specialist add-on",
+          "group_order": 3,
+          "group_collapsed": true
         },
         {
           "name": "Salbutamol",
           "sources": [
             "GOLD 2026: stable COPD bronchodilators",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Reliever",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Salmeterol",
           "sources": [
             "GOLD 2026: stable COPD bronchodilators"
-          ]
+          ],
+          "group": "Stable COPD: daily inhalers",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Tiotropium",
@@ -2583,7 +2819,11 @@
             "GOLD 2026: stable COPD bronchodilators",
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Stable COPD: daily inhalers",
+          "group_order": 0,
+          "group_collapsed": false,
+          "label": "Inhaled"
         }
       ]
     },
@@ -3159,13 +3399,21 @@
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Other antidepressants",
+          "group_order": 1,
+          "group_collapsed": false,
+          "label": "Avoid in older adults"
         },
         {
           "name": "Aripiprazole",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Specialist or add-on use",
+          "group_order": 2,
+          "group_collapsed": true,
+          "label": "Specialist add-on"
         },
         {
           "name": "Citalopram",
@@ -3173,68 +3421,98 @@
             "NICE CG91: depression with chronic physical illness",
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "SSRIs and SNRIs (usual first choice)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Duloxetine",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "SSRIs and SNRIs (usual first choice)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Escitalopram",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "SSRIs and SNRIs (usual first choice)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Fluoxetine",
           "sources": [
             "NICE NG222: depression",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "SSRIs and SNRIs (usual first choice)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Fluvoxamine",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "SSRIs and SNRIs (usual first choice)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Imipramine",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Other antidepressants",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Nefazodone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Specialist or add-on use",
+          "group_order": 2,
+          "group_collapsed": true
         },
         {
           "name": "Nortriptyline",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Other antidepressants",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Paroxetine",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "SSRIs and SNRIs (usual first choice)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Selegiline",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Specialist or add-on use",
+          "group_order": 2,
+          "group_collapsed": true
         },
         {
           "name": "Sertraline",
@@ -3242,27 +3520,40 @@
             "NICE CG91: depression with chronic physical illness",
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "SSRIs and SNRIs (usual first choice)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Trazodone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Other antidepressants",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Valproic acid",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Specialist or add-on use",
+          "group_order": 2,
+          "group_collapsed": true,
+          "label": "Different indication: specialist only"
         },
         {
           "name": "Vilazodone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Other antidepressants",
+          "group_order": 1,
+          "group_collapsed": false
         }
       ]
     },
@@ -3287,7 +3578,11 @@
           "name": "Ciclopirox",
           "sources": [
             "ICMR STW dermatology: dermatophytoses"
-          ]
+          ],
+          "group": "Applied to the skin (limited disease)",
+          "group_order": 0,
+          "group_collapsed": false,
+          "label": "Cream or solution"
         },
         {
           "name": "Clotrimazole",
@@ -3295,20 +3590,32 @@
             "IADVL 2020: dermatophytosis consensus",
             "ICMR STW dermatology: dermatophytoses",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Applied to the skin (limited disease)",
+          "group_order": 0,
+          "group_collapsed": false,
+          "label": "Cream"
         },
         {
           "name": "Fluconazole",
           "sources": [
             "ICMR STW dermatology: dermatophytoses"
-          ]
+          ],
+          "group": "Tablets (extensive, recurrent or resistant disease)",
+          "group_order": 1,
+          "group_collapsed": false,
+          "label": "Tablet"
         },
         {
           "name": "Itraconazole",
           "sources": [
             "IADVL 2020: dermatophytosis consensus",
             "ICMR STW dermatology: dermatophytoses"
-          ]
+          ],
+          "group": "Tablets (extensive, recurrent or resistant disease)",
+          "group_order": 1,
+          "group_collapsed": false,
+          "label": "Capsule. Not in heart failure"
         },
         {
           "name": "Luliconazole",
@@ -3316,27 +3623,42 @@
             "IADVL 2020: dermatophytosis consensus",
             "ICMR STW dermatology: dermatophytoses",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Applied to the skin (limited disease)",
+          "group_order": 0,
+          "group_collapsed": false,
+          "label": "Cream"
         },
         {
           "name": "Miconazole (topical)",
           "sources": [
             "ICMR STW dermatology: dermatophytoses"
-          ]
+          ],
+          "group": "Applied to the skin (limited disease)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Sertaconazole",
           "sources": [
             "IADVL 2020: dermatophytosis consensus",
             "ICMR STW dermatology: dermatophytoses"
-          ]
+          ],
+          "group": "Applied to the skin (limited disease)",
+          "group_order": 0,
+          "group_collapsed": false,
+          "label": "Cream"
         },
         {
           "name": "Terbinafine",
           "sources": [
             "IADVL 2020: dermatophytosis consensus",
             "ICMR STW dermatology: dermatophytoses"
-          ]
+          ],
+          "group": "Tablets (extensive, recurrent or resistant disease)",
+          "group_order": 1,
+          "group_collapsed": false,
+          "label": "Tablet (also available as cream)"
         }
       ],
       "note": "Avoid steroid and antifungal combination creams. If there is no response, think of resistant dermatophytosis and re-check the diagnosis.",
@@ -3534,13 +3856,19 @@
           "name": "Acetazolamide",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Amobarbital",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Carbamazepine",
@@ -3548,56 +3876,81 @@
             "NICE NG217: epilepsy",
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Maintenance anti-seizure medicines",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Clobazam",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Maintenance anti-seizure medicines",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Clonazepam",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Maintenance anti-seizure medicines",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Diazepam",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Emergency or rescue (supervised setting only)",
+          "group_order": 1,
+          "group_collapsed": true,
+          "label": "Rescue in a seizure"
         },
         {
           "name": "Felbamate",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Fosphenytoin",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Emergency or rescue (supervised setting only)",
+          "group_order": 1,
+          "group_collapsed": true
         },
         {
           "name": "Gabapentin",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Maintenance anti-seizure medicines",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Lacosamide",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Maintenance anti-seizure medicines",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Lamotrigine",
@@ -3605,7 +3958,10 @@
             "NICE NG217: epilepsy",
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Maintenance anti-seizure medicines",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Levetiracetam",
@@ -3613,74 +3969,109 @@
             "NICE NG217: epilepsy",
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Maintenance anti-seizure medicines",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Midazolam",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Emergency or rescue (supervised setting only)",
+          "group_order": 1,
+          "group_collapsed": true,
+          "label": "Rescue in a seizure"
         },
         {
           "name": "Oxcarbazepine",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Maintenance anti-seizure medicines",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Phenobarbital",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Maintenance anti-seizure medicines",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Phenytoin",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Maintenance anti-seizure medicines",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Pregabalin",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Maintenance anti-seizure medicines",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Primidone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Propofol",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Emergency or rescue (supervised setting only)",
+          "group_order": 1,
+          "group_collapsed": true,
+          "label": "Anaesthetic for status epilepticus in hospital"
         },
         {
           "name": "Rufinamide",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Topiramate",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Maintenance anti-seizure medicines",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Trimethadione",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Valproic acid",
@@ -3688,21 +4079,31 @@
             "NICE NG217: epilepsy",
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Maintenance anti-seizure medicines",
+          "group_order": 0,
+          "group_collapsed": false,
+          "label": "Avoid in girls and women who may become pregnant unless nothing else works"
         },
         {
           "name": "Vigabatrin",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Zonisamide",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Maintenance anti-seizure medicines",
+          "group_order": 0,
+          "group_collapsed": false
         }
       ]
     },
@@ -4343,49 +4744,70 @@
           "name": "Bisoprolol",
           "sources": [
             "ESC 2023: heart failure medicines"
-          ]
+          ],
+          "group": "Improve outcome (disease-modifying)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Carvedilol",
           "sources": [
             "ESC 2023: heart failure medicines",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Improve outcome (disease-modifying)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Dapagliflozin",
           "sources": [
             "ESC 2023: heart failure medicines",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Improve outcome (disease-modifying)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Empagliflozin",
           "sources": [
             "ESC 2023: heart failure medicines",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Improve outcome (disease-modifying)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Enalapril",
           "sources": [
             "ESC 2023: heart failure medicines",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Improve outcome (disease-modifying)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Furosemide",
           "sources": [
             "ESC 2023: heart failure medicines",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Relieve fluid",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Spironolactone",
           "sources": [
             "ESC 2023: heart failure medicines",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Improve outcome (disease-modifying)",
+          "group_order": 0,
+          "group_collapsed": false
         }
       ]
     },
@@ -4883,14 +5305,20 @@
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Amiloride",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Amlodipine",
@@ -4898,114 +5326,166 @@
             "India MoHFW: standard treatment guideline for hypertension",
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Atenolol",
           "sources": [
             "India MoHFW: standard treatment guideline for hypertension",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Atorvastatin",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Lowers heart risk, not blood pressure",
+          "group_order": 2,
+          "group_collapsed": false,
+          "label": "A statin: lowers cholesterol, not blood pressure"
         },
         {
           "name": "Benazepril",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Bendroflumethiazide",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Bepridil",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Betaxolol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Bumetanide",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Candesartan",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Captopril",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Carvedilol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Chlorothiazide",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Chlorthalidone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Clonidine",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Diazoxide",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Diltiazem",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Doxazosin",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Enalapril",
@@ -5013,85 +5493,124 @@
             "India MoHFW: standard treatment guideline for hypertension",
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Eplerenone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Eprosartan",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Esmolol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Felodipine",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Fenoldopam",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Fosinopril",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Furosemide",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Guanabenz",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Guanadrel",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Guanethidine",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Guanfacine",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Hydralazine",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Hydrochlorothiazide",
@@ -5099,41 +5618,60 @@
             "India MoHFW: standard treatment guideline for hypertension",
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Hydroflumethiazide",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Indapamide",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Irbesartan",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Isradipine",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Labetalol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false,
+          "label": "Used in pregnancy"
         },
         {
           "name": "Lisinopril",
@@ -5141,7 +5679,10 @@
             "India MoHFW: standard treatment guideline for hypertension",
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Losartan",
@@ -5149,213 +5690,307 @@
             "India MoHFW: standard treatment guideline for hypertension",
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Mecamylamine",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Methyldopa",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false,
+          "label": "Used in pregnancy"
         },
         {
           "name": "Metolazone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Metoprolol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Minoxidil",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Moexipril",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Nadolol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Nebivolol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Nicardipine",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Nifedipine",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Nisoldipine",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Olmesartan",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Penbutolol",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Perindopril",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Phentolamine",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Pindolol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Prazosin",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Propranolol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Quinapril",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Ramipril",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Reserpine",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Spironolactone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Telmisartan",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Terazosin",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Timolol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Torasemide",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Trandolapril",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true
         },
         {
           "name": "Triamterene",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Valsartan",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual first choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Verapamil",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "group_order": 1,
+          "group_collapsed": false
         }
       ]
     },
@@ -5405,7 +6040,11 @@
           "name": "Dextrothyroxine",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true,
+          "label": "Not used for hypothyroidism"
         },
         {
           "name": "Levothyroxine",
@@ -5413,20 +6052,31 @@
             "NICE NG145: thyroid disease",
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Usual treatment",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Liothyronine",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true,
+          "label": "Specialist only"
         },
         {
           "name": "Liotrix",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true,
+          "label": "Rarely used: specialist only"
         }
       ]
     },
@@ -5566,19 +6216,28 @@
           "name": "Ferrous fumarate",
           "sources": [
             "WHO Model List of Essential Medicines: antianaemia medicines"
-          ]
+          ],
+          "group": "Oral iron (first choice)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Ferrous gluconate",
           "sources": [
             "WHO Model List of Essential Medicines: antianaemia medicines"
-          ]
+          ],
+          "group": "Oral iron (first choice)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Ferrous sulfate anhydrous",
           "sources": [
             "WHO Model List of Essential Medicines: antianaemia medicines"
-          ]
+          ],
+          "group": "Oral iron (first choice)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Folic acid",
@@ -5586,14 +6245,21 @@
             "ICMR STW obstetrics: antenatal care of normal pregnancy",
             "WHO Model List of Essential Medicines: antianaemia medicines",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Only if folate is also needed",
+          "group_order": 2,
+          "group_collapsed": false,
+          "label": "Does not treat iron deficiency. Add only for folate deficiency or a separate antenatal reason"
         },
         {
           "name": "Iron sucrose",
           "sources": [
             "ICMR STW obstetrics: antenatal care of normal pregnancy",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Injectable iron (supervised care)",
+          "group_order": 1,
+          "group_collapsed": false
         }
       ]
     },
@@ -7051,79 +7717,117 @@
           "name": "Acetaminophen",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Pain relief: simple and applied to the skin",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Acetylsalicylic acid",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Celecoxib",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Codeine",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true,
+          "label": "Opioid: avoid in routine osteoarthritis care"
         },
         {
           "name": "Cyclobenzaprine",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true,
+          "label": "Muscle relaxant: not for osteoarthritis pain"
         },
         {
           "name": "Diclofenac",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Diclofenac (topical)",
           "sources": [
             "NICE NG226: osteoarthritis"
-          ]
+          ],
+          "group": "Pain relief: simple and applied to the skin",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Diflunisal",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Etodolac",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Fenoprofen",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Flurbiprofen",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Glucosamine",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Pain relief: simple and applied to the skin",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Ibuprofen",
@@ -7131,48 +7835,70 @@
             "NICE NG226: osteoarthritis",
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Indomethacin",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Ketoprofen",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Lidocaine",
           "sources": [
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Pain relief: simple and applied to the skin",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Meloxicam",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Methylprednisolone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true,
+          "label": "Steroid injection or tablets: specialist use"
         },
         {
           "name": "Nabumetone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Naproxen",
@@ -7180,42 +7906,61 @@
             "NICE NG226: osteoarthritis",
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Oxaprozin",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Piroxicam",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Prednisone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "More options (specialist, acute-care or rarely used)",
+          "group_order": 99,
+          "group_collapsed": true,
+          "label": "Oral steroid: not for routine osteoarthritis"
         },
         {
           "name": "Sulindac",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Tolmetin",
           "sources": [
             "fda-label:indicated",
             "hetionet:CpD"
-          ]
+          ],
+          "group": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "group_order": 1,
+          "group_collapsed": false
         }
       ]
     },
@@ -8968,13 +9713,21 @@
           "name": "Ivermectin",
           "sources": [
             "ICMR STW dermatology: scabies"
-          ]
+          ],
+          "group": "Tablets, if skin treatment fails or is not possible",
+          "group_order": 1,
+          "group_collapsed": false,
+          "label": "Tablet. Avoid in children under 5 years or under 15 kg, and in pregnancy"
         },
         {
           "name": "Permethrin",
           "sources": [
             "ICMR STW dermatology: scabies"
-          ]
+          ],
+          "group": "Applied to the skin (first choice)",
+          "group_order": 0,
+          "group_collapsed": false,
+          "label": "5% cream on the whole skin. Safe in young children and pregnancy"
         }
       ],
       "note": "Treat close contacts at the same time.",
@@ -9923,30 +10676,45 @@
           "sources": [
             "WHO 2022: drug-susceptible tuberculosis",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Standard regimen for drug-susceptible TB (given together)",
+          "group_order": 0,
+          "group_collapsed": false,
+          "label": "First 2 months only"
         },
         {
           "name": "Isoniazid",
           "sources": [
             "WHO 2022: drug-susceptible tuberculosis",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Standard regimen for drug-susceptible TB (given together)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Pyrazinamide",
           "sources": [
             "WHO 2022: drug-susceptible tuberculosis",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Standard regimen for drug-susceptible TB (given together)",
+          "group_order": 0,
+          "group_collapsed": false,
+          "label": "First 2 months only"
         },
         {
           "name": "Rifampicin",
           "sources": [
             "WHO 2022: drug-susceptible tuberculosis",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Standard regimen for drug-susceptible TB (given together)",
+          "group_order": 0,
+          "group_collapsed": false
         }
-      ]
+      ],
+      "note": "Drug-susceptible TB is treated as a regimen, not single drugs: isoniazid, rifampicin, pyrazinamide and ethambutol for 2 months, then isoniazid and rifampicin for 4 months. Follow the NTEP protocol."
     },
     {
       "id": "type-1-diabetes",
@@ -10014,40 +10782,59 @@
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Common glucose-lowering choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Bromocriptine",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Not for glucose control (used for other reasons in people with diabetes)",
+          "group_order": 2,
+          "group_collapsed": true,
+          "label": "Rarely used for diabetes"
         },
         {
           "name": "Chlorpropamide",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Older or less preferred",
+          "group_order": 1,
+          "group_collapsed": true
         },
         {
           "name": "Dapagliflozin",
           "sources": [
             "WHO EML 2025: section 18.5, medicines for diabetes",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Common glucose-lowering choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Empagliflozin",
           "sources": [
             "WHO EML 2025: section 18.5, medicines for diabetes",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Common glucose-lowering choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Gliclazide",
           "sources": [
             "NLEM 2022: section 18.3, medicines used in diabetes mellitus",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Common glucose-lowering choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Glimepiride",
@@ -10055,49 +10842,73 @@
             "NLEM 2022: section 18.3, medicines used in diabetes mellitus",
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Common glucose-lowering choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Glipizide",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Common glucose-lowering choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Glyburide",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Older or less preferred",
+          "group_order": 1,
+          "group_collapsed": true,
+          "label": "Avoid in older adults and kidney disease"
         },
         {
           "name": "Insulin human",
           "sources": [
             "WHO PEN 2020: type 2 diabetes management",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Common glucose-lowering choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Irbesartan",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Not for glucose control (used for other reasons in people with diabetes)",
+          "group_order": 2,
+          "group_collapsed": true,
+          "label": "Protects the kidneys and heart, does not lower sugar"
         },
         {
           "name": "Linagliptin",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Common glucose-lowering choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Losartan",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Not for glucose control (used for other reasons in people with diabetes)",
+          "group_order": 2,
+          "group_collapsed": true,
+          "label": "Protects the kidneys and heart, does not lower sugar"
         },
         {
           "name": "Metformin",
@@ -10106,79 +10917,118 @@
             "WHO PEN 2020: type 2 diabetes management",
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Common glucose-lowering choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Miglitol",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Older or less preferred",
+          "group_order": 1,
+          "group_collapsed": true
         },
         {
           "name": "Nateglinide",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Common glucose-lowering choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Orlistat",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Not for glucose control (used for other reasons in people with diabetes)",
+          "group_order": 2,
+          "group_collapsed": true,
+          "label": "Weight loss, not glucose control"
         },
         {
           "name": "Pioglitazone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Common glucose-lowering choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Ramipril",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Not for glucose control (used for other reasons in people with diabetes)",
+          "group_order": 2,
+          "group_collapsed": true,
+          "label": "Protects the kidneys and heart, does not lower sugar"
         },
         {
           "name": "Repaglinide",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Common glucose-lowering choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Rosiglitazone",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Older or less preferred",
+          "group_order": 1,
+          "group_collapsed": true
         },
         {
           "name": "Sitagliptin",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Common glucose-lowering choices",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Tolazamide",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Older or less preferred",
+          "group_order": 1,
+          "group_collapsed": true
         },
         {
           "name": "Tolbutamide",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Older or less preferred",
+          "group_order": 1,
+          "group_collapsed": true
         },
         {
           "name": "Valsartan",
           "sources": [
             "hetionet:CtD"
-          ]
+          ],
+          "group": "Not for glucose control (used for other reasons in people with diabetes)",
+          "group_order": 2,
+          "group_collapsed": true,
+          "label": "Protects the kidneys and heart, does not lower sugar"
         }
       ]
     },
@@ -10310,16 +11160,23 @@
           "sources": [
             "ICMR STW paediatrics: fever in children",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Fever relief",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Ibuprofen",
           "sources": [
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Fever relief",
+          "group_order": 0,
+          "group_collapsed": false,
+          "label": "Avoid if dengue is possible or the patient is dehydrated"
         }
       ],
-      "note": "Symptom entry: find the cause. Antibiotics are not routine for fever."
+      "note": "Symptom entry: find the cause first. Check for dehydration and dengue risk before ibuprofen. Antibiotics are not routine for fever. This tool does not capture weight, so doses for children are not checked."
     },
     {
       "id": "urinary-bladder-cancer",
@@ -10417,34 +11274,52 @@
           "name": "Amikacin",
           "sources": [
             "ICMR STW urology: urinary tract infection"
-          ]
+          ],
+          "group": "Kidney infection or complicated infection (supervised care)",
+          "group_order": 1,
+          "group_collapsed": false,
+          "label": "Injection"
         },
         {
           "name": "Ceftriaxone",
           "sources": [
             "ICMR STW urology: urinary tract infection",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Kidney infection or complicated infection (supervised care)",
+          "group_order": 1,
+          "group_collapsed": false,
+          "label": "Injection"
         },
         {
           "name": "Cephalexin",
           "sources": [
             "ICMR STW urology: urinary tract infection",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Lower urinary tract infection (tablets)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Fosfomycin",
           "sources": [
             "ICMR STW urology: urinary tract infection",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Lower urinary tract infection (tablets)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Gentamicin",
           "sources": [
             "ICMR STW urology: urinary tract infection"
-          ]
+          ],
+          "group": "Kidney infection or complicated infection (supervised care)",
+          "group_order": 1,
+          "group_collapsed": false,
+          "label": "Injection"
         },
         {
           "name": "Nitrofurantoin",
@@ -10452,21 +11327,31 @@
             "ICMR STW urology: urinary tract infection",
             "NICE NG109: lower urinary tract infection",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Lower urinary tract infection (tablets)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Phenazopyridine",
           "sources": [
             "ICMR STW urology: urinary tract infection",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Symptom relief only",
+          "group_order": 2,
+          "group_collapsed": false,
+          "label": "Relieves burning only; does not treat the infection"
         },
         {
           "name": "Sulfamethoxazole",
           "sources": [
             "ICMR STW urology: urinary tract infection",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Lower urinary tract infection (tablets)",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Trimethoprim",
@@ -10474,9 +11359,13 @@
             "ICMR STW urology: urinary tract infection",
             "NICE NG109: lower urinary tract infection",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Lower urinary tract infection (tablets)",
+          "group_order": 0,
+          "group_collapsed": false
         }
-      ]
+      ],
+      "note": "Send a urine culture in pregnancy and for any complicated, recurrent or kidney infection. Sulfamethoxazole and trimethoprim are usually given together as co-trimoxazole."
     },
     {
       "id": "urticaria",
@@ -10685,20 +11574,29 @@
           "name": "Cyanocobalamin",
           "sources": [
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Vitamin B12",
+          "group_order": 0,
+          "group_collapsed": false
         },
         {
           "name": "Folic acid",
           "sources": [
             "WHO Model List of Essential Medicines: antianaemia medicines",
             "fda-label:indicated"
-          ]
+          ],
+          "group": "Only if folate is also needed",
+          "group_order": 1,
+          "group_collapsed": false
         },
         {
           "name": "Hydroxocobalamin",
           "sources": [
             "WHO Model List of Essential Medicines: antianaemia medicines"
-          ]
+          ],
+          "group": "Vitamin B12",
+          "group_order": 0,
+          "group_collapsed": false
         }
       ]
     },

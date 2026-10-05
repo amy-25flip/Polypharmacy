@@ -33,7 +33,7 @@ describe('InteractionResults Component', () => {
 
     // Check action line for Major severity
     expect(
-      screen.getByText(/Review therapy, dose, alternatives, or monitoring needs before continuing\./i)
+      screen.getByText(/Major screening flag\. PolyGuard has no validated management advice/i)
     ).toBeInTheDocument()
 
     // Check highest risk pair callout
@@ -249,15 +249,15 @@ describe('InteractionResults Component', () => {
       regimen: { overall_severity: overall, pairs }, subset_certificate: null, combination_signal: null,
     })
 
-    it('shows "No reaction" as its own result, even when the model had abstained', () => {
+    it('shows "No interaction on record" as its own result, even when the model had abstained', () => {
       render(<InteractionResults result={resultWith([{
         drug_a: 'Metformin', drug_b: 'Amoxicillin', severity: 'None', severity_basis: 'no_record',
         severity_notice: 'No interaction is recorded for this pair in the reference database. This means no recorded reaction, not proof that the combination is safe.',
         is_documented: false, evidence_passport: passport,
       }], 'None')} />)
 
-      expect(screen.getByText('No Reaction on Record')).toBeInTheDocument()
-      expect(screen.getAllByText('No reaction').length).toBeGreaterThanOrEqual(1)
+      expect(screen.getByText('No Interaction on Record — Risk Not Excluded')).toBeInTheDocument()
+      expect(screen.getAllByText('No interaction on record').length).toBeGreaterThanOrEqual(1)
       expect(screen.getAllByText(/not proof that the combination is safe/i).length).toBeGreaterThanOrEqual(1)
       expect(screen.queryByText(/Uncertain — Review Needed/i)).not.toBeInTheDocument()
       expect(screen.queryByText(/insufficient evidence/i)).not.toBeInTheDocument()
@@ -273,7 +273,7 @@ describe('InteractionResults Component', () => {
       ], 'Major')} />)
 
       expect(screen.getByText('Major Interaction Risk')).toBeInTheDocument()
-      expect(screen.queryByText('No Reaction on Record')).not.toBeInTheDocument()
+      expect(screen.queryByText('No Interaction on Record — Risk Not Excluded')).not.toBeInTheDocument()
       // A documented severity is a database record, so the model's reliability does not apply.
       expect(screen.queryByText(/Model reliability at this confidence/i)).not.toBeInTheDocument()
       expect(screen.queryByText(/Independent second opinion/i)).not.toBeInTheDocument()

@@ -11,7 +11,7 @@ import pandas as pd
 from rapidfuzz import fuzz
 
 from severity_policy import (
-    BASIS_DUPLICATE, BASIS_INFERRED, BASIS_NO_DATA, BASIS_NO_RECORD, DUPLICATE_NOTICE, NO_RECORD_NOTICE, RANK,
+    BASIS_DUPLICATE, BASIS_INFERRED, BASIS_NO_DATA, apply_class_rule, BASIS_NO_RECORD, DUPLICATE_NOTICE, NO_RECORD_NOTICE, RANK,
     no_data_notice,
     resolve_severity, strong_mechanism,
 )
@@ -26,7 +26,7 @@ FEATURE_COLS = ["pair_text", "disease_diabetes", "disease_ckd", "disease_heart_f
 class DiseasePlanEngine:
     def __init__(self, data_path: Path, vocabulary: list[str], name_to_id: dict[str, str],
                  documented_pairs: set[str], model, explain_engine, passport_engine,
-                 disagreement_sentinel, aliases, documented_severity: dict[str, str], label_evidence):
+                 disagreement_sentinel, aliases, documented_severity: dict[str, str], label_evidence, class_rules):
         self.unavailable_reason: str | None = None
         self.vocab_by_norm = {self.normalize(name): name for name in vocabulary}
         self.name_to_id = name_to_id
@@ -38,6 +38,7 @@ class DiseasePlanEngine:
         self.aliases = aliases
         self.documented_severity = documented_severity
         self.labels = label_evidence
+        self.class_rules = class_rules
         self._prediction_cache: dict[tuple[str, str], tuple[str, tuple[float, ...]]] = {}
         self.diseases: dict[str, dict] = {}
         try:
@@ -165,9 +166,13 @@ class DiseasePlanEngine:
             has_mechanism=strong_mechanism(explanation), estimated=estimated,
             has_label=self.labels.has_mention(a, b),
         )
+        rule = self.class_rules.match(a, b)
+        severity, basis, class_notice = apply_class_rule(severity, basis, rule)
         # Effects named in an FDA label for this exact pair beat the overlap of each drug's own
         # side effects, which says nothing about the combination.
         label_effects = self.labels.effects(label_entries)
+        if class_notice:
+            label_effects = list(rule["effects"])
         if severity == "None":
             effects, source = (), "none"
         elif label_effects:
@@ -178,7 +183,8 @@ class DiseasePlanEngine:
                 # "Low confidence" only describes the model's own estimate.
                 "uncertain": basis == BASIS_INFERRED and bool(uncertain),
                 "adverse_effects": effects, "adverse_effect_source": source,
-                "label_evidence": tuple(label_entries)}
+                "label_evidence": tuple(label_entries),
+                **({"severity_notice": class_notice} if class_notice else {})}
 
     def screen(self, selected_raw: list[str], candidates_raw: list[str]) -> dict:
         selected, unmatched_a = self._resolve(selected_raw)

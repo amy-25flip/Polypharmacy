@@ -4,6 +4,7 @@ import itertools
 import json
 import os
 from pathlib import Path
+from typing import Literal
 
 
 def _load_local_env() -> None:
@@ -46,11 +47,12 @@ from drug_aliases import DrugAliases
 from evidence_passport import EvidencePassportEngine
 from explainability import ExplainabilityEngine
 from hoddi_model import HoddiInferenceModel, build_fingerprint_lookup
+from class_rules import ClassRules
 from label_evidence import LabelEvidence
 from patient_factors import PatientFactorEngine
 from prescription_scan import scan_prescription
 from severity_policy import (
-    BASIS_DUPLICATE, BASIS_INFERRED, BASIS_NO_DATA, BASIS_NO_RECORD, DUPLICATE_NOTICE, NO_RECORD_NOTICE,
+    BASIS_DUPLICATE, BASIS_INFERRED, BASIS_NO_DATA, apply_class_rule, BASIS_NO_RECORD, DUPLICATE_NOTICE, NO_RECORD_NOTICE,
     RANK as SEVERITY_RANK, load_documented_severity, resolve_severity, strong_mechanism, no_data_notice,
 )
 from subset_certificate import build_certificate
@@ -129,6 +131,8 @@ DOCUMENTED_SEVERITY = load_documented_severity(PROCESSED_DIR / "documented_sever
 # Sentences from FDA drug labels that name the other drug of a pair (optional data).
 LABEL_EVIDENCE = LabelEvidence(PROCESSED_DIR / "label_interactions.json")
 PATIENT_FACTORS = PatientFactorEngine(PROCESSED_DIR / "patient_factor_rules.json")
+# Class-level interaction floors (ACE inhibitor + potassium-sparing diuretic, opioid + benzodiazepine, ...).
+CLASS_RULES = ClassRules(PROCESSED_DIR / "class_interaction_rules.json")
 
 print("Loading Evidence Passport engine (calibration + selective prediction)...")
 evidence_passport_engine = EvidencePassportEngine(PROCESSED_DIR / "evidence_passport")
@@ -223,7 +227,7 @@ print("Loading disease-plan reference...")
 disease_plan_engine = DiseasePlanEngine(
     PROCESSED_DIR / "disease_formulary.json", DRUG_VOCAB, NAME_TO_DRUGBANK_ID,
     DOCUMENTED_PAIRS, model1, explain_engine, evidence_passport_engine,
-    disagreement_sentinel, DRUG_ALIASES, DOCUMENTED_SEVERITY, LABEL_EVIDENCE,
+    disagreement_sentinel, DRUG_ALIASES, DOCUMENTED_SEVERITY, LABEL_EVIDENCE, CLASS_RULES,
 )
 if disease_plan_engine.unavailable_reason:
     print(disease_plan_engine.unavailable_reason)
@@ -333,6 +337,8 @@ def predict_pair(drug_a: str, drug_b: str) -> dict:
         has_mechanism=strong_mechanism(explanation), estimated=estimated,
         has_label=LABEL_EVIDENCE.has_mention(normalize(model_a), normalize(model_b)),
     )
+    class_rule = CLASS_RULES.match(normalize(model_a), normalize(model_b))
+    severity, basis, class_notice = apply_class_rule(severity, basis, class_rule)
     if label_entries:
         result["label_evidence"] = label_entries
         result["label_effects"] = LABEL_EVIDENCE.effects(label_entries)
@@ -356,6 +362,9 @@ def predict_pair(drug_a: str, drug_b: str) -> dict:
         )
     elif basis == BASIS_NO_RECORD:
         result["severity_notice"] = NO_RECORD_NOTICE
+    elif class_notice:
+        result["severity_notice"] = class_notice
+        result["label_effects"] = class_rule["effects"]
     if notes:
         result["severity_notice"] = (result.get("severity_notice", "") + " " + estimate_notice(notes)).strip()
 
@@ -399,7 +408,8 @@ class PatientCautionsRequest(BaseModel):
     drugs: list[str] = Field(max_length=100)
     age: int | None = Field(default=None, ge=0, le=120)
     egfr: int | None = Field(default=None, ge=0, le=200)
-    pregnant: bool | None = None
+    # "possible": could become pregnant (teratogens that need contraception). "pregnant": currently pregnant.
+    pregnancy: Literal["possible", "pregnant"] | None = None
 
 
 def require_disease_plan() -> DiseasePlanEngine:
@@ -434,7 +444,7 @@ def screen_candidates(payload: ScreenCandidatesRequest):
 @app.post("/api/patient-cautions")
 def patient_cautions(payload: PatientCautionsRequest):
     drugs = [d for d in dict.fromkeys(name.strip() for name in payload.drugs) if d in DRUG_VOCAB_SET]
-    return {"cautions": PATIENT_FACTORS.cautions(drugs, payload.age, payload.egfr, payload.pregnant)}
+    return {"cautions": PATIENT_FACTORS.cautions(drugs, payload.age, payload.egfr, payload.pregnancy)}
 
 
 @app.get("/api/health")
@@ -474,6 +484,13 @@ def search_drugs(q: str = ""):
     # Prefer a curated brand interpretation to coincidental typo matches. Direct
     # prefix/substring vocabulary hits still keep first place.
     for brand, generic_names in lookup_brand_matches(q):
+        if len(generic_names) > 1:
+            # A combination brand is ONE suggestion that adds every ingredient, so none is missed.
+            label = " + ".join(generic_names)
+            if label not in seen:
+                results.append({"name": label, "matched_via_brand": brand, "matched_via_synonym": None, "bundle": generic_names})
+                seen.add(label)
+            continue
         for name in generic_names:
             if name not in seen:
                 results.append({"name": name, "matched_via_brand": brand, "matched_via_synonym": None})

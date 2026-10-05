@@ -10,15 +10,24 @@ import {
   Printer,
 } from 'lucide-react'
 import { severityName } from '../severity'
-import type { CheckResponse, InteractionPair } from '../api/client'
+import type { CheckResponse, InteractionPair, PatientCaution } from '../api/client'
 import { PairExplanationView } from './PairExplanationView'
 import { AbstainCard, EvidencePassportView } from './EvidencePassportView'
 import { SubsetCertificateView } from './SubsetCertificateView'
+
+export interface PatientSummary {
+  age?: string
+  egfr?: string
+  pregnancy?: string
+}
 
 interface InteractionResultsProps {
   result: CheckResponse
   onReset?: () => void
   diagnoses?: { name: string; medicines: string[] }[]
+  // The patient facts the check used, so the printed copy shows them.
+  patient?: PatientSummary
+  cautions?: PatientCaution[]
 }
 
 const severityBadgeClass = (severity: InteractionPair['severity']) =>
@@ -27,7 +36,7 @@ const severityBadgeClass = (severity: InteractionPair['severity']) =>
     : severity === 'Moderate'
     ? 'bg-amber-100 text-amber-800 border-amber-300'
     : severity === 'None'
-    ? 'bg-sky-100 text-sky-800 border-sky-300'
+    ? 'bg-slate-100 text-slate-800 border-slate-300'
     : 'bg-emerald-100 text-emerald-800 border-emerald-300'
 
 const severityPillClass = (severity: InteractionPair['severity']) =>
@@ -36,13 +45,15 @@ const severityPillClass = (severity: InteractionPair['severity']) =>
     : severity === 'Moderate'
     ? 'bg-amber-600 text-white'
     : severity === 'None'
-    ? 'bg-sky-700 text-white'
+    ? 'bg-slate-600 text-white'
     : 'bg-emerald-700 text-white'
 
 export const InteractionResults: React.FC<InteractionResultsProps> = ({
   result,
   onReset,
   diagnoses = [],
+  patient,
+  cautions = [],
 }) => {
   const { matched, unmatched, regimen, combination_signal, subset_certificate } = result
   const pairs = regimen.pairs || []
@@ -61,10 +72,119 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
   const isNone = !isUncertain && overallSeverity === 'None'
   const noDataPairs = pairs.filter((pair) => pair.severity_basis === 'no_data')
   const allNotChecked = pairs.length > 0 && noDataPairs.length === pairs.length
+  const screenIncomplete = noDataPairs.length > 0 || unmatched.length > 0
   const isMajor = !isUncertain && overallSeverity === 'Major'
   const isModerate = !isUncertain && overallSeverity === 'Moderate'
   const isMinor = !isUncertain && overallSeverity === 'Minor'
   const isIncomplete = matched.length < 2 || overallSeverity === null
+
+  const indexed = pairs.map((pair, index) => ({ pair, index }))
+  const isPriority = (pair: InteractionPair) => pair.severity === 'Major' || pair.severity === 'Moderate'
+  const priorityPairs = indexed.filter(({ pair }) => isPriority(pair))
+  const restPairs = indexed.filter(({ pair }) => !isPriority(pair))
+  const label = (pair: InteractionPair) => `${pair.drug_a} + ${pair.drug_b}`
+  // Major pairs backed by a database record, a label warning or a class rule come first; model estimates are prompts to verify.
+  const majorSupported = pairs.filter((pair) => pair.severity === 'Major' && (pair.severity_basis === 'documented' || pair.severity_basis === 'class_rule' || (pair.label_evidence?.length ?? 0) > 0))
+  const majorEstimated = pairs.filter((pair) => pair.severity === 'Major' && !majorSupported.includes(pair))
+  const moderateCount = pairs.filter((pair) => pair.severity === 'Moderate').length
+  const minorCount = pairs.filter((pair) => pair.severity === 'Minor').length
+  const noRecordCount = pairs.filter((pair) => pair.severity === 'None' && pair.severity_basis !== 'no_data').length
+
+  const renderPair = (pair: InteractionPair, index: number) => {
+    const hasExplanation = !!pair.explanation
+    const passport = pair.evidence_passport
+
+    if (passport?.abstain && pair.severity !== 'None') {
+      return (
+        <article
+          key={`${pair.drug_a}-${pair.drug_b}-${index}`}
+          className="p-4 sm:p-5"
+        >
+          <div className="text-sm font-bold uppercase tracking-wide text-slate-500 mb-2">
+            Pair {index + 1}
+          </div>
+          <AbstainCard drugA={pair.drug_a} drugB={pair.drug_b} reason={passport.abstain_reason} />
+        </article>
+      )
+    }
+
+    return (
+      <article
+        key={`${pair.drug_a}-${pair.drug_b}-${index}`}
+        className="p-4 sm:p-5"
+      >
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+          <div className="min-w-0">
+            <div className="text-sm font-bold uppercase tracking-wide text-slate-500">
+              Pair {index + 1}
+            </div>
+            <h4 className="mt-1 text-lg font-extrabold text-slate-950 break-words">
+              {pair.drug_a}{' '}
+              <span className="text-slate-400 font-semibold">+</span>{' '}
+              {pair.drug_b}
+            </h4>
+          </div>
+          <span
+            className={`self-start inline-block text-xs font-bold px-2.5 py-1 rounded-full border ${severityBadgeClass(
+              pair.severity
+            )}`}
+          >
+            {pair.severity_basis === 'no_data' ? 'Not checked' : severityName(pair.severity)}
+          </span>
+        </div>
+
+        {pair.severity_notice && (
+          <div className="mt-3 flex items-start gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-800">
+            <Info className="h-4 w-4 shrink-0 mt-0.5 text-slate-600" />
+            <span>{pair.severity_notice}</span>
+          </div>
+        )}
+
+        {pair.is_documented === false && (!pair.severity_basis || pair.severity_basis === 'inferred') && (
+          <div className="mt-3 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-900">
+            <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5 text-amber-700" />
+            <span>
+              No documented record for this exact pair. Treat this as an inferred screening result and verify independently.
+            </span>
+          </div>
+        )}
+
+        {pair.label_evidence && pair.label_evidence.length > 0 && (
+          <div className="mt-3 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800">
+            <div className="font-bold uppercase tracking-wide text-[11px] text-slate-600">What the FDA label says about this combination</div>
+            {pair.label_effects && pair.label_effects.length > 0 && (
+              <div className="mt-1 flex flex-wrap gap-1">
+                {pair.label_effects.map((effect) => <span key={effect} className="rounded-full border border-slate-300 bg-slate-50 px-2 py-0.5 font-semibold">{effect}</span>)}
+              </div>
+            )}
+            <ul className="mt-1.5 space-y-1">
+              {pair.label_evidence.map((entry, entryIndex) => (
+                <li key={entryIndex} className="italic text-slate-700">From the label for {entry.from}: “{entry.text}”</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {pair.severity === 'None' || pair.severity_basis === 'duplicate_class' ? null : hasExplanation && pair.explanation ? (
+          <PairExplanationView explanation={pair.explanation} compact />
+        ) : (
+          <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600">
+            No separate knowledge-graph mechanism was found for this pair in the current reference data.
+          </div>
+        )}
+
+        {passport && pair.severity !== 'None' && pair.severity_basis !== 'duplicate_class' && (
+          <EvidencePassportView
+            passport={passport}
+            drugA={pair.drug_a}
+            drugB={pair.drug_b}
+            conformalSets={pair.conformal_sets}
+            modelBased={!pair.severity_basis || pair.severity_basis === 'inferred'}
+          />
+        )}
+      </article>
+    )
+  }
 
   return (
     <div className="space-y-6 animate-fadeIn">
@@ -76,6 +196,14 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
           This is an AI-based clinical decision-support output, not a substitute for clinical judgment,
           prescribing guidelines, or pharmacist review. Verify all findings independently before acting on them.
         </p>
+        <div className="mt-3 border-t border-slate-300 pt-2 text-xs">
+          <h2 className="text-sm font-bold">Facts used for this check</h2>
+          <p>Medicines: {matched.join(', ') || 'none'}{unmatched.length > 0 && ` (not matched: ${unmatched.join(', ')})`}</p>
+          <p>Age: {patient?.age || 'not entered'} · Kidney function (eGFR): {patient?.egfr || 'not entered'} · Pregnancy: {patient?.pregnancy || 'not entered'}</p>
+          <p>{pairs.length - noDataPairs.length} of {pairs.length} pairs screened{noDataPairs.length > 0 && `; ${noDataPairs.length} not checked`}. Doses, routes and durations were not captured.</p>
+          {cautions.length > 0 && <ul className="mt-1 list-disc pl-4">{cautions.map((caution) => <li key={`${caution.drug}-${caution.factor}`}><strong>{caution.drug}</strong> ({caution.level}): {caution.text}</li>)}</ul>}
+          <p className="mt-3">Reviewed by: ______________________ Date: ______________</p>
+        </div>
         {diagnoses.length > 0 && <div className="mt-3 border-t border-slate-300 pt-2">
           <h2 className="text-sm font-bold">Medication plan by diagnosis</h2>
           <ul className="mt-1 space-y-1 text-xs">{diagnoses.map((diagnosis) => <li key={diagnosis.name} className="break-words"><strong>{diagnosis.name}:</strong> {diagnosis.medicines.join(', ') || 'No medicines selected'}</li>)}</ul>
@@ -105,7 +233,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
             : isModerate
             ? 'bg-amber-50 border-amber-500 text-amber-950'
             : isNone
-            ? 'bg-sky-50 border-sky-500 text-sky-950'
+            ? 'bg-slate-50 border-slate-400 text-slate-900'
             : 'bg-emerald-50 border-emerald-500 text-emerald-950'
         }`}
       >
@@ -121,7 +249,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                   : isModerate
                   ? 'bg-amber-600 text-white'
                   : isNone
-                  ? 'bg-sky-700 text-white'
+                  ? 'bg-slate-600 text-white'
                   : 'bg-emerald-600 text-white'
               }`}
             >
@@ -130,7 +258,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
               {isMajor && <AlertOctagon className="h-7 w-7" />}
               {isModerate && <AlertTriangle className="h-7 w-7" />}
               {isMinor && <CheckCircle2 className="h-7 w-7" />}
-              {isNone && <ShieldCheck className="h-7 w-7" />}
+              {isNone && <HelpCircle className="h-7 w-7" />}
             </div>
 
             <div>
@@ -143,12 +271,16 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                 {isMajor && 'Major Interaction Risk'}
                 {isModerate && 'Moderate Interaction Risk'}
                 {isMinor && 'Minor Interaction Risk'}
-                {isNone && (allNotChecked ? 'Not Checked — No Interaction Data' : 'No Reaction on Record')}
+                {isNone && (allNotChecked ? 'Not Checked — No Interaction Data' : 'No Interaction on Record — Risk Not Excluded')}
               </h2>
               {pairs.length > 0 && (
                 <p className="mt-2 text-sm font-semibold opacity-85">
-                  {matched.length} recognized medicine{matched.length === 1 ? '' : 's'} checked across{' '}
-                  {pairs.length} pair{pairs.length === 1 ? '' : 's'}.
+                  {pairs.length - noDataPairs.length} of {pairs.length} pair{pairs.length === 1 ? '' : 's'} screened
+                  {noDataPairs.length > 0 && `; ${noDataPairs.length} not checked (no interaction data)`}
+                  {unmatched.length > 0 && `; ${unmatched.length} medicine${unmatched.length === 1 ? '' : 's'} could not be matched`}.
+                  {screenIncomplete && (
+                    <span className="ml-2 rounded-full bg-slate-700 px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-white">Screen incomplete</span>
+                  )}
                 </p>
               )}
             </div>
@@ -186,7 +318,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
             <p className="text-base font-semibold">
               {allNotChecked
                 ? 'None of these pairs could be checked because the medicines have no interaction data in the reference database.'
-                : 'No interaction is recorded for any pair in this regimen. This means no recorded reaction, not proof that the combination is safe.'}
+                : 'No interaction is recorded for any pair in this regimen. Risk is not excluded: this is not proof that the combination is safe.'}
               {!allNotChecked && noDataPairs.length > 0 && ' Pairs with a medicine that has no interaction data were not checked.'}
             </p>
           ) : highestRiskPair ? (
@@ -211,9 +343,9 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
               )}
 
               {highestRiskPair.severity_notice && highestRiskPair.severity_basis !== 'no_record' && (
-                <div className="mt-3 p-3 rounded-lg bg-sky-50 border border-sky-300 text-sky-950 shadow-2xs">
+                <div className="mt-3 p-3 rounded-lg bg-slate-50 border border-slate-300 text-slate-900 shadow-2xs">
                   <div className="flex items-start gap-2.5">
-                    <Info className="h-4 w-4 shrink-0 mt-0.5 text-sky-700" />
+                    <Info className="h-4 w-4 shrink-0 mt-0.5 text-slate-600" />
                     <p className="text-sm font-medium leading-relaxed">{highestRiskPair.severity_notice}</p>
                   </div>
                 </div>
@@ -243,11 +375,42 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
           {/* Action-oriented line for Major severity specifically */}
           {isMajor && (
             <div className="mt-3 p-3 rounded-lg bg-rose-100/80 border border-rose-300 text-rose-950 font-semibold text-sm">
-              Action recommended: Review therapy, dose, alternatives, or monitoring needs before continuing.
+              Major screening flag. PolyGuard has no validated management advice for these pairs: read the evidence for each pair below and verify before prescribing.
             </div>
           )}
         </div>
       </div>
+
+      {pairs.length > 0 && (
+        <section aria-label="At a glance" className="rounded-xl border border-slate-300 bg-white p-4 sm:p-5 shadow-2xs">
+          <h3 className="text-base font-extrabold text-slate-950">At a glance</h3>
+          <ul className="mt-2 space-y-1.5 text-sm text-slate-800">
+            {majorSupported.length > 0 && (
+              <li><span className="font-bold text-rose-800">Major, backed by a record or label warning ({majorSupported.length}):</span> {majorSupported.map(label).join('; ')}</li>
+            )}
+            {majorEstimated.length > 0 && (
+              <li><span className="font-bold text-rose-800">Major, model estimate to verify ({majorEstimated.length}):</span> {majorEstimated.map(label).join('; ')}</li>
+            )}
+            {moderateCount > 0 && <li><span className="font-bold text-amber-800">Moderate:</span> {moderateCount} pair{moderateCount === 1 ? '' : 's'}</li>}
+            {minorCount > 0 && <li><span className="font-bold text-emerald-800">Minor:</span> {minorCount} pair{minorCount === 1 ? '' : 's'}</li>}
+            {noRecordCount > 0 && <li><span className="font-bold text-slate-700">No interaction on record:</span> {noRecordCount} pair{noRecordCount === 1 ? '' : 's'}. This does not exclude risk.</li>}
+            {noDataPairs.length > 0 && <li><span className="font-bold text-slate-700">Not checked (no interaction data):</span> {[...new Set(noDataPairs.flatMap((pair) => [pair.drug_a, pair.drug_b]))].join(', ')}</li>}
+            {unmatched.length > 0 && <li><span className="font-bold text-slate-700">Not matched to the database:</span> {unmatched.join(', ')}</li>}
+            {cautions.length > 0 && <li><span className="font-bold text-rose-800">Patient cautions:</span> {cautions.length} (see below)</li>}
+          </ul>
+        </section>
+      )}
+
+      {cautions.length > 0 && (
+        <section aria-label="Cautions for this patient" className="rounded-xl border border-amber-300 bg-amber-50 p-4 sm:p-5">
+          <h3 className="text-base font-extrabold text-amber-950">Cautions for this patient</h3>
+          <ul className="mt-2 space-y-1.5 text-sm text-amber-950">
+            {cautions.map((caution) => (
+              <li key={`${caution.drug}-${caution.factor}`}><span className="font-bold">{caution.drug}</span> ({caution.level}; {caution.trigger}): {caution.text}</li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* 2. Unmatched Medicines Notice (if any) - Framed as limitation, not error */}
       {unmatched.length > 0 && (
@@ -325,102 +488,18 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
           </div>
 
           <div className="divide-y divide-slate-100">
-            {pairs.map((pair, index) => {
-              const hasExplanation = !!pair.explanation
-              const passport = pair.evidence_passport
-
-              if (passport?.abstain && pair.severity !== 'None') {
-                return (
-                  <article
-                    key={`${pair.drug_a}-${pair.drug_b}-${index}`}
-                    className="p-4 sm:p-5"
-                  >
-                    <div className="text-sm font-bold uppercase tracking-wide text-slate-500 mb-2">
-                      Pair {index + 1}
-                    </div>
-                    <AbstainCard drugA={pair.drug_a} drugB={pair.drug_b} reason={passport.abstain_reason} />
-                  </article>
-                )
-              }
-
-              return (
-                <article
-                  key={`${pair.drug_a}-${pair.drug_b}-${index}`}
-                  className="p-4 sm:p-5"
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                    <div className="min-w-0">
-                      <div className="text-sm font-bold uppercase tracking-wide text-slate-500">
-                        Pair {index + 1}
-                      </div>
-                      <h4 className="mt-1 text-lg font-extrabold text-slate-950 break-words">
-                        {pair.drug_a}{' '}
-                        <span className="text-slate-400 font-semibold">+</span>{' '}
-                        {pair.drug_b}
-                      </h4>
-                    </div>
-                    <span
-                      className={`self-start inline-block text-xs font-bold px-2.5 py-1 rounded-full border ${severityBadgeClass(
-                        pair.severity
-                      )}`}
-                    >
-                      {pair.severity_basis === 'no_data' ? 'Not checked' : severityName(pair.severity)}
-                    </span>
-                  </div>
-
-                  {pair.severity_notice && (
-                    <div className="mt-3 flex items-start gap-2 rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 text-xs font-semibold text-sky-900">
-                      <Info className="h-4 w-4 shrink-0 mt-0.5 text-sky-700" />
-                      <span>{pair.severity_notice}</span>
-                    </div>
-                  )}
-
-                  {pair.is_documented === false && (!pair.severity_basis || pair.severity_basis === 'inferred') && (
-                    <div className="mt-3 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-900">
-                      <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5 text-amber-700" />
-                      <span>
-                        No documented record for this exact pair. Treat this as an inferred screening result and verify independently.
-                      </span>
-                    </div>
-                  )}
-
-                  {pair.label_evidence && pair.label_evidence.length > 0 && (
-                    <div className="mt-3 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800">
-                      <div className="font-bold uppercase tracking-wide text-[11px] text-slate-600">What the FDA label says about this combination</div>
-                      {pair.label_effects && pair.label_effects.length > 0 && (
-                        <div className="mt-1 flex flex-wrap gap-1">
-                          {pair.label_effects.map((effect) => <span key={effect} className="rounded-full border border-slate-300 bg-slate-50 px-2 py-0.5 font-semibold">{effect}</span>)}
-                        </div>
-                      )}
-                      <ul className="mt-1.5 space-y-1">
-                        {pair.label_evidence.map((entry, entryIndex) => (
-                          <li key={entryIndex} className="italic text-slate-700">From the label for {entry.from}: “{entry.text}”</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {pair.severity === 'None' || pair.severity_basis === 'duplicate_class' ? null : hasExplanation && pair.explanation ? (
-                    <PairExplanationView explanation={pair.explanation} compact />
-                  ) : (
-                    <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600">
-                      No separate knowledge-graph mechanism was found for this pair in the current reference data.
-                    </div>
-                  )}
-
-                  {passport && pair.severity !== 'None' && pair.severity_basis !== 'duplicate_class' && (
-                    <EvidencePassportView
-                      passport={passport}
-                      drugA={pair.drug_a}
-                      drugB={pair.drug_b}
-                      conformalSets={pair.conformal_sets}
-                      modelBased={!pair.severity_basis || pair.severity_basis === 'inferred'}
-                    />
-                  )}
-                </article>
-              )
-            })}
+            {priorityPairs.map(({ pair, index }) => renderPair(pair, index))}
           </div>
+          {restPairs.length > 0 && (
+            <details className="border-t border-slate-200">
+              <summary className="cursor-pointer px-5 py-3 text-sm font-semibold text-blue-800">
+                Show {restPairs.length} lower-priority pair{restPairs.length === 1 ? '' : 's'} (Minor, none on record, or not checked)
+              </summary>
+              <div className="divide-y divide-slate-100">
+                {restPairs.map(({ pair, index }) => renderPair(pair, index))}
+              </div>
+            </details>
+          )}
         </section>
       )}
     </div>

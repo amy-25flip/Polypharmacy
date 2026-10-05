@@ -95,6 +95,23 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
+  // A combination brand adds every ingredient at once, so the interaction check cannot miss one.
+  const handleSelectOption = (drug: DrugSearchResult) => {
+    if (!drug.bundle || drug.bundle.length < 2) {
+      handleSelect(drug.name)
+      return
+    }
+    const fresh = drug.bundle.filter((name) => !existingDrugs.some((d) => d.toLowerCase() === name.toLowerCase()))
+    fresh.forEach((name) => onAddDrug(name, timing, false))
+    setFeedback(fresh.length ? null : `All ingredients of ${drug.matched_via_brand ?? 'this brand'} are already added.`)
+    if (!fresh.length) setTimeout(() => setFeedback(null), 3000)
+    setQuery('')
+    setSuggestions([])
+    setIsOpen(false)
+    setSelectedIndex(-1)
+    inputRef.current?.focus()
+  }
+
   const handleSelect = (drugName: string, isUnmatched = false) => {
     const trimmed = drugName.trim()
     if (!trimmed) return
@@ -133,13 +150,13 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
     } else if (e.key === 'Enter') {
       e.preventDefault()
       if (selectedIndex >= 0 && selectedIndex < suggestions.length) {
-        handleSelect(suggestions[selectedIndex].name)
+        handleSelectOption(suggestions[selectedIndex])
       } else if (suggestions.length === 0 && query.trim().length >= 2) {
         // Pick fallback unmatched option
         handleSelect(query.trim(), true)
       } else if (suggestions.length > 0 && selectedIndex === -1) {
         // Pick top suggestion on enter
-        handleSelect(suggestions[0].name)
+        handleSelectOption(suggestions[0])
       }
     } else if (e.key === 'Escape') {
       setIsOpen(false)
@@ -272,7 +289,7 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
                     type="button"
                     role="option"
                     aria-selected={isSelected}
-                    onClick={() => handleSelect(drug.name)}
+                    onClick={() => handleSelectOption(drug)}
                     onMouseEnter={() => setSelectedIndex(index)}
                     className={`w-full text-left px-3.5 py-2.5 text-sm font-medium flex items-center justify-between transition-colors ${
                       isSelected
@@ -289,7 +306,7 @@ export const DrugSearchInput: React.FC<DrugSearchInputProps> = ({
                       )}
                       {drug.matched_via_brand && (
                         <span className={`block text-xs font-normal ${isSelected ? 'text-blue-100' : 'text-slate-500'}`}>
-                          brand: {drug.matched_via_brand}
+                          {drug.bundle && drug.bundle.length > 1 ? `brand: ${drug.matched_via_brand}. Adds all ${drug.bundle.length} ingredients` : `brand: ${drug.matched_via_brand}`}
                         </span>
                       )}
                     </span>

@@ -28,6 +28,7 @@ BASIS_INFERRED = "inferred"
 BASIS_NO_RECORD = "no_record"
 BASIS_DUPLICATE = "duplicate_class"
 BASIS_NO_DATA = "no_data"
+BASIS_CLASS_RULE = "class_rule"
 
 NO_RECORD_NOTICE = (
     "No interaction is recorded for this pair in the reference database. This means no "
@@ -58,6 +59,13 @@ def strong_mechanism(explanation: dict) -> bool:
     they do not count as a reason to withhold a "no reaction" result."""
     reason = explanation.get("primary_reason")
     return bool(explanation.get("has_explanation") and reason and reason["type"] in ("class", "gene"))
+
+
+def apply_class_rule(severity: str, basis: str, rule: dict | None) -> tuple[str, str, str | None]:
+    """Raise an undocumented pair to a class rule's minimum severity; never touches a documented one."""
+    if rule and basis in (BASIS_INFERRED, BASIS_NO_RECORD) and RANK[severity] < RANK[rule["minimum"]]:
+        return rule["minimum"], BASIS_CLASS_RULE, rule["notice"] + " This is a class-level warning, not a pair-specific record."
+    return severity, basis, None
 
 
 def resolve_severity(*, documented: str | None, model_severity: str, uncertain: bool,

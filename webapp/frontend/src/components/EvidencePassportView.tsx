@@ -93,7 +93,7 @@ export const EvidencePassportView: React.FC<EvidencePassportViewProps> = ({ pass
     <div className="mt-3 rounded-lg border border-slate-200 bg-white/70 p-3">
       <div className="flex items-center gap-1.5 font-bold text-slate-900 text-[11px] tracking-wide uppercase mb-2">
         <Icon className="h-3.5 w-3.5 text-slate-500 shrink-0" />
-        <span>Evidence Passport</span>
+        <span>Why this flag appeared</span>
       </div>
       <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs">
         <span
@@ -105,7 +105,7 @@ export const EvidencePassportView: React.FC<EvidencePassportViewProps> = ({ pass
           <span className="text-slate-600">
             Model reliability at this confidence:{' '}
             <span className={`font-bold ${reliabilityClass[reliability.band]}`}>
-              {reliability.band} ({Math.round(reliability.empirical_accuracy * 100)}% historically, held-out test)
+              {reliability.band} (right for about {Math.round(reliability.empirical_accuracy * 100)}% of similar pairs in test data; this patient may differ)
             </span>
           </span>
         ) : (
@@ -120,7 +120,7 @@ export const EvidencePassportView: React.FC<EvidencePassportViewProps> = ({ pass
         <div className="mt-2 pt-2 border-t border-slate-100 text-xs">
           <div className="flex items-center gap-1.5 font-semibold text-slate-700 mb-1.5">
             <Braces className="h-3.5 w-3.5 text-slate-400 shrink-0" />
-            <span>Conformal severity set — statistically guaranteed coverage, not a single guess</span>
+            <span>Model uncertainty on test data: the severities it could not rule out</span>
           </div>
           <div className="space-y-1">
             {conformalLevels.map(({ level, entry }) => (
@@ -143,7 +143,7 @@ export const EvidencePassportView: React.FC<EvidencePassportViewProps> = ({ pass
             ))}
           </div>
           <p className="mt-1.5 text-[11px] text-slate-500 italic">
-            As target coverage rises, the guaranteed set widens — a mathematically calibrated way of saying how sure PolyGuard really is, not just a confidence number.
+            These sets describe how the model behaved on test data. They are not a guarantee for this patient.
           </p>
         </div>
       )}

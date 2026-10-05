@@ -191,12 +191,47 @@ def main() -> None:
     for a, b in [("Isotretinoin", "Doxycycline"), ("Acitretin", "Methotrexate"), ("Methotrexate", "Trimethoprim")]:
         status, check = request(base, "/api/check", {"drugs": [a, b]})
         assert check["regimen"]["pairs"][0]["severity"] == "Major", (a, b)
-    status, preg = request(base, "/api/patient-cautions", {"drugs": ["Isotretinoin", "Doxycycline", "Lisinopril", "Metformin"], "pregnant": True})
+    status, preg = request(base, "/api/patient-cautions", {"drugs": ["Isotretinoin", "Doxycycline", "Lisinopril", "Metformin"], "pregnancy": "pregnant"})
     assert {c["drug"] for c in preg["cautions"]} == {"Isotretinoin", "Doxycycline", "Lisinopril"}, preg
     assert all(c["level"] == "Avoid" and c["factor"] == "pregnancy" for c in preg["cautions"])
-    status, none = request(base, "/api/patient-cautions", {"drugs": ["Isotretinoin"], "pregnant": False})
+    status, none = request(base, "/api/patient-cautions", {"drugs": ["Isotretinoin"]})
     assert none["cautions"] == []
+    # "Could become pregnant" triggers the teratogens that need contraception, not every pregnancy caution.
+    status, possible = request(base, "/api/patient-cautions", {"drugs": ["Isotretinoin", "Lisinopril", "Methotrexate"], "pregnancy": "possible"})
+    assert {c["drug"] for c in possible["cautions"]} == {"Isotretinoin", "Methotrexate"}, possible
+    assert all(c["trigger"] == "pregnancy possible" for c in possible["cautions"])
+    status, bad = request(base, "/api/patient-cautions", {"drugs": ["Isotretinoin"], "pregnancy": "maybe"})
+    assert status == 422
     print("PASS dermatology safety: isotretinoin + doxycycline, acitretin + methotrexate and methotrexate + trimethoprim are Major; pregnancy cautions fire only when ticked")
+
+    # Review fixes: class warnings outrank a weak model guess, brands bundle every ingredient, lists are grouped.
+    for a, b, floor in [("Lisinopril", "Spironolactone", "Moderate"), ("Enalapril", "Amiloride", "Moderate"),
+                        ("Ramipril", "Naproxen", "Moderate"), ("Losartan", "Spironolactone", "Moderate")]:
+        status, check = request(base, "/api/check", {"drugs": [a, b]})
+        pair = check["regimen"]["pairs"][0]
+        assert pair["severity"] in ("Moderate", "Major"), (a, b, pair)
+        if pair["severity_basis"] == "class_rule":
+            assert pair["severity"] == floor and "class-level warning" in pair["severity_notice"], pair
+        status, screen = request(base, "/api/screen-candidates", {"selected": [a], "candidates": [b]})
+        assert screen["results"][0]["flags"][0]["severity"] == pair["severity"], (a, b)
+    status, check = request(base, "/api/check", {"drugs": ["Lisinopril", "Spironolactone"]})
+    assert check["regimen"]["pairs"][0]["severity_basis"] in ("class_rule", "documented", "inferred")
+    status, bundle = request(base, "/api/drugs/search?q=zerodol%20p")
+    assert bundle[0]["bundle"] == ["Aceclofenac", "Acetaminophen"] and bundle[0]["matched_via_brand"] == "zerodol p", bundle[:2]
+    status, single = request(base, "/api/drugs/search?q=dolo%20650")
+    assert single[0]["name"] == "Acetaminophen" and "bundle" not in single[0]
+    status, ht = request(base, "/api/diseases/hypertension/medicines")
+    groups = {m["name"]: m["group"] for m in ht["medicines"]}
+    assert groups["Amlodipine"] == "Usual first choices" and groups["Atorvastatin"].startswith("Lowers heart risk")
+    assert any(m["group_collapsed"] for m in ht["medicines"]) and sum(1 for g in groups.values() if g == "Usual first choices") >= 10
+    status, t2 = request(base, "/api/diseases/type-2-diabetes-mellitus/medicines")
+    by = {m["name"]: m for m in t2["medicines"]}
+    assert by["Losartan"]["group"].startswith("Not for glucose control") and by["Metformin"]["group"].startswith("Common glucose-lowering")
+    status, tb = request(base, "/api/diseases?q=tuberculosis")
+    assert "regimen" in (tb["diseases"][0]["note"] or "")
+    status, gi = request(base, "/api/diseases/acute-gastroenteritis/medicines")
+    assert gi["medicines"][0]["name"] == "Oral rehydration salts" or any(m["name"] == "Oral rehydration salts" for m in gi["medicines"])
+    print("PASS review fixes: class warnings raise ACE/ARB pairs, combination brands bundle ingredients, long lists are grouped with TB as a regimen and ORS listed")
 
     status, result = request(base, "/api/screen-candidates",
                              {"selected": ["Warfarin", "warfarin"],

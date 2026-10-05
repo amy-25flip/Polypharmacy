@@ -304,6 +304,10 @@
     "Ketotifen": {
       "kind": "systemic",
       "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Oral rehydration salts": {
+      "kind": "systemic",
+      "note": "is the first treatment for diarrhoea. It has no interaction concerns and is not screened; it is listed so it is not forgotten."
     }
   }
 }

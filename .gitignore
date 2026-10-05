@@ -11,6 +11,7 @@ processed/*
 !processed/label_indications.json
 !processed/patient_factor_rules.json
 !processed/no_reaction_validation.json
+!processed/class_interaction_rules.json
 
 # Python
 __pycache__/

@@ -4,7 +4,6 @@ import * as api from '../api/client'
 import type { CandidateFlag, CheckResponse, Disease } from '../api/client'
 import { PatientPrescriptionWorkflow } from '../components/PatientPrescriptionWorkflow'
 import { InteractionResults } from '../components/InteractionResults'
-import { PatientFactors } from '../components/PatientFactors'
 import { ScreeningFlag } from '../components/ScreeningFlag'
 
 const fever: Disease = {
@@ -54,7 +53,7 @@ describe('medicines the checker cannot check', () => {
     }
     render(<ScreeningFlag flags={[flag]} severity="None" basis="basis" />)
     expect(screen.getAllByText(/Not checked \(no interaction data\)/).length).toBeGreaterThan(0)
-    expect(screen.queryByText('No reaction')).not.toBeInTheDocument()
+    expect(screen.queryByText('No interaction on record')).not.toBeInTheDocument()
     expect(screen.queryByText(/not proof that it is safe/i)).not.toBeInTheDocument()
   })
 
@@ -72,25 +71,7 @@ describe('medicines the checker cannot check', () => {
     }
     render(<InteractionResults result={result} />)
     expect(screen.getByText('Not Checked — No Interaction Data')).toBeInTheDocument()
-    expect(screen.queryByText('No Reaction on Record')).not.toBeInTheDocument()
+    expect(screen.queryByText('No Interaction on Record — Risk Not Excluded')).not.toBeInTheDocument()
     expect(screen.getAllByText('Not checked').length).toBeGreaterThan(0)
-  })
-})
-
-describe('pregnancy cautions', () => {
-  afterEach(() => vi.restoreAllMocks())
-
-  it('asks for cautions when pregnancy is ticked, even with no age or kidney value', async () => {
-    const spy = vi.spyOn(api, 'fetchPatientCautions').mockResolvedValue([{
-      drug: 'Isotretinoin', level: 'Avoid', factor: 'pregnancy', trigger: 'pregnant or may become pregnant',
-      text: 'Causes serious birth defects.', source: 'FDA Isotretinoin label', url: 'https://dailymed.nlm.nih.gov/x',
-    }])
-    render(<PatientFactors medicines={['Isotretinoin']} />)
-    expect(spy).not.toHaveBeenCalled()
-    fireEvent.click(screen.getByLabelText(/Pregnant, or could become pregnant/))
-    await waitFor(() => expect(spy).toHaveBeenCalled())
-    expect(spy.mock.calls[0][0]).toEqual(['Isotretinoin'])
-    expect(spy.mock.calls[0][4]).toBe(true)
-    expect(await screen.findByText(/Causes serious birth defects/)).toBeInTheDocument()
   })
 })

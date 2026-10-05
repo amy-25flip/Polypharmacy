@@ -1,0 +1,189 @@
+{
+  "groups": {
+    "ace_inhibitors": [
+      "Enalapril",
+      "Ramipril",
+      "Lisinopril",
+      "Perindopril",
+      "Captopril",
+      "Benazepril",
+      "Fosinopril",
+      "Quinapril",
+      "Trandolapril"
+    ],
+    "arbs": [
+      "Losartan",
+      "Telmisartan",
+      "Valsartan",
+      "Olmesartan",
+      "Irbesartan",
+      "Candesartan",
+      "Eprosartan"
+    ],
+    "potassium_raisers": [
+      "Spironolactone",
+      "Eplerenone",
+      "Amiloride",
+      "Triamterene",
+      "Potassium chloride"
+    ],
+    "nsaids": [
+      "Ibuprofen",
+      "Diclofenac",
+      "Naproxen",
+      "Ketorolac",
+      "Celecoxib",
+      "Etoricoxib",
+      "Aceclofenac",
+      "Meloxicam",
+      "Indomethacin",
+      "Piroxicam",
+      "Nimesulide",
+      "Mefenamic acid",
+      "Ketoprofen"
+    ],
+    "nitrates": [
+      "Nitroglycerin",
+      "Isosorbide mononitrate",
+      "Isosorbide dinitrate"
+    ],
+    "pde5_inhibitors": [
+      "Sildenafil",
+      "Tadalafil",
+      "Vardenafil"
+    ],
+    "opioids": [
+      "Morphine",
+      "Codeine",
+      "Tramadol",
+      "Fentanyl",
+      "Oxycodone",
+      "Hydromorphone",
+      "Methadone",
+      "Meperidine",
+      "Tapentadol",
+      "Buprenorphine"
+    ],
+    "benzodiazepines": [
+      "Diazepam",
+      "Alprazolam",
+      "Lorazepam",
+      "Clonazepam",
+      "Midazolam",
+      "Temazepam",
+      "Chlordiazepoxide",
+      "Clobazam",
+      "Triazolam"
+    ],
+    "serotonergic": [
+      "Sertraline",
+      "Fluoxetine",
+      "Paroxetine",
+      "Escitalopram",
+      "Citalopram",
+      "Venlafaxine",
+      "Duloxetine",
+      "Fluvoxamine",
+      "Tramadol"
+    ],
+    "linezolid": [
+      "Linezolid"
+    ]
+  },
+  "rules": [
+    {
+      "a": "ace_inhibitors",
+      "b": "potassium_raisers",
+      "minimum": "Moderate",
+      "effects": [
+        "High potassium"
+      ],
+      "notice": "ACE inhibitors raise potassium, and so do potassium-sparing diuretics and potassium salts. Risk is higher in kidney disease, diabetes and older adults. Check potassium and kidney function.",
+      "source": "FDA Lisinopril label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=lisinopril"
+    },
+    {
+      "a": "arbs",
+      "b": "potassium_raisers",
+      "minimum": "Moderate",
+      "effects": [
+        "High potassium"
+      ],
+      "notice": "ARBs raise potassium, and so do potassium-sparing diuretics and potassium salts. Risk is higher in kidney disease, diabetes and older adults. Check potassium and kidney function.",
+      "source": "FDA Losartan label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=losartan"
+    },
+    {
+      "a": "ace_inhibitors",
+      "b": "nsaids",
+      "minimum": "Moderate",
+      "effects": [
+        "Kidney injury",
+        "Reduced effect"
+      ],
+      "notice": "NSAIDs can blunt the blood-pressure effect and worsen kidney function, mostly with dehydration, kidney disease or a diuretic. Avoid prolonged use and check kidney function.",
+      "source": "FDA Lisinopril label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=lisinopril"
+    },
+    {
+      "a": "arbs",
+      "b": "nsaids",
+      "minimum": "Moderate",
+      "effects": [
+        "Kidney injury",
+        "Reduced effect"
+      ],
+      "notice": "NSAIDs can blunt the blood-pressure effect and worsen kidney function, mostly with dehydration, kidney disease or a diuretic. Avoid prolonged use and check kidney function.",
+      "source": "FDA Losartan label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=losartan"
+    },
+    {
+      "a": "ace_inhibitors",
+      "b": "arbs",
+      "minimum": "Moderate",
+      "effects": [
+        "High potassium",
+        "Low blood pressure",
+        "Kidney injury"
+      ],
+      "notice": "Taking an ACE inhibitor and an ARB together raises the risk of high potassium, low blood pressure and kidney injury without added benefit.",
+      "source": "FDA Lisinopril label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=lisinopril"
+    },
+    {
+      "a": "nitrates",
+      "b": "pde5_inhibitors",
+      "minimum": "Major",
+      "effects": [
+        "Low blood pressure"
+      ],
+      "notice": "Contraindicated: can cause a sudden, severe fall in blood pressure.",
+      "source": "FDA Sildenafil label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=sildenafil"
+    },
+    {
+      "a": "opioids",
+      "b": "benzodiazepines",
+      "minimum": "Major",
+      "effects": [
+        "Respiratory depression",
+        "Sedation"
+      ],
+      "notice": "Boxed warning: together they can cause profound sedation, slow breathing, coma and death. Avoid unless there is no alternative, and use the lowest doses for the shortest time.",
+      "source": "FDA Tramadol label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=tramadol"
+    },
+    {
+      "a": "linezolid",
+      "b": "serotonergic",
+      "minimum": "Major",
+      "effects": [
+        "Serotonin syndrome"
+      ],
+      "notice": "Linezolid blocks monoamine oxidase. With serotonergic medicines it can cause serotonin syndrome (agitation, fever, tremor).",
+      "source": "FDA Linezolid label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=linezolid"
+    }
+  ],
+  "note": "Floors for undocumented pairs only; from FDA label warnings; not yet reviewed by a pharmacist."
+}

@@ -1077,6 +1077,7 @@
       ],
       "medicines": {
         "ICMR STW paediatrics: diarrhoea": [
+          "Oral rehydration salts",
           "Zinc sulfate",
           "Metronidazole",
           "Doxycycline",
@@ -1707,7 +1708,11 @@
       "Doxofylline",
       "Tazobactam",
       "Thiocolchicoside",
-      "Ketotifen"
+      "Ketotifen",
+      "Oral rehydration salts"
     ]
+  },
+  "limited_notes": {
+    "Oral rehydration salts": "is the first treatment for diarrhoea. It has no interaction concerns and is not screened; it is listed so it is not forgotten."
   }
 }

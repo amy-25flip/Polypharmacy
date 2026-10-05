@@ -1,0 +1,656 @@
+{
+  "_note": "Clinical grouping and display labels applied on top of the evidence lists by build_disease_formulary.py. Medicines not named in a group fall into a collapsed 'More options' group. Nothing is deleted, so provenance is kept. Grouping drawn from standard Indian practice and the cited sources. It has not yet been reviewed by an Indian clinician.",
+  "rest_label": "More options (specialist, acute-care or rarely used)",
+  "diseases": {
+    "Hypertension": {
+      "groups": [
+        {
+          "label": "Usual first choices",
+          "medicines": [
+            "Amlodipine",
+            "Nifedipine",
+            "Felodipine",
+            "Telmisartan",
+            "Losartan",
+            "Olmesartan",
+            "Valsartan",
+            "Irbesartan",
+            "Candesartan",
+            "Enalapril",
+            "Ramipril",
+            "Lisinopril",
+            "Perindopril",
+            "Captopril",
+            "Benazepril",
+            "Hydrochlorothiazide",
+            "Chlorthalidone",
+            "Indapamide"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Add-on, or for a specific reason (pregnancy, angina, heart failure, prostate)",
+          "medicines": [
+            "Atenolol",
+            "Metoprolol",
+            "Carvedilol",
+            "Nebivolol",
+            "Propranolol",
+            "Labetalol",
+            "Methyldopa",
+            "Spironolactone",
+            "Eplerenone",
+            "Amiloride",
+            "Triamterene",
+            "Furosemide",
+            "Torasemide",
+            "Bumetanide",
+            "Metolazone",
+            "Diltiazem",
+            "Verapamil",
+            "Doxazosin",
+            "Prazosin",
+            "Terazosin",
+            "Clonidine",
+            "Hydralazine",
+            "Minoxidil"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Lowers heart risk, not blood pressure",
+          "medicines": [
+            "Atorvastatin"
+          ],
+          "collapsed": false
+        }
+      ],
+      "labels": {
+        "Atorvastatin": "A statin: lowers cholesterol, not blood pressure",
+        "Methyldopa": "Used in pregnancy",
+        "Labetalol": "Used in pregnancy"
+      }
+    },
+    "Type 2 diabetes mellitus": {
+      "groups": [
+        {
+          "label": "Common glucose-lowering choices",
+          "medicines": [
+            "Metformin",
+            "Glimepiride",
+            "Gliclazide",
+            "Glipizide",
+            "Sitagliptin",
+            "Linagliptin",
+            "Pioglitazone",
+            "Dapagliflozin",
+            "Empagliflozin",
+            "Insulin human",
+            "Acarbose",
+            "Repaglinide",
+            "Nateglinide"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Older or less preferred",
+          "medicines": [
+            "Glyburide",
+            "Rosiglitazone",
+            "Miglitol",
+            "Chlorpropamide",
+            "Tolazamide",
+            "Tolbutamide"
+          ],
+          "collapsed": true
+        },
+        {
+          "label": "Not for glucose control (used for other reasons in people with diabetes)",
+          "medicines": [
+            "Losartan",
+            "Valsartan",
+            "Irbesartan",
+            "Ramipril",
+            "Orlistat",
+            "Bromocriptine"
+          ],
+          "collapsed": true
+        }
+      ],
+      "labels": {
+        "Losartan": "Protects the kidneys and heart, does not lower sugar",
+        "Valsartan": "Protects the kidneys and heart, does not lower sugar",
+        "Irbesartan": "Protects the kidneys and heart, does not lower sugar",
+        "Ramipril": "Protects the kidneys and heart, does not lower sugar",
+        "Orlistat": "Weight loss, not glucose control",
+        "Bromocriptine": "Rarely used for diabetes",
+        "Glyburide": "Avoid in older adults and kidney disease"
+      }
+    },
+    "Asthma": {
+      "groups": [
+        {
+          "label": "Controller, taken every day (inhaled steroids)",
+          "medicines": [
+            "Beclomethasone dipropionate",
+            "Budesonide",
+            "Ciclesonide",
+            "Mometasone",
+            "Flunisolide"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Reliever, taken when needed",
+          "medicines": [
+            "Salbutamol",
+            "Terbutaline",
+            "Ipratropium"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Add-on to an inhaled steroid (a long-acting inhaler is never used alone in asthma)",
+          "medicines": [
+            "Formoterol",
+            "Salmeterol",
+            "Indacaterol",
+            "Tiotropium",
+            "Montelukast",
+            "Theophylline",
+            "Zafirlukast",
+            "Zileuton"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Short oral steroid course for a flare-up",
+          "medicines": [
+            "Prednisolone",
+            "Prednisone",
+            "Methylprednisolone",
+            "Dexamethasone",
+            "Hydrocortisone",
+            "Betamethasone"
+          ],
+          "collapsed": true
+        }
+      ],
+      "labels": {
+        "Formoterol": "Inhaled. Use only together with an inhaled steroid",
+        "Salmeterol": "Inhaled. Use only together with an inhaled steroid",
+        "Indacaterol": "Inhaled. Use only together with an inhaled steroid",
+        "Tiotropium": "Inhaled",
+        "Salbutamol": "Inhaled (or tablet/syrup)",
+        "Beclomethasone dipropionate": "Inhaled",
+        "Budesonide": "Inhaled",
+        "Ciclesonide": "Inhaled",
+        "Mometasone": "Inhaled"
+      }
+    },
+    "Chronic obstructive pulmonary disease": {
+      "groups": [
+        {
+          "label": "Stable COPD: daily inhalers",
+          "medicines": [
+            "Tiotropium",
+            "Formoterol",
+            "Salmeterol",
+            "Arformoterol",
+            "Ipratropium"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Reliever",
+          "medicines": [
+            "Salbutamol"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Flare-ups only (short courses)",
+          "medicines": [
+            "Prednisolone",
+            "Prednisone",
+            "Doxycycline",
+            "Ciprofloxacin",
+            "Levofloxacin",
+            "Moxifloxacin",
+            "Ofloxacin"
+          ],
+          "collapsed": true
+        },
+        {
+          "label": "Specialist add-on",
+          "medicines": [
+            "Roflumilast",
+            "Aminophylline",
+            "Acetylcysteine",
+            "Montelukast"
+          ],
+          "collapsed": true
+        }
+      ],
+      "labels": {
+        "Ciprofloxacin": "Antibiotic for a flare-up only when infection is likely",
+        "Levofloxacin": "Antibiotic for a flare-up only when infection is likely",
+        "Moxifloxacin": "Antibiotic for a flare-up only when infection is likely",
+        "Ofloxacin": "Antibiotic for a flare-up only when infection is likely",
+        "Doxycycline": "Antibiotic for a flare-up only when infection is likely",
+        "Tiotropium": "Inhaled"
+      }
+    },
+    "Epilepsy": {
+      "groups": [
+        {
+          "label": "Maintenance anti-seizure medicines",
+          "medicines": [
+            "Carbamazepine",
+            "Oxcarbazepine",
+            "Phenytoin",
+            "Valproic acid",
+            "Levetiracetam",
+            "Lamotrigine",
+            "Topiramate",
+            "Lacosamide",
+            "Clobazam",
+            "Phenobarbital",
+            "Zonisamide",
+            "Clonazepam",
+            "Gabapentin",
+            "Pregabalin"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Emergency or rescue (supervised setting only)",
+          "medicines": [
+            "Diazepam",
+            "Midazolam",
+            "Fosphenytoin",
+            "Propofol"
+          ],
+          "collapsed": true
+        }
+      ],
+      "labels": {
+        "Valproic acid": "Avoid in girls and women who may become pregnant unless nothing else works",
+        "Propofol": "Anaesthetic for status epilepticus in hospital",
+        "Midazolam": "Rescue in a seizure",
+        "Diazepam": "Rescue in a seizure"
+      }
+    },
+    "Depression": {
+      "groups": [
+        {
+          "label": "SSRIs and SNRIs (usual first choice)",
+          "medicines": [
+            "Sertraline",
+            "Escitalopram",
+            "Fluoxetine",
+            "Paroxetine",
+            "Citalopram",
+            "Fluvoxamine",
+            "Duloxetine"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Other antidepressants",
+          "medicines": [
+            "Amitriptyline",
+            "Nortriptyline",
+            "Imipramine",
+            "Trazodone",
+            "Vilazodone"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Specialist or add-on use",
+          "medicines": [
+            "Aripiprazole",
+            "Valproic acid",
+            "Nefazodone",
+            "Selegiline"
+          ],
+          "collapsed": true
+        }
+      ],
+      "labels": {
+        "Aripiprazole": "Specialist add-on",
+        "Valproic acid": "Different indication: specialist only",
+        "Amitriptyline": "Avoid in older adults"
+      }
+    },
+    "Tuberculosis": {
+      "groups": [
+        {
+          "label": "Standard regimen for drug-susceptible TB (given together)",
+          "medicines": [
+            "Isoniazid",
+            "Rifampicin",
+            "Pyrazinamide",
+            "Ethambutol"
+          ],
+          "collapsed": false
+        }
+      ],
+      "note": "Drug-susceptible TB is treated as a regimen, not single drugs: isoniazid, rifampicin, pyrazinamide and ethambutol for 2 months, then isoniazid and rifampicin for 4 months. Follow the NTEP protocol.",
+      "labels": {
+        "Pyrazinamide": "First 2 months only",
+        "Ethambutol": "First 2 months only"
+      }
+    },
+    "Osteoarthritis": {
+      "groups": [
+        {
+          "label": "Pain relief: simple and applied to the skin",
+          "medicines": [
+            "Acetaminophen",
+            "Diclofenac (topical)",
+            "Lidocaine",
+            "Glucosamine"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Oral anti-inflammatory tablets (take care in kidney disease, heart failure and older adults)",
+          "medicines": [
+            "Ibuprofen",
+            "Naproxen",
+            "Diclofenac",
+            "Celecoxib",
+            "Meloxicam",
+            "Etodolac",
+            "Nabumetone",
+            "Ketoprofen",
+            "Flurbiprofen",
+            "Piroxicam",
+            "Indomethacin",
+            "Diflunisal",
+            "Fenoprofen",
+            "Oxaprozin",
+            "Sulindac",
+            "Tolmetin",
+            "Acetylsalicylic acid"
+          ],
+          "collapsed": false
+        }
+      ],
+      "labels": {
+        "Codeine": "Opioid: avoid in routine osteoarthritis care",
+        "Cyclobenzaprine": "Muscle relaxant: not for osteoarthritis pain",
+        "Prednisone": "Oral steroid: not for routine osteoarthritis",
+        "Methylprednisolone": "Steroid injection or tablets: specialist use"
+      }
+    },
+    "Hypothyroidism": {
+      "groups": [
+        {
+          "label": "Usual treatment",
+          "medicines": [
+            "Levothyroxine"
+          ],
+          "collapsed": false
+        }
+      ],
+      "labels": {
+        "Dextrothyroxine": "Not used for hypothyroidism",
+        "Liotrix": "Rarely used: specialist only",
+        "Liothyronine": "Specialist only"
+      }
+    },
+    "Chronic kidney disease": {
+      "groups": [
+        {
+          "label": "Protect the kidneys and heart",
+          "medicines": [
+            "Enalapril",
+            "Losartan",
+            "Dapagliflozin",
+            "Empagliflozin"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Swelling and fluid",
+          "medicines": [
+            "Furosemide",
+            "Torasemide",
+            "Bumetanide"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Bone and mineral problems",
+          "medicines": [
+            "Calcitriol",
+            "Calcium acetate",
+            "Cholecalciferol",
+            "Cinacalcet",
+            "Paricalcitol"
+          ],
+          "collapsed": false
+        }
+      ],
+      "labels": {
+        "Deferoxamine": "Iron or aluminium overload: specialist only"
+      }
+    },
+    "Heart failure": {
+      "groups": [
+        {
+          "label": "Improve outcome (disease-modifying)",
+          "medicines": [
+            "Enalapril",
+            "Bisoprolol",
+            "Carvedilol",
+            "Spironolactone",
+            "Dapagliflozin",
+            "Empagliflozin"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Relieve fluid",
+          "medicines": [
+            "Furosemide"
+          ],
+          "collapsed": false
+        }
+      ]
+    },
+    "Urinary tract infection": {
+      "groups": [
+        {
+          "label": "Lower urinary tract infection (tablets)",
+          "medicines": [
+            "Nitrofurantoin",
+            "Trimethoprim",
+            "Sulfamethoxazole",
+            "Cephalexin",
+            "Fosfomycin"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Kidney infection or complicated infection (supervised care)",
+          "medicines": [
+            "Ceftriaxone",
+            "Gentamicin",
+            "Amikacin"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Symptom relief only",
+          "medicines": [
+            "Phenazopyridine"
+          ],
+          "collapsed": false
+        }
+      ],
+      "note": "Send a urine culture in pregnancy and for any complicated, recurrent or kidney infection. Sulfamethoxazole and trimethoprim are usually given together as co-trimoxazole.",
+      "labels": {
+        "Phenazopyridine": "Relieves burning only; does not treat the infection",
+        "Ceftriaxone": "Injection",
+        "Gentamicin": "Injection",
+        "Amikacin": "Injection"
+      }
+    },
+    "Scabies": {
+      "groups": [
+        {
+          "label": "Applied to the skin (first choice)",
+          "medicines": [
+            "Permethrin"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Tablets, if skin treatment fails or is not possible",
+          "medicines": [
+            "Ivermectin"
+          ],
+          "collapsed": false
+        }
+      ],
+      "labels": {
+        "Permethrin": "5% cream on the whole skin. Safe in young children and pregnancy",
+        "Ivermectin": "Tablet. Avoid in children under 5 years or under 15 kg, and in pregnancy"
+      }
+    },
+    "Dermatophytosis of skin": {
+      "groups": [
+        {
+          "label": "Applied to the skin (limited disease)",
+          "medicines": [
+            "Clotrimazole",
+            "Miconazole (topical)",
+            "Luliconazole",
+            "Sertaconazole",
+            "Ciclopirox"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Tablets (extensive, recurrent or resistant disease)",
+          "medicines": [
+            "Terbinafine",
+            "Itraconazole",
+            "Fluconazole"
+          ],
+          "collapsed": false
+        }
+      ],
+      "labels": {
+        "Clotrimazole": "Cream",
+        "Luliconazole": "Cream",
+        "Sertaconazole": "Cream",
+        "Ciclopirox": "Cream or solution",
+        "Terbinafine": "Tablet (also available as cream)",
+        "Itraconazole": "Capsule. Not in heart failure",
+        "Fluconazole": "Tablet"
+      }
+    },
+    "Undifferentiated fever": {
+      "groups": [
+        {
+          "label": "Fever relief",
+          "medicines": [
+            "Acetaminophen",
+            "Ibuprofen"
+          ],
+          "collapsed": false
+        }
+      ],
+      "note": "Symptom entry: find the cause first. Check for dehydration and dengue risk before ibuprofen. Antibiotics are not routine for fever. This tool does not capture weight, so doses for children are not checked.",
+      "labels": {
+        "Ibuprofen": "Avoid if dengue is possible or the patient is dehydrated"
+      }
+    },
+    "Acute gastroenteritis": {
+      "groups": [
+        {
+          "label": "First treatment",
+          "medicines": [
+            "Oral rehydration salts",
+            "Zinc sulfate"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Only when an antibiotic is indicated (blood in stool, cholera, or a severe case)",
+          "medicines": [
+            "Metronidazole",
+            "Doxycycline",
+            "Erythromycin"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Adults only, for no-blood diarrhoea",
+          "medicines": [
+            "Loperamide"
+          ],
+          "collapsed": false
+        }
+      ],
+      "labels": {
+        "Oral rehydration salts": "Not screened for interactions. Always give first",
+        "Zinc sulfate": "Especially for children"
+      }
+    },
+    "Iron-deficiency anaemia": {
+      "groups": [
+        {
+          "label": "Oral iron (first choice)",
+          "medicines": [
+            "Ferrous fumarate",
+            "Ferrous sulfate anhydrous",
+            "Ferrous gluconate"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Injectable iron (supervised care)",
+          "medicines": [
+            "Iron sucrose"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Only if folate is also needed",
+          "medicines": [
+            "Folic acid"
+          ],
+          "collapsed": false
+        }
+      ],
+      "labels": {
+        "Folic acid": "Does not treat iron deficiency. Add only for folate deficiency or a separate antenatal reason"
+      }
+    },
+    "Vitamin B12-deficiency anaemia": {
+      "groups": [
+        {
+          "label": "Vitamin B12",
+          "medicines": [
+            "Cyanocobalamin",
+            "Hydroxocobalamin"
+          ],
+          "collapsed": false
+        },
+        {
+          "label": "Only if folate is also needed",
+          "medicines": [
+            "Folic acid"
+          ],
+          "collapsed": false
+        }
+      ]
+    }
+  }
+}

@@ -3,7 +3,7 @@ export type Severity = 'None' | 'Minor' | 'Moderate' | 'Major' | null
 
 // How a severity was reached: a documented record, a borrowed record for a drug with none of its
 // own ('estimated'), the model's guess ('inferred'), no record at all, or a same-class duplicate.
-export type SeverityBasis = 'documented' | 'estimated' | 'inferred' | 'no_record' | 'duplicate_class' | 'no_data'
+export type SeverityBasis = 'documented' | 'estimated' | 'inferred' | 'no_record' | 'duplicate_class' | 'no_data' | 'class_rule'
 
 // A sentence from an FDA drug label that names the other drug of a pair.
 export interface LabelEvidenceEntry {
@@ -203,6 +203,8 @@ export interface DrugSearchResult {
   name: string
   matched_via_brand?: string | null
   matched_via_synonym?: string | null
+  // Every ingredient of a combination brand; choosing the suggestion adds all of them.
+  bundle?: string[]
 }
 
 export interface Disease {
@@ -218,6 +220,11 @@ export interface Disease {
 export interface DiseaseMedicine {
   name: string
   sources: string[]
+  // Clinical grouping and a short display label (for example "Inhaled. Use only with an inhaled steroid").
+  group?: string
+  group_order?: number
+  group_collapsed?: boolean
+  label?: string
 }
 
 export interface CandidateFlag {
@@ -276,12 +283,12 @@ export interface PatientCaution {
 }
 
 export async function fetchPatientCautions(
-  drugs: string[], age: number | null, egfr: number | null, signal?: AbortSignal, pregnant?: boolean,
+  drugs: string[], age: number | null, egfr: number | null, signal?: AbortSignal, pregnancy?: 'possible' | 'pregnant',
 ): Promise<PatientCaution[]> {
   const res = await fetch(`${API_BASE}/api/patient-cautions`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ drugs, age, egfr, pregnant: pregnant || null }),
+    body: JSON.stringify({ drugs, age, egfr, pregnancy: pregnancy || null }),
     signal,
   })
   if (!res.ok) throw new Error(`Patient cautions failed: ${res.statusText}`)

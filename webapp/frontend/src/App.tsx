@@ -87,8 +87,8 @@ export function App() {
 
             <div role="tablist" aria-label="Choose a workflow" className="print:hidden grid gap-2 sm:grid-cols-2">
               {([
-                ['prescription', 'Prescriptions & scan', 'Enter medicines from prescriptions, a photo, or by name', ClipboardList],
-                ['diagnosis', 'Plan by diagnosis', 'Pick each diagnosis, then its medicines', Stethoscope],
+                ['prescription', 'Prescriptions & scan', 'Enter medicines from prescriptions, a photo, or by name. Its own patient plan', ClipboardList],
+                ['diagnosis', 'Plan by diagnosis', 'Pick each diagnosis, then its medicines. Its own patient plan', Stethoscope],
               ] as const).map(([key, label, hint, Icon]) => {
                 const selected = tab === key
                 return (
@@ -107,7 +107,6 @@ export function App() {
                     <span className={`flex items-center gap-2 text-sm font-bold ${selected ? 'text-blue-800' : 'text-slate-700'}`}>
                       <Icon className="h-4 w-4 shrink-0" />
                       <span className="break-words">{label}</span>
-                      {key === 'diagnosis' && <span className="rounded-full bg-purple-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-purple-800">New</span>}
                     </span>
                     <span className="mt-0.5 block break-words text-xs text-slate-500">{hint}</span>
                   </button>
@@ -134,7 +133,7 @@ export function App() {
                 <BarChart3 className="h-3.5 w-3.5" />
                 Model transparency &amp; real evaluation numbers
               </button>
-              <p>PolyGuard v1.0 • Clinical Drug Interaction Screening System</p>
+              <p>PolyGuard v1.0 • Medication interaction screening: decision support only</p>
             </footer>
           </div>
         </div>
