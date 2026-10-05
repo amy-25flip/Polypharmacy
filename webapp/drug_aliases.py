@@ -7,6 +7,9 @@ Two different things live in processed/drug_aliases.json:
 * ``estimated``: drugs the interaction database has no records for (gliclazide). Checks
   borrow the records of a close relative (glimepiride) and are always labelled as
   estimates, never as documented results.
+* ``limited_data``: drugs with no interaction records and no close relative, mostly skin
+  preparations (mupirocin, permethrin). They can be added to a plan, but pairs with them are
+  reported as not checked instead of guessed.
 """
 from __future__ import annotations
 
@@ -31,6 +34,11 @@ class DrugAliases:
             for name, info in data["estimated"].items()
             if name in known and info["proxy"] in known
         }
+        self._limited: dict[str, dict] = {
+            _norm(name): {"drug": name, "note": info["note"]}
+            for name, info in data.get("limited_data", {}).items()
+            if name in known
+        }
 
     def lookup_synonyms(self, query: str) -> list[tuple[str, list[str]]]:
         """Synonyms whose name starts with, or contains, the typed text (exact hit first)."""
@@ -44,6 +52,13 @@ class DrugAliases:
     def estimate(self, drug: str) -> dict | None:
         """``{"drug", "proxy", "reason"}`` if this drug is checked through a relative."""
         return self._estimated.get(_norm(drug))
+
+    def limited(self, drug: str) -> dict | None:
+        """``{"drug", "note"}`` if this drug has no interaction records and no stand-in."""
+        return self._limited.get(_norm(drug))
+
+    def limited_notes(self, *drugs: str) -> list[dict]:
+        return [info for info in (self.limited(d) for d in drugs) if info]
 
     def effective(self, drug: str) -> str:
         """The drug whose records are used for checking (the drug itself unless estimated)."""

@@ -10,33 +10,33 @@
   "by_true_severity": {
     "Major": {
       "pairs": 8074,
-      "shown_no_reaction_pct": 7.4,
+      "shown_no_reaction_pct": 7.3,
       "shown_correctly_pct": 76.6,
       "shown_as": {
         "Major": 76.6,
         "Moderate": 12.2,
         "Minor": 3.9,
-        "None": 7.4
+        "None": 7.3
       }
     },
     "Moderate": {
       "pairs": 29003,
-      "shown_no_reaction_pct": 14.2,
+      "shown_no_reaction_pct": 14.1,
       "shown_correctly_pct": 69.6,
       "shown_as": {
         "Moderate": 69.6,
         "Minor": 4.8,
-        "None": 14.2,
+        "None": 14.1,
         "Major": 11.5
       }
     },
     "Minor": {
       "pairs": 2050,
-      "shown_no_reaction_pct": 80.2,
-      "shown_correctly_pct": 8.4,
+      "shown_no_reaction_pct": 80.0,
+      "shown_correctly_pct": 8.6,
       "shown_as": {
-        "Minor": 8.4,
-        "None": 80.2,
+        "Minor": 8.6,
+        "None": 80.0,
         "Moderate": 8.2,
         "Major": 3.2
       }
@@ -46,11 +46,11 @@
     "at least one sparse or limited": {
       "Major": {
         "pairs": 2430,
-        "shown_no_reaction_pct": 8.6
+        "shown_no_reaction_pct": 8.5
       },
       "Minor": {
         "pairs": 1207,
-        "shown_no_reaction_pct": 86.2
+        "shown_no_reaction_pct": 86.0
       },
       "Moderate": {
         "pairs": 12479,
@@ -64,7 +64,7 @@
       },
       "Minor": {
         "pairs": 843,
-        "shown_no_reaction_pct": 71.8
+        "shown_no_reaction_pct": 71.5
       },
       "Moderate": {
         "pairs": 16524,

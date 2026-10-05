@@ -25,6 +25,7 @@ export function PatientFactors({ medicines }: { medicines: string[] }) {
   const requestIdRef = useRef(0)
   const [age, setAge] = useState('')
   const [egfr, setEgfr] = useState('')
+  const [pregnant, setPregnant] = useState(false)
   const [cautions, setCautions] = useState<PatientCaution[]>([])
   const [loading, setLoading] = useState(false)
   const [failed, setFailed] = useState(false)
@@ -34,7 +35,7 @@ export function PatientFactors({ medicines }: { medicines: string[] }) {
     const ageValue = age === '' ? null : Number(age)
     const egfrValue = egfr === '' ? null : Number(egfr)
     const validAge = ageValue !== null && Number.isInteger(ageValue) && ageValue >= 0 && ageValue <= 120
-    if (medicines.length === 0 || (!validAge && egfrValue === null)) {
+    if (medicines.length === 0 || (!validAge && egfrValue === null && !pregnant)) {
       requestIdRef.current += 1
       setCautions([])
       setLoading(false)
@@ -47,7 +48,7 @@ export function PatientFactors({ medicines }: { medicines: string[] }) {
     setFailed(false)
     const timer = window.setTimeout(async () => {
       try {
-        const found = await fetchPatientCautions(medicines, validAge ? ageValue : null, egfrValue, controller.signal)
+        const found = await fetchPatientCautions(medicines, validAge ? ageValue : null, egfrValue, controller.signal, pregnant)
         if (requestIdRef.current === requestId) setCautions(found)
       } catch (caught) {
         if (requestIdRef.current !== requestId || (caught instanceof Error && caught.name === 'AbortError')) return
@@ -59,16 +60,16 @@ export function PatientFactors({ medicines }: { medicines: string[] }) {
     return () => { window.clearTimeout(timer); controller.abort() }
     // medicinesKey stands in for the medicines array so a new array with the same names does not refetch
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [age, egfr, medicinesKey])
+  }, [age, egfr, pregnant, medicinesKey])
 
-  const anyFactor = age !== '' || egfr !== ''
+  const anyFactor = age !== '' || egfr !== '' || pregnant
   return (
     <section aria-label="Patient factors" className="print:hidden rounded-xl border border-slate-200 bg-white p-5 sm:p-7 space-y-3">
       <div className="flex items-start gap-2">
         <UserRound className="mt-0.5 h-5 w-5 shrink-0 text-slate-600" />
         <div>
           <h2 className="text-lg font-bold text-slate-900">Patient factors (optional)</h2>
-          <p className="text-xs text-slate-500 mt-1">Age and kidney function change which medicines need extra care. Nothing here is saved.</p>
+          <p className="text-xs text-slate-500 mt-1">Age, kidney function and pregnancy change which medicines need extra care. Nothing here is saved.</p>
         </div>
       </div>
       <div className="grid gap-3 sm:grid-cols-2">
@@ -86,6 +87,10 @@ export function PatientFactors({ medicines }: { medicines: string[] }) {
           </select>
         </div>
       </div>
+      <label className="flex items-center gap-2 text-sm font-semibold text-slate-800">
+        <input type="checkbox" checked={pregnant} onChange={(event) => setPregnant(event.target.checked)} />
+        Pregnant, or could become pregnant
+      </label>
       {anyFactor && medicines.length === 0 && <p className="text-xs text-slate-500">Add medicines to see cautions for this patient.</p>}
       {loading && <p className="flex items-center gap-1 text-xs text-slate-500"><Loader2 className="h-3 w-3 animate-spin" /> Checking cautions…</p>}
       {failed && <p role="alert" className="text-xs text-rose-800">Patient cautions are unavailable right now. This does not mean there are none.</p>}

@@ -11,9 +11,11 @@ interface Props {
   // Stealing focus on mount broke keyboard tab navigation: arrowing to the diagnosis tab
   // would jump into the search field instead of staying on the tab.
   autoFocus?: boolean
+  // Only list diagnoses of this specialty (all of them when empty).
+  specialty?: string
 }
 
-export function DiseaseCombobox({ existingIds, onSelect, autoFocus = false }: Props) {
+export function DiseaseCombobox({ existingIds, onSelect, autoFocus = false, specialty = '' }: Props) {
   const id = useId()
   const inputRef = useRef<HTMLInputElement>(null)
   const rootRef = useRef<HTMLDivElement>(null)
@@ -43,7 +45,7 @@ export function DiseaseCombobox({ existingIds, onSelect, autoFocus = false }: Pr
     setActive(-1)
     const timer = window.setTimeout(async () => {
       try {
-        const diseases = await searchDiseases(query, controller.signal)
+        const diseases = await searchDiseases(query, controller.signal, specialty || undefined)
         if (searchRequestIdRef.current !== requestId) return
         setResults(diseases)
         if (!suppressOpenRef.current) setOpen(true)
@@ -56,7 +58,7 @@ export function DiseaseCombobox({ existingIds, onSelect, autoFocus = false }: Pr
       }
     }, query ? 200 : 0)
     return () => { window.clearTimeout(timer); controller.abort() }
-  }, [query, focused, retry])
+  }, [query, focused, retry, specialty])
 
   useEffect(() => {
     const outside = (event: MouseEvent) => {

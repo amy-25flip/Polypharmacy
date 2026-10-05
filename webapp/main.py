@@ -50,8 +50,8 @@ from label_evidence import LabelEvidence
 from patient_factors import PatientFactorEngine
 from prescription_scan import scan_prescription
 from severity_policy import (
-    BASIS_DUPLICATE, BASIS_INFERRED, BASIS_NO_RECORD, DUPLICATE_NOTICE, NO_RECORD_NOTICE,
-    RANK as SEVERITY_RANK, load_documented_severity, resolve_severity, strong_mechanism,
+    BASIS_DUPLICATE, BASIS_INFERRED, BASIS_NO_DATA, BASIS_NO_RECORD, DUPLICATE_NOTICE, NO_RECORD_NOTICE,
+    RANK as SEVERITY_RANK, load_documented_severity, resolve_severity, strong_mechanism, no_data_notice,
 )
 from subset_certificate import build_certificate
 
@@ -238,6 +238,15 @@ def estimate_notice(notes: list[dict]) -> str:
 
 
 def predict_pair(drug_a: str, drug_b: str) -> dict:
+    # A drug with no interaction records and no close relative (mostly skin preparations) is not checked.
+    limited = DRUG_ALIASES.limited_notes(drug_a, drug_b)
+    if limited:
+        return {
+            "drug_a": drug_a, "drug_b": drug_b, "severity": "None", "severity_basis": BASIS_NO_DATA,
+            "is_documented": False, "estimated_from": [], "severity_notice": no_data_notice(limited),
+            "confidence": 1.0,
+        }
+
     # A drug with no records of its own is checked through a close relative, and says so.
     notes = DRUG_ALIASES.notes(drug_a, drug_b)
     estimated = bool(notes)
@@ -390,6 +399,7 @@ class PatientCautionsRequest(BaseModel):
     drugs: list[str] = Field(max_length=100)
     age: int | None = Field(default=None, ge=0, le=120)
     egfr: int | None = Field(default=None, ge=0, le=200)
+    pregnant: bool | None = None
 
 
 def require_disease_plan() -> DiseasePlanEngine:
@@ -399,8 +409,13 @@ def require_disease_plan() -> DiseasePlanEngine:
 
 
 @app.get("/api/diseases")
-def search_diseases(q: str = ""):
-    return {"diseases": require_disease_plan().search(q)}
+def search_diseases(q: str = "", specialty: str | None = None):
+    return {"diseases": require_disease_plan().search(q, specialty)}
+
+
+@app.get("/api/specialties")
+def list_specialties():
+    return {"specialties": require_disease_plan().specialties()}
 
 
 @app.get("/api/diseases/{disease_id}/medicines")
@@ -419,7 +434,7 @@ def screen_candidates(payload: ScreenCandidatesRequest):
 @app.post("/api/patient-cautions")
 def patient_cautions(payload: PatientCautionsRequest):
     drugs = [d for d in dict.fromkeys(name.strip() for name in payload.drugs) if d in DRUG_VOCAB_SET]
-    return {"cautions": PATIENT_FACTORS.cautions(drugs, payload.age, payload.egfr)}
+    return {"cautions": PATIENT_FACTORS.cautions(drugs, payload.age, payload.egfr, payload.pregnant)}
 
 
 @app.get("/api/health")

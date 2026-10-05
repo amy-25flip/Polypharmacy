@@ -4,6 +4,7 @@ export const severityName = (severity: string) => (severity === 'None' ? 'No rea
 export const basisLabel = (basis: string | undefined, documented: boolean) => {
   if (basis === 'estimated') return 'Estimated'
   if (basis === 'no_record') return 'No record'
+  if (basis === 'no_data') return 'Not checked'
   if (basis === 'duplicate_class') return 'Same class'
   if (basis === 'inferred') return 'Inferred'
   if (basis === 'documented') return 'Documented'

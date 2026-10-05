@@ -23,7 +23,7 @@ class PatientFactorEngine:
         except (OSError, ValueError, KeyError):
             pass  # optional data: the feature simply reports no cautions
 
-    def cautions(self, drugs: list[str], age: int | None, egfr: int | None) -> list[dict]:
+    def cautions(self, drugs: list[str], age: int | None, egfr: int | None, pregnant: bool | None = None) -> list[dict]:
         """``egfr`` is the lower edge of the band the doctor picked, so "below 45" includes 30-44."""
         found: dict[tuple[str, str], dict] = {}
         for drug in drugs:
@@ -35,6 +35,8 @@ class PatientFactorEngine:
                     trigger = f"eGFR below {rule['below']}"
                 elif rule["factor"] == "age" and age is not None and age >= rule["at_least"]:
                     trigger = f"age {rule['at_least']} or over"
+                elif rule["factor"] == "pregnancy" and pregnant:
+                    trigger = "pregnant or may become pregnant"
                 else:
                     continue
                 key = (name, rule["factor"])

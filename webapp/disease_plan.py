@@ -11,7 +11,8 @@ import pandas as pd
 from rapidfuzz import fuzz
 
 from severity_policy import (
-    BASIS_DUPLICATE, BASIS_INFERRED, BASIS_NO_RECORD, DUPLICATE_NOTICE, NO_RECORD_NOTICE, RANK,
+    BASIS_DUPLICATE, BASIS_INFERRED, BASIS_NO_DATA, BASIS_NO_RECORD, DUPLICATE_NOTICE, NO_RECORD_NOTICE, RANK,
+    no_data_notice,
     resolve_severity, strong_mechanism,
 )
 
@@ -70,9 +71,19 @@ class DiseasePlanEngine:
     def pair_key(a: str, b: str) -> tuple[str, str]:
         return tuple(sorted((a, b)))
 
-    def search(self, query: str) -> list[dict]:
+    def specialties(self) -> list[dict]:
+        """Specialties with the number of diagnoses listed under each (alphabetical)."""
+        counts: dict[str, int] = {}
+        for disease in self.diseases.values():
+            for specialty in disease.get("specialties", []):
+                counts[specialty] = counts.get(specialty, 0) + 1
+        return [{"name": name, "disease_count": counts[name]} for name in sorted(counts, key=str.casefold)]
+
+    def search(self, query: str, specialty: str | None = None) -> list[dict]:
         q = self.normalize(query)
         diseases = list(self.diseases.values())
+        if specialty:
+            diseases = [d for d in diseases if specialty in d.get("specialties", [])]
         if not q:
             ordered = sorted(diseases, key=lambda d: (-len(d["medicines"]), d["name"].casefold()))
         else:
@@ -98,6 +109,8 @@ class DiseasePlanEngine:
                                 key=lambda item: (-item[0], item[1]["name"].casefold()))
                 ordered = [d for score, d in scored[:8] if score >= 78]
         return [{"id": d["id"], "name": d["name"], "aliases": d["aliases"],
+                 "specialties": d.get("specialties", []),
+                 "note": d.get("note"), "route_note": d.get("route_note"),
                  "medicine_count": len(d["medicines"])} for d in ordered]
 
     def medicines(self, disease_id: str) -> dict | None:
@@ -177,14 +190,17 @@ class DiseasePlanEngine:
         def same_drug(a: str, b: str) -> bool:
             return effective[a] == effective[b]
 
+        def not_checked(a: str, b: str) -> bool:
+            return bool(self.aliases.limited_notes(a, b))
+
         needed = set()
         for a, b in combinations(selected, 2):
-            if not same_drug(a, b):
+            if not same_drug(a, b) and not not_checked(a, b):
                 needed.add(self.pair_key(effective[a], effective[b]))
         for c in candidates:
             if self.normalize(c) not in selected_norm:
                 for s in selected:
-                    if not same_drug(c, s):
+                    if not same_drug(c, s) and not not_checked(c, s):
                         needed.add(self.pair_key(effective[c], effective[s]))
 
         # One vectorized Model 1 pass for all uncached pairs. Documented pairs take their
@@ -203,6 +219,12 @@ class DiseasePlanEngine:
                 self._prediction_cache[key] = (str(label), tuple(float(x) for x in proba))
 
         def pair(a: str, b: str) -> dict:
+            limited = self.aliases.limited_notes(a, b)
+            if limited:
+                return {"severity": "None", "severity_basis": BASIS_NO_DATA, "is_documented": False,
+                        "uncertain": False, "adverse_effects": (), "estimated_from": [],
+                        "adverse_effect_source": "none", "label_evidence": (),
+                        "severity_notice": no_data_notice(limited)}
             notes = self.aliases.notes(a, b)
             if same_drug(a, b):
                 return {"severity": "Moderate", "severity_basis": BASIS_DUPLICATE, "is_documented": False,
@@ -236,6 +258,7 @@ class DiseasePlanEngine:
                     flags.append({"with": s, "severity": p["severity"], "severity_basis": p["severity_basis"],
                                   "is_documented": p["is_documented"], "uncertain": p["uncertain"],
                                   "estimated_from": p["estimated_from"],
+                                  "severity_notice": p.get("severity_notice"),
                                   "adverse_effect_source": p["adverse_effect_source"],
                                   "label_evidence": list(p["label_evidence"]),
                                   "adverse_effects": list(p["adverse_effects"][:5])})

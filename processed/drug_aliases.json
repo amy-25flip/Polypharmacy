@@ -119,5 +119,191 @@
       "proxy": "Vancomycin",
       "reason": "Both are glycopeptide antibiotics; kidney and hearing toxicity interactions are largely shared."
     }
+  },
+  "limited_data": {
+    "Luliconazole": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Sertaconazole": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Ciclopirox": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Amorolfine": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Permethrin": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Mupirocin": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Fusidic acid": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Hydroquinone": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Mometasone": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Halobetasol": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Malathion": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Selenium sulfide": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Benzyl benzoate": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Crotamiton": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Tolnaftate": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Nystatin": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Naftifine": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Butenafine": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Nadifloxacin": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Ozenoxacin": {
+      "kind": "topical",
+      "note": "is applied to the skin and has no interaction records in the reference database. Interactions through the skin are unlikely, but this pair was not checked."
+    },
+    "Domperidone": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Ambroxol": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Bromhexine": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Guaifenesin": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Drotaverine": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Hyoscine": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Dicycloverine": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Racecadotril": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Ispaghula": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Betahistine": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Trimetazidine": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Flunarizine": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Cinnarizine": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Itopride": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Levosulpiride": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Mosapride": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Bilastine": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Rupatadine": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Acebrophylline": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Dabigatran": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Carbidopa": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Nimesulide": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Doxofylline": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Tazobactam": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Thiocolchicoside": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    },
+    "Ketotifen": {
+      "kind": "systemic",
+      "note": "has no interaction records in the reference database, so pairs with it were not checked. Check it against the other medicines separately."
+    }
   }
 }

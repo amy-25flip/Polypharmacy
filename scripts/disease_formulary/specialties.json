@@ -1,0 +1,259 @@
+{
+  "Acquired immunodeficiency syndrome": [
+    "Infectious disease"
+  ],
+  "Alcohol dependence": [
+    "Psychiatry"
+  ],
+  "Allergic rhinitis": [
+    "ENT and allergy"
+  ],
+  "Alzheimer's disease": [
+    "Neurology"
+  ],
+  "Anaemia of chronic kidney disease": [
+    "Nephrology"
+  ],
+  "Ankylosing spondylitis": [
+    "Rheumatology"
+  ],
+  "Asthma": [
+    "Pulmonology"
+  ],
+  "Atherosclerosis": [
+    "Cardiology"
+  ],
+  "Atopic dermatitis": [
+    "Dermatology"
+  ],
+  "Atrial fibrillation": [
+    "Cardiology"
+  ],
+  "Attention deficit hyperactivity disorder": [
+    "Psychiatry"
+  ],
+  "Autistic disorder": [
+    "Psychiatry"
+  ],
+  "Benign prostatic hyperplasia": [
+    "Urology"
+  ],
+  "Bipolar disorder": [
+    "Psychiatry"
+  ],
+  "Bone cancer": [
+    "Oncology"
+  ],
+  "Brain cancer": [
+    "Oncology"
+  ],
+  "Breast cancer": [
+    "Oncology"
+  ],
+  "Chronic kidney disease": [
+    "Nephrology"
+  ],
+  "Chronic obstructive pulmonary disease": [
+    "Pulmonology"
+  ],
+  "Colon cancer": [
+    "Oncology"
+  ],
+  "Conduct disorder": [
+    "Psychiatry"
+  ],
+  "Coronary artery disease": [
+    "Cardiology"
+  ],
+  "Crohn's disease": [
+    "Gastroenterology"
+  ],
+  "Depression": [
+    "Psychiatry"
+  ],
+  "Dilated cardiomyopathy": [
+    "Cardiology"
+  ],
+  "Dyslipidaemia": [
+    "Cardiology",
+    "Endocrinology"
+  ],
+  "Epilepsy": [
+    "Neurology"
+  ],
+  "Esophageal cancer": [
+    "Oncology"
+  ],
+  "Gastro-oesophageal reflux disease and peptic ulcer": [
+    "Gastroenterology"
+  ],
+  "Germ cell cancer": [
+    "Oncology"
+  ],
+  "Gilles de la Tourette syndrome": [
+    "Neurology"
+  ],
+  "Glaucoma": [
+    "Ophthalmology"
+  ],
+  "Gout": [
+    "Rheumatology",
+    "Orthopaedics"
+  ],
+  "Head and neck cancer": [
+    "Oncology"
+  ],
+  "Heart failure": [
+    "Cardiology"
+  ],
+  "Hematologic cancer": [
+    "Oncology"
+  ],
+  "Hepatitis B": [
+    "Gastroenterology",
+    "Infectious disease"
+  ],
+  "Hyperkalaemia in chronic kidney disease": [
+    "Nephrology"
+  ],
+  "Hypertension": [
+    "Cardiology"
+  ],
+  "Hyperthyroidism": [
+    "Endocrinology"
+  ],
+  "Hypothyroidism": [
+    "Endocrinology"
+  ],
+  "Kidney cancer": [
+    "Oncology"
+  ],
+  "Leprosy": [
+    "Dermatology",
+    "Infectious disease"
+  ],
+  "Liver cancer": [
+    "Oncology"
+  ],
+  "Lung cancer": [
+    "Oncology"
+  ],
+  "Lymphatic system cancer": [
+    "Oncology"
+  ],
+  "Malaria": [
+    "Infectious disease"
+  ],
+  "Melanoma": [
+    "Dermatology",
+    "Oncology"
+  ],
+  "Migraine": [
+    "Neurology"
+  ],
+  "Multiple sclerosis": [
+    "Neurology"
+  ],
+  "Muscle cancer": [
+    "Oncology"
+  ],
+  "Narcolepsy": [
+    "Neurology"
+  ],
+  "Obesity": [
+    "Endocrinology"
+  ],
+  "Osteoarthritis": [
+    "Orthopaedics"
+  ],
+  "Osteoporosis": [
+    "Endocrinology",
+    "Orthopaedics"
+  ],
+  "Ovarian cancer": [
+    "Oncology"
+  ],
+  "Pancreatic cancer": [
+    "Oncology"
+  ],
+  "Panic disorder": [
+    "Psychiatry"
+  ],
+  "Parkinson's disease": [
+    "Neurology"
+  ],
+  "Peripheral nervous system neoplasm": [
+    "Oncology"
+  ],
+  "Polycystic ovary syndrome": [
+    "Endocrinology",
+    "Gynaecology"
+  ],
+  "Primary biliary cirrhosis": [
+    "Gastroenterology"
+  ],
+  "Prostate cancer": [
+    "Oncology"
+  ],
+  "Psoriasis": [
+    "Dermatology"
+  ],
+  "Psoriatic arthritis": [
+    "Rheumatology",
+    "Dermatology"
+  ],
+  "Restless legs syndrome": [
+    "Neurology"
+  ],
+  "Rheumatoid arthritis": [
+    "Rheumatology"
+  ],
+  "Sarcoma": [
+    "Oncology"
+  ],
+  "Schizophrenia": [
+    "Psychiatry"
+  ],
+  "Secondary hyperparathyroidism in chronic kidney disease": [
+    "Nephrology"
+  ],
+  "Skin cancer": [
+    "Dermatology",
+    "Oncology"
+  ],
+  "Stomach cancer": [
+    "Oncology"
+  ],
+  "Systemic lupus erythematosus": [
+    "Rheumatology"
+  ],
+  "Systemic scleroderma": [
+    "Rheumatology"
+  ],
+  "Testicular cancer": [
+    "Oncology"
+  ],
+  "Thyroid cancer": [
+    "Oncology"
+  ],
+  "Tuberculosis": [
+    "Pulmonology",
+    "Infectious disease"
+  ],
+  "Type 2 diabetes mellitus": [
+    "Endocrinology"
+  ],
+  "Ulcerative colitis": [
+    "Gastroenterology"
+  ],
+  "Urinary bladder cancer": [
+    "Oncology"
+  ],
+  "Urinary tract infection": [
+    "Infectious disease",
+    "Urology"
+  ],
+  "Uterine cancer": [
+    "Oncology"
+  ]
+}

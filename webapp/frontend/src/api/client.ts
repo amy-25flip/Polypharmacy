@@ -3,7 +3,7 @@ export type Severity = 'None' | 'Minor' | 'Moderate' | 'Major' | null
 
 // How a severity was reached: a documented record, a borrowed record for a drug with none of its
 // own ('estimated'), the model's guess ('inferred'), no record at all, or a same-class duplicate.
-export type SeverityBasis = 'documented' | 'estimated' | 'inferred' | 'no_record' | 'duplicate_class'
+export type SeverityBasis = 'documented' | 'estimated' | 'inferred' | 'no_record' | 'duplicate_class' | 'no_data'
 
 // A sentence from an FDA drug label that names the other drug of a pair.
 export interface LabelEvidenceEntry {
@@ -209,6 +209,9 @@ export interface Disease {
   id: string
   name: string
   aliases: string[]
+  specialties?: string[]
+  note?: string | null
+  route_note?: string | null
   medicine_count: number
 }
 
@@ -221,6 +224,7 @@ export interface CandidateFlag {
   with: string
   severity: string
   severity_basis?: SeverityBasis
+  severity_notice?: string | null
   estimated_from?: EstimateNote[]
   label_evidence?: LabelEvidenceEntry[]
   adverse_effect_source?: 'label' | 'overlap' | 'none'
@@ -264,7 +268,7 @@ export interface CandidateScreenResponse {
 export interface PatientCaution {
   drug: string
   level: string
-  factor: 'age' | 'egfr'
+  factor: 'age' | 'egfr' | 'pregnancy'
   trigger: string
   text: string
   source: string
@@ -272,12 +276,12 @@ export interface PatientCaution {
 }
 
 export async function fetchPatientCautions(
-  drugs: string[], age: number | null, egfr: number | null, signal?: AbortSignal,
+  drugs: string[], age: number | null, egfr: number | null, signal?: AbortSignal, pregnant?: boolean,
 ): Promise<PatientCaution[]> {
   const res = await fetch(`${API_BASE}/api/patient-cautions`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ drugs, age, egfr }),
+    body: JSON.stringify({ drugs, age, egfr, pregnant: pregnant || null }),
     signal,
   })
   if (!res.ok) throw new Error(`Patient cautions failed: ${res.statusText}`)
@@ -285,8 +289,21 @@ export async function fetchPatientCautions(
   return body.cautions
 }
 
-export async function searchDiseases(query: string, signal?: AbortSignal): Promise<Disease[]> {
-  const res = await fetch(`${API_BASE}/api/diseases?q=${encodeURIComponent(query.trim())}`, { signal })
+export interface Specialty {
+  name: string
+  disease_count: number
+}
+
+export async function fetchSpecialties(signal?: AbortSignal): Promise<Specialty[]> {
+  const res = await fetch(`${API_BASE}/api/specialties`, { signal })
+  if (!res.ok) throw new Error(`Specialties failed: ${res.statusText}`)
+  const body: { specialties: Specialty[] } = await res.json()
+  return body.specialties
+}
+
+export async function searchDiseases(query: string, signal?: AbortSignal, specialty?: string): Promise<Disease[]> {
+  const filter = specialty ? `&specialty=${encodeURIComponent(specialty)}` : ''
+  const res = await fetch(`${API_BASE}/api/diseases?q=${encodeURIComponent(query.trim())}${filter}`, { signal })
   if (!res.ok) throw new Error(`Disease search failed: ${res.statusText}`)
   const body: { diseases: Disease[] } = await res.json()
   return body.diseases

@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
 import { ClipboardPlus, Loader2, Plus, RefreshCw, ShieldCheck, Sparkles, Trash2 } from 'lucide-react'
-import { checkInteractions, screenCandidates } from '../api/client'
-import type { CandidateScreenResponse, CheckResponse, Disease } from '../api/client'
+import { checkInteractions, fetchSpecialties, screenCandidates } from '../api/client'
+import type { CandidateScreenResponse, CheckResponse, Disease, Specialty } from '../api/client'
 import { DrugSearchInput } from './DrugSearchInput'
 import { DiseaseCombobox } from './DiseaseCombobox'
 import { DiagnosisMedicinePicker } from './DiagnosisMedicinePicker'
@@ -26,6 +26,9 @@ interface SessionPrescription {
   drugs: SessionDrug[]
   kind: 'prescription' | 'diagnosis'
   diseaseId?: string
+  // Cautions shown with a diagnosis's medicine list (for example "symptom entry" or "mostly topical").
+  note?: string
+  routeNote?: string
 }
 
 const makeId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
@@ -56,6 +59,21 @@ export function PatientPrescriptionWorkflow({ mode = 'prescription' }: { mode?: 
   const [checkError, setCheckError] = useState<string | null>(null)
   const [result, setResult] = useState<CheckResponse | null>(null)
   const [showDiagnosisSearch, setShowDiagnosisSearch] = useState(isDiagnosisMode)
+  const specialtyId = useId()
+  const [specialty, setSpecialty] = useState('')
+  const [specialties, setSpecialties] = useState<Specialty[]>([])
+  // The specialty list only narrows the diagnosis search, so a failure just hides the filter.
+  useEffect(() => {
+    if (!isDiagnosisMode) return
+    let cancelled = false
+    void (async () => {
+      try {
+        const found = await fetchSpecialties()
+        if (!cancelled) setSpecialties(found)
+      } catch { /* filter stays hidden */ }
+    })()
+    return () => { cancelled = true }
+  }, [isDiagnosisMode])
   const [focusDiagnosisSearch, setFocusDiagnosisSearch] = useState(false)
   const diagnosisButtonRef = useRef<HTMLButtonElement>(null)
   const [visibleCandidates, setVisibleCandidates] = useState<Record<string, string[]>>({})
@@ -236,6 +254,7 @@ export function PatientPrescriptionWorkflow({ mode = 'prescription' }: { mode?: 
     screenControllerRef.current?.abort()
     setPrescriptions((current) => current.some((item) => item.diseaseId === disease.id) ? current : [...current, {
       id: makeId(), kind: 'diagnosis', diseaseId: disease.id, label: disease.name, drugs: [],
+      note: disease.note ?? undefined, routeNote: disease.route_note ?? undefined,
     }])
     setResult(null)
     setCheckError(null)
@@ -299,6 +318,8 @@ export function PatientPrescriptionWorkflow({ mode = 'prescription' }: { mode?: 
                 id={prescription.id}
                 diseaseId={prescription.diseaseId}
                 diseaseName={prescription.label}
+                note={prescription.note}
+                routeNote={prescription.routeNote}
                 selected={prescription.drugs.map((drug) => drug.name)}
                 combined={combinedMedications}
                 screening={screening}
@@ -374,7 +395,16 @@ export function PatientPrescriptionWorkflow({ mode = 'prescription' }: { mode?: 
           <Plus className="h-4 w-4" /> Add a diagnosis
         </button>}
         </div>
-        {isDiagnosisMode && showDiagnosisSearch && <DiseaseCombobox existingIds={diagnosisGroups.map((item) => item.diseaseId || '')} onSelect={addDiagnosis} autoFocus={focusDiagnosisSearch} />}
+        {isDiagnosisMode && showDiagnosisSearch && <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+          <DiseaseCombobox existingIds={diagnosisGroups.map((item) => item.diseaseId || '')} onSelect={addDiagnosis} autoFocus={focusDiagnosisSearch} specialty={specialty} />
+          {specialties.length > 1 && <div className="w-full max-w-xs">
+            <label htmlFor={`${specialtyId}-specialty`} className="block text-sm font-semibold text-slate-800">Specialty</label>
+            <select id={`${specialtyId}-specialty`} value={specialty} onChange={(event) => setSpecialty(event.target.value)} className="mt-1 w-full rounded-lg border-2 border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900">
+              <option value="">All specialties</option>
+              {specialties.map((item) => <option key={item.name} value={item.name}>{item.name} ({item.disease_count})</option>)}
+            </select>
+          </div>}
+        </div>}
         {diagnosisGroups.length > 0 && combinedMedications.length >= 2 && <section aria-label="Whole plan screening" className="rounded-xl border border-blue-200 bg-blue-50/50 p-4 space-y-3">
           <h3 className="text-base font-bold text-slate-900">Whole plan screening</h3>
           {screeningLoading ? <p className="flex items-center gap-2 text-xs text-slate-600"><Loader2 className="h-4 w-4 animate-spin" /> Screening the current plan…</p> : screening && <>

@@ -59,6 +59,8 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
   // A "no reaction on record" pair is a result in its own right, whatever the model's own confidence.
   const isUncertain = highestRiskPair?.severity !== 'None' && !!highestRiskPair?.evidence_passport?.abstain
   const isNone = !isUncertain && overallSeverity === 'None'
+  const noDataPairs = pairs.filter((pair) => pair.severity_basis === 'no_data')
+  const allNotChecked = pairs.length > 0 && noDataPairs.length === pairs.length
   const isMajor = !isUncertain && overallSeverity === 'Major'
   const isModerate = !isUncertain && overallSeverity === 'Moderate'
   const isMinor = !isUncertain && overallSeverity === 'Minor'
@@ -141,7 +143,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                 {isMajor && 'Major Interaction Risk'}
                 {isModerate && 'Moderate Interaction Risk'}
                 {isMinor && 'Minor Interaction Risk'}
-                {isNone && 'No Reaction on Record'}
+                {isNone && (allNotChecked ? 'Not Checked — No Interaction Data' : 'No Reaction on Record')}
               </h2>
               {pairs.length > 0 && (
                 <p className="mt-2 text-sm font-semibold opacity-85">
@@ -182,7 +184,10 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
             </div>
           ) : isNone ? (
             <p className="text-base font-semibold">
-              No interaction is recorded for any pair in this regimen. This means no recorded reaction, not proof that the combination is safe.
+              {allNotChecked
+                ? 'None of these pairs could be checked because the medicines have no interaction data in the reference database.'
+                : 'No interaction is recorded for any pair in this regimen. This means no recorded reaction, not proof that the combination is safe.'}
+              {!allNotChecked && noDataPairs.length > 0 && ' Pairs with a medicine that has no interaction data were not checked.'}
             </p>
           ) : highestRiskPair ? (
             <div>
@@ -359,7 +364,7 @@ export const InteractionResults: React.FC<InteractionResultsProps> = ({
                         pair.severity
                       )}`}
                     >
-                      {severityName(pair.severity)}
+                      {pair.severity_basis === 'no_data' ? 'Not checked' : severityName(pair.severity)}
                     </span>
                   </div>
 

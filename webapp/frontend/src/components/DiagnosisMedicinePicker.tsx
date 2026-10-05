@@ -9,6 +9,8 @@ interface Props {
   id: string
   diseaseId: string
   diseaseName: string
+  note?: string
+  routeNote?: string
   selected: string[]
   combined: CombinedMedication[]
   screening: CandidateScreenResponse | null
@@ -31,7 +33,7 @@ function sourceLabels(sources: string[]): string {
   return [...new Set(labels)].join(' · ')
 }
 
-export function DiagnosisMedicinePicker({ id, diseaseId, diseaseName, selected, combined, screening, screeningLoading, screeningError, onVisibleChange, onToggle }: Props) {
+export function DiagnosisMedicinePicker({ id, diseaseId, diseaseName, note, routeNote, selected, combined, screening, screeningLoading, screeningError, onVisibleChange, onToggle }: Props) {
   const [medicines, setMedicines] = useState<DiseaseMedicine[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -73,6 +75,10 @@ export function DiagnosisMedicinePicker({ id, diseaseId, diseaseName, selected, 
   return <div className="rounded-lg border border-blue-200 bg-white p-3 sm:p-4">
     <h4 className="break-words text-sm font-bold text-slate-900">Medicines for {diseaseName}</h4>
     <p className="mt-1 text-xs text-slate-600">Reference list of medicines commonly associated with this condition - not a prescribing recommendation. Flags are screening estimates; verify clinically.</p>
+    {(note || routeNote) && <div className="mt-2 space-y-1 rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 text-xs text-sky-950">
+      {note && <p><span className="font-semibold">Note: </span>{note}</p>}
+      {routeNote && <p><span className="font-semibold">About these medicines: </span>{routeNote}</p>}
+    </div>}
     {loading ? <p role="status" className="mt-3 flex items-center gap-2 text-xs text-slate-600"><Loader2 className="h-4 w-4 animate-spin" /> Loading reference medicines…</p> : error ? <div role="alert" className="mt-3 rounded-lg border border-rose-200 bg-rose-50 p-3 text-xs text-rose-900">
       <p className="font-semibold">Medicine reference list unavailable. This does not mean no medicines are associated with this diagnosis.</p>
       <button type="button" onClick={() => setRetry((value) => value + 1)} className="mt-2 inline-flex items-center gap-1 font-bold"><RefreshCw className="h-3.5 w-3.5" /> Retry medicines</button>

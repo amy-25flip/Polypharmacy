@@ -3,9 +3,138 @@
   "generated_by": "scripts/disease_formulary/build_disease_formulary.py",
   "diseases": [
     {
+      "id": "abnormal-uterine-bleeding",
+      "name": "Abnormal uterine bleeding",
+      "aliases": [
+        "AUB",
+        "heavy menstrual bleeding",
+        "heavy periods",
+        "menorrhagia"
+      ],
+      "specialties": [
+        "Gynaecology"
+      ],
+      "medicines": [
+        {
+          "name": "Levonorgestrel",
+          "sources": [
+            "ICMR STW obstetrics and gynaecology: heavy menstrual bleeding"
+          ]
+        },
+        {
+          "name": "Medroxyprogesterone acetate",
+          "sources": [
+            "ICMR STW obstetrics and gynaecology: uterine fibroids and polyps"
+          ]
+        },
+        {
+          "name": "Norethisterone",
+          "sources": [
+            "ICMR STW obstetrics and gynaecology: heavy menstrual bleeding",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Tranexamic acid",
+          "sources": [
+            "ICMR STW obstetrics and gynaecology: heavy menstrual bleeding"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acne-vulgaris",
+      "name": "Acne vulgaris",
+      "aliases": [
+        "acne",
+        "acneiform eruption",
+        "pimples"
+      ],
+      "specialties": [
+        "Dermatology"
+      ],
+      "medicines": [
+        {
+          "name": "Adapalene (topical)",
+          "sources": [
+            "AAD: acne guideline",
+            "ICMR STW dermatology: acne and rosacea"
+          ]
+        },
+        {
+          "name": "Azelaic acid (topical)",
+          "sources": [
+            "ICMR STW dermatology: acne and rosacea"
+          ]
+        },
+        {
+          "name": "Benzoyl peroxide (topical)",
+          "sources": [
+            "AAD: acne guideline",
+            "ICMR STW dermatology: acne and rosacea"
+          ]
+        },
+        {
+          "name": "Clindamycin (topical)",
+          "sources": [
+            "ICMR STW dermatology: acne and rosacea"
+          ]
+        },
+        {
+          "name": "Dapsone (topical)",
+          "sources": [
+            "AAD: acne guideline"
+          ]
+        },
+        {
+          "name": "Doxycycline",
+          "sources": [
+            "AAD: acne guideline",
+            "ICMR STW dermatology: acne and rosacea"
+          ]
+        },
+        {
+          "name": "Isotretinoin",
+          "sources": [
+            "AAD: acne guideline",
+            "ICMR STW dermatology: acne and rosacea"
+          ]
+        },
+        {
+          "name": "Minocycline",
+          "sources": [
+            "AAD: acne guideline"
+          ]
+        },
+        {
+          "name": "Spironolactone",
+          "sources": [
+            "AAD: acne guideline"
+          ]
+        },
+        {
+          "name": "Tazarotene (topical)",
+          "sources": [
+            "AAD: acne guideline"
+          ]
+        },
+        {
+          "name": "Tretinoin (topical)",
+          "sources": [
+            "ICMR STW dermatology: acne and rosacea"
+          ]
+        }
+      ],
+      "note": "Isotretinoin must never be combined with a tetracycline, and needs pregnancy prevention in anyone who can become pregnant.",
+      "route_note": "Most medicines here are applied to the skin. Where the checker has no interaction data for one, its pairs show as Not checked."
+    },
+    {
       "id": "acquired-immunodeficiency-syndrome",
       "name": "Acquired immunodeficiency syndrome",
       "aliases": [],
+      "specialties": [
+        "Infectious disease"
+      ],
       "medicines": [
         {
           "name": "Abacavir",
@@ -94,9 +223,286 @@
       ]
     },
     {
+      "id": "acute-bronchitis",
+      "name": "Acute bronchitis",
+      "aliases": [
+        "bronchitis",
+        "chest cold",
+        "productive cough"
+      ],
+      "specialties": [
+        "General medicine",
+        "Pulmonology"
+      ],
+      "medicines": [
+        {
+          "name": "Acetaminophen",
+          "sources": [
+            "ICMR STW pulmonology: acute respiratory infections"
+          ]
+        },
+        {
+          "name": "Salbutamol",
+          "sources": [
+            "ICMR STW pulmonology: acute respiratory infections"
+          ]
+        }
+      ],
+      "note": "Symptom entry: most are viral. Antibiotics are not routine."
+    },
+    {
+      "id": "acute-gastroenteritis",
+      "name": "Acute gastroenteritis",
+      "aliases": [
+        "diarrhea",
+        "diarrhoea",
+        "loose motions",
+        "vomiting and diarrhoea"
+      ],
+      "specialties": [
+        "General medicine",
+        "Paediatrics"
+      ],
+      "medicines": [
+        {
+          "name": "Doxycycline",
+          "sources": [
+            "ICMR STW paediatrics: diarrhoea"
+          ]
+        },
+        {
+          "name": "Erythromycin",
+          "sources": [
+            "ICMR STW paediatrics: diarrhoea"
+          ]
+        },
+        {
+          "name": "Loperamide",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Metronidazole",
+          "sources": [
+            "ICMR STW paediatrics: diarrhoea"
+          ]
+        },
+        {
+          "name": "Zinc sulfate",
+          "sources": [
+            "ICMR STW paediatrics: diarrhoea"
+          ]
+        }
+      ],
+      "note": "Oral rehydration solution comes first (it is not in the checker). Antibiotics are for selected cases only."
+    },
+    {
+      "id": "acute-otitis-media",
+      "name": "Acute otitis media",
+      "aliases": [
+        "AOM",
+        "ear infection",
+        "middle-ear infection"
+      ],
+      "specialties": [
+        "ENT and allergy",
+        "Paediatrics"
+      ],
+      "medicines": [
+        {
+          "name": "Amoxicillin",
+          "sources": [
+            "ICMR STW ENT: otorrhoea",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Azithromycin",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Clarithromycin",
+          "sources": [
+            "ICMR STW ENT: otorrhoea",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Clavulanic acid",
+          "sources": [
+            "ICMR STW ENT: otorrhoea",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Erythromycin",
+          "sources": [
+            "ICMR STW ENT: otorrhoea",
+            "fda-label:indicated"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pharyngitis-and-tonsillitis",
+      "name": "Acute pharyngitis and tonsillitis",
+      "aliases": [
+        "pharyngitis",
+        "sore throat",
+        "throat infection",
+        "tonsillitis"
+      ],
+      "specialties": [
+        "ENT and allergy",
+        "General medicine",
+        "Paediatrics"
+      ],
+      "medicines": [
+        {
+          "name": "Acetaminophen",
+          "sources": [
+            "ICMR STW ENT: pharyngitis and sore throat"
+          ]
+        },
+        {
+          "name": "Amoxicillin",
+          "sources": [
+            "ICMR STW ENT: pharyngitis and sore throat",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Azithromycin",
+          "sources": [
+            "ICMR STW ENT: pharyngitis and sore throat"
+          ]
+        },
+        {
+          "name": "Erythromycin",
+          "sources": [
+            "ICMR STW ENT: pharyngitis and sore throat"
+          ]
+        },
+        {
+          "name": "Ibuprofen",
+          "sources": [
+            "ICMR STW ENT: pharyngitis and sore throat"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-rhinosinusitis",
+      "name": "Acute rhinosinusitis",
+      "aliases": [
+        "acute bacterial sinusitis",
+        "rhinosinusitis",
+        "sinus infection",
+        "sinusitis"
+      ],
+      "specialties": [
+        "ENT and allergy",
+        "General medicine"
+      ],
+      "medicines": [
+        {
+          "name": "Azithromycin",
+          "sources": [
+            "ICMR STW ENT: acute rhinosinusitis",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Budesonide (nasal)",
+          "sources": [
+            "ICMR STW ENT: acute rhinosinusitis"
+          ]
+        },
+        {
+          "name": "Mometasone",
+          "sources": [
+            "ICMR STW ENT: acute rhinosinusitis"
+          ]
+        },
+        {
+          "name": "Pseudoephedrine",
+          "sources": [
+            "ICMR STW ENT: acute rhinosinusitis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-upper-respiratory-infection",
+      "name": "Acute upper respiratory infection",
+      "aliases": [
+        "cold",
+        "common cold",
+        "cough and cold",
+        "runny nose",
+        "URI"
+      ],
+      "specialties": [
+        "ENT and allergy",
+        "General medicine",
+        "Paediatrics"
+      ],
+      "medicines": [
+        {
+          "name": "Acetaminophen",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Dextromethorphan",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Ibuprofen",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Ipratropium",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Oxymetazoline (nasal)",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Phenylephrine",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Pseudoephedrine",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        }
+      ],
+      "note": "Symptom entry: most are viral. Antibiotics are not routine."
+    },
+    {
       "id": "alcohol-dependence",
       "name": "Alcohol dependence",
       "aliases": [],
+      "specialties": [
+        "Psychiatry"
+      ],
       "medicines": [
         {
           "name": "Chlordiazepoxide",
@@ -132,9 +538,66 @@
       ]
     },
     {
+      "id": "allergic-contact-dermatitis",
+      "name": "Allergic contact dermatitis",
+      "aliases": [
+        "chemical allergy",
+        "contact dermatitis",
+        "contact eczema",
+        "nickel allergy"
+      ],
+      "specialties": [
+        "Dermatology",
+        "General medicine"
+      ],
+      "medicines": [
+        {
+          "name": "Betamethasone (topical)",
+          "sources": [
+            "AAD: atopic dermatitis guidance"
+          ]
+        },
+        {
+          "name": "Clobetasol (topical)",
+          "sources": [
+            "AAD: atopic dermatitis guidance"
+          ]
+        },
+        {
+          "name": "Cyclosporine",
+          "sources": [
+            "ICMR STW dermatology: eczema"
+          ]
+        },
+        {
+          "name": "Hydrocortisone (topical)",
+          "sources": [
+            "AAD: atopic dermatitis guidance"
+          ]
+        },
+        {
+          "name": "Prednisone",
+          "sources": [
+            "AAD: atopic dermatitis guidance"
+          ]
+        },
+        {
+          "name": "Tacrolimus",
+          "sources": [
+            "AAD: atopic dermatitis guidance"
+          ]
+        }
+      ],
+      "note": "Remove the trigger first. Systemic steroids only for severe or widespread disease.",
+      "route_note": "Most medicines here are applied to the skin. Where the checker has no interaction data for one, its pairs show as Not checked."
+    },
+    {
       "id": "allergic-rhinitis",
       "name": "Allergic rhinitis",
       "aliases": [],
+      "specialties": [
+        "ENT and allergy"
+      ],
       "medicines": [
         {
           "name": "Betamethasone",
@@ -255,9 +718,69 @@
       ]
     },
     {
+      "id": "alopecia-areata",
+      "name": "Alopecia areata",
+      "aliases": [
+        "AA",
+        "autoimmune alopecia",
+        "patchy hair loss"
+      ],
+      "specialties": [
+        "Dermatology"
+      ],
+      "medicines": [
+        {
+          "name": "Baricitinib",
+          "sources": [
+            "DermNet: alopecia areata",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Betamethasone (topical)",
+          "sources": [
+            "ICMR STW dermatology: alopecia and hair disorders"
+          ]
+        },
+        {
+          "name": "Cyclosporine",
+          "sources": [
+            "ICMR STW dermatology: alopecia and hair disorders"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "ICMR STW dermatology: alopecia and hair disorders"
+          ]
+        },
+        {
+          "name": "Minoxidil (topical)",
+          "sources": [
+            "ICMR STW dermatology: alopecia and hair disorders"
+          ]
+        },
+        {
+          "name": "Triamcinolone",
+          "sources": [
+            "ICMR STW dermatology: alopecia and hair disorders"
+          ]
+        }
+      ],
+      "route_note": "Most medicines here are applied to the skin. Where the checker has no interaction data for one, its pairs show as Not checked."
+    },
+    {
       "id": "alzheimer-s-disease",
       "name": "Alzheimer's disease",
-      "aliases": [],
+      "aliases": [
+        "alzheimer",
+        "dementia",
+        "memory loss"
+      ],
+      "specialties": [
+        "Neurology",
+        "Psychiatry"
+      ],
       "medicines": [
         {
           "name": "Benzatropine",
@@ -326,6 +849,9 @@
         "anemia of CKD",
         "renal anaemia"
       ],
+      "specialties": [
+        "Nephrology"
+      ],
       "medicines": [
         {
           "name": "Darbepoetin alfa",
@@ -343,9 +869,47 @@
       ]
     },
     {
+      "id": "androgenetic-alopecia",
+      "name": "Androgenetic alopecia",
+      "aliases": [
+        "female-pattern hair loss",
+        "hair fall",
+        "male-pattern baldness",
+        "pattern hair loss"
+      ],
+      "specialties": [
+        "Dermatology"
+      ],
+      "medicines": [
+        {
+          "name": "Finasteride",
+          "sources": [
+            "ICMR STW dermatology: alopecia and hair disorders",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Minoxidil (topical)",
+          "sources": [
+            "ICMR STW dermatology: alopecia and hair disorders"
+          ]
+        },
+        {
+          "name": "Spironolactone",
+          "sources": [
+            "ICMR STW dermatology: alopecia and hair disorders"
+          ]
+        }
+      ],
+      "note": "Finasteride is not for use in pregnancy and women who may become pregnant should not handle crushed tablets."
+    },
+    {
       "id": "ankylosing-spondylitis",
       "name": "Ankylosing spondylitis",
       "aliases": [],
+      "specialties": [
+        "Rheumatology"
+      ],
       "medicines": [
         {
           "name": "Betamethasone",
@@ -449,6 +1013,9 @@
       "name": "Asthma",
       "aliases": [
         "bronchial asthma"
+      ],
+      "specialties": [
+        "Pulmonology"
       ],
       "medicines": [
         {
@@ -561,6 +1128,12 @@
           ]
         },
         {
+          "name": "Ketotifen",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
           "name": "Loratadine",
           "sources": [
             "hetionet:CtD"
@@ -568,6 +1141,12 @@
         },
         {
           "name": "Methylprednisolone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mometasone",
           "sources": [
             "hetionet:CtD"
           ]
@@ -681,6 +1260,9 @@
       "id": "atherosclerosis",
       "name": "Atherosclerosis",
       "aliases": [],
+      "specialties": [
+        "Cardiology"
+      ],
       "medicines": [
         {
           "name": "Ezetimibe",
@@ -726,13 +1308,45 @@
     {
       "id": "atopic-dermatitis",
       "name": "Atopic dermatitis",
-      "aliases": [],
+      "aliases": [
+        "atopic eczema",
+        "dermatitis",
+        "eczema"
+      ],
+      "specialties": [
+        "Dermatology",
+        "Paediatrics"
+      ],
       "medicines": [
+        {
+          "name": "Azathioprine",
+          "sources": [
+            "ICMR STW dermatology: eczema"
+          ]
+        },
+        {
+          "name": "Baricitinib",
+          "sources": [
+            "AAD: atopic dermatitis guidance"
+          ]
+        },
         {
           "name": "Betamethasone",
           "sources": [
             "fda-label:indicated",
             "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Betamethasone (topical)",
+          "sources": [
+            "AAD: atopic dermatitis guidance"
+          ]
+        },
+        {
+          "name": "Cyclosporine",
+          "sources": [
+            "ICMR STW dermatology: eczema"
           ]
         },
         {
@@ -761,9 +1375,22 @@
           ]
         },
         {
+          "name": "Dupilumab",
+          "sources": [
+            "AAD: atopic dermatitis guidance",
+            "fda-label:indicated"
+          ]
+        },
+        {
           "name": "Hydrocortisone",
           "sources": [
             "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Hydrocortisone (topical)",
+          "sources": [
+            "AAD: atopic dermatitis guidance"
           ]
         },
         {
@@ -773,9 +1400,27 @@
           ]
         },
         {
+          "name": "Methotrexate",
+          "sources": [
+            "AAD: atopic dermatitis guidance"
+          ]
+        },
+        {
           "name": "Methylprednisolone",
           "sources": [
             "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Mometasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Pimecrolimus (topical)",
+          "sources": [
+            "AAD: atopic dermatitis guidance"
           ]
         },
         {
@@ -794,6 +1439,7 @@
         {
           "name": "Tacrolimus",
           "sources": [
+            "AAD: atopic dermatitis guidance",
             "hetionet:CtD"
           ]
         },
@@ -805,12 +1451,25 @@
           ]
         },
         {
+          "name": "Triamcinolone (topical)",
+          "sources": [
+            "AAD: atopic dermatitis guidance"
+          ]
+        },
+        {
           "name": "Triprolidine",
           "sources": [
             "hetionet:CpD"
           ]
+        },
+        {
+          "name": "Upadacitinib",
+          "sources": [
+            "AAD: atopic dermatitis guidance"
+          ]
         }
-      ]
+      ],
+      "route_note": "Most medicines here are applied to the skin. Where the checker has no interaction data for one, its pairs show as Not checked."
     },
     {
       "id": "atrial-fibrillation",
@@ -818,6 +1477,9 @@
       "aliases": [
         "AF",
         "AFib"
+      ],
+      "specialties": [
+        "Cardiology"
       ],
       "medicines": [
         {
@@ -859,7 +1521,14 @@
     {
       "id": "attention-deficit-hyperactivity-disorder",
       "name": "Attention deficit hyperactivity disorder",
-      "aliases": [],
+      "aliases": [
+        "ADHD",
+        "attention deficit disorder"
+      ],
+      "specialties": [
+        "Paediatrics",
+        "Psychiatry"
+      ],
       "medicines": [
         {
           "name": "Amphetamine",
@@ -951,6 +1620,9 @@
       "id": "autistic-disorder",
       "name": "Autistic disorder",
       "aliases": [],
+      "specialties": [
+        "Psychiatry"
+      ],
       "medicines": [
         {
           "name": "Aripiprazole",
@@ -1011,6 +1683,9 @@
         "benign prostate enlargement",
         "BPH"
       ],
+      "specialties": [
+        "Urology"
+      ],
       "medicines": [
         {
           "name": "Dutasteride",
@@ -1038,6 +1713,9 @@
       "id": "bipolar-disorder",
       "name": "Bipolar disorder",
       "aliases": [],
+      "specialties": [
+        "Psychiatry"
+      ],
       "medicines": [
         {
           "name": "Aripiprazole",
@@ -1170,6 +1848,9 @@
       "id": "bone-cancer",
       "name": "Bone cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Carboplatin",
@@ -1208,6 +1889,9 @@
       "id": "brain-cancer",
       "name": "Brain cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Betamethasone",
@@ -1281,6 +1965,9 @@
       "id": "breast-cancer",
       "name": "Breast cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Anastrozole",
@@ -1537,23 +2224,168 @@
       ]
     },
     {
+      "id": "bullous-pemphigoid",
+      "name": "Bullous pemphigoid",
+      "aliases": [
+        "pemphigoid",
+        "tense blisters"
+      ],
+      "specialties": [
+        "Dermatology",
+        "General medicine"
+      ],
+      "medicines": [
+        {
+          "name": "Clobetasol (topical)",
+          "sources": [
+            "ICMR STW dermatology: immunobullous disorders"
+          ]
+        },
+        {
+          "name": "Dapsone",
+          "sources": [
+            "ICMR STW dermatology: immunobullous disorders"
+          ]
+        },
+        {
+          "name": "Doxycycline",
+          "sources": [
+            "ICMR STW dermatology: immunobullous disorders"
+          ]
+        },
+        {
+          "name": "Methotrexate",
+          "sources": [
+            "ICMR STW dermatology: immunobullous disorders"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "ICMR STW dermatology: immunobullous disorders",
+            "fda-label:indicated"
+          ]
+        }
+      ],
+      "note": "Specialist-directed treatment."
+    },
+    {
+      "id": "candidal-intertrigo",
+      "name": "Candidal intertrigo",
+      "aliases": [
+        "candida",
+        "cutaneous candidiasis",
+        "flexural candida",
+        "fungal skin folds"
+      ],
+      "specialties": [
+        "Dermatology",
+        "General medicine"
+      ],
+      "medicines": [
+        {
+          "name": "Clotrimazole",
+          "sources": [
+            "DermNet: candidiasis of skin folds",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Fluconazole",
+          "sources": [
+            "DermNet: candidiasis of skin folds",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Itraconazole",
+          "sources": [
+            "DermNet: candidiasis of skin folds"
+          ]
+        },
+        {
+          "name": "Miconazole (topical)",
+          "sources": [
+            "DermNet: candidiasis of skin folds"
+          ]
+        }
+      ],
+      "route_note": "Most medicines here are applied to the skin. Where the checker has no interaction data for one, its pairs show as Not checked."
+    },
+    {
+      "id": "cellulitis",
+      "name": "Cellulitis",
+      "aliases": [
+        "erysipelas",
+        "skin infection",
+        "spreading redness"
+      ],
+      "specialties": [
+        "Dermatology",
+        "General medicine",
+        "General surgery"
+      ],
+      "medicines": [
+        {
+          "name": "Ceftriaxone",
+          "sources": [
+            "ICMR STW dermatology: bacterial skin infections",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Cephalexin",
+          "sources": [
+            "ICMR STW dermatology: bacterial skin infections",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Clindamycin",
+          "sources": [
+            "ICMR STW dermatology: bacterial skin infections"
+          ]
+        },
+        {
+          "name": "Cloxacillin",
+          "sources": [
+            "ICMR STW dermatology: bacterial skin infections"
+          ]
+        },
+        {
+          "name": "Vancomycin",
+          "sources": [
+            "ICMR STW dermatology: bacterial skin infections"
+          ]
+        }
+      ],
+      "note": "Severe or spreading infection needs urgent assessment."
+    },
+    {
       "id": "chronic-kidney-disease",
       "name": "Chronic kidney disease",
       "aliases": [
         "chronic kidney failure",
         "CKD",
-        "kidney disease"
+        "kidney disease",
+        "kidney failure",
+        "renal failure"
+      ],
+      "specialties": [
+        "Nephrology"
       ],
       "medicines": [
         {
           "name": "Bumetanide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
         {
           "name": "Calcitriol",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -1604,6 +2436,7 @@
         {
           "name": "Furosemide",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -1635,6 +2468,9 @@
         "chronic bronchitis",
         "COPD",
         "emphysema"
+      ],
+      "specialties": [
+        "Pulmonology"
       ],
       "medicines": [
         {
@@ -1755,6 +2591,9 @@
       "id": "colon-cancer",
       "name": "Colon cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Aprepitant",
@@ -1814,9 +2653,75 @@
       ]
     },
     {
+      "id": "community-acquired-pneumonia",
+      "name": "Community-acquired pneumonia",
+      "aliases": [
+        "CAP",
+        "chest infection",
+        "pneumonia"
+      ],
+      "specialties": [
+        "General medicine",
+        "Paediatrics",
+        "Pulmonology"
+      ],
+      "medicines": [
+        {
+          "name": "Amoxicillin",
+          "sources": [
+            "ICMR STW pulmonology: acute respiratory infections",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Azithromycin",
+          "sources": [
+            "ICMR STW pulmonology: acute respiratory infections",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Ceftriaxone",
+          "sources": [
+            "ICMR STW pulmonology: acute respiratory infections"
+          ]
+        },
+        {
+          "name": "Clarithromycin",
+          "sources": [
+            "ICMR STW pulmonology: acute respiratory infections",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Clavulanic acid",
+          "sources": [
+            "ICMR STW pulmonology: acute respiratory infections"
+          ]
+        },
+        {
+          "name": "Doxycycline",
+          "sources": [
+            "ICMR STW pulmonology: acute respiratory infections",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Erythromycin",
+          "sources": [
+            "ICMR STW pulmonology: acute respiratory infections",
+            "fda-label:indicated"
+          ]
+        }
+      ]
+    },
+    {
       "id": "conduct-disorder",
       "name": "Conduct disorder",
       "aliases": [],
+      "specialties": [
+        "Psychiatry"
+      ],
       "medicines": [
         {
           "name": "Chlorpromazine",
@@ -1840,12 +2745,60 @@
       ]
     },
     {
+      "id": "constipation",
+      "name": "Constipation",
+      "aliases": [
+        "bowel difficulty",
+        "chronic constipation",
+        "hard stools"
+      ],
+      "specialties": [
+        "Gastroenterology",
+        "General medicine",
+        "General surgery"
+      ],
+      "medicines": [
+        {
+          "name": "Bisacodyl",
+          "sources": [
+            "ICMR STW paediatric surgery: constipation"
+          ]
+        },
+        {
+          "name": "Docusate",
+          "sources": [
+            "ICMR STW paediatric surgery: constipation",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Lactulose",
+          "sources": [
+            "ICMR STW paediatric surgery: constipation"
+          ]
+        },
+        {
+          "name": "Polyethylene glycol (3350)",
+          "sources": [
+            "ICMR STW paediatric surgery: constipation"
+          ]
+        }
+      ]
+    },
+    {
       "id": "coronary-artery-disease",
       "name": "Coronary artery disease",
       "aliases": [
         "angina",
         "CAD",
-        "ischemic heart disease"
+        "heart attack",
+        "IHD",
+        "ischaemic heart disease",
+        "ischemic heart disease",
+        "myocardial infarction"
+      ],
+      "specialties": [
+        "Cardiology"
       ],
       "medicines": [
         {
@@ -1918,6 +2871,7 @@
         {
           "name": "Eplerenone",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -1968,12 +2922,14 @@
         {
           "name": "Lisinopril",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Losartan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2014,6 +2970,7 @@
         {
           "name": "Olmesartan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2045,6 +3002,7 @@
         {
           "name": "Ramipril",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2057,12 +3015,14 @@
         {
           "name": "Simvastatin",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Telmisartan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2082,18 +3042,21 @@
         {
           "name": "Tirofiban",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Trandolapril",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
         {
           "name": "Valsartan",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         }
@@ -2103,6 +3066,9 @@
       "id": "crohn-s-disease",
       "name": "Crohn's disease",
       "aliases": [],
+      "specialties": [
+        "Gastroenterology"
+      ],
       "medicines": [
         {
           "name": "Atropine",
@@ -2155,11 +3121,37 @@
       ]
     },
     {
+      "id": "dengue-fever",
+      "name": "Dengue fever",
+      "aliases": [
+        "breakbone fever",
+        "dengue",
+        "dengue-like illness"
+      ],
+      "specialties": [
+        "General medicine",
+        "Infectious disease",
+        "Paediatrics"
+      ],
+      "medicines": [
+        {
+          "name": "Acetaminophen",
+          "sources": [
+            "ICMR STW paediatrics: dengue fever"
+          ]
+        }
+      ],
+      "note": "Avoid NSAIDs and aspirin in dengue. Fluids and close monitoring are the mainstay."
+    },
+    {
       "id": "depression",
       "name": "Depression",
       "aliases": [
         "depressive disorder",
         "Endogenous depression"
+      ],
+      "specialties": [
+        "Psychiatry"
       ],
       "medicines": [
         {
@@ -2275,9 +3267,88 @@
       ]
     },
     {
+      "id": "dermatophytosis-of-skin",
+      "name": "Dermatophytosis of skin",
+      "aliases": [
+        "daad",
+        "dhobi itch",
+        "jock itch",
+        "ringworm",
+        "tinea",
+        "tinea corporis",
+        "tinea cruris"
+      ],
+      "specialties": [
+        "Dermatology",
+        "General medicine"
+      ],
+      "medicines": [
+        {
+          "name": "Ciclopirox",
+          "sources": [
+            "ICMR STW dermatology: dermatophytoses"
+          ]
+        },
+        {
+          "name": "Clotrimazole",
+          "sources": [
+            "IADVL 2020: dermatophytosis consensus",
+            "ICMR STW dermatology: dermatophytoses",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Fluconazole",
+          "sources": [
+            "ICMR STW dermatology: dermatophytoses"
+          ]
+        },
+        {
+          "name": "Itraconazole",
+          "sources": [
+            "IADVL 2020: dermatophytosis consensus",
+            "ICMR STW dermatology: dermatophytoses"
+          ]
+        },
+        {
+          "name": "Luliconazole",
+          "sources": [
+            "IADVL 2020: dermatophytosis consensus",
+            "ICMR STW dermatology: dermatophytoses",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Miconazole (topical)",
+          "sources": [
+            "ICMR STW dermatology: dermatophytoses"
+          ]
+        },
+        {
+          "name": "Sertaconazole",
+          "sources": [
+            "IADVL 2020: dermatophytosis consensus",
+            "ICMR STW dermatology: dermatophytoses"
+          ]
+        },
+        {
+          "name": "Terbinafine",
+          "sources": [
+            "IADVL 2020: dermatophytosis consensus",
+            "ICMR STW dermatology: dermatophytoses"
+          ]
+        }
+      ],
+      "note": "Avoid steroid and antifungal combination creams. If there is no response, think of resistant dermatophytosis and re-check the diagnosis.",
+      "route_note": "Most medicines here are applied to the skin. Where the checker has no interaction data for one, its pairs show as Not checked."
+    },
+    {
       "id": "dilated-cardiomyopathy",
       "name": "Dilated cardiomyopathy",
       "aliases": [],
+      "specialties": [
+        "Cardiology"
+      ],
       "medicines": [
         {
           "name": "Amrinone",
@@ -2312,12 +3383,44 @@
       ]
     },
     {
+      "id": "drug-eruption",
+      "name": "Drug eruption",
+      "aliases": [
+        "drug rash",
+        "fixed drug eruption",
+        "medicine allergy rash"
+      ],
+      "specialties": [
+        "Dermatology",
+        "General medicine"
+      ],
+      "medicines": [
+        {
+          "name": "Cetirizine",
+          "sources": [
+            "DermNet: drug eruptions"
+          ]
+        },
+        {
+          "name": "Hydrocortisone (topical)",
+          "sources": [
+            "DermNet: drug eruptions"
+          ]
+        }
+      ],
+      "note": "Stop the suspected medicine. Blisters, mouth sores, fever or breathlessness need urgent hospital care."
+    },
+    {
       "id": "dyslipidaemia",
       "name": "Dyslipidaemia",
       "aliases": [
         "dyslipidemia",
         "high cholesterol",
         "hyperlipidemia"
+      ],
+      "specialties": [
+        "Cardiology",
+        "Endocrinology"
       ],
       "medicines": [
         {
@@ -2337,11 +3440,94 @@
       ]
     },
     {
+      "id": "dysmenorrhoea",
+      "name": "Dysmenorrhoea",
+      "aliases": [
+        "dysmenorrhea",
+        "menstrual cramps",
+        "painful periods",
+        "period pain"
+      ],
+      "specialties": [
+        "Gynaecology"
+      ],
+      "medicines": [
+        {
+          "name": "Celecoxib",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Diclofenac",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Ibuprofen",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Ketoprofen",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Mefenamic acid",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Naproxen",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "endometriosis",
+      "name": "Endometriosis",
+      "aliases": [
+        "endometrioma",
+        "endometriotic pain",
+        "pelvic endometriosis"
+      ],
+      "specialties": [
+        "Gynaecology"
+      ],
+      "medicines": [
+        {
+          "name": "Danazol",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Leuprolide",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        }
+      ]
+    },
+    {
       "id": "epilepsy",
       "name": "Epilepsy",
       "aliases": [
+        "convulsions",
         "epilepsy syndrome",
-        "seizure disorder"
+        "fits",
+        "seizure disorder",
+        "seizures"
+      ],
+      "specialties": [
+        "Neurology"
       ],
       "medicines": [
         {
@@ -2381,6 +3567,7 @@
         {
           "name": "Diazepam",
           "sources": [
+            "fda-label:indicated",
             "hetionet:CtD"
           ]
         },
@@ -2523,6 +3710,9 @@
       "id": "esophageal-cancer",
       "name": "Esophageal cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Capecitabine",
@@ -2563,13 +3753,68 @@
       ]
     },
     {
+      "id": "folliculitis-and-furunculosis",
+      "name": "Folliculitis and furunculosis",
+      "aliases": [
+        "boils",
+        "folliculitis",
+        "furuncle",
+        "infected hair follicles"
+      ],
+      "specialties": [
+        "Dermatology",
+        "General surgery"
+      ],
+      "medicines": [
+        {
+          "name": "Cephalexin",
+          "sources": [
+            "ICMR STW dermatology: bacterial skin infections"
+          ]
+        },
+        {
+          "name": "Clindamycin (topical)",
+          "sources": [
+            "ICMR STW dermatology: bacterial skin infections"
+          ]
+        },
+        {
+          "name": "Cloxacillin",
+          "sources": [
+            "ICMR STW dermatology: bacterial skin infections"
+          ]
+        },
+        {
+          "name": "Doxycycline",
+          "sources": [
+            "ICMR STW dermatology: bacterial skin infections"
+          ]
+        },
+        {
+          "name": "Mupirocin",
+          "sources": [
+            "ICMR STW dermatology: bacterial skin infections"
+          ]
+        }
+      ],
+      "route_note": "Most medicines here are applied to the skin. Where the checker has no interaction data for one, its pairs show as Not checked."
+    },
+    {
       "id": "gastro-oesophageal-reflux-disease-and-peptic-ulcer",
       "name": "Gastro-oesophageal reflux disease and peptic ulcer",
       "aliases": [
         "acid reflux",
+        "acidity",
+        "gastritis",
         "GERD",
         "GORD",
-        "peptic ulcer"
+        "heartburn",
+        "peptic ulcer",
+        "ulcer"
+      ],
+      "specialties": [
+        "Gastroenterology",
+        "General medicine"
       ],
       "medicines": [
         {
@@ -2594,9 +3839,98 @@
       ]
     },
     {
+      "id": "generalised-anxiety-disorder",
+      "name": "Generalised anxiety disorder",
+      "aliases": [
+        "anxiety",
+        "chronic worry",
+        "GAD"
+      ],
+      "specialties": [
+        "General medicine",
+        "Psychiatry"
+      ],
+      "medicines": [
+        {
+          "name": "Buspirone",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Clomipramine",
+          "sources": [
+            "ICMR STW psychiatry: anxiety disorder"
+          ]
+        },
+        {
+          "name": "Diazepam",
+          "sources": [
+            "ICMR STW psychiatry: anxiety disorder",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Duloxetine",
+          "sources": [
+            "ICMR STW psychiatry: anxiety disorder",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Escitalopram",
+          "sources": [
+            "ICMR STW psychiatry: anxiety disorder",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Fluoxetine",
+          "sources": [
+            "ICMR STW psychiatry: anxiety disorder"
+          ]
+        },
+        {
+          "name": "Fluvoxamine",
+          "sources": [
+            "ICMR STW psychiatry: anxiety disorder"
+          ]
+        },
+        {
+          "name": "Paroxetine",
+          "sources": [
+            "ICMR STW psychiatry: anxiety disorder",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Pregabalin",
+          "sources": [
+            "ICMR STW psychiatry: anxiety disorder"
+          ]
+        },
+        {
+          "name": "Sertraline",
+          "sources": [
+            "ICMR STW psychiatry: anxiety disorder",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Venlafaxine",
+          "sources": [
+            "ICMR STW psychiatry: anxiety disorder"
+          ]
+        }
+      ]
+    },
+    {
       "id": "germ-cell-cancer",
       "name": "Germ cell cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Bleomycin",
@@ -2647,6 +3981,9 @@
       "id": "gilles-de-la-tourette-syndrome",
       "name": "Gilles de la Tourette syndrome",
       "aliases": [],
+      "specialties": [
+        "Neurology"
+      ],
       "medicines": [
         {
           "name": "Clonidine",
@@ -2708,6 +4045,9 @@
       "id": "glaucoma",
       "name": "Glaucoma",
       "aliases": [],
+      "specialties": [
+        "Ophthalmology"
+      ],
       "medicines": [
         {
           "name": "Acetazolamide",
@@ -2793,6 +4133,10 @@
       "aliases": [
         "gouty arthritis"
       ],
+      "specialties": [
+        "Orthopaedics",
+        "Rheumatology"
+      ],
       "medicines": [
         {
           "name": "Acetylsalicylic acid",
@@ -2870,9 +4214,46 @@
       ]
     },
     {
+      "id": "haemorrhoids",
+      "name": "Haemorrhoids",
+      "aliases": [
+        "bleeding piles",
+        "haemorrhoidal disease",
+        "hemorrhoids",
+        "piles"
+      ],
+      "specialties": [
+        "General medicine",
+        "General surgery"
+      ],
+      "medicines": [
+        {
+          "name": "Hydrocortisone (topical)",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Lidocaine (topical)",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Phenylephrine (topical)",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        }
+      ]
+    },
+    {
       "id": "head-and-neck-cancer",
       "name": "Head and neck cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Docetaxel",
@@ -2909,11 +4290,53 @@
       ]
     },
     {
+      "id": "head-lice",
+      "name": "Head lice",
+      "aliases": [
+        "lice",
+        "nits",
+        "pediculosis",
+        "pediculosis capitis"
+      ],
+      "specialties": [
+        "Dermatology",
+        "Paediatrics"
+      ],
+      "medicines": [
+        {
+          "name": "Ivermectin",
+          "sources": [
+            "DermNet: head lice"
+          ]
+        },
+        {
+          "name": "Malathion",
+          "sources": [
+            "DermNet: head lice",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Permethrin",
+          "sources": [
+            "DermNet: head lice",
+            "fda-label:indicated"
+          ]
+        }
+      ],
+      "route_note": "Most medicines here are applied to the skin. Where the checker has no interaction data for one, its pairs show as Not checked."
+    },
+    {
       "id": "heart-failure",
       "name": "Heart failure",
       "aliases": [
+        "cardiac failure",
+        "CHF",
         "congestive heart failure",
         "HF"
+      ],
+      "specialties": [
+        "Cardiology"
       ],
       "medicines": [
         {
@@ -2967,9 +4390,48 @@
       ]
     },
     {
+      "id": "helminthiasis",
+      "name": "Helminthiasis",
+      "aliases": [
+        "deworming",
+        "intestinal worms",
+        "pinworm",
+        "roundworm",
+        "worms"
+      ],
+      "specialties": [
+        "General medicine",
+        "Paediatrics"
+      ],
+      "medicines": [
+        {
+          "name": "Albendazole",
+          "sources": [
+            "ICMR STW obstetrics: antenatal care of normal pregnancy",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Ivermectin",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Pyrantel",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        }
+      ]
+    },
+    {
       "id": "hematologic-cancer",
       "name": "Hematologic cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Anagrelide",
@@ -3289,6 +4751,10 @@
       "id": "hepatitis-b",
       "name": "Hepatitis B",
       "aliases": [],
+      "specialties": [
+        "Gastroenterology",
+        "Infectious disease"
+      ],
       "medicines": [
         {
           "name": "Entecavir",
@@ -3312,11 +4778,81 @@
       ]
     },
     {
+      "id": "herpes-zoster",
+      "name": "Herpes zoster",
+      "aliases": [
+        "shingles",
+        "zona",
+        "zoster"
+      ],
+      "specialties": [
+        "Dermatology",
+        "General medicine"
+      ],
+      "medicines": [
+        {
+          "name": "Acyclovir",
+          "sources": [
+            "ICMR STW dermatology: varicella and herpes zoster",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Valaciclovir",
+          "sources": [
+            "ICMR STW dermatology: varicella and herpes zoster"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hidradenitis-suppurativa",
+      "name": "Hidradenitis suppurativa",
+      "aliases": [
+        "acne inversa",
+        "HS",
+        "recurrent axillary boils"
+      ],
+      "specialties": [
+        "Dermatology",
+        "General surgery"
+      ],
+      "medicines": [
+        {
+          "name": "Adalimumab",
+          "sources": [
+            "DermNet: hidradenitis suppurativa"
+          ]
+        },
+        {
+          "name": "Clindamycin (topical)",
+          "sources": [
+            "DermNet: hidradenitis suppurativa"
+          ]
+        },
+        {
+          "name": "Doxycycline",
+          "sources": [
+            "DermNet: hidradenitis suppurativa"
+          ]
+        },
+        {
+          "name": "Rifampicin",
+          "sources": [
+            "DermNet: hidradenitis suppurativa"
+          ]
+        }
+      ]
+    },
+    {
       "id": "hyperkalaemia-in-chronic-kidney-disease",
       "name": "Hyperkalaemia in chronic kidney disease",
       "aliases": [
         "high potassium in CKD",
         "hyperkalemia"
+      ],
+      "specialties": [
+        "Nephrology"
       ],
       "medicines": [
         {
@@ -3332,8 +4868,14 @@
       "id": "hypertension",
       "name": "Hypertension",
       "aliases": [
+        "BP",
         "high blood pressure",
+        "high BP",
         "HTN"
+      ],
+      "specialties": [
+        "Cardiology",
+        "General medicine"
       ],
       "medicines": [
         {
@@ -3824,6 +5366,9 @@
         "Graves disease",
         "overactive thyroid"
       ],
+      "specialties": [
+        "Endocrinology"
+      ],
       "medicines": [
         {
           "name": "Carbimazole",
@@ -3851,6 +5396,9 @@
       "name": "Hypothyroidism",
       "aliases": [
         "underactive thyroid"
+      ],
+      "specialties": [
+        "Endocrinology"
       ],
       "medicines": [
         {
@@ -3883,9 +5431,218 @@
       ]
     },
     {
+      "id": "impetigo",
+      "name": "Impetigo",
+      "aliases": [
+        "honey-crusted lesions",
+        "infected sores",
+        "pyoderma"
+      ],
+      "specialties": [
+        "Dermatology",
+        "General medicine",
+        "Paediatrics"
+      ],
+      "medicines": [
+        {
+          "name": "Cephalexin",
+          "sources": [
+            "ICMR STW dermatology: bacterial skin infections"
+          ]
+        },
+        {
+          "name": "Cloxacillin",
+          "sources": [
+            "ICMR STW dermatology: bacterial skin infections"
+          ]
+        },
+        {
+          "name": "Erythromycin",
+          "sources": [
+            "ICMR STW dermatology: bacterial skin infections"
+          ]
+        },
+        {
+          "name": "Fusidic acid",
+          "sources": [
+            "ICMR STW dermatology: bacterial skin infections"
+          ]
+        },
+        {
+          "name": "Mupirocin",
+          "sources": [
+            "ICMR STW dermatology: bacterial skin infections",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Retapamulin (topical)",
+          "sources": [
+            "DermNet: impetigo"
+          ]
+        }
+      ],
+      "route_note": "Most medicines here are applied to the skin. Where the checker has no interaction data for one, its pairs show as Not checked."
+    },
+    {
+      "id": "insomnia-disorder",
+      "name": "Insomnia disorder",
+      "aliases": [
+        "insomnia",
+        "poor sleep",
+        "sleeplessness"
+      ],
+      "specialties": [
+        "General medicine",
+        "Psychiatry"
+      ],
+      "medicines": [
+        {
+          "name": "Doxepin",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Eszopiclone",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Melatonin",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Ramelteon",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Temazepam",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Triazolam",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Zaleplon",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Zolpidem",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iron-deficiency-anaemia",
+      "name": "Iron-deficiency anaemia",
+      "aliases": [
+        "anemia",
+        "iron deficiency",
+        "low Hb",
+        "microcytic anaemia"
+      ],
+      "specialties": [
+        "General medicine",
+        "Gynaecology",
+        "Paediatrics"
+      ],
+      "medicines": [
+        {
+          "name": "Ferrous fumarate",
+          "sources": [
+            "WHO Model List of Essential Medicines: antianaemia medicines"
+          ]
+        },
+        {
+          "name": "Ferrous gluconate",
+          "sources": [
+            "WHO Model List of Essential Medicines: antianaemia medicines"
+          ]
+        },
+        {
+          "name": "Ferrous sulfate anhydrous",
+          "sources": [
+            "WHO Model List of Essential Medicines: antianaemia medicines"
+          ]
+        },
+        {
+          "name": "Folic acid",
+          "sources": [
+            "ICMR STW obstetrics: antenatal care of normal pregnancy",
+            "WHO Model List of Essential Medicines: antianaemia medicines",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Iron sucrose",
+          "sources": [
+            "ICMR STW obstetrics: antenatal care of normal pregnancy",
+            "fda-label:indicated"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "irritable-bowel-syndrome",
+      "name": "Irritable bowel syndrome",
+      "aliases": [
+        "functional bowel disorder",
+        "IBS",
+        "spastic colon"
+      ],
+      "specialties": [
+        "Gastroenterology",
+        "General medicine"
+      ],
+      "medicines": [
+        {
+          "name": "Dicyclomine",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Hyoscyamine",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Lubiprostone",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Rifaximin",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        }
+      ]
+    },
+    {
       "id": "kidney-cancer",
       "name": "Kidney cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Betamethasone",
@@ -4007,6 +5764,10 @@
       "id": "leprosy",
       "name": "Leprosy",
       "aliases": [],
+      "specialties": [
+        "Dermatology",
+        "Infectious disease"
+      ],
       "medicines": [
         {
           "name": "Dapsone",
@@ -4030,9 +5791,93 @@
       ]
     },
     {
+      "id": "leprosy-reaction",
+      "name": "Leprosy reaction",
+      "aliases": [
+        "ENL",
+        "erythema nodosum leprosum",
+        "type 1 lepra reaction",
+        "type 2 lepra reaction"
+      ],
+      "specialties": [
+        "Dermatology",
+        "Infectious disease"
+      ],
+      "medicines": [
+        {
+          "name": "Clofazimine",
+          "sources": [
+            "WHO: leprosy reactions guidance",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "WHO: leprosy reactions guidance"
+          ]
+        },
+        {
+          "name": "Thalidomide",
+          "sources": [
+            "WHO: leprosy reactions guidance",
+            "fda-label:indicated"
+          ]
+        }
+      ],
+      "note": "Thalidomide carries a severe birth-defect risk and is tightly controlled."
+    },
+    {
+      "id": "lichen-planus",
+      "name": "Lichen planus",
+      "aliases": [
+        "LP",
+        "oral lichen planus",
+        "purple itchy rash"
+      ],
+      "specialties": [
+        "Dermatology"
+      ],
+      "medicines": [
+        {
+          "name": "Acitretin",
+          "sources": [
+            "DermNet: lichen planus"
+          ]
+        },
+        {
+          "name": "Clobetasol (topical)",
+          "sources": [
+            "DermNet: lichen planus"
+          ]
+        },
+        {
+          "name": "Hydroxychloroquine",
+          "sources": [
+            "DermNet: lichen planus"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "DermNet: lichen planus"
+          ]
+        },
+        {
+          "name": "Tacrolimus",
+          "sources": [
+            "DermNet: lichen planus"
+          ]
+        }
+      ]
+    },
+    {
       "id": "liver-cancer",
       "name": "Liver cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Doxorubicin",
@@ -4055,9 +5900,69 @@
       ]
     },
     {
+      "id": "low-back-pain",
+      "name": "Low back pain",
+      "aliases": [
+        "backache",
+        "lumbago",
+        "lumbar pain"
+      ],
+      "specialties": [
+        "General medicine",
+        "Orthopaedics"
+      ],
+      "medicines": [
+        {
+          "name": "Acetaminophen",
+          "sources": [
+            "ICMR STW orthopaedics: low back pain"
+          ]
+        },
+        {
+          "name": "Chlorzoxazone",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Cyclobenzaprine",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Diclofenac",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Ibuprofen",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Methocarbamol",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Naproxen",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        }
+      ]
+    },
+    {
       "id": "lung-cancer",
       "name": "Lung cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Cisplatin",
@@ -4176,6 +6081,9 @@
       "id": "lymphatic-system-cancer",
       "name": "Lymphatic system cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Bleomycin",
@@ -4238,6 +6146,9 @@
       "name": "Malaria",
       "aliases": [
         "plasmodium infection"
+      ],
+      "specialties": [
+        "Infectious disease"
       ],
       "medicines": [
         {
@@ -4338,6 +6249,10 @@
       "id": "melanoma",
       "name": "Melanoma",
       "aliases": [],
+      "specialties": [
+        "Dermatology",
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Bleomycin",
@@ -4386,9 +6301,81 @@
       ]
     },
     {
+      "id": "melasma",
+      "name": "Melasma",
+      "aliases": [
+        "chloasma",
+        "facial pigmentation",
+        "pregnancy mask"
+      ],
+      "specialties": [
+        "Dermatology"
+      ],
+      "medicines": [
+        {
+          "name": "Azelaic acid (topical)",
+          "sources": [
+            "DermNet: melasma"
+          ]
+        },
+        {
+          "name": "Hydroquinone",
+          "sources": [
+            "DermNet: melasma",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Tranexamic acid",
+          "sources": [
+            "DermNet: melasma"
+          ]
+        },
+        {
+          "name": "Tretinoin (topical)",
+          "sources": [
+            "DermNet: melasma"
+          ]
+        }
+      ],
+      "note": "Tranexamic acid needs a clot-risk review first.",
+      "route_note": "Most medicines here are applied to the skin. Where the checker has no interaction data for one, its pairs show as Not checked."
+    },
+    {
+      "id": "menopausal-symptoms",
+      "name": "Menopausal symptoms",
+      "aliases": [
+        "hot flushes",
+        "menopause",
+        "perimenopause",
+        "vasomotor symptoms"
+      ],
+      "specialties": [
+        "General medicine",
+        "Gynaecology"
+      ],
+      "medicines": [
+        {
+          "name": "Estradiol",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Paroxetine",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        }
+      ]
+    },
+    {
       "id": "migraine",
       "name": "Migraine",
       "aliases": [],
+      "specialties": [
+        "Neurology"
+      ],
       "medicines": [
         {
           "name": "Acetaminophen",
@@ -4587,6 +6574,9 @@
       "id": "multiple-sclerosis",
       "name": "Multiple sclerosis",
       "aliases": [],
+      "specialties": [
+        "Neurology"
+      ],
       "medicines": [
         {
           "name": "Amantadine",
@@ -4791,6 +6781,9 @@
       "id": "muscle-cancer",
       "name": "Muscle cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Dacarbazine",
@@ -4834,6 +6827,9 @@
       "id": "narcolepsy",
       "name": "Narcolepsy",
       "aliases": [],
+      "specialties": [
+        "Neurology"
+      ],
       "medicines": [
         {
           "name": "Amphetamine",
@@ -4858,9 +6854,69 @@
       ]
     },
     {
+      "id": "neck-pain-and-cervical-spondylosis",
+      "name": "Neck pain and cervical spondylosis",
+      "aliases": [
+        "cervical pain",
+        "cervical spondylitis",
+        "neck ache"
+      ],
+      "specialties": [
+        "General medicine",
+        "Orthopaedics"
+      ],
+      "medicines": [
+        {
+          "name": "Acetaminophen",
+          "sources": [
+            "ICMR STW orthopaedics: neck pain"
+          ]
+        },
+        {
+          "name": "Chlorzoxazone",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Cyclobenzaprine",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Diclofenac",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Ibuprofen",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Methocarbamol",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Naproxen",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        }
+      ]
+    },
+    {
       "id": "obesity",
       "name": "Obesity",
       "aliases": [],
+      "specialties": [
+        "Endocrinology"
+      ],
       "medicines": [
         {
           "name": "Benzphetamine",
@@ -4930,11 +6986,65 @@
       ]
     },
     {
+      "id": "onychomycosis",
+      "name": "Onychomycosis",
+      "aliases": [
+        "fungal nail",
+        "nail fungus",
+        "tinea unguium"
+      ],
+      "specialties": [
+        "Dermatology"
+      ],
+      "medicines": [
+        {
+          "name": "Amorolfine",
+          "sources": [
+            "DermNet: fungal nail infections"
+          ]
+        },
+        {
+          "name": "Ciclopirox",
+          "sources": [
+            "DermNet: fungal nail infections",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Fluconazole",
+          "sources": [
+            "DermNet: fungal nail infections"
+          ]
+        },
+        {
+          "name": "Itraconazole",
+          "sources": [
+            "DermNet: fungal nail infections"
+          ]
+        },
+        {
+          "name": "Terbinafine",
+          "sources": [
+            "DermNet: fungal nail infections",
+            "fda-label:indicated"
+          ]
+        }
+      ],
+      "note": "Confirm the diagnosis before starting oral antifungals. Itraconazole is not for patients with heart failure.",
+      "route_note": "Most medicines here are applied to the skin. Where the checker has no interaction data for one, its pairs show as Not checked."
+    },
+    {
       "id": "osteoarthritis",
       "name": "Osteoarthritis",
       "aliases": [
+        "arthritis",
         "degenerative joint disease",
+        "joint pain",
+        "knee pain",
         "OA"
+      ],
+      "specialties": [
+        "Orthopaedics"
       ],
       "medicines": [
         {
@@ -5115,6 +7225,10 @@
       "aliases": [
         "low bone density"
       ],
+      "specialties": [
+        "Endocrinology",
+        "Orthopaedics"
+      ],
       "medicines": [
         {
           "name": "Alendronic acid",
@@ -5212,6 +7326,9 @@
       "id": "ovarian-cancer",
       "name": "Ovarian cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Altretamine",
@@ -5280,6 +7397,9 @@
       "id": "pancreatic-cancer",
       "name": "Pancreatic cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Dacarbazine",
@@ -5349,6 +7469,9 @@
       "id": "panic-disorder",
       "name": "Panic disorder",
       "aliases": [],
+      "specialties": [
+        "Psychiatry"
+      ],
       "medicines": [
         {
           "name": "Alprazolam",
@@ -5470,6 +7593,9 @@
       "id": "parkinson-s-disease",
       "name": "Parkinson's disease",
       "aliases": [],
+      "specialties": [
+        "Neurology"
+      ],
       "medicines": [
         {
           "name": "Amantadine",
@@ -5512,6 +7638,13 @@
         {
           "name": "Cabergoline",
           "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Carbidopa",
+          "sources": [
+            "fda-label:indicated",
             "hetionet:CpD"
           ]
         },
@@ -5641,9 +7774,134 @@
       ]
     },
     {
+      "id": "pelvic-inflammatory-disease",
+      "name": "Pelvic inflammatory disease",
+      "aliases": [
+        "pelvic infection",
+        "PID",
+        "salpingitis"
+      ],
+      "specialties": [
+        "Gynaecology"
+      ],
+      "medicines": [
+        {
+          "name": "Azithromycin",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Cefotaxime",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Cefotetan",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Cefoxitin",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Ceftriaxone",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Ofloxacin",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pemphigus-vulgaris",
+      "name": "Pemphigus vulgaris",
+      "aliases": [
+        "autoimmune blisters",
+        "pemphigus"
+      ],
+      "specialties": [
+        "Dermatology"
+      ],
+      "medicines": [
+        {
+          "name": "Azathioprine",
+          "sources": [
+            "ICMR STW dermatology: immunobullous disorders"
+          ]
+        },
+        {
+          "name": "Mycophenolate mofetil",
+          "sources": [
+            "ICMR STW dermatology: immunobullous disorders"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "ICMR STW dermatology: immunobullous disorders",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Rituximab",
+          "sources": [
+            "ICMR STW dermatology: immunobullous disorders"
+          ]
+        }
+      ],
+      "note": "Specialist-directed treatment."
+    },
+    {
+      "id": "periorificial-dermatitis",
+      "name": "Periorificial dermatitis",
+      "aliases": [
+        "mouth-area rash",
+        "perioral dermatitis",
+        "steroid face"
+      ],
+      "specialties": [
+        "Dermatology"
+      ],
+      "medicines": [
+        {
+          "name": "Doxycycline",
+          "sources": [
+            "DermNet: periorificial dermatitis"
+          ]
+        },
+        {
+          "name": "Metronidazole (topical)",
+          "sources": [
+            "DermNet: periorificial dermatitis"
+          ]
+        },
+        {
+          "name": "Pimecrolimus (topical)",
+          "sources": [
+            "DermNet: periorificial dermatitis"
+          ]
+        }
+      ],
+      "note": "Stop any facial steroid cream first."
+    },
+    {
       "id": "peripheral-nervous-system-neoplasm",
       "name": "Peripheral nervous system neoplasm",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Cisplatin",
@@ -5714,9 +7972,91 @@
       ]
     },
     {
+      "id": "pityriasis-rosea",
+      "name": "Pityriasis rosea",
+      "aliases": [
+        "christmas-tree rash",
+        "herald patch rash"
+      ],
+      "specialties": [
+        "Dermatology",
+        "General medicine"
+      ],
+      "medicines": [
+        {
+          "name": "Cetirizine",
+          "sources": [
+            "DermNet: pityriasis rosea"
+          ]
+        },
+        {
+          "name": "Hydrocortisone (topical)",
+          "sources": [
+            "DermNet: pityriasis rosea"
+          ]
+        }
+      ],
+      "note": "Usually clears by itself; treatment is for itch only."
+    },
+    {
+      "id": "pityriasis-versicolor",
+      "name": "Pityriasis versicolor",
+      "aliases": [
+        "fungal discoloration",
+        "PV",
+        "tinea versicolor"
+      ],
+      "specialties": [
+        "Dermatology"
+      ],
+      "medicines": [
+        {
+          "name": "Clotrimazole",
+          "sources": [
+            "DermNet: pityriasis versicolor",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Fluconazole",
+          "sources": [
+            "DermNet: pityriasis versicolor"
+          ]
+        },
+        {
+          "name": "Itraconazole",
+          "sources": [
+            "DermNet: pityriasis versicolor"
+          ]
+        },
+        {
+          "name": "Ketoconazole",
+          "sources": [
+            "DermNet: pityriasis versicolor"
+          ]
+        },
+        {
+          "name": "Selenium sulfide",
+          "sources": [
+            "DermNet: pityriasis versicolor"
+          ]
+        }
+      ],
+      "note": "Oral terbinafine does not work for this yeast infection.",
+      "route_note": "Ketoconazole here means a shampoo or cream. The checker's interaction data are for oral ketoconazole and overstate the risk of the skin form."
+    },
+    {
       "id": "polycystic-ovary-syndrome",
       "name": "Polycystic ovary syndrome",
-      "aliases": [],
+      "aliases": [
+        "PCOD",
+        "PCOS",
+        "polycystic ovarian disease"
+      ],
+      "specialties": [
+        "Endocrinology",
+        "Gynaecology"
+      ],
       "medicines": [
         {
           "name": "Desogestrel",
@@ -5745,9 +8085,45 @@
       ]
     },
     {
+      "id": "post-inflammatory-hyperpigmentation",
+      "name": "Post-inflammatory hyperpigmentation",
+      "aliases": [
+        "acne marks",
+        "dark marks",
+        "PIH"
+      ],
+      "specialties": [
+        "Dermatology"
+      ],
+      "medicines": [
+        {
+          "name": "Azelaic acid (topical)",
+          "sources": [
+            "DermNet: hydroquinone"
+          ]
+        },
+        {
+          "name": "Hydroquinone",
+          "sources": [
+            "DermNet: hydroquinone"
+          ]
+        },
+        {
+          "name": "Tretinoin (topical)",
+          "sources": [
+            "DermNet: hydroquinone"
+          ]
+        }
+      ],
+      "route_note": "Most medicines here are applied to the skin. Where the checker has no interaction data for one, its pairs show as Not checked."
+    },
+    {
       "id": "primary-biliary-cirrhosis",
       "name": "Primary biliary cirrhosis",
       "aliases": [],
+      "specialties": [
+        "Gastroenterology"
+      ],
       "medicines": [
         {
           "name": "Chenodeoxycholic acid",
@@ -5773,6 +8149,9 @@
       "id": "prostate-cancer",
       "name": "Prostate cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Abiraterone",
@@ -5941,19 +8320,53 @@
     {
       "id": "psoriasis",
       "name": "Psoriasis",
-      "aliases": [],
+      "aliases": [
+        "plaque psoriasis",
+        "psoriasis vulgaris"
+      ],
+      "specialties": [
+        "Dermatology"
+      ],
       "medicines": [
         {
           "name": "Acitretin",
           "sources": [
+            "AAD: psoriasis guidance",
+            "ICMR STW dermatology: psoriasis",
             "fda-label:indicated",
             "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Adalimumab",
+          "sources": [
+            "AAD: psoriasis guidance"
+          ]
+        },
+        {
+          "name": "Apremilast",
+          "sources": [
+            "AAD: psoriasis guidance",
+            "fda-label:indicated"
           ]
         },
         {
           "name": "Betamethasone",
           "sources": [
             "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Betamethasone (topical)",
+          "sources": [
+            "ICMR STW dermatology: psoriasis"
+          ]
+        },
+        {
+          "name": "Calcipotriol (topical)",
+          "sources": [
+            "AAD: psoriasis guidance",
+            "ICMR STW dermatology: psoriasis"
           ]
         },
         {
@@ -5971,6 +8384,8 @@
         {
           "name": "Cyclosporine",
           "sources": [
+            "AAD: psoriasis guidance",
+            "ICMR STW dermatology: psoriasis",
             "fda-label:indicated",
             "hetionet:CtD"
           ]
@@ -5979,6 +8394,13 @@
           "name": "Dexamethasone",
           "sources": [
             "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Etanercept",
+          "sources": [
+            "AAD: psoriasis guidance",
+            "fda-label:indicated"
           ]
         },
         {
@@ -5996,6 +8418,8 @@
         {
           "name": "Methotrexate",
           "sources": [
+            "AAD: psoriasis guidance",
+            "ICMR STW dermatology: psoriasis",
             "fda-label:indicated",
             "hetionet:CtD"
           ]
@@ -6032,9 +8456,41 @@
           ]
         },
         {
+          "name": "Salicylic acid (topical)",
+          "sources": [
+            "ICMR STW dermatology: psoriasis"
+          ]
+        },
+        {
+          "name": "Secukinumab",
+          "sources": [
+            "AAD: psoriasis guidance",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Tacrolimus",
+          "sources": [
+            "ICMR STW dermatology: psoriasis"
+          ]
+        },
+        {
+          "name": "Tazarotene (topical)",
+          "sources": [
+            "ICMR STW dermatology: psoriasis"
+          ]
+        },
+        {
           "name": "Triamcinolone",
           "sources": [
             "hetionet:CtD"
+          ]
+        },
+        {
+          "name": "Ustekinumab",
+          "sources": [
+            "AAD: psoriasis guidance",
+            "fda-label:indicated"
           ]
         }
       ]
@@ -6043,6 +8499,10 @@
       "id": "psoriatic-arthritis",
       "name": "Psoriatic arthritis",
       "aliases": [],
+      "specialties": [
+        "Dermatology",
+        "Rheumatology"
+      ],
       "medicines": [
         {
           "name": "Auranofin",
@@ -6100,9 +8560,18 @@
       "id": "restless-legs-syndrome",
       "name": "Restless legs syndrome",
       "aliases": [],
+      "specialties": [
+        "Neurology"
+      ],
       "medicines": [
         {
           "name": "Carbamazepine",
+          "sources": [
+            "hetionet:CpD"
+          ]
+        },
+        {
+          "name": "Carbidopa",
           "sources": [
             "hetionet:CpD"
           ]
@@ -6157,6 +8626,9 @@
       "name": "Rheumatoid arthritis",
       "aliases": [
         "RA"
+      ],
+      "specialties": [
+        "Rheumatology"
       ],
       "medicines": [
         {
@@ -6372,9 +8844,57 @@
       ]
     },
     {
+      "id": "rosacea",
+      "name": "Rosacea",
+      "aliases": [
+        "acne rosacea",
+        "facial flushing",
+        "papulopustular rosacea"
+      ],
+      "specialties": [
+        "Dermatology"
+      ],
+      "medicines": [
+        {
+          "name": "Azelaic acid (topical)",
+          "sources": [
+            "ICMR STW dermatology: acne and rosacea"
+          ]
+        },
+        {
+          "name": "Doxycycline",
+          "sources": [
+            "ICMR STW dermatology: acne and rosacea"
+          ]
+        },
+        {
+          "name": "Isotretinoin",
+          "sources": [
+            "ICMR STW dermatology: acne and rosacea"
+          ]
+        },
+        {
+          "name": "Ivermectin (topical)",
+          "sources": [
+            "ICMR STW dermatology: acne and rosacea"
+          ]
+        },
+        {
+          "name": "Metronidazole (topical)",
+          "sources": [
+            "ICMR STW dermatology: acne and rosacea"
+          ]
+        }
+      ],
+      "route_note": "Most medicines here are applied to the skin. Where the checker has no interaction data for one, its pairs show as Not checked."
+    },
+    {
       "id": "sarcoma",
       "name": "Sarcoma",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Dacarbazine",
@@ -6431,9 +8951,42 @@
       ]
     },
     {
+      "id": "scabies",
+      "name": "Scabies",
+      "aliases": [
+        "itch infestation",
+        "khujli",
+        "scabetic rash"
+      ],
+      "specialties": [
+        "Dermatology",
+        "General medicine",
+        "Paediatrics"
+      ],
+      "medicines": [
+        {
+          "name": "Ivermectin",
+          "sources": [
+            "ICMR STW dermatology: scabies"
+          ]
+        },
+        {
+          "name": "Permethrin",
+          "sources": [
+            "ICMR STW dermatology: scabies"
+          ]
+        }
+      ],
+      "note": "Treat close contacts at the same time.",
+      "route_note": "Most medicines here are applied to the skin. Where the checker has no interaction data for one, its pairs show as Not checked."
+    },
+    {
       "id": "schizophrenia",
       "name": "Schizophrenia",
       "aliases": [],
+      "specialties": [
+        "Psychiatry"
+      ],
       "medicines": [
         {
           "name": "Aripiprazole",
@@ -6613,11 +9166,60 @@
       ]
     },
     {
+      "id": "seborrhoeic-dermatitis",
+      "name": "Seborrhoeic dermatitis",
+      "aliases": [
+        "dandruff",
+        "scalp dermatitis",
+        "seborrheic dermatitis",
+        "seborrhoeic eczema"
+      ],
+      "specialties": [
+        "Dermatology"
+      ],
+      "medicines": [
+        {
+          "name": "Ciclopirox",
+          "sources": [
+            "DermNet: seborrhoeic dermatitis"
+          ]
+        },
+        {
+          "name": "Hydrocortisone (topical)",
+          "sources": [
+            "DermNet: seborrhoeic dermatitis"
+          ]
+        },
+        {
+          "name": "Ketoconazole",
+          "sources": [
+            "DermNet: seborrhoeic dermatitis"
+          ]
+        },
+        {
+          "name": "Pimecrolimus (topical)",
+          "sources": [
+            "DermNet: seborrhoeic dermatitis"
+          ]
+        },
+        {
+          "name": "Tacrolimus",
+          "sources": [
+            "DermNet: seborrhoeic dermatitis"
+          ]
+        }
+      ],
+      "route_note": "Ketoconazole here means a shampoo or cream. The checker's interaction data are for oral ketoconazole and overstate the risk of the skin form."
+    },
+    {
       "id": "secondary-hyperparathyroidism-in-chronic-kidney-disease",
       "name": "Secondary hyperparathyroidism in chronic kidney disease",
       "aliases": [
         "CKD-MBD",
         "renal hyperparathyroidism"
+      ],
+      "specialties": [
+        "Nephrology"
       ],
       "medicines": [
         {
@@ -6646,6 +9248,10 @@
       "id": "skin-cancer",
       "name": "Skin cancer",
       "aliases": [],
+      "specialties": [
+        "Dermatology",
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Bleomycin",
@@ -6699,9 +9305,45 @@
       ]
     },
     {
+      "id": "soft-tissue-sprain-or-strain",
+      "name": "Soft-tissue sprain or strain",
+      "aliases": [
+        "ligament injury",
+        "muscle pull",
+        "sprain"
+      ],
+      "specialties": [
+        "General medicine",
+        "Orthopaedics"
+      ],
+      "medicines": [
+        {
+          "name": "Acetaminophen",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Ibuprofen",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Naproxen",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        }
+      ]
+    },
+    {
       "id": "stomach-cancer",
       "name": "Stomach cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Capecitabine",
@@ -6760,9 +9402,83 @@
       ]
     },
     {
+      "id": "stroke-secondary-prevention",
+      "name": "Stroke, secondary prevention",
+      "aliases": [
+        "CVA",
+        "ischaemic stroke",
+        "post-stroke",
+        "stroke"
+      ],
+      "specialties": [
+        "Cardiology",
+        "General medicine",
+        "Neurology"
+      ],
+      "medicines": [
+        {
+          "name": "Acetylsalicylic acid",
+          "sources": [
+            "ICMR STW neurology: stroke"
+          ]
+        },
+        {
+          "name": "Apixaban",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Atorvastatin",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Edoxaban",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Losartan",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Pravastatin",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Rivaroxaban",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Rosuvastatin",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Ticagrelor",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        }
+      ]
+    },
+    {
       "id": "systemic-lupus-erythematosus",
       "name": "Systemic lupus erythematosus",
       "aliases": [],
+      "specialties": [
+        "Rheumatology"
+      ],
       "medicines": [
         {
           "name": "Acetylsalicylic acid",
@@ -6890,6 +9606,9 @@
       "id": "systemic-scleroderma",
       "name": "Systemic scleroderma",
       "aliases": [],
+      "specialties": [
+        "Rheumatology"
+      ],
       "medicines": [
         {
           "name": "Alprazolam",
@@ -6982,6 +9701,12 @@
           ]
         },
         {
+          "name": "Mometasone",
+          "sources": [
+            "hetionet:CtD"
+          ]
+        },
+        {
           "name": "Mycophenolate mofetil",
           "sources": [
             "hetionet:CtD"
@@ -7038,9 +9763,39 @@
       ]
     },
     {
+      "id": "tension-type-headache",
+      "name": "Tension-type headache",
+      "aliases": [
+        "band headache",
+        "headache",
+        "stress headache",
+        "tension headache"
+      ],
+      "specialties": [
+        "General medicine"
+      ],
+      "medicines": [
+        {
+          "name": "Acetaminophen",
+          "sources": [
+            "ICMR STW neurology: headache"
+          ]
+        },
+        {
+          "name": "Amitriptyline",
+          "sources": [
+            "ICMR STW neurology: headache"
+          ]
+        }
+      ]
+    },
+    {
       "id": "testicular-cancer",
       "name": "Testicular cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Bleomycin",
@@ -7119,6 +9874,9 @@
       "id": "thyroid-cancer",
       "name": "Thyroid cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Doxorubicin",
@@ -7155,6 +9913,10 @@
         "pulmonary tuberculosis",
         "TB"
       ],
+      "specialties": [
+        "Infectious disease",
+        "Pulmonology"
+      ],
       "medicines": [
         {
           "name": "Ethambutol",
@@ -7187,12 +9949,64 @@
       ]
     },
     {
+      "id": "type-1-diabetes",
+      "name": "Type 1 diabetes",
+      "aliases": [
+        "insulin-dependent diabetes",
+        "juvenile diabetes",
+        "T1DM"
+      ],
+      "specialties": [
+        "Endocrinology",
+        "General medicine",
+        "Paediatrics"
+      ],
+      "medicines": [
+        {
+          "name": "Glucagon",
+          "sources": [
+            "ICMR STW endocrinology: type 1 diabetes",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Insulin detemir",
+          "sources": [
+            "ICMR STW endocrinology: type 1 diabetes",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Insulin glargine",
+          "sources": [
+            "ICMR STW endocrinology: type 1 diabetes",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Insulin human (isophane)",
+          "sources": [
+            "ICMR STW endocrinology: type 1 diabetes"
+          ]
+        },
+        {
+          "name": "Insulin human (regular)",
+          "sources": [
+            "ICMR STW endocrinology: type 1 diabetes"
+          ]
+        }
+      ]
+    },
+    {
       "id": "type-2-diabetes-mellitus",
       "name": "Type 2 diabetes mellitus",
       "aliases": [
         "diabetes",
         "T2DM",
         "type 2 diabetes"
+      ],
+      "specialties": [
+        "Endocrinology"
       ],
       "medicines": [
         {
@@ -7372,6 +10186,9 @@
       "id": "ulcerative-colitis",
       "name": "Ulcerative colitis",
       "aliases": [],
+      "specialties": [
+        "Gastroenterology"
+      ],
       "medicines": [
         {
           "name": "Azathioprine",
@@ -7475,9 +10292,42 @@
       ]
     },
     {
+      "id": "undifferentiated-fever",
+      "name": "Undifferentiated fever",
+      "aliases": [
+        "bukhar",
+        "fever",
+        "pyrexia",
+        "viral fever"
+      ],
+      "specialties": [
+        "General medicine",
+        "Paediatrics"
+      ],
+      "medicines": [
+        {
+          "name": "Acetaminophen",
+          "sources": [
+            "ICMR STW paediatrics: fever in children",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Ibuprofen",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        }
+      ],
+      "note": "Symptom entry: find the cause. Antibiotics are not routine for fever."
+    },
+    {
       "id": "urinary-bladder-cancer",
       "name": "Urinary bladder cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Carboplatin",
@@ -7551,23 +10401,155 @@
       "id": "urinary-tract-infection",
       "name": "Urinary tract infection",
       "aliases": [
+        "burning urination",
         "cystitis",
         "lower urinary tract infection",
         "UTI"
       ],
+      "specialties": [
+        "General medicine",
+        "Gynaecology",
+        "Infectious disease",
+        "Urology"
+      ],
       "medicines": [
+        {
+          "name": "Amikacin",
+          "sources": [
+            "ICMR STW urology: urinary tract infection"
+          ]
+        },
+        {
+          "name": "Ceftriaxone",
+          "sources": [
+            "ICMR STW urology: urinary tract infection",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Cephalexin",
+          "sources": [
+            "ICMR STW urology: urinary tract infection",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Fosfomycin",
+          "sources": [
+            "ICMR STW urology: urinary tract infection",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Gentamicin",
+          "sources": [
+            "ICMR STW urology: urinary tract infection"
+          ]
+        },
         {
           "name": "Nitrofurantoin",
           "sources": [
+            "ICMR STW urology: urinary tract infection",
             "NICE NG109: lower urinary tract infection",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Phenazopyridine",
+          "sources": [
+            "ICMR STW urology: urinary tract infection",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Sulfamethoxazole",
+          "sources": [
+            "ICMR STW urology: urinary tract infection",
             "fda-label:indicated"
           ]
         },
         {
           "name": "Trimethoprim",
           "sources": [
+            "ICMR STW urology: urinary tract infection",
             "NICE NG109: lower urinary tract infection",
             "fda-label:indicated"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "urticaria",
+      "name": "Urticaria",
+      "aliases": [
+        "angioedema",
+        "chronic urticaria",
+        "hives",
+        "pitti",
+        "wheals"
+      ],
+      "specialties": [
+        "Dermatology",
+        "General medicine"
+      ],
+      "medicines": [
+        {
+          "name": "Cetirizine",
+          "sources": [
+            "ICMR STW dermatology: urticaria and angioedema",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Cyclosporine",
+          "sources": [
+            "ICMR STW dermatology: urticaria and angioedema"
+          ]
+        },
+        {
+          "name": "Fexofenadine",
+          "sources": [
+            "ICMR STW dermatology: urticaria and angioedema",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Hydroxyzine",
+          "sources": [
+            "ICMR STW dermatology: urticaria and angioedema",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Levocetirizine",
+          "sources": [
+            "ICMR STW dermatology: urticaria and angioedema",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Loratadine",
+          "sources": [
+            "ICMR STW dermatology: urticaria and angioedema"
+          ]
+        },
+        {
+          "name": "Montelukast",
+          "sources": [
+            "ICMR STW dermatology: urticaria and angioedema"
+          ]
+        },
+        {
+          "name": "Omalizumab",
+          "sources": [
+            "ICMR STW dermatology: urticaria and angioedema",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Prednisolone",
+          "sources": [
+            "ICMR STW dermatology: urticaria and angioedema"
           ]
         }
       ]
@@ -7576,6 +10558,9 @@
       "id": "uterine-cancer",
       "name": "Uterine cancer",
       "aliases": [],
+      "specialties": [
+        "Oncology"
+      ],
       "medicines": [
         {
           "name": "Carboplatin",
@@ -7617,6 +10602,174 @@
           "name": "Progesterone",
           "sources": [
             "hetionet:CtD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "uterine-fibroids",
+      "name": "Uterine fibroids",
+      "aliases": [
+        "fibroid",
+        "leiomyoma",
+        "myoma"
+      ],
+      "specialties": [
+        "Gynaecology"
+      ],
+      "medicines": [
+        {
+          "name": "Levonorgestrel",
+          "sources": [
+            "ICMR STW obstetrics and gynaecology: uterine fibroids and polyps"
+          ]
+        },
+        {
+          "name": "Medroxyprogesterone acetate",
+          "sources": [
+            "ICMR STW obstetrics and gynaecology: uterine fibroids and polyps"
+          ]
+        },
+        {
+          "name": "Norethisterone",
+          "sources": [
+            "ICMR STW obstetrics and gynaecology: uterine fibroids and polyps",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Tranexamic acid",
+          "sources": [
+            "ICMR STW obstetrics and gynaecology: uterine fibroids and polyps"
+          ]
+        }
+      ],
+      "note": "Large fibroids and persistent heavy bleeding need specialist assessment."
+    },
+    {
+      "id": "viral-warts",
+      "name": "Viral warts",
+      "aliases": [
+        "common wart",
+        "HPV wart",
+        "verruca",
+        "warts"
+      ],
+      "specialties": [
+        "Dermatology"
+      ],
+      "medicines": [
+        {
+          "name": "Salicylic acid (topical)",
+          "sources": [
+            "DermNet: viral wart"
+          ]
+        }
+      ],
+      "route_note": "Most medicines here are applied to the skin. Where the checker has no interaction data for one, its pairs show as Not checked."
+    },
+    {
+      "id": "vitamin-b12-deficiency-anaemia",
+      "name": "Vitamin B12-deficiency anaemia",
+      "aliases": [
+        "B12 deficiency",
+        "low B12",
+        "megaloblastic anaemia",
+        "pernicious anaemia"
+      ],
+      "specialties": [
+        "General medicine"
+      ],
+      "medicines": [
+        {
+          "name": "Cyanocobalamin",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Folic acid",
+          "sources": [
+            "WHO Model List of Essential Medicines: antianaemia medicines",
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Hydroxocobalamin",
+          "sources": [
+            "WHO Model List of Essential Medicines: antianaemia medicines"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vitiligo",
+      "name": "Vitiligo",
+      "aliases": [
+        "depigmentation",
+        "leucoderma",
+        "white patches"
+      ],
+      "specialties": [
+        "Dermatology"
+      ],
+      "medicines": [
+        {
+          "name": "Betamethasone (topical)",
+          "sources": [
+            "ICMR STW dermatology: vitiligo"
+          ]
+        },
+        {
+          "name": "Clobetasol (topical)",
+          "sources": [
+            "ICMR STW dermatology: vitiligo"
+          ]
+        },
+        {
+          "name": "Mometasone",
+          "sources": [
+            "ICMR STW dermatology: vitiligo"
+          ]
+        },
+        {
+          "name": "Tacrolimus",
+          "sources": [
+            "ICMR STW dermatology: vitiligo"
+          ]
+        }
+      ],
+      "route_note": "Most medicines here are applied to the skin. Where the checker has no interaction data for one, its pairs show as Not checked."
+    },
+    {
+      "id": "vulvovaginal-candidiasis",
+      "name": "Vulvovaginal candidiasis",
+      "aliases": [
+        "vaginal candida",
+        "vaginal thrush",
+        "yeast infection"
+      ],
+      "specialties": [
+        "General medicine",
+        "Gynaecology"
+      ],
+      "medicines": [
+        {
+          "name": "Clotrimazole",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Fluconazole",
+          "sources": [
+            "fda-label:indicated"
+          ]
+        },
+        {
+          "name": "Miconazole",
+          "sources": [
+            "fda-label:indicated"
           ]
         }
       ]

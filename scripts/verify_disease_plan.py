@@ -5,6 +5,7 @@ import argparse
 import itertools
 import json
 import time
+import urllib.parse
 from pathlib import Path
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
@@ -155,6 +156,47 @@ def main() -> None:
         assert flag["adverse_effect_source"] == "label" and "Bleeding" in flag["adverse_effects"], flag
         assert flag["label_evidence"]
         print("PASS label evidence: amiodarone + warfarin carries the FDA label sentence and its named effect in both endpoints")
+
+    # Specialties and the wider condition list (dermatology and everyday primary-care conditions).
+    status, specs = request(base, "/api/specialties")
+    names = {item["name"]: item["disease_count"] for item in specs["specialties"]}
+    assert status == 200 and names.get("Dermatology", 0) >= 30 and len(names) >= 12, names
+    status, derm = request(base, "/api/diseases?q=&specialty=Dermatology")
+    assert derm["diseases"] and all("Dermatology" in d["specialties"] for d in derm["diseases"])
+    for query, expected in [("acne", "Acne vulgaris"), ("ringworm", "Dermatophytosis of skin"), ("khujli", "Scabies"),
+                            ("piles", "Haemorrhoids"), ("loose motions", "Acute gastroenteritis"), ("PCOD", "Polycystic ovary syndrome"),
+                            ("UTI", "Urinary tract infection"), ("fever", "Undifferentiated fever")]:
+        status, found = request(base, "/api/diseases?q=" + urllib.parse.quote(query))
+        assert any(d["name"] == expected for d in found["diseases"]), (query, [d["name"] for d in found["diseases"]])
+    status, narrowed = request(base, "/api/diseases?q=tinea&specialty=Cardiology")
+    assert narrowed["diseases"] == []
+    status, fever = request(base, "/api/diseases?q=fever")
+    assert any("Antibiotics are not routine" in (d.get("note") or "") for d in fever["diseases"])
+    status, seb = request(base, "/api/diseases?q=seborrhoeic")
+    assert any("oral ketoconazole" in (d.get("route_note") or "") for d in seb["diseases"])
+    print(f"PASS conditions: {len(names)} specialties; Dermatology has {names['Dermatology']} diagnoses; aliases like ringworm, khujli, piles, PCOD and loose motions resolve; cautions are carried")
+
+    # Drugs the interaction database cannot check are accepted but reported as not checked, never as safe.
+    status, nc = request(base, "/api/check", {"drugs": ["Mupirocin", "Warfarin"]})
+    pair = nc["regimen"]["pairs"][0]
+    assert pair["severity"] == "None" and pair["severity_basis"] == "no_data" and "not checked" in pair["severity_notice"].lower(), pair
+    status, nc2 = request(base, "/api/screen-candidates", {"selected": ["Warfarin"], "candidates": ["Mupirocin", "Domperidone"]})
+    for result in nc2["results"]:
+        assert result["flags"][0]["severity_basis"] == "no_data" and result["flags"][0]["severity_notice"], result
+    status, hits = request(base, "/api/drugs/search?q=mupiro")
+    assert hits and hits[0]["name"] == "Mupirocin"
+    print("PASS not-checked drugs: Mupirocin and Domperidone can be added; their pairs say Not checked in both endpoints")
+
+    # Key dermatology interactions come out as documented Major pairs.
+    for a, b in [("Isotretinoin", "Doxycycline"), ("Acitretin", "Methotrexate"), ("Methotrexate", "Trimethoprim")]:
+        status, check = request(base, "/api/check", {"drugs": [a, b]})
+        assert check["regimen"]["pairs"][0]["severity"] == "Major", (a, b)
+    status, preg = request(base, "/api/patient-cautions", {"drugs": ["Isotretinoin", "Doxycycline", "Lisinopril", "Metformin"], "pregnant": True})
+    assert {c["drug"] for c in preg["cautions"]} == {"Isotretinoin", "Doxycycline", "Lisinopril"}, preg
+    assert all(c["level"] == "Avoid" and c["factor"] == "pregnancy" for c in preg["cautions"])
+    status, none = request(base, "/api/patient-cautions", {"drugs": ["Isotretinoin"], "pregnant": False})
+    assert none["cautions"] == []
+    print("PASS dermatology safety: isotretinoin + doxycycline, acitretin + methotrexate and methotrexate + trimethoprim are Major; pregnancy cautions fire only when ticked")
 
     status, result = request(base, "/api/screen-candidates",
                              {"selected": ["Warfarin", "warfarin"],

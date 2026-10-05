@@ -7,11 +7,18 @@ from __future__ import annotations
 import csv
 import json
 import re
+import sys
 from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(Path(__file__).parent))
+import fda_indications  # noqa: E402  (reverse indication search helpers)
+
 INPUT = Path(__file__).with_name("curated_formulary.json")
+# Conditions added for wider specialty coverage (dermatology and everyday primary-care conditions).
+NEW_CONDITIONS = Path(__file__).with_name("new_conditions.json")
+SPECIALTIES = Path(__file__).with_name("specialties.json")
 OUTPUT = ROOT / "processed" / "disease_formulary.json"
 SUMMARY = ROOT / "processed" / "disease_formulary_summary.md"
 # source key (casefolded name before merging) -> target key
@@ -87,14 +94,35 @@ def main() -> None:
         diseases[raw_name.casefold()] = {"name": name, "aliases": set(), "medicines": medicines}
 
     skipped = list(curated.get("skipped_for_review", []))
-    curated_added = 0
-    for condition in curated["diseases"]:
+    conditions = list(curated["diseases"])
+    if NEW_CONDITIONS.exists():
+        added_conditions = json.loads(NEW_CONDITIONS.read_text(encoding="utf-8"))
+        references = {**references, **added_conditions["sources"]}
+        conditions += added_conditions["diseases"]
+    synonyms = json.loads((ROOT / "processed" / "drug_aliases.json").read_text(encoding="utf-8"))["synonyms"]
+    lookup = fda_indications.build_lookup(vocabulary, synonyms)
+    curated_added = fda_added = 0
+    route_lookups: dict[str, dict[str, str]] = {}
+    for condition in conditions:
         name = condition["name"]
         key = condition.get("hetionet_name", name).casefold()
         disease = diseases.setdefault(key, {"name": name, "aliases": set(),
                                             "medicines": defaultdict(set)})
         disease["name"] = name
         disease["aliases"].update(condition.get("aliases", []))
+        disease.setdefault("specialties", set()).update(condition.get("specialties", []))
+        for field in ("note", "route_note"):
+            if condition.get(field):
+                disease[field] = condition[field]
+        # Medicines whose FDA label lists the condition among its approved uses (single-ingredient labels only).
+        route = condition.get("route_prefer")
+        if route and route not in route_lookups:
+            route_lookups[route] = fda_indications.build_lookup(vocabulary, synonyms, route)
+        allowed = condition.get("fda_include")
+        for drug in fda_indications.candidates(condition.get("fda_phrases", []), route_lookups.get(route, lookup)):
+            if drug not in condition.get("fda_exclude", []) and (allowed is None or drug in allowed):
+                disease["medicines"][drug].add(LABEL_SOURCE)
+                fda_added += 1
         if condition.get("hetionet_name"):
             disease["aliases"].add(condition["hetionet_name"])
         for citation, candidates in condition["medicines"].items():
@@ -154,6 +182,7 @@ def main() -> None:
                     citations.add(LABEL_SOURCE)
                     label_marked += 1
 
+    specialty_map = json.loads(SPECIALTIES.read_text(encoding="utf-8")) if SPECIALTIES.exists() else {}
     result = []
     ids_seen = set()
     for disease in diseases.values():
@@ -168,9 +197,15 @@ def main() -> None:
             {"name": name, "sources": sorted(sources)}
             for name, sources in sorted(disease["medicines"].items(), key=lambda item: item[0].casefold())
         ]
-        result.append({"id": did, "name": disease["name"],
-                       "aliases": sorted(disease["aliases"], key=str.casefold),
-                       "medicines": medicines})
+        entry = {"id": did, "name": disease["name"],
+                 "aliases": sorted(disease["aliases"], key=str.casefold),
+                 "specialties": sorted(disease.get("specialties", set()) | set(specialty_map.get(disease["name"], [])),
+                                       key=str.casefold),
+                 "medicines": medicines}
+        for field in ("note", "route_note"):
+            if disease.get(field):
+                entry[field] = disease[field]
+        result.append(entry)
     result.sort(key=lambda d: d["name"].casefold())
     OUTPUT.write_text(json.dumps({"version": 1,
                                   "generated_by": "scripts/disease_formulary/build_disease_formulary.py",
@@ -189,7 +224,8 @@ def main() -> None:
              f"- Curated source-to-medicine additions processed: {curated_added} (before deduplication).",
              f"- Clinician review applied: {review_removed} removals, {review_added} additions." if review
              else "- Clinician review: none applied yet.",
-             f"- Listings whose FDA label names the condition among its approved uses: {label_marked}.", "",
+             f"- Listings whose FDA label names the condition among its approved uses: {label_marked}.",
+             f"- Medicines suggested directly from FDA label indications for the added conditions: {fda_added}.", "",
              "## Diseases and medicine counts", "",
              "| Disease | Medicines |", "|---|---:|",]
     lines += [f"| {d['name']} | {len(d['medicines'])} |" for d in result]

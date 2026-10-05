@@ -27,11 +27,19 @@ BASIS_ESTIMATED = "estimated"
 BASIS_INFERRED = "inferred"
 BASIS_NO_RECORD = "no_record"
 BASIS_DUPLICATE = "duplicate_class"
+BASIS_NO_DATA = "no_data"
 
 NO_RECORD_NOTICE = (
     "No interaction is recorded for this pair in the reference database. This means no "
     "recorded reaction, not proof that the combination is safe."
 )
+
+
+def no_data_notice(notes: list[dict]) -> str:
+    """Why a pair with a limited-data drug was not checked."""
+    return " ".join(f"{n['drug']}: {n['note']}" for n in notes)
+
+
 DUPLICATE_NOTICE = (
     "These two medicines belong to the same class. Taking both is therapeutic duplication, "
     "which usually adds risk without extra benefit."

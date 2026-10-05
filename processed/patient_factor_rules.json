@@ -333,6 +333,144 @@
     },
     {
       "drugs": [
+        "Isotretinoin"
+      ],
+      "factor": "pregnancy",
+      "level": "Avoid",
+      "text": "Causes serious birth defects. Contraindicated in pregnancy; needs a negative pregnancy test and effective contraception before, during and for a month after treatment.",
+      "source": "FDA Isotretinoin label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=isotretinoin"
+    },
+    {
+      "drugs": [
+        "Acitretin"
+      ],
+      "factor": "pregnancy",
+      "level": "Avoid",
+      "text": "Causes severe birth defects. Contraindicated in pregnancy, and pregnancy must be avoided for at least 3 years after stopping. Alcohol must be avoided during and for 2 months after treatment.",
+      "source": "FDA Acitretin label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=acitretin"
+    },
+    {
+      "drugs": [
+        "Methotrexate"
+      ],
+      "factor": "pregnancy",
+      "level": "Avoid",
+      "text": "Can cause fetal death and birth defects. Contraindicated in pregnancy for non-cancer uses such as psoriasis and arthritis.",
+      "source": "FDA Methotrexate label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=methotrexate"
+    },
+    {
+      "drugs": [
+        "Thalidomide"
+      ],
+      "factor": "pregnancy",
+      "level": "Avoid",
+      "text": "Causes severe, life-threatening birth defects. Use only under a pregnancy-prevention programme.",
+      "source": "FDA Thalidomide label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=thalidomide"
+    },
+    {
+      "drugs": [
+        "Finasteride"
+      ],
+      "factor": "pregnancy",
+      "level": "Avoid",
+      "text": "Can harm a male fetus. Women who are or may be pregnant must not take it or handle crushed tablets.",
+      "source": "FDA Finasteride label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=finasteride"
+    },
+    {
+      "drugs": [
+        "Mycophenolate mofetil"
+      ],
+      "factor": "pregnancy",
+      "level": "Avoid",
+      "text": "Boxed warning for pregnancy loss and birth defects. Needs pregnancy testing and contraception.",
+      "source": "FDA Mycophenolate label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=mycophenolate"
+    },
+    {
+      "drugs": [
+        "Misoprostol"
+      ],
+      "factor": "pregnancy",
+      "level": "Avoid",
+      "text": "Can cause abortion, premature birth and birth defects.",
+      "source": "FDA Misoprostol label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=misoprostol"
+    },
+    {
+      "drugs": [
+        "Valproic acid"
+      ],
+      "factor": "pregnancy",
+      "level": "Avoid",
+      "text": "Raises the risk of neural tube defects and lower IQ in the child. Use only if no alternative works.",
+      "source": "FDA Valproate label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=valproate"
+    },
+    {
+      "drugs": [
+        "Warfarin"
+      ],
+      "factor": "pregnancy",
+      "level": "Avoid",
+      "text": "Crosses the placenta and can cause birth defects and bleeding. Contraindicated except in women with mechanical heart valves, under specialist care.",
+      "source": "FDA Warfarin label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=warfarin"
+    },
+    {
+      "drugs": [
+        "Lisinopril",
+        "Enalapril",
+        "Ramipril",
+        "Perindopril",
+        "Captopril",
+        "Losartan",
+        "Telmisartan",
+        "Valsartan",
+        "Olmesartan",
+        "Irbesartan",
+        "Candesartan"
+      ],
+      "factor": "pregnancy",
+      "level": "Avoid",
+      "text": "Boxed warning for fetal toxicity. Stop as soon as pregnancy is detected.",
+      "source": "FDA Lisinopril label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=lisinopril"
+    },
+    {
+      "drugs": [
+        "Doxycycline",
+        "Minocycline",
+        "Tetracycline"
+      ],
+      "factor": "pregnancy",
+      "level": "Avoid",
+      "text": "Can permanently discolour the developing teeth of the baby and affect bone growth. Avoid in pregnancy.",
+      "source": "FDA Doxycycline label",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=doxycycline"
+    },
+    {
+      "drugs": [
+        "Ibuprofen",
+        "Diclofenac",
+        "Naproxen",
+        "Ketorolac",
+        "Celecoxib",
+        "Etoricoxib",
+        "Aceclofenac"
+      ],
+      "factor": "pregnancy",
+      "level": "Use with caution",
+      "text": "Avoid from 20 weeks of pregnancy: can cause low amniotic fluid and fetal kidney problems.",
+      "source": "US FDA drug safety communication on NSAIDs in pregnancy (2020)",
+      "url": "https://www.fda.gov/drugs/drug-safety-and-availability/fda-recommends-avoiding-use-nsaids-pregnancy-20-weeks-or-later-because-they-can-result-low-amniotic"
+    },
+    {
+      "drugs": [
         "Acetylsalicylic acid"
       ],
       "factor": "age",
